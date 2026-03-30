@@ -1036,7 +1036,7 @@ details.faq-item[open] summary::after { transform: rotate(45deg); }
 }
 
 .product-photo-real {
-  padding: 0;
+  padding: 0.85rem;
   background: linear-gradient(180deg, #FFF9F2 0%, #F7E8D8 100%);
   background-image: none;
   justify-content: center;
@@ -1045,8 +1045,8 @@ details.faq-item[open] summary::after { transform: rotate(45deg); }
 .product-photo-real img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
-  object-position: center 60%;
+  object-fit: contain;
+  object-position: center center;
   display: block;
 }
 
