@@ -1,0 +1,55 @@
+<svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <!-- Top arc: from left midpoint, clockwise over top to right midpoint -->
+    <path id="top-arc" d="M 42,200 A 158,158 0 0,1 358,200"/>
+    <!-- Bottom arc: from left midpoint, counterclockwise under bottom to right midpoint -->
+    <path id="bottom-arc1" d="M 48,200 A 152,152 0 0,0 352,200"/>
+    <path id="bottom-arc2" d="M 58,200 A 142,142 0 0,0 342,200"/>
+    <!-- Clip mitten to inner circle -->
+    <clipPath id="badge-inner">
+      <circle cx="200" cy="195" r="116"/>
+    </clipPath>
+    <!-- Clip layer lines to mitten body -->
+    <clipPath id="bmc">
+      <path d="M 165,234 L 165,180 Q 165,161 179,161 L 219,161 Q 231,161 231,180 L 231,185 Q 234,182 238,184 Q 248,189 248,205 Q 248,221 238,224 Q 234,226 231,224 L 231,234 Z"/>
+    </clipPath>
+  </defs>
+
+  <!-- Outer filled circle -->
+  <circle cx="200" cy="200" r="192" fill="#D97706"/>
+  <!-- Outer ring highlight -->
+  <circle cx="200" cy="200" r="180" fill="none" stroke="rgba(255,255,255,0.35)" stroke-width="3"/>
+  <!-- Inner cream circle -->
+  <circle cx="200" cy="200" r="128" fill="#F7F1E8"/>
+  <!-- Inner ring edge -->
+  <circle cx="200" cy="200" r="128" fill="none" stroke="rgba(255,255,255,0.5)" stroke-width="2"/>
+
+  <!-- Stars (left and right) -->
+  <polygon points="36,190 38.2,196.8 45.4,196.8 39.8,200.9 42,207.7 36,203.6 30,207.7 32.2,200.9 26.6,196.8 33.8,196.8" fill="#F5B83A"/>
+  <polygon points="364,190 366.2,196.8 373.4,196.8 367.8,200.9 370,207.7 364,203.6 358,207.7 360.2,200.9 354.6,196.8 361.8,196.8" fill="#F5B83A"/>
+
+  <!-- Mitten icon in center (scaled and centered) -->
+  <!-- Mitten body + thumb -->
+  <path d="M 165,234 L 165,180 Q 165,161 179,161 L 219,161 Q 231,161 231,180 L 231,185 Q 234,182 238,184 Q 248,189 248,205 Q 248,221 238,224 Q 234,226 231,224 L 231,234 Z" fill="#D97706"/>
+  <!-- Layer lines -->
+  <rect x="160" y="189" width="92" height="4.5" fill="#A86002" clip-path="url(#bmc)"/>
+  <rect x="160" y="200" width="92" height="4.5" fill="#A86002" clip-path="url(#bmc)"/>
+  <rect x="160" y="211" width="92" height="4.5" fill="#A86002" clip-path="url(#bmc)"/>
+  <!-- Cuff -->
+  <rect x="163" y="227" width="70" height="19" rx="4" fill="#8C4902"/>
+
+  <!-- Curved text: MITTEN MAKES (top) -->
+  <text font-family="'Poppins', 'Arial Black', sans-serif" font-weight="800" font-size="27" fill="#ffffff" letter-spacing="3">
+    <textPath href="#top-arc" startOffset="50%" text-anchor="middle">MITTEN MAKES</textPath>
+  </text>
+
+  <!-- Curved text: HANDCRAFTED 3D PRINTS (bottom) -->
+  <text font-family="'Poppins', 'Arial Black', sans-serif" font-weight="700" font-size="16" fill="#ffffff" letter-spacing="1.5">
+    <textPath href="#bottom-arc1" startOffset="50%" text-anchor="middle">HANDCRAFTED 3D PRINTS</textPath>
+  </text>
+
+  <!-- Curved text: MADE IN MICHIGAN (bottom inner) -->
+  <text font-family="'Poppins', sans-serif" font-weight="600" font-size="13" fill="rgba(255,255,255,0.85)" letter-spacing="2">
+    <textPath href="#bottom-arc2" startOffset="50%" text-anchor="middle">— MADE IN MICHIGAN —</textPath>
+  </text>
+</svg>

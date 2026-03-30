@@ -1,0 +1,38 @@
+<svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <path id="top-arc-w" d="M 42,200 A 158,158 0 0,1 358,200"/>
+    <path id="bottom-arc1-w" d="M 48,200 A 152,152 0 0,0 352,200"/>
+    <path id="bottom-arc2-w" d="M 58,200 A 142,142 0 0,0 342,200"/>
+    <clipPath id="bmc-w">
+      <path d="M 165,234 L 165,180 Q 165,161 179,161 L 219,161 Q 231,161 231,180 L 231,185 Q 234,182 238,184 Q 248,189 248,205 Q 248,221 238,224 Q 234,226 231,224 L 231,234 Z"/>
+    </clipPath>
+  </defs>
+
+  <!-- Outer circle (white outline only) -->
+  <circle cx="200" cy="200" r="192" fill="none" stroke="#ffffff" stroke-width="3"/>
+  <circle cx="200" cy="200" r="180" fill="none" stroke="rgba(255,255,255,0.4)" stroke-width="2"/>
+  <!-- Inner circle border -->
+  <circle cx="200" cy="200" r="128" fill="none" stroke="#ffffff" stroke-width="2"/>
+
+  <!-- Stars -->
+  <polygon points="36,190 38.2,196.8 45.4,196.8 39.8,200.9 42,207.7 36,203.6 30,207.7 32.2,200.9 26.6,196.8 33.8,196.8" fill="#ffffff"/>
+  <polygon points="364,190 366.2,196.8 373.4,196.8 367.8,200.9 370,207.7 364,203.6 358,207.7 360.2,200.9 354.6,196.8 361.8,196.8" fill="#ffffff"/>
+
+  <!-- Mitten icon (white) -->
+  <path d="M 165,234 L 165,180 Q 165,161 179,161 L 219,161 Q 231,161 231,180 L 231,185 Q 234,182 238,184 Q 248,189 248,205 Q 248,221 238,224 Q 234,226 231,224 L 231,234 Z" fill="#ffffff"/>
+  <rect x="160" y="189" width="92" height="4.5" fill="rgba(0,0,0,0.15)" clip-path="url(#bmc-w)"/>
+  <rect x="160" y="200" width="92" height="4.5" fill="rgba(0,0,0,0.15)" clip-path="url(#bmc-w)"/>
+  <rect x="160" y="211" width="92" height="4.5" fill="rgba(0,0,0,0.15)" clip-path="url(#bmc-w)"/>
+  <rect x="163" y="227" width="70" height="19" rx="4" fill="rgba(0,0,0,0.2)"/>
+
+  <!-- Curved text: all white -->
+  <text font-family="'Poppins', 'Arial Black', sans-serif" font-weight="800" font-size="27" fill="#ffffff" letter-spacing="3">
+    <textPath href="#top-arc-w" startOffset="50%" text-anchor="middle">MITTEN MAKES</textPath>
+  </text>
+  <text font-family="'Poppins', 'Arial Black', sans-serif" font-weight="700" font-size="16" fill="#ffffff" letter-spacing="1.5">
+    <textPath href="#bottom-arc1-w" startOffset="50%" text-anchor="middle">HANDCRAFTED 3D PRINTS</textPath>
+  </text>
+  <text font-family="'Poppins', sans-serif" font-weight="600" font-size="13" fill="rgba(255,255,255,0.8)" letter-spacing="2">
+    <textPath href="#bottom-arc2-w" startOffset="50%" text-anchor="middle">— MADE IN MICHIGAN —</textPath>
+  </text>
+</svg>

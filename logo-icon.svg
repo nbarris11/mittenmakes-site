@@ -1,0 +1,19 @@
+<svg viewBox="0 0 108 132" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <clipPath id="mc">
+      <path d="M 92,72 L 92,27 Q 92,10 78,10 L 38,10 Q 24,10 24,27 L 24,32 Q 21,29 17,31 Q 5,36 5,52 Q 5,68 17,71 Q 21,73 24,71 L 24,72 Z"/>
+    </clipPath>
+  </defs>
+  <!-- Mitten body + thumb -->
+  <path d="M 92,72 L 92,27 Q 92,10 78,10 L 38,10 Q 24,10 24,27 L 24,32 Q 21,29 17,31 Q 5,36 5,52 Q 5,68 17,71 Q 21,73 24,71 L 24,72 Z" fill="#D97706"/>
+  <!-- Layer lines clipped to body -->
+  <rect x="0" y="34" width="98" height="5" fill="#A86002" clip-path="url(#mc)"/>
+  <rect x="0" y="45" width="98" height="5" fill="#A86002" clip-path="url(#mc)"/>
+  <rect x="0" y="56" width="98" height="5" fill="#A86002" clip-path="url(#mc)"/>
+  <!-- Cuff band (slightly wider than body, overlaps bottom of body) -->
+  <rect x="22" y="65" width="70" height="23" rx="5" fill="#8C4902"/>
+  <!-- Radiating arcs below -->
+  <path d="M 30,91 Q 57,102 84,91" fill="none" stroke="#D97706" stroke-width="2.5" stroke-linecap="round"/>
+  <path d="M 21,101 Q 57,114 93,101" fill="none" stroke="#D97706" stroke-width="2" stroke-linecap="round"/>
+  <path d="M 12,111 Q 57,126 102,111" fill="none" stroke="#D97706" stroke-width="1.5" stroke-linecap="round"/>
+</svg>

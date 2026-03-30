@@ -1,0 +1,19 @@
+<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <clipPath id="bmc-s">
+      <path d="M 65,134 L 65,80 Q 65,61 79,61 L 119,61 Q 131,61 131,80 L 131,85 Q 134,82 138,84 Q 148,89 148,105 Q 148,121 138,124 Q 134,126 131,124 L 131,134 Z"/>
+    </clipPath>
+  </defs>
+  <!-- Outer circle -->
+  <circle cx="100" cy="100" r="96" fill="#D97706"/>
+  <!-- Inner cream circle -->
+  <circle cx="100" cy="100" r="78" fill="#F7F1E8"/>
+  <!-- Mitten body + thumb -->
+  <path d="M 65,134 L 65,80 Q 65,61 79,61 L 119,61 Q 131,61 131,80 L 131,85 Q 134,82 138,84 Q 148,89 148,105 Q 148,121 138,124 Q 134,126 131,124 L 131,134 Z" fill="#D97706"/>
+  <!-- Layer lines -->
+  <rect x="60" y="89" width="92" height="4.5" fill="#A86002" clip-path="url(#bmc-s)"/>
+  <rect x="60" y="100" width="92" height="4.5" fill="#A86002" clip-path="url(#bmc-s)"/>
+  <rect x="60" y="111" width="92" height="4.5" fill="#A86002" clip-path="url(#bmc-s)"/>
+  <!-- Cuff -->
+  <rect x="63" y="127" width="70" height="18" rx="4" fill="#8C4902"/>
+</svg>
