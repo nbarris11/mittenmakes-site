@@ -12,7 +12,7 @@
     <meta property="og:image" content="https://mittenmakes.com/og-image.jpg">
     <link rel="icon" type="image/svg+xml" href="logo-icon.svg">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css?v=20260330d">
+    <link rel="stylesheet" href="styles.css?v=20260330e">
 </head>
 <body>
     <!-- Navigation -->
@@ -324,7 +324,7 @@
                 <div class="order-copy">
                     <p class="order-eyebrow">Ready to order?</p>
                     <h2 id="order-form-heading">Send us your idea and we'll take it from there.</h2>
-                    <p>Tell us what item you want, who it is for, and any color ideas you have. We'll follow up with the details, timing, and best next step.</p>
+                    <p>Tell us what item you want, who it is for, whether you need shipping or local pickup, and any color ideas you have. We'll follow up with the details, timing, and best next step.</p>
                 </div>
                 <form id="order-form" class="order-form fade-up" action="https://formsubmit.co/mittenmakes@gmail.com" method="POST" aria-labelledby="order-form-heading">
                     <input type="hidden" name="_subject" value="New Mitten Makes order inquiry">
@@ -376,12 +376,29 @@
                             </select>
                         </label>
                         <label class="form-field">
+                            <span>Delivery preference</span>
+                            <select name="delivery_preference" required>
+                                <option value="">Choose one</option>
+                                <option>Local pickup in Metro Detroit</option>
+                                <option>Ship within the U.S.</option>
+                                <option>Not sure yet</option>
+                            </select>
+                        </label>
+                        <label class="form-field">
+                            <span>Shipping ZIP code</span>
+                            <input type="text" name="shipping_zip" placeholder="Optional, if you want shipping">
+                        </label>
+                        <label class="form-field">
                             <span>Preferred colors</span>
                             <input type="text" name="colors" placeholder="Optional">
                         </label>
                         <label class="form-field">
                             <span>Quantity</span>
                             <input type="text" name="quantity" placeholder="Optional">
+                        </label>
+                        <label class="form-field">
+                            <span>Preferred payment method</span>
+                            <input type="text" name="payment_preference" placeholder="Optional">
                         </label>
                     </div>
 
@@ -390,7 +407,7 @@
                         <textarea name="message" rows="6" placeholder="Include any details that would help us, like colors, names, photos, size, or timing." required></textarea>
                     </label>
 
-                    <p class="form-note">First-time setup note: the first test submission will send a confirmation email to `mittenmakes@gmail.com`. Once you confirm it, future submissions will go straight through.</p>
+                    <p class="form-note">We will follow up to confirm pricing, pickup or shipping, and how you want to pay. First-time setup note: the first test submission will send a confirmation email to `mittenmakes@gmail.com`. Once you confirm it, future submissions will go straight through.</p>
 
                     <div class="form-actions">
                         <button type="submit" class="btn btn-primary">Send inquiry</button>

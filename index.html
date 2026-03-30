@@ -12,7 +12,7 @@
     <meta property="og:image" content="https://mittenmakes.com/og-image.jpg">
     <link rel="icon" type="image/svg+xml" href="logo-icon.svg">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css?v=20260330d">
+    <link rel="stylesheet" href="styles.css?v=20260330e">
 </head>
 <body>
     <!-- Navigation -->
@@ -174,7 +174,7 @@
                 <div class="order-copy">
                     <p class="order-eyebrow">Ready to order?</p>
                     <h2>Tell us what you want and we'll help from there.</h2>
-                    <p>You do not have to figure everything out on your own. Send us the item you want, who it is for, and any color ideas you have, and we'll walk you through the next step.</p>
+                    <p>You do not have to figure everything out on your own. Send us the item you want, who it is for, whether you need shipping or local pickup, and any color ideas you have, and we'll walk you through the next step.</p>
                 </div>
                 <div class="order-steps">
                     <div class="order-step">
@@ -187,7 +187,7 @@
                     </div>
                     <div class="order-step">
                         <span>3</span>
-                        <p>We'll confirm details, timing, and pickup or shipping.</p>
+                        <p>We'll confirm the details, timing, delivery plan, and payment options.</p>
                     </div>
                 </div>
                 <div class="order-actions">
@@ -239,12 +239,29 @@
                             </select>
                         </label>
                         <label class="form-field">
+                            <span>Delivery preference</span>
+                            <select name="delivery_preference" required>
+                                <option value="">Choose one</option>
+                                <option>Local pickup in Metro Detroit</option>
+                                <option>Ship within the U.S.</option>
+                                <option>Not sure yet</option>
+                            </select>
+                        </label>
+                        <label class="form-field">
+                            <span>Shipping ZIP code</span>
+                            <input type="text" name="shipping_zip" placeholder="Optional, if you want shipping">
+                        </label>
+                        <label class="form-field">
                             <span>Preferred colors</span>
                             <input type="text" name="colors" placeholder="Optional">
                         </label>
                         <label class="form-field">
                             <span>Quantity</span>
                             <input type="text" name="quantity" placeholder="Optional">
+                        </label>
+                        <label class="form-field">
+                            <span>Preferred payment method</span>
+                            <input type="text" name="payment_preference" placeholder="Optional">
                         </label>
                     </div>
 
@@ -253,7 +270,7 @@
                         <textarea name="message" rows="6" placeholder="What item do you want, what colors do you like, and anything else we should know?" required></textarea>
                     </label>
 
-                    <p class="form-note">First-time setup note: the first test submission will send a confirmation email to `mittenmakes@gmail.com`. Once you confirm it, future submissions will go straight through.</p>
+                    <p class="form-note">We will follow up to confirm pricing, pickup or shipping, and how you want to pay. First-time setup note: the first test submission will send a confirmation email to `mittenmakes@gmail.com`. Once you confirm it, future submissions will go straight through.</p>
 
                     <div class="form-actions">
                         <button type="submit" class="btn btn-primary">Send inquiry</button>
