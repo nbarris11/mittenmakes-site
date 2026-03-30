@@ -3,14 +3,14 @@
    =========================== */
 
 :root {
-  --bg:           #F5EFE8;
-  --surface:      #FFFDF9;
+  --bg:           #FDF5ED;
+  --surface:      #FFF9F2;
   --text:         #3D3D3D;
   --muted:        #5B6470;
   --accent:       #C4511A;
   --accent-hover: #E8651A;
-  --accent-soft:  #F3E1CE;
-  --border:       #E7DED3;
+  --accent-soft:  #F7E8D8;
+  --border:       #EDE1D5;
 }
 
 /* ===========================
@@ -88,7 +88,7 @@ a:hover { color: var(--accent-hover); }
    =========================== */
 
 .navbar {
-  background-color: var(--surface);
+  background-color: var(--bg);
   border-bottom: 1px solid var(--border);
   padding: 1.1rem 0;
   position: sticky;
@@ -164,12 +164,7 @@ a:hover { color: var(--accent-hover); }
 }
 
 .hero::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background-image: url("data:image/svg+xml,%3Csvg width='200' height='200' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M 16,72 L 16,27 Q 16,10 30,10 L 70,10 Q 84,10 84,27 L 84,32 Q 87,29 91,31 Q 103,36 103,52 Q 103,68 91,71 Q 87,73 84,71 L 84,72 Z' fill='%23D97706' opacity='0.05'/%3E%3C/svg%3E");
-  background-size: 160px 160px;
-  pointer-events: none;
+  content: none;
 }
 
 .hero-content {
@@ -177,38 +172,40 @@ a:hover { color: var(--accent-hover); }
   z-index: 1;
   text-align: center;
   padding: 0 1.5rem;
+  max-width: 860px;
 }
 
 .hero-logo {
-  width: 320px;
+  width: min(460px, 90vw);
   height: auto;
-  margin: 0 auto 2rem;
+  margin: 0 auto 2.4rem;
   display: block;
-  max-width: 90vw;
 }
 
 .hero-tagline {
   font-family: 'Poppins', sans-serif;
-  font-size: 1.55rem;
-  font-weight: 600;
+  font-size: clamp(1.9rem, 4vw, 3.2rem);
+  font-weight: 700;
   color: var(--text);
-  margin-bottom: 0.5rem;
-  letter-spacing: -0.2px;
+  margin-bottom: 0.75rem;
+  letter-spacing: -0.8px;
+  line-height: 1.08;
 }
 
 .hero-sub {
-  font-size: 0.85rem;
-  font-weight: 600;
+  font-size: 0.92rem;
+  font-weight: 700;
   color: var(--accent);
-  letter-spacing: 2px;
+  letter-spacing: 3px;
   text-transform: uppercase;
-  margin-bottom: 2.25rem;
+  margin-bottom: 2.1rem;
 }
 
 @media (max-width: 768px) {
   .hero { min-height: 520px; }
-  .hero-logo { width: 110px; }
-  .hero-tagline { font-size: 1.25rem; }
+  .hero-logo { width: min(360px, 88vw); }
+  .hero-tagline { font-size: 1.65rem; }
+  .hero-sub { font-size: 0.78rem; letter-spacing: 2px; }
 }
 
 /* ===========================
@@ -233,6 +230,7 @@ a:hover { color: var(--accent-hover); }
 .btn-primary {
   background-color: var(--accent);
   color: #ffffff;
+  box-shadow: 0 12px 24px rgba(196, 81, 26, 0.18);
 }
 .btn-primary:hover {
   background-color: var(--accent-hover);
@@ -320,6 +318,7 @@ a:hover { color: var(--accent-hover); }
   border: 1px solid var(--border);
   border-radius: 12px;
   background-color: var(--surface);
+  box-shadow: 0 10px 26px rgba(61, 61, 61, 0.04);
   transition: box-shadow 0.2s ease, transform 0.2s ease;
 }
 .step-card:hover {
@@ -381,6 +380,7 @@ a:hover { color: var(--accent-hover); }
   border-radius: 12px;
   border: 1px solid var(--border);
   border-top: 4px solid var(--accent);
+  box-shadow: 0 10px 26px rgba(61, 61, 61, 0.04);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 .category-card:hover {
@@ -643,6 +643,7 @@ details.faq-item[open] summary::after { transform: rotate(45deg); }
   padding: 3rem 3.5rem;
   border-radius: 16px;
   border: 1px solid var(--border);
+  box-shadow: 0 14px 32px rgba(61, 61, 61, 0.05);
 }
 .about-content h1 { color: var(--accent); font-size: 2.2rem; margin-bottom: 1.5rem; }
 .about-content h2 {
@@ -679,7 +680,7 @@ details.faq-item[open] summary::after { transform: rotate(45deg); }
    =========================== */
 
 .footer {
-  background-color: var(--surface);
+  background-color: var(--bg);
   border-top: 1px solid var(--border);
   padding: 3rem 0 2rem;
   margin-top: 4rem;
