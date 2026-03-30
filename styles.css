@@ -538,11 +538,81 @@ a:hover { color: var(--accent-hover); }
   flex-wrap: wrap;
 }
 
+.order-form {
+  margin-top: 1.75rem;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  margin-bottom: 1rem;
+}
+
+.form-field span {
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.86rem;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.form-field input,
+.form-field select,
+.form-field textarea {
+  width: 100%;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 0.95rem 1rem;
+  font: inherit;
+  color: var(--text);
+  background-color: #ffffff;
+}
+
+.form-field input:focus,
+.form-field select:focus,
+.form-field textarea:focus {
+  outline: 2px solid rgba(196, 81, 26, 0.18);
+  border-color: var(--accent);
+}
+
+.form-field textarea {
+  resize: vertical;
+  min-height: 140px;
+}
+
+.form-note {
+  margin-top: 0.5rem;
+  margin-bottom: 1rem;
+  color: var(--muted);
+  font-size: 0.85rem;
+  line-height: 1.7;
+}
+
+.form-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.honeypot-field {
+  display: none;
+}
+
 @media (max-width: 768px) {
   .order-panel {
     padding: 1.5rem;
   }
   .order-steps {
+    grid-template-columns: 1fr;
+  }
+  .form-grid {
     grid-template-columns: 1fr;
   }
 }

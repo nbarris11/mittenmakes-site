@@ -12,7 +12,7 @@
     <meta property="og:image" content="https://mittenmakes.com/og-image.jpg">
     <link rel="icon" type="image/svg+xml" href="logo-icon.svg">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css?v=20260330c">
+    <link rel="stylesheet" href="styles.css?v=20260330d">
 </head>
 <body>
     <!-- Navigation -->
@@ -192,8 +192,73 @@
                 </div>
                 <div class="order-actions">
                     <a href="https://instagram.com/mittenmakes" target="_blank" class="btn btn-primary">DM on Instagram</a>
-                    <a href="mailto:mittenmakes@gmail.com?subject=Mitten%20Makes%20Order%20Inquiry" class="btn btn-secondary">Email your idea</a>
+                    <a href="#order-form" class="btn btn-secondary">Use the order form</a>
                 </div>
+                <form id="order-form" class="order-form fade-up" action="https://formsubmit.co/mittenmakes@gmail.com" method="POST">
+                    <input type="hidden" name="_subject" value="New Mitten Makes order inquiry">
+                    <input type="hidden" name="_next" value="https://mittenmakes.com/thanks.html">
+                    <input type="hidden" name="_template" value="table">
+                    <input type="hidden" name="_autoresponse" value="Thanks for reaching out to Mitten Makes. We got your inquiry and will follow up soon with next steps.">
+                    <input type="text" name="_honey" class="honeypot-field" tabindex="-1" autocomplete="off">
+
+                    <div class="form-grid">
+                        <label class="form-field">
+                            <span>Your name</span>
+                            <input type="text" name="name" required>
+                        </label>
+                        <label class="form-field">
+                            <span>Your email</span>
+                            <input type="email" name="email" required>
+                        </label>
+                        <label class="form-field">
+                            <span>What are you interested in?</span>
+                            <select name="product_interest" required>
+                                <option value="">Choose one</option>
+                                <option>Squishy Fidgets</option>
+                                <option>Desk Accessories</option>
+                                <option>Poseable Creatures</option>
+                                <option>Personalized Keychains</option>
+                                <option>Photo Lightbox</option>
+                                <option>Custom Lithophane</option>
+                                <option>Personalized Statue</option>
+                                <option>Decorative Vase</option>
+                                <option>Image Keychain</option>
+                                <option>Custom Name Sign</option>
+                                <option>Something custom</option>
+                            </select>
+                        </label>
+                        <label class="form-field">
+                            <span>Who is it for?</span>
+                            <select name="who_its_for">
+                                <option value="">Optional</option>
+                                <option>My child</option>
+                                <option>A parent</option>
+                                <option>An adult gift</option>
+                                <option>Myself</option>
+                                <option>Special event</option>
+                            </select>
+                        </label>
+                        <label class="form-field">
+                            <span>Preferred colors</span>
+                            <input type="text" name="colors" placeholder="Optional">
+                        </label>
+                        <label class="form-field">
+                            <span>Quantity</span>
+                            <input type="text" name="quantity" placeholder="Optional">
+                        </label>
+                    </div>
+
+                    <label class="form-field">
+                        <span>Tell us what you want</span>
+                        <textarea name="message" rows="6" placeholder="What item do you want, what colors do you like, and anything else we should know?" required></textarea>
+                    </label>
+
+                    <p class="form-note">First-time setup note: the first test submission will send a confirmation email to `mittenmakes@gmail.com`. Once you confirm it, future submissions will go straight through.</p>
+
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary">Send inquiry</button>
+                    </div>
+                </form>
             </div>
         </div>
     </section>
