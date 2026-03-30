@@ -403,6 +403,47 @@ a:hover { color: var(--accent-hover); }
 }
 
 /* ===========================
+   GIFTING SECTION
+   =========================== */
+
+.gifting-section {
+  background-color: var(--surface);
+}
+
+.gifting-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+
+.gift-card {
+  background-color: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 1.8rem;
+  box-shadow: 0 10px 26px rgba(61, 61, 61, 0.04);
+}
+
+.gift-card h3 {
+  font-size: 1.1rem;
+  margin-bottom: 0.7rem;
+}
+
+.gift-card p {
+  margin-bottom: 0;
+  color: var(--muted);
+  font-size: 0.95rem;
+  line-height: 1.8;
+}
+
+@media (max-width: 768px) {
+  .gifting-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+}
+
+/* ===========================
    MADE TO ORDER BANNER
    =========================== */
 
@@ -419,6 +460,92 @@ a:hover { color: var(--accent-hover); }
   transition: border-color 0.2s ease;
 }
 .made-to-order-banner a:hover { border-bottom-color: #ffffff; }
+
+/* ===========================
+   ORDER SECTION
+   =========================== */
+
+.order-panel {
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  padding: 2.25rem;
+  box-shadow: 0 12px 30px rgba(61, 61, 61, 0.05);
+}
+
+.order-copy {
+  max-width: 760px;
+  margin-bottom: 1.5rem;
+}
+
+.order-eyebrow {
+  color: var(--accent);
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+}
+
+.order-copy h2 {
+  margin-bottom: 0.75rem;
+}
+
+.order-copy p:last-child {
+  margin-bottom: 0;
+  color: var(--muted);
+}
+
+.order-steps {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.order-step {
+  background-color: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 1.2rem;
+}
+
+.order-step span {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background-color: var(--accent);
+  color: #ffffff;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 700;
+  margin-bottom: 0.8rem;
+}
+
+.order-step p {
+  margin-bottom: 0;
+  color: var(--muted);
+  font-size: 0.94rem;
+  line-height: 1.75;
+}
+
+.order-actions {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 768px) {
+  .order-panel {
+    padding: 1.5rem;
+  }
+  .order-steps {
+    grid-template-columns: 1fr;
+  }
+}
 
 /* ===========================
    FAQ
@@ -500,6 +627,13 @@ details.faq-item[open] summary::after { transform: rotate(45deg); }
 }
 .shop-intro strong { color: var(--text); }
 .shop-intro p { margin-bottom: 0; }
+
+.shop-intro-actions {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-top: 1.1rem;
+}
 
 /* ===========================
    PRODUCT GRID & CARDS
@@ -625,6 +759,7 @@ details.faq-item[open] summary::after { transform: rotate(45deg); }
 @media (max-width: 768px) {
   .product-grid { grid-template-columns: 1fr; gap: 1.25rem; }
   .shop-intro { padding: 1.25rem 1.5rem; margin-bottom: 2rem; }
+  .shop-intro-actions { margin-top: 1rem; }
 }
 
 /* ===========================
