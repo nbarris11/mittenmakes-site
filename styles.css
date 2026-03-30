@@ -903,7 +903,10 @@ details.faq-item[open] summary::after { transform: rotate(45deg); }
 }
 
 .featured-gift-photo {
-  min-height: 440px;
+  align-self: start;
+  min-height: 0;
+  aspect-ratio: 1 / 1;
+  max-height: 540px;
   display: flex;
   align-items: center;
   justify-content: center;
