@@ -694,18 +694,29 @@ details.faq-item[open] summary::after { transform: rotate(45deg); }
   gap: 2rem;
 }
 
-.footer-brand { flex: 1; min-width: 240px; }
+.footer-brand {
+  flex: 1;
+  min-width: 240px;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
 
 .footer-logo {
   display: flex;
   align-items: center;
   gap: 10px;
-  margin-bottom: 0.875rem;
+  margin-bottom: 0;
   color: var(--text);
   transition: opacity 0.2s ease;
   text-decoration: none;
 }
 .footer-logo:hover { opacity: 0.75; }
+.footer-badge-image {
+  width: 84px;
+  height: auto;
+  display: block;
+}
 .footer-logo-img { width: 81px; height: auto; display: block; }
 .footer-logo span {
   font-family: 'Poppins', sans-serif;
@@ -714,19 +725,6 @@ details.faq-item[open] summary::after { transform: rotate(45deg); }
   letter-spacing: -0.2px;
   color: var(--text);
   text-transform: uppercase;
-}
-
-.footer-badge {
-  flex: 0 0 auto;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.footer-badge-img {
-  width: 72px;
-  height: 72px;
-  display: block;
-  opacity: 0.72;
 }
 
 .footer-tagline {
@@ -758,7 +756,7 @@ details.faq-item[open] summary::after { transform: rotate(45deg); }
 @media (max-width: 768px) {
   .footer { padding: 2rem 0 1.5rem; margin-top: 2rem; }
   .footer-content { flex-direction: column; align-items: flex-start; gap: 1.5rem; }
-  .footer-badge { display: none; }
+  .footer-brand { align-items: center; }
   .footer-links { text-align: left; }
   .footer-link { display: inline-block; margin-right: 1rem; }
 }
