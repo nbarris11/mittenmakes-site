@@ -937,7 +937,10 @@ details.faq-item[open] summary::after { transform: rotate(45deg); }
 }
 
 .featured-gift-preview {
-  min-height: 230px;
+  align-self: start;
+  width: min(100%, 380px);
+  min-height: 0;
+  aspect-ratio: 4 / 5;
   border: 1px solid var(--border);
 }
 
