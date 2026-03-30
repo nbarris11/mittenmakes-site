@@ -3,12 +3,12 @@
    =========================== */
 
 :root {
-  --bg:           #F7F5F2;
+  --bg:           #F5EFE8;
   --surface:      #FFFDF9;
-  --text:         #1F2933;
+  --text:         #3D3D3D;
   --muted:        #5B6470;
-  --accent:       #D97706;
-  --accent-hover: #B85F05;
+  --accent:       #C4511A;
+  --accent-hover: #E8651A;
   --accent-soft:  #F3E1CE;
   --border:       #E7DED3;
 }
@@ -115,8 +115,8 @@ a:hover { color: var(--accent-hover); }
 .nav-logo:hover { opacity: 0.85; }
 
 .nav-logo-img {
-  height: 36px;
-  width: auto;
+  width: 96px;
+  height: auto;
   display: block;
 }
 
@@ -238,7 +238,7 @@ a:hover { color: var(--accent-hover); }
   background-color: var(--accent-hover);
   color: #ffffff;
   transform: translateY(-1px);
-  box-shadow: 0 4px 14px rgba(217, 119, 6, 0.3);
+  box-shadow: 0 4px 14px rgba(196, 81, 26, 0.3);
 }
 
 .btn-secondary {
@@ -705,7 +705,7 @@ details.faq-item[open] summary::after { transform: rotate(45deg); }
   text-decoration: none;
 }
 .footer-logo:hover { opacity: 0.75; }
-.footer-logo-img { height: 32px; width: auto; display: block; }
+.footer-logo-img { width: 81px; height: auto; display: block; }
 .footer-logo span {
   font-family: 'Poppins', sans-serif;
   font-weight: 800;
@@ -713,6 +713,19 @@ details.faq-item[open] summary::after { transform: rotate(45deg); }
   letter-spacing: -0.2px;
   color: var(--text);
   text-transform: uppercase;
+}
+
+.footer-badge {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.footer-badge-img {
+  width: 72px;
+  height: 72px;
+  display: block;
+  opacity: 0.72;
 }
 
 .footer-tagline {
@@ -744,6 +757,7 @@ details.faq-item[open] summary::after { transform: rotate(45deg); }
 @media (max-width: 768px) {
   .footer { padding: 2rem 0 1.5rem; margin-top: 2rem; }
   .footer-content { flex-direction: column; align-items: flex-start; gap: 1.5rem; }
+  .footer-badge { display: none; }
   .footer-links { text-align: left; }
   .footer-link { display: inline-block; margin-right: 1rem; }
 }
@@ -783,7 +797,7 @@ details.faq-item[open] summary::after { transform: rotate(45deg); }
   pointer-events: none;
   transition: opacity 0.3s ease, transform 0.2s ease, background 0.2s ease;
   z-index: 200;
-  box-shadow: 0 4px 14px rgba(217, 119, 6, 0.35);
+  box-shadow: 0 4px 14px rgba(196, 81, 26, 0.35);
   display: flex;
   align-items: center;
   justify-content: center;
