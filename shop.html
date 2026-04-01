@@ -22,8 +22,8 @@
     <link rel="canonical" href="https://mittenmakes.com/shop.html">
     <link rel="icon" type="image/png" href="/assets/logo-badge.png?v=20260401c">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css?v=20260401e">
-    <script src="stripe-payment-links.js?v=20260401a" defer></script>
+    <link rel="stylesheet" href="styles.css?v=20260401f">
+    <script src="shop-checkout.js?v=20260401a" defer></script>
     <style>
         .product-card {
             overflow: hidden;
@@ -209,7 +209,7 @@
         <div class="container">
             <div class="shop-intro">
                 <h1>Shop 3D Printed Gifts and Fidgets</h1>
-                <p>All items are made to order in Metro Detroit, MI. Looking for a gift for a kid, a fun desk toy, a classroom quantity, or a custom piece for your home? DM us on Instagram or click <strong>Request this</strong> to get started. Starter pricing is listed below, and we will confirm your final total, pickup or shipping, and payment before anything is finalized.</p>
+                <p>All items are made to order in Metro Detroit, MI. Looking for a gift for a kid, a fun desk toy, a classroom quantity, or a custom piece for your home? Use <strong>Add to cart</strong> for standard ready-to-order items, or click <strong>Request this</strong> when you want a specific color, custom version, or help figuring out the right fit.</p>
                 <div class="shop-intro-actions">
                     <a href="https://instagram.com/mittenmakes" target="_blank" class="btn btn-primary">DM on Instagram</a>
                     <a href="#order-form" class="btn btn-secondary">Use the order form</a>
@@ -226,6 +226,48 @@
                     <a href="#shop-collector-creatures" class="shop-jump-link">Collector creatures</a>
                 </div>
             </div>
+
+            <section class="checkout-cart-panel fade-up" id="online-checkout" aria-labelledby="online-checkout-title">
+                <div class="checkout-cart-copy">
+                    <p class="order-eyebrow">Online checkout</p>
+                    <h2 id="online-checkout-title">Build your ready-to-order cart</h2>
+                    <p>Use online checkout for standard ready-to-order versions of select items. Your merchandise subtotal needs to be at least <strong>$24.97</strong> before checkout. Local pickup is free, and shipping is a flat <strong>$9.97</strong> anywhere in the U.S.</p>
+                    <p class="checkout-cart-subcopy">Because every print is made to order, exact colors and filament blends can vary a little from the listing photos. If you want a specific color or personalized version, use <strong>Request this</strong> instead.</p>
+                </div>
+                <div class="checkout-cart-shell">
+                    <div class="checkout-cart-header">
+                        <h3>Your cart</h3>
+                        <span class="checkout-cart-count" id="checkout-cart-count">0 items</span>
+                    </div>
+                    <p class="checkout-cart-empty" id="checkout-cart-empty">Add ready-to-order items from the shop below to start your online checkout.</p>
+                    <ul class="checkout-cart-items" id="checkout-cart-items" hidden></ul>
+
+                    <fieldset class="checkout-fulfillment">
+                        <legend>How would you like to get your order?</legend>
+                        <label class="checkout-fulfillment-option">
+                            <input type="radio" name="checkout-fulfillment" value="pickup" checked>
+                            <span>Local pickup in Metro Detroit</span>
+                        </label>
+                        <label class="checkout-fulfillment-option">
+                            <input type="radio" name="checkout-fulfillment" value="shipping">
+                            <span>Ship within the U.S. (+$9.97)</span>
+                        </label>
+                    </fieldset>
+
+                    <div class="checkout-totals">
+                        <div><span>Merchandise subtotal</span><strong id="checkout-subtotal">$0.00</strong></div>
+                        <div><span>Shipping</span><strong id="checkout-shipping">Free</strong></div>
+                        <div class="checkout-total-row"><span>Total at checkout</span><strong id="checkout-total">$0.00</strong></div>
+                    </div>
+
+                    <p class="checkout-minimum-note" id="checkout-minimum-note">Online checkout starts at $24.97 in ready-to-order items before shipping.</p>
+
+                    <div class="checkout-actions">
+                        <button type="button" class="btn btn-primary" id="checkout-button" disabled>Checkout with Stripe</button>
+                        <p class="checkout-message" id="checkout-message" aria-live="polite"></p>
+                    </div>
+                </div>
+            </section>
 
             <section class="featured-gift-card fade-up" aria-labelledby="featured-gift-title">
                 <div class="featured-gift-media">

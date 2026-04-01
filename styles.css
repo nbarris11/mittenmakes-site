@@ -1097,6 +1097,198 @@ details.faq-item[open] summary::after { transform: rotate(45deg); }
   transform: translateY(-1px);
 }
 
+.checkout-cart-panel {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(320px, 0.92fr);
+  gap: 1.5rem;
+  align-items: start;
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 14px 32px rgba(61, 61, 61, 0.06);
+}
+
+.checkout-cart-copy p:last-child {
+  margin-bottom: 0;
+}
+
+.checkout-cart-subcopy {
+  color: var(--muted);
+}
+
+.checkout-cart-shell {
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  padding: 1.25rem;
+  background: linear-gradient(180deg, #FFF9F2 0%, #FFFFFF 100%);
+}
+
+.checkout-cart-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
+  margin-bottom: 0.9rem;
+}
+
+.checkout-cart-header h3 {
+  margin-bottom: 0;
+  font-size: 1.2rem;
+}
+
+.checkout-cart-count {
+  color: var(--muted);
+  font-size: 0.92rem;
+  font-weight: 600;
+}
+
+.checkout-cart-empty {
+  color: var(--muted);
+  margin-bottom: 0;
+}
+
+.checkout-cart-items {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 1rem;
+  display: grid;
+  gap: 0.8rem;
+}
+
+.checkout-cart-item {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  align-items: center;
+  padding: 0.9rem 1rem;
+  border-radius: 14px;
+  border: 1px solid var(--border);
+  background-color: #ffffff;
+}
+
+.checkout-cart-item-copy {
+  display: grid;
+  gap: 0.2rem;
+}
+
+.checkout-cart-item-copy strong {
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.95rem;
+}
+
+.checkout-cart-item-copy span {
+  color: var(--muted);
+  font-size: 0.88rem;
+}
+
+.checkout-cart-item-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.cart-qty-button,
+.cart-remove-button {
+  border: 1px solid var(--border);
+  background-color: #ffffff;
+  color: var(--text);
+  border-radius: 999px;
+  font: inherit;
+  cursor: pointer;
+}
+
+.cart-qty-button {
+  width: 34px;
+  height: 34px;
+  font-size: 1.1rem;
+  line-height: 1;
+}
+
+.cart-remove-button {
+  padding: 0.45rem 0.8rem;
+  font-size: 0.86rem;
+  font-weight: 600;
+}
+
+.cart-qty-value {
+  min-width: 1.2rem;
+  text-align: center;
+  font-weight: 700;
+}
+
+.checkout-fulfillment {
+  border: 0;
+  padding: 0;
+  margin: 0 0 1rem;
+  display: grid;
+  gap: 0.65rem;
+}
+
+.checkout-fulfillment legend {
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 700;
+  margin-bottom: 0.3rem;
+}
+
+.checkout-fulfillment-option {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  padding: 0.8rem 0.9rem;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  background-color: #ffffff;
+  color: var(--text);
+}
+
+.checkout-totals {
+  display: grid;
+  gap: 0.55rem;
+  padding: 1rem 0;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+
+.checkout-totals > div {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.checkout-total-row {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 700;
+}
+
+.checkout-minimum-note,
+.checkout-message {
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.checkout-actions {
+  display: grid;
+  gap: 0.8rem;
+  margin-top: 1rem;
+}
+
+.product-checkout-note {
+  margin-top: 0.8rem;
+  margin-bottom: 0;
+  color: var(--muted);
+  font-size: 0.82rem;
+  line-height: 1.6;
+}
+
+.btn-add-to-cart {
+  min-width: 180px;
+}
+
 .featured-gift-card {
   display: grid;
   gap: 1.35rem;
@@ -1368,6 +1560,24 @@ details.faq-item[open] summary::after { transform: rotate(45deg); }
 .swatch:hover { transform: scale(1.3); }
 
 @media (max-width: 768px) {
+  .checkout-cart-panel {
+    grid-template-columns: 1fr;
+    padding: 1.2rem;
+  }
+
+  .checkout-cart-shell {
+    padding: 1rem;
+  }
+
+  .checkout-cart-item {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .checkout-cart-item-controls {
+    justify-content: flex-start;
+  }
+
   .product-grid { grid-template-columns: 1fr; gap: 1.25rem; }
   .shop-intro { padding: 1.25rem 1.5rem; margin-bottom: 2rem; }
   .shop-intro-actions { margin-top: 1rem; }

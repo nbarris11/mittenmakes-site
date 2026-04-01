@@ -1,0 +1,86 @@
+{
+  "minimumSubtotalCents": 2497,
+  "shippingCents": 997,
+  "products": [
+    {
+      "id": "dual-color-star-fidget",
+      "name": "Dual-Color Star Fidget",
+      "priceCents": 1200,
+      "priceLabel": "$12.00",
+      "image": "assets/geometric-spinner-gradient.png?v=20260330k",
+      "description": "Standard ready-to-order version."
+    },
+    {
+      "id": "blue-starfish-fidget",
+      "name": "Blue Starfish Fidget",
+      "priceCents": 800,
+      "priceLabel": "$8.00",
+      "image": "assets/articulated-starfish-blue.png?v=20260330k",
+      "description": "Standard ready-to-order version."
+    },
+    {
+      "id": "bun-slime-fidget",
+      "name": "Bun Slime Fidget",
+      "priceCents": 1000,
+      "priceLabel": "$10.00",
+      "image": "assets/bun-slime-fidget-closed.jpg?v=20260331a",
+      "description": "Standard ready-to-order version."
+    },
+    {
+      "id": "fidget-switch",
+      "name": "Fidget Switch",
+      "priceCents": 800,
+      "priceLabel": "$8.00",
+      "image": "assets/fidget-switch.jpg?v=20260401a",
+      "description": "Standard ready-to-order version."
+    },
+    {
+      "id": "whale-shark",
+      "name": "Whale Shark",
+      "priceCents": 1000,
+      "priceLabel": "$10.00",
+      "image": "assets/whale-shark-biocraftlab.jpg?v=20260401b",
+      "description": "Standard ready-to-order version."
+    },
+    {
+      "id": "cookie-dragon-keychain-figure",
+      "name": "Cookie Dragon Keychain Figure",
+      "priceCents": 800,
+      "priceLabel": "$8.00",
+      "image": "assets/cookie-dragon-front.jpg?v=20260331b",
+      "description": "Standard ready-to-order version."
+    },
+    {
+      "id": "penguin-articulated-keychain",
+      "name": "Penguin Articulated Figure Keychain",
+      "priceCents": 800,
+      "priceLabel": "$8.00",
+      "image": "assets/penguin-keychain.png?v=20260331i",
+      "description": "Standard ready-to-order version."
+    },
+    {
+      "id": "elephant-articulated-keychain",
+      "name": "Elephant Articulated Figure Keychain",
+      "priceCents": 800,
+      "priceLabel": "$8.00",
+      "image": "assets/elephant-keychain.png?v=20260401a",
+      "description": "Standard ready-to-order version."
+    },
+    {
+      "id": "bookmarks-3-pack",
+      "name": "Bookmarks 3 Pack",
+      "priceCents": 1000,
+      "priceLabel": "$10.00",
+      "image": "assets/bookmarks-3-pack.png?v=20260331j",
+      "description": "Standard ready-to-order version."
+    },
+    {
+      "id": "cute-octopus",
+      "name": "Cute Octopus",
+      "priceCents": 1000,
+      "priceLabel": "$10.00",
+      "image": "assets/cute-octopus-clean.png?v=20260330q",
+      "description": "Standard ready-to-order version."
+    }
+  ]
+}
