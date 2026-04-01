@@ -1434,6 +1434,14 @@ details.faq-item[open] summary::after { transform: rotate(45deg); }
   margin-bottom: 0;
 }
 
+.footer-license {
+  color: #8d857d;
+  font-size: 0.68rem;
+  letter-spacing: 0.15px;
+  margin-top: 0.35rem;
+  margin-bottom: 0;
+}
+
 @media (max-width: 768px) {
   .footer { padding: 2rem 0 1.5rem; margin-top: 2rem; }
   .footer-content { flex-direction: column; align-items: flex-start; gap: 1.5rem; }
