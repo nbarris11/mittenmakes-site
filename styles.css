@@ -1240,6 +1240,13 @@ details.faq-item[open] summary::after { transform: rotate(45deg); }
   line-height: 1.7;
   flex-grow: 1;
 }
+.product-credit {
+  font-size: 0.72rem;
+  line-height: 1.5;
+  color: var(--muted);
+  margin-top: -0.15rem;
+  margin-bottom: 0.85rem;
+}
 .product-price {
   font-size: 1rem;
   font-weight: 700;
