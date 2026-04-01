@@ -201,32 +201,77 @@
                             </select>
                         </label>
                         <label class="form-field">
+                            <span>How many do you need?</span>
+                            <select name="quantity">
+                                <option value="">Choose one</option>
+                                <option>1</option>
+                                <option>2 to 5</option>
+                                <option>6 to 10</option>
+                                <option>11 to 25</option>
+                                <option>25+</option>
+                                <option>Not sure yet</option>
+                            </select>
+                        </label>
+                        <label class="form-field">
+                            <span>When do you need it?</span>
+                            <select name="timeline">
+                                <option value="">Choose one</option>
+                                <option>As soon as possible</option>
+                                <option>Within 1 week</option>
+                                <option>Within 2 weeks</option>
+                                <option>This month</option>
+                                <option>Just browsing for now</option>
+                            </select>
+                        </label>
+                        <label class="form-field">
+                            <span>Color style</span>
+                            <select name="color_style">
+                                <option value="">Optional</option>
+                                <option>Use the colors shown</option>
+                                <option>Bright colors</option>
+                                <option>Pastel colors</option>
+                                <option>Rainbow / color blend</option>
+                                <option>Neutral colors</option>
+                                <option>Metallic / shiny look</option>
+                                <option>Not sure yet</option>
+                            </select>
+                        </label>
+                        <label class="form-field">
+                            <span>Do you need a name, photo, or custom text?</span>
+                            <select name="personalization_type">
+                                <option value="">Optional</option>
+                                <option>No</option>
+                                <option>Name or short text</option>
+                                <option>Photo-based</option>
+                                <option>Logo or business version</option>
+                                <option>Not sure yet</option>
+                            </select>
+                        </label>
+                        <label class="form-field">
+                            <span>How would you like to pay?</span>
+                            <select name="payment_preference">
+                                <option value="">Optional</option>
+                                <option>Cash</option>
+                                <option>Venmo</option>
+                                <option>PayPal</option>
+                                <option>Not sure yet</option>
+                            </select>
+                        </label>
+                        <label class="form-field">
                             <span>Shipping ZIP code</span>
-                            <input type="text" name="shipping_zip" placeholder="Optional, if you want shipping">
-                        </label>
-                        <label class="form-field">
-                            <span>Preferred colors</span>
-                            <input type="text" name="colors" placeholder="Optional">
-                        </label>
-                        <label class="form-field">
-                            <span>Quantity</span>
-                            <input type="text" name="quantity" placeholder="Optional">
-                        </label>
-                        <label class="form-field">
-                            <span>Preferred payment method</span>
-                            <input type="text" name="payment_preference" placeholder="Optional, like cash, Venmo, or PayPal">
+                            <input type="text" name="shipping_zip" placeholder="Only if you want shipping">
                         </label>
                     </div>
 
                     <label class="form-field">
-                        <span>Tell us what you want</span>
-                        <textarea name="message" rows="6" placeholder="Share the idea, the use case, colors, size, quantity, and anything else that would help us quote it." required></textarea>
+                        <span>Anything else we should know?</span>
+                        <textarea name="message" rows="4" placeholder="Optional. Add names, size ideas, classroom quantities, or anything special here."></textarea>
                     </label>
 
-                    <p class="form-note">We will follow up to confirm your final price, pickup or shipping, and payment. Local pickup orders can be paid by cash or Venmo, and shipped orders can be paid by Venmo or PayPal after confirmation.</p>
+                    <p class="form-note">We will follow up with the final price, timing, pickup or shipping details, and payment. You do not need to have every detail figured out before sending this.</p>
 
                     <div class="form-actions">
-                        <button type="submit" class="btn btn-primary">Send inquiry</button>
+                        <button type="submit" class="btn btn-primary">Send request</button>
                     </div>
                 </form>
             </div>
