@@ -23,7 +23,7 @@
     <link rel="icon" type="image/png" href="/assets/logo-badge.png?v=20260401c">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css?v=20260401f">
-    <script src="shop-checkout.js?v=20260401a" defer></script>
+    <script src="shop-checkout.js?v=20260401b" defer></script>
     <style>
         .product-card {
             overflow: hidden;
@@ -227,45 +227,17 @@
                 </div>
             </div>
 
-            <section class="checkout-cart-panel fade-up" id="online-checkout" aria-labelledby="online-checkout-title">
-                <div class="checkout-cart-copy">
+            <section class="shop-cart-summary fade-up" id="online-checkout" aria-labelledby="shop-cart-summary-title">
+                <div class="shop-cart-summary-copy">
                     <p class="order-eyebrow">Online checkout</p>
-                    <h2 id="online-checkout-title">Build your ready-to-order cart</h2>
-                    <p>Use online checkout for standard ready-to-order versions of select items. Your merchandise subtotal needs to be at least <strong>$24.97</strong> before checkout. Local pickup is free, and shipping is a flat <strong>$9.97</strong> anywhere in the U.S.</p>
-                    <p class="checkout-cart-subcopy">Because every print is made to order, exact colors and filament blends can vary a little from the listing photos. If you want a specific color or personalized version, use <strong>Request this</strong> instead.</p>
+                    <h2 id="shop-cart-summary-title">Add ready-to-order items, then head to checkout.</h2>
+                    <p>Use online checkout for the standard ready-to-order version of select products. The minimum online merchandise subtotal is <strong>$24.97</strong>. Shipping is a flat <strong>$9.97</strong>, and local pickup is free.</p>
+                    <p class="checkout-cart-subcopy">Exact colors and filament blends can vary slightly from the listing photos because everything is made to order. If you want a very specific version, use <strong>Request this</strong> instead.</p>
                 </div>
-                <div class="checkout-cart-shell">
-                    <div class="checkout-cart-header">
-                        <h3>Your cart</h3>
-                        <span class="checkout-cart-count" id="checkout-cart-count">0 items</span>
-                    </div>
-                    <p class="checkout-cart-empty" id="checkout-cart-empty">Add ready-to-order items from the shop below to start your online checkout.</p>
-                    <ul class="checkout-cart-items" id="checkout-cart-items" hidden></ul>
-
-                    <fieldset class="checkout-fulfillment">
-                        <legend>How would you like to get your order?</legend>
-                        <label class="checkout-fulfillment-option">
-                            <input type="radio" name="checkout-fulfillment" value="pickup" checked>
-                            <span>Local pickup in Metro Detroit</span>
-                        </label>
-                        <label class="checkout-fulfillment-option">
-                            <input type="radio" name="checkout-fulfillment" value="shipping">
-                            <span>Ship within the U.S. (+$9.97)</span>
-                        </label>
-                    </fieldset>
-
-                    <div class="checkout-totals">
-                        <div><span>Merchandise subtotal</span><strong id="checkout-subtotal">$0.00</strong></div>
-                        <div><span>Shipping</span><strong id="checkout-shipping">Free</strong></div>
-                        <div class="checkout-total-row"><span>Total at checkout</span><strong id="checkout-total">$0.00</strong></div>
-                    </div>
-
-                    <p class="checkout-minimum-note" id="checkout-minimum-note">Online checkout starts at $24.97 in ready-to-order items before shipping.</p>
-
-                    <div class="checkout-actions">
-                        <button type="button" class="btn btn-primary" id="checkout-button" disabled>Checkout with Stripe</button>
-                        <p class="checkout-message" id="checkout-message" aria-live="polite"></p>
-                    </div>
+                <div class="shop-cart-summary-actions">
+                    <p class="shop-cart-summary-count">Current cart: <strong data-cart-count>0 items</strong></p>
+                    <a href="checkout.html" class="btn btn-primary" data-cart-link>Open cart</a>
+                    <p class="shop-cart-summary-note">The full review step lives on its own checkout page now, so the shop can stay focused on browsing.</p>
                 </div>
             </section>
 

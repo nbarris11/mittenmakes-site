@@ -1,7 +1,10 @@
 (async () => {
   const CART_STORAGE_KEY = 'mitten-makes-cart-v1';
   const cartRoot = document.getElementById('online-checkout');
-  if (!cartRoot) return;
+  const cartSummaryLinks = Array.from(document.querySelectorAll('[data-cart-link]'));
+  const cartSummaryCounts = Array.from(document.querySelectorAll('[data-cart-count]'));
+  const checkoutPanelPresent = Boolean(cartRoot);
+  const featuredActions = document.querySelector('.featured-gift-copy .order-actions');
 
   const response = await fetch('checkout-products.json?v=20260401a');
   if (!response.ok) return;
@@ -20,7 +23,6 @@
   const checkoutButton = document.getElementById('checkout-button');
   const checkoutMessage = document.getElementById('checkout-message');
   const cartCount = document.getElementById('checkout-cart-count');
-  const featuredActions = document.querySelector('.featured-gift-copy .order-actions');
 
   const formatCurrency = cents =>
     new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(cents / 100);
@@ -49,6 +51,17 @@
       return product ? sum + (product.priceCents * item.quantity) : sum;
     }, 0);
 
+  const updateCartSummary = () => {
+    const itemCount = cart.reduce((sum, item) => sum + item.quantity, 0);
+    cartSummaryCounts.forEach(node => {
+      node.textContent = `${itemCount} item${itemCount === 1 ? '' : 's'}`;
+    });
+
+    cartSummaryLinks.forEach(link => {
+      link.textContent = itemCount > 0 ? 'View cart & checkout' : 'Open cart';
+    });
+  };
+
   const syncCardButtons = () => {
     products.forEach((product, productId) => {
       const card = document.getElementById(productId);
@@ -61,7 +74,12 @@
       cartButton.textContent = 'Add to cart';
       cartButton.addEventListener('click', () => {
         addToCart(productId);
-        cartRoot.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        if (checkoutPanelPresent) {
+          cartRoot.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        } else {
+          const summaryTarget = document.querySelector('.shop-cart-summary');
+          summaryTarget?.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
       });
 
       const cardNote = document.createElement('p');
@@ -83,7 +101,12 @@
     cartButton.textContent = 'Add to cart';
     cartButton.addEventListener('click', () => {
       addToCart(productId);
-      cartRoot.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      if (checkoutPanelPresent) {
+        cartRoot.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      } else {
+        const summaryTarget = document.querySelector('.shop-cart-summary');
+        summaryTarget?.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      }
     });
 
     const requestButton = featuredActions.querySelector('.btn.btn-primary') || featuredActions.querySelector('.btn');
@@ -103,6 +126,7 @@
       cart.push({ id: productId, quantity: 1 });
     }
     saveCart(cart);
+    updateCartSummary();
     renderCart();
   };
 
@@ -111,22 +135,28 @@
       .map(item => item.id === productId ? { ...item, quantity: item.quantity + delta } : item)
       .filter(item => item.quantity > 0);
     saveCart(cart);
+    updateCartSummary();
     renderCart();
   };
 
   const removeFromCart = productId => {
     cart = cart.filter(item => item.id !== productId);
     saveCart(cart);
+    updateCartSummary();
     renderCart();
   };
 
   const renderCart = () => {
+    updateCartSummary();
+    if (!checkoutPanelPresent) return;
+
     const subtotal = getSubtotal();
     const fulfillmentMethod = getFulfillmentMethod();
     const shippingAmount = fulfillmentMethod === 'shipping' ? shippingCents : 0;
     const total = subtotal + shippingAmount;
     const itemCount = cart.reduce((sum, item) => sum + item.quantity, 0);
     const meetsMinimum = subtotal >= minimumSubtotalCents;
+    const amountRemaining = Math.max(minimumSubtotalCents - subtotal, 0);
 
     cartCount.textContent = `${itemCount} item${itemCount === 1 ? '' : 's'}`;
     subtotalValue.textContent = formatCurrency(subtotal);
@@ -138,6 +168,17 @@
       : `Online checkout starts at ${formatCurrency(minimumSubtotalCents)} in ready-to-order items before shipping.`;
 
     checkoutButton.disabled = !cart.length || !meetsMinimum;
+    checkoutButton.classList.toggle('btn-disabled', !cart.length || !meetsMinimum);
+    checkoutButton.textContent = !cart.length
+      ? 'Add items to unlock checkout'
+      : meetsMinimum
+        ? 'Checkout with Stripe'
+        : `Add ${formatCurrency(amountRemaining)} more to checkout`;
+    checkoutMessage.textContent = !cart.length
+      ? 'Add a few ready-to-order items to start online checkout.'
+      : meetsMinimum
+        ? `You are ready to check out${fulfillmentMethod === 'shipping' ? ' with flat-rate shipping.' : ' for free local pickup.'}`
+        : `Add ${formatCurrency(amountRemaining)} more in ready-to-order items to unlock online checkout.`;
 
     emptyState.hidden = cart.length > 0;
     cartList.hidden = cart.length === 0;
@@ -177,7 +218,7 @@
     input.addEventListener('change', renderCart);
   });
 
-  checkoutButton.addEventListener('click', async () => {
+  checkoutButton?.addEventListener('click', async () => {
     checkoutButton.disabled = true;
     checkoutMessage.textContent = 'Opening secure checkout...';
 
@@ -210,5 +251,6 @@
 
   syncCardButtons();
   syncFeaturedButton();
+  updateCartSummary();
   renderCart();
 })();

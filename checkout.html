@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-D4EEQX849H"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-D4EEQX849H');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout | Mitten Makes</title>
+    <meta name="description" content="Review your Mitten Makes ready-to-order cart, choose pickup or shipping, and continue to secure Stripe checkout.">
+    <meta name="robots" content="noindex, nofollow">
+    <meta property="og:title" content="Checkout | Mitten Makes">
+    <meta property="og:description" content="Review your Mitten Makes ready-to-order cart, choose pickup or shipping, and continue to secure Stripe checkout.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://mittenmakes.com/checkout.html">
+    <meta property="og:image" content="https://mittenmakes.com/og-image.jpg">
+    <link rel="canonical" href="https://mittenmakes.com/checkout.html">
+    <link rel="icon" type="image/png" href="/assets/logo-badge.png?v=20260401c">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css?v=20260401g">
+    <script src="shop-checkout.js?v=20260401b" defer></script>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">
+                <img src="assets/logo-badge.png" alt="Mitten Makes" class="nav-logo-img">
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="shop.html" class="nav-link">Shop</a></li>
+                <li><a href="gift-guides.html" class="nav-link">Gift Guides</a></li>
+                <li><a href="custom.html" class="nav-link">Custom</a></li>
+                <li><a href="about.html" class="nav-link">About</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section class="section about-section">
+        <div class="container">
+            <div class="seo-page-hero">
+                <div class="seo-page-copy fade-up">
+                    <p class="order-eyebrow">Ready-to-order checkout</p>
+                    <h1>Review your cart before Stripe</h1>
+                    <p>This page is for the standard ready-to-order versions of select products. Your merchandise subtotal needs to be at least <strong>$24.97</strong> before online checkout. Local pickup is free, and shipping is a flat <strong>$9.97</strong> anywhere in the U.S.</p>
+                    <p class="checkout-cart-subcopy">Colors and filament blends can vary a little from the listing photos because every item is made to order. If you want something more specific, head back to the shop and use <strong>Request this</strong> instead.</p>
+                    <div class="hero-actions">
+                        <a href="shop.html" class="btn btn-secondary">Back to shop</a>
+                        <a href="custom.html" class="btn btn-secondary">Need something custom?</a>
+                    </div>
+                </div>
+                <div class="seo-page-image fade-up">
+                    <img src="assets/logo-main.png" alt="Mitten Makes checkout">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container">
+            <section class="checkout-cart-panel fade-up" id="online-checkout" aria-labelledby="online-checkout-title">
+                <div class="checkout-cart-copy">
+                    <p class="order-eyebrow">Your cart</p>
+                    <h2 id="online-checkout-title">Choose pickup or shipping, then continue to Stripe.</h2>
+                    <p>You can still go back and add more items if you need to reach the minimum. When everything looks right, continue to secure Stripe checkout for the standard ready-to-order version of the items in your cart.</p>
+                    <p class="checkout-cart-subcopy">Current cart: <strong data-cart-count>0 items</strong>. If the button is locked, you just need to add a little more merchandise subtotal first.</p>
+                </div>
+                <div class="checkout-cart-shell">
+                    <div class="checkout-cart-header">
+                        <h3>Order review</h3>
+                        <span class="checkout-cart-count" id="checkout-cart-count">0 items</span>
+                    </div>
+                    <p class="checkout-cart-empty" id="checkout-cart-empty">Your cart is empty right now. Head back to the shop to add a few ready-to-order items first.</p>
+                    <ul class="checkout-cart-items" id="checkout-cart-items" hidden></ul>
+
+                    <fieldset class="checkout-fulfillment">
+                        <legend>How would you like to get your order?</legend>
+                        <label class="checkout-fulfillment-option">
+                            <input type="radio" name="checkout-fulfillment" value="pickup" checked>
+                            <span>Local pickup in Metro Detroit</span>
+                        </label>
+                        <label class="checkout-fulfillment-option">
+                            <input type="radio" name="checkout-fulfillment" value="shipping">
+                            <span>Ship within the U.S. (+$9.97)</span>
+                        </label>
+                    </fieldset>
+
+                    <div class="checkout-totals">
+                        <div><span>Merchandise subtotal</span><strong id="checkout-subtotal">$0.00</strong></div>
+                        <div><span>Shipping</span><strong id="checkout-shipping">Free</strong></div>
+                        <div class="checkout-total-row"><span>Total at checkout</span><strong id="checkout-total">$0.00</strong></div>
+                    </div>
+
+                    <p class="checkout-minimum-note" id="checkout-minimum-note">Online checkout starts at $24.97 in ready-to-order items before shipping.</p>
+
+                    <div class="checkout-actions">
+                        <button type="button" class="btn btn-primary" id="checkout-button" disabled>Checkout with Stripe</button>
+                        <p class="checkout-message" id="checkout-message" aria-live="polite"></p>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <a href="index.html" class="footer-logo">
+                        <img src="assets/logo-badge.png" alt="Mitten Makes" class="footer-badge-image">
+                    </a>
+                    <p class="footer-tagline">From our mitten to yours.</p>
+                </div>
+                <div class="footer-links">
+                    <a href="https://instagram.com/mittenmakes" target="_blank" class="footer-link">Instagram</a>
+                    <p class="footer-copyright">&copy; 2026 Mitten Makes. All rights reserved.</p>
+                    <p class="footer-license">Authorized Hive seller · Hive ID K12MT29266</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
