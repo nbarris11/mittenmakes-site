@@ -257,7 +257,7 @@
                                 <option>Not sure yet</option>
                             </select>
                         </label>
-                        <label class="form-field">
+                        <label class="form-field conditional-shipping-field" hidden>
                             <span>Shipping ZIP code</span>
                             <input type="text" name="shipping_zip" placeholder="Only if you want shipping">
                         </label>
@@ -307,6 +307,24 @@
         const btt = document.querySelector('.back-to-top');
         window.addEventListener('scroll', () => btt.classList.toggle('visible', window.scrollY > 320));
         btt.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+        document.querySelectorAll('form').forEach(form => {
+            const delivery = form.querySelector('select[name="delivery_preference"]');
+            const shippingField = form.querySelector('.conditional-shipping-field');
+            const shippingInput = shippingField?.querySelector('input[name="shipping_zip"]');
+
+            if (!delivery || !shippingField || !shippingInput) return;
+
+            const syncShippingField = () => {
+                const shouldShow = delivery.value === 'Ship within the U.S.';
+                shippingField.hidden = !shouldShow;
+                shippingInput.disabled = !shouldShow;
+                if (!shouldShow) shippingInput.value = '';
+            };
+
+            delivery.addEventListener('change', syncShippingField);
+            syncShippingField();
+        });
     </script>
 </body>
 </html>
