@@ -5,6 +5,7 @@
   const cartSummaryCounts = Array.from(document.querySelectorAll('[data-cart-count]'));
   const checkoutPanelPresent = Boolean(cartRoot);
   const featuredActions = document.querySelector('.featured-gift-copy .order-actions');
+  let cartToastTimeout;
 
   const response = await fetch('checkout-products.json?v=20260401a');
   if (!response.ok) return;
@@ -62,6 +63,55 @@
     });
   };
 
+  const ensureCartToast = () => {
+    let toast = document.querySelector('[data-cart-toast]');
+    if (toast) return toast;
+
+    toast = document.createElement('div');
+    toast.className = 'cart-toast';
+    toast.setAttribute('data-cart-toast', '');
+    toast.setAttribute('role', 'status');
+    toast.setAttribute('aria-live', 'polite');
+    toast.setAttribute('aria-atomic', 'true');
+    document.body.appendChild(toast);
+    return toast;
+  };
+
+  const showCartToast = message => {
+    const toast = ensureCartToast();
+    toast.textContent = message;
+    toast.classList.add('is-visible');
+    window.clearTimeout(cartToastTimeout);
+    cartToastTimeout = window.setTimeout(() => {
+      toast.classList.remove('is-visible');
+    }, 2200);
+  };
+
+  const pulseCartSummary = () => {
+    const summary = document.querySelector('.shop-cart-summary-actions');
+    if (!summary) return;
+
+    summary.classList.remove('cart-updated');
+    // Force reflow so repeated adds can retrigger the animation.
+    void summary.offsetWidth;
+    summary.classList.add('cart-updated');
+    window.setTimeout(() => {
+      summary.classList.remove('cart-updated');
+    }, 800);
+  };
+
+  const flashAddedState = button => {
+    if (!button) return;
+    const originalLabel = button.dataset.defaultLabel || button.textContent;
+    button.dataset.defaultLabel = originalLabel;
+    button.textContent = 'Added';
+    button.classList.add('is-added');
+    window.setTimeout(() => {
+      button.textContent = originalLabel;
+      button.classList.remove('is-added');
+    }, 1200);
+  };
+
   const syncCardButtons = () => {
     products.forEach((product, productId) => {
       const card = document.getElementById(productId);
@@ -74,6 +124,7 @@
       cartButton.textContent = 'Add to cart';
       cartButton.addEventListener('click', () => {
         addToCart(productId);
+        flashAddedState(cartButton);
         if (checkoutPanelPresent) {
           cartRoot.scrollIntoView({ behavior: 'smooth', block: 'start' });
         } else {
@@ -101,6 +152,7 @@
     cartButton.textContent = 'Add to cart';
     cartButton.addEventListener('click', () => {
       addToCart(productId);
+      flashAddedState(cartButton);
       if (checkoutPanelPresent) {
         cartRoot.scrollIntoView({ behavior: 'smooth', block: 'start' });
       } else {
@@ -120,6 +172,7 @@
 
   const addToCart = productId => {
     const existing = cart.find(item => item.id === productId);
+    const product = products.get(productId);
     if (existing) {
       existing.quantity += 1;
     } else {
@@ -128,6 +181,10 @@
     saveCart(cart);
     updateCartSummary();
     renderCart();
+    if (!checkoutPanelPresent) {
+      pulseCartSummary();
+      showCartToast(`${product?.name || 'Item'} added to cart`);
+    }
   };
 
   const updateQuantity = (productId, delta) => {
