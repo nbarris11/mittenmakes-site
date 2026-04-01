@@ -42,6 +42,27 @@
             cursor: zoom-in !important;
         }
 
+        .product-photo.product-photo-real video {
+            display: block !important;
+            width: 100% !important;
+            height: 100% !important;
+            object-fit: contain !important;
+            object-position: center center !important;
+            position: static !important;
+            border-radius: 12px !important;
+            background: #fffaf4 !important;
+        }
+
+        .product-photo-note {
+            margin-top: 0.6rem;
+            font-size: 0.68rem;
+            font-weight: 700;
+            letter-spacing: 1.4px;
+            text-transform: uppercase;
+            color: #B8927A;
+            font-family: 'Poppins', sans-serif;
+        }
+
         .product-card-body {
             position: relative;
             z-index: 1;
@@ -269,12 +290,15 @@
 
                 <div class="product-card fade-up" id="fidget-switch">
                     <div class="product-photo product-photo-real">
-                        <img src="assets/fidget-switch.jpg?v=20260401a" alt="Colorful Fidget Switches lined up on a wood surface">
+                        <video autoplay muted loop playsinline poster="assets/fidget-switch.jpg?v=20260401a" aria-label="Looping preview of the Fidget Switch being pressed">
+                            <source src="assets/fidget-switch-preview-web.mp4?v=20260401a" type="video/mp4">
+                        </video>
                     </div>
                     <div class="product-card-body">
                         <h3 class="product-name">Fidget Switch</h3>
                         <p class="product-description">A clicky little fidget with a satisfyingly simple press that is easy to keep in your pocket, gift bag, desk drawer, or backpack. Great for kids, teens, and anyone who likes a quick tactile break.</p>
                         <p class="product-credit">Licensed Hive design by Click Bait.</p>
+                        <p class="product-photo-note">Looping preview</p>
                         <p class="swatches-label">Popular for</p>
                         <div class="color-swatches">
                             <span class="swatch" style="background:#C73A53" title="Berry Red"></span>
