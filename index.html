@@ -400,7 +400,7 @@
                                 <option>Not sure yet</option>
                             </select>
                         </label>
-                        <label class="form-field">
+                        <label class="form-field conditional-payment-field" hidden>
                             <span>How would you like to pay?</span>
                             <select name="payment_preference">
                                 <option value="">Optional</option>
@@ -521,14 +521,50 @@
             const delivery = form.querySelector('select[name="delivery_preference"]');
             const shippingField = form.querySelector('.conditional-shipping-field');
             const shippingInput = shippingField?.querySelector('input[name="shipping_zip"]');
+            const paymentField = form.querySelector('.conditional-payment-field');
+            const paymentSelect = paymentField?.querySelector('select[name="payment_preference"]');
 
-            if (!delivery || !shippingField || !shippingInput) return;
+            if (!delivery || !shippingField || !shippingInput || !paymentField || !paymentSelect) return;
+
+            const setPaymentOptions = () => {
+                const current = paymentSelect.value;
+                let options = [];
+
+                if (delivery.value === 'Local pickup in Metro Detroit') {
+                    options = ['', 'Cash', 'Venmo', 'Not sure yet'];
+                } else if (delivery.value === 'Ship within the U.S.') {
+                    options = ['', 'Venmo', 'PayPal', 'Not sure yet'];
+                } else if (delivery.value === 'Not sure yet') {
+                    options = ['', 'Not sure yet'];
+                }
+
+                paymentSelect.innerHTML = '';
+                options.forEach(optionValue => {
+                    const option = document.createElement('option');
+                    option.value = optionValue;
+                    option.textContent = optionValue || 'Choose one';
+                    paymentSelect.appendChild(option);
+                });
+
+                if (options.includes(current)) {
+                    paymentSelect.value = current;
+                }
+            };
 
             const syncShippingField = () => {
                 const shouldShow = delivery.value === 'Ship within the U.S.';
                 shippingField.hidden = !shouldShow;
                 shippingInput.disabled = !shouldShow;
                 if (!shouldShow) shippingInput.value = '';
+
+                const showPayment = delivery.value !== '';
+                paymentField.hidden = !showPayment;
+                paymentSelect.disabled = !showPayment;
+                if (!showPayment) {
+                    paymentSelect.value = '';
+                } else {
+                    setPaymentOptions();
+                }
             };
 
             delivery.addEventListener('change', syncShippingField);
