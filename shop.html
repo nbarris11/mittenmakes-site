@@ -22,7 +22,7 @@
     <link rel="canonical" href="https://mittenmakes.com/shop.html">
     <link rel="icon" type="image/png" href="/assets/logo-badge.png?v=20260401c">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css?v=20260331g">
+    <link rel="stylesheet" href="styles.css?v=20260401e">
     <style>
         .product-card {
             overflow: hidden;
@@ -39,22 +39,40 @@
             position: relative !important;
             background: linear-gradient(180deg, #FFF9F2 0%, #F7E8D8 100%) !important;
             background-image: none !important;
+            border-bottom: 1px solid rgba(196, 81, 26, 0.08);
+        }
+
+        .product-photo.product-photo-real.product-photo-tall {
+            aspect-ratio: 4 / 5 !important;
+        }
+
+        .product-photo.product-photo-real.product-photo-wide {
+            aspect-ratio: 5 / 4 !important;
+        }
+
+        .product-photo.product-photo-real.product-photo-square {
+            aspect-ratio: 1 / 1 !important;
         }
 
         .product-photo.product-photo-real img {
             display: block !important;
-            width: 100% !important;
-            height: 100% !important;
+            width: auto !important;
+            height: auto !important;
+            max-width: 100% !important;
+            max-height: 100% !important;
             object-fit: contain !important;
             object-position: center center !important;
             position: static !important;
             cursor: zoom-in !important;
+            filter: drop-shadow(0 12px 20px rgba(61, 61, 61, 0.08));
         }
 
         .product-photo.product-photo-real video {
             display: block !important;
-            width: 100% !important;
-            height: 100% !important;
+            width: auto !important;
+            height: auto !important;
+            max-width: 100% !important;
+            max-height: 100% !important;
             object-fit: contain !important;
             object-position: center center !important;
             position: static !important;
@@ -235,7 +253,7 @@
                     </div>
                     <div class="product-grid">
                         <div class="product-card fade-up" id="dual-color-star-fidget">
-                    <div class="product-photo product-photo-real">
+                    <div class="product-photo product-photo-real product-photo-tall">
                         <img src="assets/geometric-spinner-gradient.png?v=20260330k" alt="Dual-color star fidget in pink and blue">
                     </div>
                     <div class="product-card-body">
@@ -252,7 +270,7 @@
                         </div>
 
                         <div class="product-card fade-up" id="blue-starfish-fidget">
-                    <div class="product-photo product-photo-real">
+                    <div class="product-photo product-photo-real product-photo-tall">
                         <img src="assets/articulated-starfish-blue.png?v=20260330k" alt="Blue articulated starfish fidget">
                     </div>
                     <div class="product-card-body">
@@ -268,7 +286,7 @@
                         </div>
 
                         <div class="product-card fade-up" id="bun-slime-fidget">
-                    <div class="product-photo product-photo-real">
+                    <div class="product-photo product-photo-real product-photo-square">
                         <img src="assets/bun-slime-fidget-closed.jpg?v=20260331a" alt="Bun Slime Fidget in a green pearl finish">
                     </div>
                     <div class="product-card-body">
@@ -288,7 +306,7 @@
                         </div>
 
                         <div class="product-card fade-up" id="fidget-switch">
-                    <div class="product-photo product-photo-real">
+                    <div class="product-photo product-photo-real product-photo-square">
                         <video autoplay muted loop playsinline poster="assets/fidget-switch.jpg?v=20260401a" aria-label="Looping preview of the Fidget Switch being pressed">
                             <source src="assets/fidget-switch-preview-web.mp4?v=20260401a" type="video/mp4">
                         </video>
@@ -320,7 +338,7 @@
                     </div>
                     <div class="product-grid">
                         <div class="product-card fade-up" id="whale-shark">
-                    <div class="product-photo product-photo-real">
+                    <div class="product-photo product-photo-real product-photo-wide">
                         <img src="assets/whale-shark-biocraftlab.jpg?v=20260401b" alt="Blue articulated whale shark posed on rocks by the water">
                     </div>
                     <div class="product-card-body">
@@ -337,7 +355,7 @@
                         </div>
 
                         <div class="product-card fade-up" id="cookie-dragon-keychain-figure">
-                    <div class="product-photo product-photo-real">
+                    <div class="product-photo product-photo-real product-photo-wide">
                         <img src="assets/cookie-dragon-front.jpg?v=20260331b" alt="Cookie Dragon articulated keychain figure in front of cookies">
                     </div>
                     <div class="product-card-body">
@@ -356,7 +374,7 @@
                 </div>
 
                 <div class="product-card fade-up" id="penguin-articulated-keychain">
-                    <div class="product-photo product-photo-real">
+                    <div class="product-photo product-photo-real product-photo-square">
                         <img src="assets/penguin-keychain.png?v=20260331i" alt="Penguin articulated figure keychain in black, white, and orange">
                     </div>
                     <div class="product-card-body">
@@ -375,7 +393,7 @@
                 </div>
 
                 <div class="product-card fade-up" id="elephant-articulated-keychain">
-                    <div class="product-photo product-photo-real">
+                    <div class="product-photo product-photo-real product-photo-wide">
                         <img src="assets/elephant-keychain.png?v=20260401a" alt="Cute articulated elephant keychain figure in gray with pink ears">
                     </div>
                     <div class="product-card-body">
@@ -404,7 +422,7 @@
                     </div>
                     <div class="product-grid">
                         <div class="product-card fade-up" id="bookmarks-3-pack">
-                    <div class="product-photo product-photo-real">
+                    <div class="product-photo product-photo-real product-photo-tall">
                         <img src="assets/bookmarks-3-pack.png?v=20260331j" alt="Three patterned bookmarks held in hand">
                     </div>
                     <div class="product-card-body">
@@ -424,7 +442,7 @@
 
 
                         <div class="product-card fade-up">
-                    <div class="product-photo product-photo-real">
+                    <div class="product-photo product-photo-real product-photo-tall">
                         <img src="assets/golf-ball-holder-loaded.png?v=20260330t" alt="Custom golf ball holder clipped with two golf balls">
                     </div>
                     <div class="product-card-body">
@@ -441,7 +459,7 @@
                         </div>
 
                         <div class="product-card fade-up" id="cable-monster-desk-helper">
-                    <div class="product-photo product-photo-real">
+                    <div class="product-photo product-photo-real product-photo-tall">
                         <img src="assets/cable-monster-blue.jpg?v=20260331i" alt="Blue Cable Monster desk helper holding a charging cable">
                     </div>
                     <div class="product-card-body">
@@ -460,7 +478,7 @@
                         </div>
 
                         <div class="product-card fade-up" id="flirty-heart-photo-card-display">
-                    <div class="product-photo product-photo-real">
+                    <div class="product-photo product-photo-real product-photo-tall">
                         <img src="assets/flirty-heart-photo.jpg?v=20260331d" alt="Heart photo and card display with flexible legs holding a printed photo">
                     </div>
                     <div class="product-card-body">
@@ -477,7 +495,7 @@
                         </div>
 
                         <div class="product-card fade-up" id="fleggy-flexi-egg-buddy">
-                    <div class="product-photo product-photo-real">
+                    <div class="product-photo product-photo-real product-photo-tall">
                         <img src="assets/fleggy-egg-open.jpg?v=20260331e" alt="Fleggy flexi egg buddy with storage compartment open and candy inside">
                     </div>
                     <div class="product-card-body">
@@ -505,7 +523,7 @@
                     </div>
                     <div class="product-grid">
                         <div class="product-card fade-up" id="tiny-t-rex">
-                    <div class="product-photo product-photo-real">
+                    <div class="product-photo product-photo-real product-photo-square">
                         <img src="assets/tiny-t-rex-cinderwing.png?v=20260401b" alt="Tiny articulated T-Rex in yellow and mint tones">
                     </div>
                     <div class="product-card-body">
@@ -522,7 +540,7 @@
                         </div>
 
                         <div class="product-card fade-up" id="crystal-dragon">
-                    <div class="product-photo product-photo-real">
+                    <div class="product-photo product-photo-real product-photo-wide">
                         <img src="assets/crystal-dragon-cinderwing.png?v=20260401b" alt="Rainbow crystal dragon with faceted spikes">
                     </div>
                     <div class="product-card-body">
@@ -540,7 +558,7 @@
 
 
                         <div class="product-card fade-up" id="bone-dragon">
-                    <div class="product-photo product-photo-real">
+                    <div class="product-photo product-photo-real product-photo-wide">
                         <img src="assets/bone-dragon.jpg?v=20260331c" alt="Bone Dragon articulated dragon in an iridescent purple and gold finish">
                     </div>
                     <div class="product-card-body">
@@ -557,7 +575,7 @@
                         </div>
 
                         <div class="product-card fade-up" id="water-dragon">
-                    <div class="product-photo product-photo-real">
+                    <div class="product-photo product-photo-real product-photo-wide">
                         <img src="assets/water-dragon.jpg?v=20260331f" alt="Water Dragon articulated dragon in a glossy blue finish">
                     </div>
                     <div class="product-card-body">
@@ -575,7 +593,7 @@
 
 
                         <div class="product-card fade-up" id="cute-octopus">
-                    <div class="product-photo product-photo-real">
+                    <div class="product-photo product-photo-real product-photo-wide">
                         <img src="assets/cute-octopus-clean.png?v=20260330q" alt="Cute octopus figures in multiple bright colors">
                     </div>
                     <div class="product-card-body">
