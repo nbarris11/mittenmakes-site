@@ -23,9 +23,21 @@
     <link rel="icon" type="image/png" href="/assets/logo-badge.png?v=20260401c">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css?v=20260401e">
+    <script src="stripe-payment-links.js?v=20260401a" defer></script>
     <style>
         .product-card {
             overflow: hidden;
+        }
+
+        .product-card-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            margin-top: 1rem;
+        }
+
+        .product-card-actions .btn {
+            flex: 1 1 190px;
         }
 
         .product-photo.product-photo-real {
@@ -265,7 +277,9 @@
                             <span class="swatch" style="background:linear-gradient(135deg, #E34A9B, #3B67C5)" title="Pink and Blue"></span>
                         </div>
                         <p class="product-price">$12–16</p>
-                        <a href="#order-form" class="btn btn-secondary">Request this</a>
+                        <div class="product-card-actions">
+                            <a href="#order-form" class="btn btn-secondary">Request this</a>
+                        </div>
                     </div>
                         </div>
 
@@ -281,7 +295,9 @@
                             <span class="swatch" style="background:#1976D2" title="Ocean Blue"></span>
                         </div>
                         <p class="product-price">$8–10</p>
-                        <a href="#order-form" class="btn btn-secondary">Request this</a>
+                        <div class="product-card-actions">
+                            <a href="#order-form" class="btn btn-secondary">Request this</a>
+                        </div>
                     </div>
                         </div>
 
@@ -301,7 +317,9 @@
                             <span class="swatch" style="background:#9067C6" title="Purple"></span>
                         </div>
                         <p class="product-price">$10–12</p>
-                        <a href="#order-form" class="btn btn-secondary">Request this</a>
+                        <div class="product-card-actions">
+                            <a href="#order-form" class="btn btn-secondary">Request this</a>
+                        </div>
                     </div>
                         </div>
 
@@ -324,7 +342,9 @@
                             <span class="swatch" style="background:#7BA1D9" title="Dusty Blue"></span>
                         </div>
                         <p class="product-price">$8–12</p>
-                        <a href="#order-form" class="btn btn-secondary">Request this</a>
+                        <div class="product-card-actions">
+                            <a href="#order-form" class="btn btn-secondary">Request this</a>
+                        </div>
                     </div>
                         </div>
                     </div>
@@ -350,7 +370,9 @@
                             <span class="swatch" style="background:#1D73D8" title="Ocean Blue"></span>
                         </div>
                         <p class="product-price">$10–14</p>
-                        <a href="#order-form" class="btn btn-secondary">Request this</a>
+                        <div class="product-card-actions">
+                            <a href="#order-form" class="btn btn-secondary">Request this</a>
+                        </div>
                     </div>
                         </div>
 
@@ -369,7 +391,9 @@
                             <span class="swatch" style="background:#DCEBFF" title="Icing Blue"></span>
                         </div>
                         <p class="product-price">$8–10</p>
-                        <a href="#order-form" class="btn btn-secondary">Request this</a>
+                        <div class="product-card-actions">
+                            <a href="#order-form" class="btn btn-secondary">Request this</a>
+                        </div>
                     </div>
                 </div>
 
@@ -388,7 +412,9 @@
                             <span class="swatch" style="background:#E88B2D" title="Orange"></span>
                         </div>
                         <p class="product-price">$8–10</p>
-                        <a href="#order-form" class="btn btn-secondary">Request this</a>
+                        <div class="product-card-actions">
+                            <a href="#order-form" class="btn btn-secondary">Request this</a>
+                        </div>
                     </div>
                 </div>
 
@@ -407,7 +433,9 @@
                             <span class="swatch" style="background:#1B1B1B" title="Black"></span>
                         </div>
                         <p class="product-price">$8–10</p>
-                        <a href="#order-form" class="btn btn-secondary">Request this</a>
+                        <div class="product-card-actions">
+                            <a href="#order-form" class="btn btn-secondary">Request this</a>
+                        </div>
                     </div>
                 </div>
 
@@ -436,7 +464,9 @@
                             <span class="swatch" style="background:#C99AF5" title="Lavender"></span>
                         </div>
                         <p class="product-price">$10–14</p>
-                        <a href="#order-form" class="btn btn-secondary">Request this</a>
+                        <div class="product-card-actions">
+                            <a href="#order-form" class="btn btn-secondary">Request this</a>
+                        </div>
                     </div>
                         </div>
 
@@ -454,7 +484,9 @@
                             <span class="swatch" style="background:#39D353" title="Bright Green"></span>
                         </div>
                         <p class="product-price">$16–22</p>
-                        <a href="#order-form" class="btn btn-secondary">Request this</a>
+                        <div class="product-card-actions">
+                            <a href="#order-form" class="btn btn-secondary">Request this</a>
+                        </div>
                     </div>
                         </div>
 
@@ -473,7 +505,9 @@
                             <span class="swatch" style="background:#1E1E1E" title="Black"></span>
                         </div>
                         <p class="product-price">$14–18</p>
-                        <a href="#order-form" class="btn btn-secondary">Request this</a>
+                        <div class="product-card-actions">
+                            <a href="#order-form" class="btn btn-secondary">Request this</a>
+                        </div>
                     </div>
                         </div>
 
@@ -490,7 +524,9 @@
                             <span class="swatch" style="background:#A63434" title="Deep Red"></span>
                         </div>
                         <p class="product-price">$12–18</p>
-                        <a href="#order-form" class="btn btn-secondary">Request this</a>
+                        <div class="product-card-actions">
+                            <a href="#order-form" class="btn btn-secondary">Request this</a>
+                        </div>
                     </div>
                         </div>
 
@@ -509,7 +545,9 @@
                             <span class="swatch" style="background:#F5A9C7" title="Pastel Pink"></span>
                         </div>
                         <p class="product-price">$10–14</p>
-                        <a href="#order-form" class="btn btn-secondary">Request this</a>
+                        <div class="product-card-actions">
+                            <a href="#order-form" class="btn btn-secondary">Request this</a>
+                        </div>
                     </div>
                         </div>
                     </div>
@@ -535,7 +573,9 @@
                             <span class="swatch" style="background: linear-gradient(135deg, #F1EE54, #9CE5CE 55%, #E8D189)" title="Soft yellow and mint"></span>
                         </div>
                         <p class="product-price">$12–18</p>
-                        <a href="#order-form" class="btn btn-secondary">Request this</a>
+                        <div class="product-card-actions">
+                            <a href="#order-form" class="btn btn-secondary">Request this</a>
+                        </div>
                     </div>
                         </div>
 
@@ -552,7 +592,9 @@
                             <span class="swatch" style="background: linear-gradient(135deg, #F0E26B, #7AD9FF 35%, #B57BFF 65%, #FF8FB1)" title="Rainbow Crystal"></span>
                         </div>
                         <p class="product-price">$12–16</p>
-                        <a href="#order-form" class="btn btn-secondary">Request this</a>
+                        <div class="product-card-actions">
+                            <a href="#order-form" class="btn btn-secondary">Request this</a>
+                        </div>
                     </div>
                         </div>
 
@@ -570,7 +612,9 @@
                             <span class="swatch" style="background: linear-gradient(135deg, #5A3E86, #B8860B)" title="Iridescent Purple and Gold"></span>
                         </div>
                         <p class="product-price">$14–18</p>
-                        <a href="#order-form" class="btn btn-secondary">Request this</a>
+                        <div class="product-card-actions">
+                            <a href="#order-form" class="btn btn-secondary">Request this</a>
+                        </div>
                     </div>
                         </div>
 
@@ -587,7 +631,9 @@
                             <span class="swatch" style="background: linear-gradient(135deg, #244B92, #7AB8FF)" title="Ocean Blue"></span>
                         </div>
                         <p class="product-price">$14–18</p>
-                        <a href="#order-form" class="btn btn-secondary">Request this</a>
+                        <div class="product-card-actions">
+                            <a href="#order-form" class="btn btn-secondary">Request this</a>
+                        </div>
                     </div>
                         </div>
 
@@ -606,7 +652,9 @@
                             <span class="swatch" style="background: linear-gradient(135deg, #C62828, #F57F17)" title="Fire"></span>
                         </div>
                         <p class="product-price">$10–12</p>
-                        <a href="#order-form" class="btn btn-secondary">Request this</a>
+                        <div class="product-card-actions">
+                            <a href="#order-form" class="btn btn-secondary">Request this</a>
+                        </div>
                     </div>
                         </div>
                     </div>
