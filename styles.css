@@ -376,6 +376,37 @@ a:hover { color: var(--accent-hover); }
   object-fit: contain;
 }
 
+.gift-guides-intro-section {
+  padding-top: 2.4rem;
+  padding-bottom: 1.5rem;
+}
+
+.gift-guides-hero {
+  grid-template-columns: minmax(0, 1fr) minmax(220px, 280px);
+  gap: 1.25rem;
+  align-items: start;
+  margin-bottom: 0;
+}
+
+.gift-guides-hero .seo-page-copy {
+  padding: 1.9rem 2rem;
+}
+
+.gift-guides-hero-image {
+  padding: 1.35rem 1.1rem;
+  display: grid;
+  place-items: center;
+}
+
+.gift-guides-hero-image img {
+  width: min(100%, 220px);
+  margin: 0 auto;
+}
+
+.gift-guides-intro-section + .gift-finder-section {
+  padding-top: 1.75rem;
+}
+
 .seo-link-list {
   display: grid;
   gap: 0.9rem;
@@ -482,6 +513,23 @@ a:hover { color: var(--accent-hover); }
   .seo-page-hero { grid-template-columns: 1fr; }
   .seo-page-copy { padding: 1.75rem 1.5rem; }
   .article-content { padding: 2rem 1.5rem; }
+  .gift-guides-intro-section {
+    padding-top: 1.6rem;
+    padding-bottom: 1rem;
+  }
+  .gift-guides-hero {
+    gap: 1rem;
+  }
+  .gift-guides-hero .seo-page-copy,
+  .gift-guides-hero-image {
+    padding: 1.4rem;
+  }
+  .gift-guides-hero-image img {
+    width: min(100%, 160px);
+  }
+  .gift-guides-intro-section + .gift-finder-section {
+    padding-top: 1.25rem;
+  }
 }
 
 /* ===========================
@@ -1087,11 +1135,14 @@ a:hover { color: var(--accent-hover); }
 .order-steps {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
+  align-items: start;
   gap: 1rem;
   margin-bottom: 1.5rem;
 }
 
 .order-step {
+  display: grid;
+  align-content: start;
   background-color: var(--bg);
   border: 1px solid var(--border);
   border-radius: 14px;
