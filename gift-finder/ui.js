@@ -249,7 +249,44 @@ const renderQuestion = question => {
 };
 
 const renderQuiz = () => {
+  if (quizFields.children.length) return;
   quizFields.innerHTML = GIFT_FINDER_QUESTIONS.map(renderQuestion).join('');
+};
+
+const readAnswersFromDom = () => {
+  const nextAnswers = { ...GIFT_FINDER_DEFAULTS };
+
+  GIFT_FINDER_QUESTIONS.forEach(question => {
+    if (question.type === 'single-chip') {
+      const activeButton = quizFields.querySelector(
+        `[data-question="${question.id}"] [data-question-id="${question.id}"].is-active`
+      );
+      nextAnswers[question.id] = activeButton?.dataset.value || '';
+      return;
+    }
+
+    if (question.type === 'multi-chip') {
+      nextAnswers[question.id] = Array.from(
+        quizFields.querySelectorAll(
+          `[data-question="${question.id}"] [data-question-id="${question.id}"].is-active`
+        )
+      ).map(button => button.dataset.value);
+      return;
+    }
+
+    if (question.type === 'select') {
+      const select = quizFields.querySelector(`select[name="${question.id}"]`);
+      nextAnswers[question.id] = select?.value || '';
+      return;
+    }
+
+    if (question.type === 'text') {
+      const textarea = quizFields.querySelector(`textarea[name="${question.id}"]`);
+      nextAnswers[question.id] = textarea?.value || '';
+    }
+  });
+
+  return nextAnswers;
 };
 
 const updateChipStates = () => {
@@ -385,7 +422,8 @@ const clearFinder = () => {
 };
 
 quizFields.addEventListener('click', event => {
-  const button = event.target.closest('[data-question-id]');
+  const target = event.target instanceof Element ? event.target : null;
+  const button = target?.closest('[data-question-id]');
   if (!button) return;
 
   const { questionId, value } = button.dataset;
@@ -393,24 +431,26 @@ quizFields.addEventListener('click', event => {
   if (!question) return;
 
   if (question.type === 'multi-chip') {
-    const current = new Set(state.answers[questionId]);
-    if (current.has(value)) {
-      current.delete(value);
-    } else {
-      current.add(value);
-    }
-    state.answers[questionId] = Array.from(current);
+    const isActive = button.classList.toggle('is-active');
+    button.setAttribute('aria-pressed', String(isActive));
   } else {
-    state.answers[questionId] = value;
+    const groupButtons = quizFields.querySelectorAll(
+      `[data-question="${questionId}"] [data-question-id="${questionId}"]`
+    );
+    groupButtons.forEach(groupButton => {
+      const active = groupButton.dataset.value === value;
+      groupButton.classList.toggle('is-active', active);
+      groupButton.setAttribute('aria-pressed', String(active));
+    });
   }
 
-  updateChipStates();
+  state.answers = readAnswersFromDom();
 });
 
 quizFields.addEventListener('change', event => {
   const field = event.target;
   if (!(field instanceof HTMLSelectElement || field instanceof HTMLTextAreaElement)) return;
-  state.answers[field.name] = field.value;
+  state.answers = readAnswersFromDom();
 });
 
 quizForm.addEventListener('submit', event => {
