@@ -22,8 +22,8 @@
     <link rel="canonical" href="https://mittenmakes.com/shop.html">
     <link rel="icon" type="image/png" href="/assets/logo-badge.png?v=20260401c">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css?v=20260401f">
-    <script src="shop-checkout.js?v=20260401b" defer></script>
+    <link rel="stylesheet" href="styles.css?v=20260401h">
+    <script src="shop-checkout.js?v=20260401c" defer></script>
     <style>
         .product-card {
             overflow: hidden;
@@ -240,6 +240,14 @@
                     <p class="shop-cart-summary-note">The full review step lives on its own checkout page now, so the shop can stay focused on browsing.</p>
                 </div>
             </section>
+
+            <div class="shop-cart-dock" aria-live="polite">
+                <div class="shop-cart-dock-copy">
+                    <p class="shop-cart-dock-label">Ready-to-order cart</p>
+                    <p class="shop-cart-dock-count"><strong data-cart-count>0 items</strong></p>
+                </div>
+                <a href="checkout.html" class="btn btn-primary shop-cart-dock-link" data-cart-link>Open cart</a>
+            </div>
 
             <section class="featured-gift-card fade-up" aria-labelledby="featured-gift-title">
                 <div class="featured-gift-media">

@@ -59,7 +59,9 @@
     });
 
     cartSummaryLinks.forEach(link => {
-      link.textContent = itemCount > 0 ? 'View cart & checkout' : 'Open cart';
+      link.textContent = itemCount > 0
+        ? `View cart & checkout (${itemCount})`
+        : 'Open cart';
     });
   };
 
@@ -87,17 +89,15 @@
     }, 2200);
   };
 
-  const pulseCartSummary = () => {
-    const summary = document.querySelector('.shop-cart-summary-actions');
-    if (!summary) return;
-
-    summary.classList.remove('cart-updated');
-    // Force reflow so repeated adds can retrigger the animation.
-    void summary.offsetWidth;
-    summary.classList.add('cart-updated');
-    window.setTimeout(() => {
-      summary.classList.remove('cart-updated');
-    }, 800);
+  const pulseCartIndicators = () => {
+    document.querySelectorAll('.shop-cart-summary-actions, .shop-cart-dock').forEach(node => {
+      node.classList.remove('cart-updated');
+      void node.offsetWidth;
+      node.classList.add('cart-updated');
+      window.setTimeout(() => {
+        node.classList.remove('cart-updated');
+      }, 800);
+    });
   };
 
   const flashAddedState = button => {
@@ -125,12 +125,6 @@
       cartButton.addEventListener('click', () => {
         addToCart(productId);
         flashAddedState(cartButton);
-        if (checkoutPanelPresent) {
-          cartRoot.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        } else {
-          const summaryTarget = document.querySelector('.shop-cart-summary');
-          summaryTarget?.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-        }
       });
 
       const cardNote = document.createElement('p');
@@ -153,12 +147,6 @@
     cartButton.addEventListener('click', () => {
       addToCart(productId);
       flashAddedState(cartButton);
-      if (checkoutPanelPresent) {
-        cartRoot.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      } else {
-        const summaryTarget = document.querySelector('.shop-cart-summary');
-        summaryTarget?.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-      }
     });
 
     const requestButton = featuredActions.querySelector('.btn.btn-primary') || featuredActions.querySelector('.btn');
@@ -181,10 +169,9 @@
     saveCart(cart);
     updateCartSummary();
     renderCart();
-    if (!checkoutPanelPresent) {
-      pulseCartSummary();
-      showCartToast(`${product?.name || 'Item'} added to cart`);
-    }
+    const itemCount = cart.reduce((sum, item) => sum + item.quantity, 0);
+    pulseCartIndicators();
+    showCartToast(`${product?.name || 'Item'} added to cart • ${itemCount} item${itemCount === 1 ? '' : 's'} ready`);
   };
 
   const updateQuantity = (productId, delta) => {
