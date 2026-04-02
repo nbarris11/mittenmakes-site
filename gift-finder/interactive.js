@@ -169,6 +169,66 @@
   };
 
   const IDEA_ARTWORK_OVERRIDES = {
+    'mini-articulated-dragon': {
+      key: 'idea-mini-articulated-dragon',
+      src: '/assets/gift-finder/001-warm-studio-product-photo-of-a-small-articulated-3d-printed-.png',
+      label: 'Fantasy dragon gift idea'
+    },
+    'dragon-egg-desk-buddy': {
+      key: 'idea-dragon-egg-desk-buddy',
+      src: '/assets/gift-finder/002-warm-shelf-product-photo-of-a-3d-printed-dragon-egg-desk-bud.png',
+      label: 'Dragon desk buddy concept'
+    },
+    'pocket-dino-fidget': {
+      key: 'idea-pocket-dino-fidget',
+      src: '/assets/gift-finder/003-warm-product-photo-of-a-small-pocket-sized-3d-printed-dinosa.png',
+      label: 'Pocket dino fidget idea'
+    },
+    'mini-dino-keychain': {
+      key: 'idea-mini-dino-keychain',
+      src: '/assets/gift-finder/004-warm-flat-lay-of-a-tiny-3d-printed-dinosaur-keychain-in-terr.png',
+      label: 'Mini dino keychain idea'
+    },
+    'dino-bookmark': {
+      key: 'idea-dino-bookmark',
+      src: '/assets/gift-finder/005-warm-studio-flat-lay-of-a-3d-printed-dinosaur-bookmark-with-.png',
+      label: 'Dinosaur bookmark concept'
+    },
+    'dino-desk-buddy': {
+      key: 'idea-dino-desk-buddy',
+      src: '/assets/gift-finder/006-warm-desk-scene-with-a-small-3d-printed-dinosaur-desk-buddy-.png',
+      label: 'Dino desk buddy idea'
+    },
+    'flexi-animal-keychain': {
+      key: 'idea-flexi-animal-keychain',
+      src: '/assets/gift-finder/007-warm-product-photo-of-a-bendy-articulated-animal-keychain-in.png',
+      label: 'Animal keychain concept'
+    },
+    'sensory-fidget-clicker': {
+      key: 'idea-sensory-fidget-clicker',
+      src: '/assets/gift-finder/008-warm-minimalist-product-photo-of-a-3d-printed-sensory-fidget.png',
+      label: 'Sensory clicker idea'
+    },
+    'infinity-cube-desk-fidget': {
+      key: 'idea-infinity-cube-desk-fidget',
+      src: '/assets/gift-finder/009-warm-product-photo-of-a-3d-printed-infinity-cube-desk-fidget.png',
+      label: 'Desk fidget concept'
+    },
+    'cute-desk-buddy-creature': {
+      key: 'idea-cute-desk-buddy-creature',
+      src: '/assets/gift-finder/010-warm-cheerful-desk-scene-with-a-cute-3d-printed-desk-buddy-c.png',
+      label: 'Cute creature desk gift'
+    },
+    'personalized-name-keychain': {
+      key: 'idea-personalized-name-keychain',
+      src: '/assets/gift-finder/011-warm-flat-lay-of-a-3d-printed-personalized-name-keychain-in-.png',
+      label: 'Name keychain concept'
+    },
+    'custom-initial-key-tag': {
+      key: 'idea-custom-initial-key-tag',
+      src: '/assets/gift-finder/012-warm-flat-lay-of-a-3d-printed-custom-initial-key-tag-in-terr.png',
+      label: 'Initial key tag idea'
+    },
     'teacher-desk-name-plate': {
       key: 'idea-teacher-name-plate',
       src: '/assets/gift-finder/idea-teacher-name-plate.png',
@@ -178,6 +238,26 @@
       key: 'idea-kids-name-sign',
       src: '/assets/gift-finder/idea-kids-name-sign.png',
       label: 'Kids room name sign idea'
+    },
+    'fantasy-themed-bookmark': {
+      key: 'idea-fantasy-themed-bookmark',
+      src: '/assets/gift-finder/013-warm-reading-themed-flat-lay-of-a-3d-printed-fantasy-bookmar.png',
+      label: 'Fantasy bookmark concept'
+    },
+    'animal-bookmark': {
+      key: 'idea-animal-bookmark',
+      src: '/assets/gift-finder/014-warm-studio-flat-lay-of-a-3d-printed-animal-bookmark-with-pl.png',
+      label: 'Animal bookmark idea'
+    },
+    'photo-lithophane-gift': {
+      key: 'idea-photo-lithophane-gift',
+      src: '/assets/gift-finder/015-warm-glowing-product-photo-of-a-3d-printed-photo-lithophane-.png',
+      label: 'Photo lithophane gift concept'
+    },
+    'lit-photo-nightlight-insert': {
+      key: 'idea-lit-photo-nightlight-insert',
+      src: '/assets/gift-finder/016-warm-bedside-product-photo-of-a-3d-printed-photo-nightlight-.png',
+      label: 'Photo nightlight keepsake'
     },
     'custom-shelf-name-display': {
       key: 'idea-shelf-name-display',
@@ -204,6 +284,16 @@
       src: '/assets/gift-finder/idea-gamer-desk.png',
       label: 'Gaming desk setup idea'
     },
+    'sports-themed-keychain': {
+      key: 'idea-sports-themed-keychain',
+      src: '/assets/gift-finder/017-warm-flat-lay-of-a-3d-printed-sports-themed-keychain-in-terr.png',
+      label: 'Sports keychain concept'
+    },
+    'party-favor-mini-fidget-set': {
+      key: 'idea-party-favor-mini-fidget-set',
+      src: '/assets/gift-finder/018-warm-celebratory-flat-lay-of-a-3d-printed-mini-fidget-set-fo.png',
+      label: 'Party favor fidget set'
+    },
     'classroom-reward-token-set': {
       key: 'idea-classroom-tokens',
       src: '/assets/gift-finder/idea-classroom-tokens.png',
@@ -213,6 +303,11 @@
       key: 'idea-classroom-tokens',
       src: '/assets/gift-finder/idea-classroom-tokens.png',
       label: 'Science reward set idea'
+    },
+    'desk-decor-creature-set': {
+      key: 'idea-desk-decor-creature-set',
+      src: '/assets/gift-finder/019-warm-desk-display-of-a-small-3d-printed-creature-set-in-eart.png',
+      label: 'Desk creature set concept'
     },
     'office-cable-buddy': {
       key: 'idea-office-cable-buddy',
@@ -224,15 +319,45 @@
       src: '/assets/gift-finder/idea-funny-desk-creature.png',
       label: 'Funny desk decor idea'
     },
+    'simple-custom-door-sign': {
+      key: 'idea-simple-custom-door-sign',
+      src: '/assets/gift-finder/020-warm-studio-product-photo-of-a-simple-custom-3d-printed-door.png',
+      label: 'Simple door sign idea'
+    },
+    'mini-creature-prize-bundle': {
+      key: 'idea-mini-creature-bundle',
+      src: '/assets/gift-finder/idea-mini-creature-bundle.png',
+      label: 'Mini bundle gift set'
+    },
+    'classroom-bookmark-bundle': {
+      key: 'idea-classroom-bookmark-bundle',
+      src: '/assets/gift-finder/021-warm-classroom-flat-lay-of-a-3d-printed-bookmark-bundle-in-e.png',
+      label: 'Classroom bookmark bundle'
+    },
+    'sports-locker-bag-tag': {
+      key: 'idea-bag-tag-travel',
+      src: '/assets/gift-finder/idea-bag-tag-travel.png',
+      label: 'Sports bag tag idea'
+    },
     'rocket-desk-buddy': {
       key: 'idea-rocket-space-gift',
       src: '/assets/gift-finder/idea-rocket-space-gift.png',
       label: 'Space-themed gift concept'
     },
+    'moon-phase-bookmark': {
+      key: 'idea-moon-phase-bookmark',
+      src: '/assets/gift-finder/022-warm-reading-themed-flat-lay-of-a-3d-printed-moon-phase-book.png',
+      label: 'Moon phase bookmark idea'
+    },
     'pet-name-bag-tag': {
       key: 'idea-pet-name-tag',
       src: '/assets/gift-finder/idea-pet-name-tag.png',
       label: 'Pet lover tag idea'
+    },
+    'music-note-bookmark': {
+      key: 'idea-music-note-bookmark',
+      src: '/assets/gift-finder/023-warm-reading-themed-flat-lay-of-a-3d-printed-music-note-book.png',
+      label: 'Music bookmark concept'
     },
     'pattern-play-bookmark-set': {
       key: 'idea-pattern-bookmarks',
@@ -243,16 +368,6 @@
       key: 'idea-spooky-creature',
       src: '/assets/gift-finder/idea-spooky-creature.png',
       label: 'Spooky collectible idea'
-    },
-    'mini-creature-prize-bundle': {
-      key: 'idea-mini-creature-bundle',
-      src: '/assets/gift-finder/idea-mini-creature-bundle.png',
-      label: 'Mini bundle gift set'
-    },
-    'sports-locker-bag-tag': {
-      key: 'idea-bag-tag-travel',
-      src: '/assets/gift-finder/idea-bag-tag-travel.png',
-      label: 'Sports bag tag idea'
     }
   };
 
