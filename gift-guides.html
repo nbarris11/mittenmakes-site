@@ -22,7 +22,7 @@
     <link rel="canonical" href="https://mittenmakes.com/gift-guides.html">
     <link rel="icon" type="image/png" href="/assets/logo-badge.png?v=20260401c">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css?v=20260402b">
+    <link rel="stylesheet" href="styles.css?v=20260402c">
 </head>
 <body>
     <nav class="navbar">
@@ -77,14 +77,22 @@
                                 <p>Pick the closest fit so the ideas feel more tailored.</p>
                             </div>
                             <div class="gift-choice-group" role="group" aria-label="Who is it for?">
-                                <button type="button" class="gift-choice-chip" data-question-id="recipient" data-value="kid" aria-pressed="false">Kid</button>
-                                <button type="button" class="gift-choice-chip" data-question-id="recipient" data-value="teen" aria-pressed="false">Teen</button>
-                                <button type="button" class="gift-choice-chip" data-question-id="recipient" data-value="adult" aria-pressed="false">Adult</button>
-                                <button type="button" class="gift-choice-chip" data-question-id="recipient" data-value="parent" aria-pressed="false">Parent</button>
-                                <button type="button" class="gift-choice-chip" data-question-id="recipient" data-value="teacher" aria-pressed="false">Teacher</button>
-                                <button type="button" class="gift-choice-chip" data-question-id="recipient" data-value="coworker" aria-pressed="false">Coworker</button>
-                                <button type="button" class="gift-choice-chip" data-question-id="recipient" data-value="friend" aria-pressed="false">Friend</button>
-                                <button type="button" class="gift-choice-chip" data-question-id="recipient" data-value="other" aria-pressed="false">Other</button>
+                                <input class="gift-choice-input" type="radio" name="recipient" id="recipient-kid" value="kid">
+                                <label class="gift-choice-chip gift-choice-pill" for="recipient-kid">Kid</label>
+                                <input class="gift-choice-input" type="radio" name="recipient" id="recipient-teen" value="teen">
+                                <label class="gift-choice-chip gift-choice-pill" for="recipient-teen">Teen</label>
+                                <input class="gift-choice-input" type="radio" name="recipient" id="recipient-adult" value="adult">
+                                <label class="gift-choice-chip gift-choice-pill" for="recipient-adult">Adult</label>
+                                <input class="gift-choice-input" type="radio" name="recipient" id="recipient-parent" value="parent">
+                                <label class="gift-choice-chip gift-choice-pill" for="recipient-parent">Parent</label>
+                                <input class="gift-choice-input" type="radio" name="recipient" id="recipient-teacher" value="teacher">
+                                <label class="gift-choice-chip gift-choice-pill" for="recipient-teacher">Teacher</label>
+                                <input class="gift-choice-input" type="radio" name="recipient" id="recipient-coworker" value="coworker">
+                                <label class="gift-choice-chip gift-choice-pill" for="recipient-coworker">Coworker</label>
+                                <input class="gift-choice-input" type="radio" name="recipient" id="recipient-friend" value="friend">
+                                <label class="gift-choice-chip gift-choice-pill" for="recipient-friend">Friend</label>
+                                <input class="gift-choice-input" type="radio" name="recipient" id="recipient-other" value="other">
+                                <label class="gift-choice-chip gift-choice-pill" for="recipient-other">Other</label>
                             </div>
                         </section>
 
@@ -94,14 +102,22 @@
                                 <p>Pick the main reason you are shopping, even if it could fit more than one.</p>
                             </div>
                             <div class="gift-choice-group" role="group" aria-label="Occasion">
-                                <button type="button" class="gift-choice-chip" data-question-id="occasion" data-value="birthday" aria-pressed="false">Birthday</button>
-                                <button type="button" class="gift-choice-chip" data-question-id="occasion" data-value="holiday" aria-pressed="false">Holiday</button>
-                                <button type="button" class="gift-choice-chip" data-question-id="occasion" data-value="thank-you" aria-pressed="false">Thank you</button>
-                                <button type="button" class="gift-choice-chip" data-question-id="occasion" data-value="party-favor" aria-pressed="false">Party favor</button>
-                                <button type="button" class="gift-choice-chip" data-question-id="occasion" data-value="classroom-prize" aria-pressed="false">Classroom/prize</button>
-                                <button type="button" class="gift-choice-chip" data-question-id="occasion" data-value="desk-toy" aria-pressed="false">Desk toy</button>
-                                <button type="button" class="gift-choice-chip" data-question-id="occasion" data-value="just-because" aria-pressed="false">Just because</button>
-                                <button type="button" class="gift-choice-chip" data-question-id="occasion" data-value="custom-gift" aria-pressed="false">Custom gift</button>
+                                <input class="gift-choice-input" type="radio" name="occasion" id="occasion-birthday" value="birthday">
+                                <label class="gift-choice-chip gift-choice-pill" for="occasion-birthday">Birthday</label>
+                                <input class="gift-choice-input" type="radio" name="occasion" id="occasion-holiday" value="holiday">
+                                <label class="gift-choice-chip gift-choice-pill" for="occasion-holiday">Holiday</label>
+                                <input class="gift-choice-input" type="radio" name="occasion" id="occasion-thank-you" value="thank-you">
+                                <label class="gift-choice-chip gift-choice-pill" for="occasion-thank-you">Thank you</label>
+                                <input class="gift-choice-input" type="radio" name="occasion" id="occasion-party-favor" value="party-favor">
+                                <label class="gift-choice-chip gift-choice-pill" for="occasion-party-favor">Party favor</label>
+                                <input class="gift-choice-input" type="radio" name="occasion" id="occasion-classroom-prize" value="classroom-prize">
+                                <label class="gift-choice-chip gift-choice-pill" for="occasion-classroom-prize">Classroom/prize</label>
+                                <input class="gift-choice-input" type="radio" name="occasion" id="occasion-desk-toy" value="desk-toy">
+                                <label class="gift-choice-chip gift-choice-pill" for="occasion-desk-toy">Desk toy</label>
+                                <input class="gift-choice-input" type="radio" name="occasion" id="occasion-just-because" value="just-because">
+                                <label class="gift-choice-chip gift-choice-pill" for="occasion-just-because">Just because</label>
+                                <input class="gift-choice-input" type="radio" name="occasion" id="occasion-custom-gift" value="custom-gift">
+                                <label class="gift-choice-chip gift-choice-pill" for="occasion-custom-gift">Custom gift</label>
                             </div>
                         </section>
 
@@ -111,27 +127,48 @@
                                 <p>Pick as many as fit. The results will blend them together.</p>
                             </div>
                             <div class="gift-choice-group" role="group" aria-label="Interests">
-                                <button type="button" class="gift-choice-chip gift-choice-chip-soft" data-question-id="interests" data-value="dinosaurs" aria-pressed="false">Dinosaurs</button>
-                                <button type="button" class="gift-choice-chip gift-choice-chip-soft" data-question-id="interests" data-value="dragons" aria-pressed="false">Dragons</button>
-                                <button type="button" class="gift-choice-chip gift-choice-chip-soft" data-question-id="interests" data-value="animals" aria-pressed="false">Animals</button>
-                                <button type="button" class="gift-choice-chip gift-choice-chip-soft" data-question-id="interests" data-value="pets" aria-pressed="false">Pets</button>
-                                <button type="button" class="gift-choice-chip gift-choice-chip-soft" data-question-id="interests" data-value="space-science" aria-pressed="false">Space/science</button>
-                                <button type="button" class="gift-choice-chip gift-choice-chip-soft" data-question-id="interests" data-value="bugs-nature" aria-pressed="false">Bugs/nature</button>
-                                <button type="button" class="gift-choice-chip gift-choice-chip-soft" data-question-id="interests" data-value="sports" aria-pressed="false">Sports</button>
-                                <button type="button" class="gift-choice-chip gift-choice-chip-soft" data-question-id="interests" data-value="fidgets" aria-pressed="false">Fidgets</button>
-                                <button type="button" class="gift-choice-chip gift-choice-chip-soft" data-question-id="interests" data-value="sensory-items" aria-pressed="false">Sensory items</button>
-                                <button type="button" class="gift-choice-chip gift-choice-chip-soft" data-question-id="interests" data-value="desk-accessories" aria-pressed="false">Desk accessories</button>
-                                <button type="button" class="gift-choice-chip gift-choice-chip-soft" data-question-id="interests" data-value="cute-decor" aria-pressed="false">Cute decor</button>
-                                <button type="button" class="gift-choice-chip gift-choice-chip-soft" data-question-id="interests" data-value="fantasy" aria-pressed="false">Fantasy</button>
-                                <button type="button" class="gift-choice-chip gift-choice-chip-soft" data-question-id="interests" data-value="personalized-items" aria-pressed="false">Personalized items</button>
-                                <button type="button" class="gift-choice-chip gift-choice-chip-soft" data-question-id="interests" data-value="video-games" aria-pressed="false">Video games</button>
-                                <button type="button" class="gift-choice-chip gift-choice-chip-soft" data-question-id="interests" data-value="books-reading" aria-pressed="false">Books/reading</button>
-                                <button type="button" class="gift-choice-chip gift-choice-chip-soft" data-question-id="interests" data-value="office-workspace" aria-pressed="false">Office/workspace</button>
-                                <button type="button" class="gift-choice-chip gift-choice-chip-soft" data-question-id="interests" data-value="school-classroom" aria-pressed="false">School/classroom</button>
-                                <button type="button" class="gift-choice-chip gift-choice-chip-soft" data-question-id="interests" data-value="art-design" aria-pressed="false">Art/design</button>
-                                <button type="button" class="gift-choice-chip gift-choice-chip-soft" data-question-id="interests" data-value="music" aria-pressed="false">Music</button>
-                                <button type="button" class="gift-choice-chip gift-choice-chip-soft" data-question-id="interests" data-value="travel" aria-pressed="false">Travel</button>
-                                <button type="button" class="gift-choice-chip gift-choice-chip-soft" data-question-id="interests" data-value="spooky-goth" aria-pressed="false">Spooky/goth</button>
+                                <input class="gift-choice-input" type="checkbox" name="interests" id="interest-dinosaurs" value="dinosaurs">
+                                <label class="gift-choice-chip gift-choice-chip-soft gift-choice-pill" for="interest-dinosaurs">Dinosaurs</label>
+                                <input class="gift-choice-input" type="checkbox" name="interests" id="interest-dragons" value="dragons">
+                                <label class="gift-choice-chip gift-choice-chip-soft gift-choice-pill" for="interest-dragons">Dragons</label>
+                                <input class="gift-choice-input" type="checkbox" name="interests" id="interest-animals" value="animals">
+                                <label class="gift-choice-chip gift-choice-chip-soft gift-choice-pill" for="interest-animals">Animals</label>
+                                <input class="gift-choice-input" type="checkbox" name="interests" id="interest-pets" value="pets">
+                                <label class="gift-choice-chip gift-choice-chip-soft gift-choice-pill" for="interest-pets">Pets</label>
+                                <input class="gift-choice-input" type="checkbox" name="interests" id="interest-space-science" value="space-science">
+                                <label class="gift-choice-chip gift-choice-chip-soft gift-choice-pill" for="interest-space-science">Space/science</label>
+                                <input class="gift-choice-input" type="checkbox" name="interests" id="interest-bugs-nature" value="bugs-nature">
+                                <label class="gift-choice-chip gift-choice-chip-soft gift-choice-pill" for="interest-bugs-nature">Bugs/nature</label>
+                                <input class="gift-choice-input" type="checkbox" name="interests" id="interest-sports" value="sports">
+                                <label class="gift-choice-chip gift-choice-chip-soft gift-choice-pill" for="interest-sports">Sports</label>
+                                <input class="gift-choice-input" type="checkbox" name="interests" id="interest-fidgets" value="fidgets">
+                                <label class="gift-choice-chip gift-choice-chip-soft gift-choice-pill" for="interest-fidgets">Fidgets</label>
+                                <input class="gift-choice-input" type="checkbox" name="interests" id="interest-sensory-items" value="sensory-items">
+                                <label class="gift-choice-chip gift-choice-chip-soft gift-choice-pill" for="interest-sensory-items">Sensory items</label>
+                                <input class="gift-choice-input" type="checkbox" name="interests" id="interest-desk-accessories" value="desk-accessories">
+                                <label class="gift-choice-chip gift-choice-chip-soft gift-choice-pill" for="interest-desk-accessories">Desk accessories</label>
+                                <input class="gift-choice-input" type="checkbox" name="interests" id="interest-cute-decor" value="cute-decor">
+                                <label class="gift-choice-chip gift-choice-chip-soft gift-choice-pill" for="interest-cute-decor">Cute decor</label>
+                                <input class="gift-choice-input" type="checkbox" name="interests" id="interest-fantasy" value="fantasy">
+                                <label class="gift-choice-chip gift-choice-chip-soft gift-choice-pill" for="interest-fantasy">Fantasy</label>
+                                <input class="gift-choice-input" type="checkbox" name="interests" id="interest-personalized-items" value="personalized-items">
+                                <label class="gift-choice-chip gift-choice-chip-soft gift-choice-pill" for="interest-personalized-items">Personalized items</label>
+                                <input class="gift-choice-input" type="checkbox" name="interests" id="interest-video-games" value="video-games">
+                                <label class="gift-choice-chip gift-choice-chip-soft gift-choice-pill" for="interest-video-games">Video games</label>
+                                <input class="gift-choice-input" type="checkbox" name="interests" id="interest-books-reading" value="books-reading">
+                                <label class="gift-choice-chip gift-choice-chip-soft gift-choice-pill" for="interest-books-reading">Books/reading</label>
+                                <input class="gift-choice-input" type="checkbox" name="interests" id="interest-office-workspace" value="office-workspace">
+                                <label class="gift-choice-chip gift-choice-chip-soft gift-choice-pill" for="interest-office-workspace">Office/workspace</label>
+                                <input class="gift-choice-input" type="checkbox" name="interests" id="interest-school-classroom" value="school-classroom">
+                                <label class="gift-choice-chip gift-choice-chip-soft gift-choice-pill" for="interest-school-classroom">School/classroom</label>
+                                <input class="gift-choice-input" type="checkbox" name="interests" id="interest-art-design" value="art-design">
+                                <label class="gift-choice-chip gift-choice-chip-soft gift-choice-pill" for="interest-art-design">Art/design</label>
+                                <input class="gift-choice-input" type="checkbox" name="interests" id="interest-music" value="music">
+                                <label class="gift-choice-chip gift-choice-chip-soft gift-choice-pill" for="interest-music">Music</label>
+                                <input class="gift-choice-input" type="checkbox" name="interests" id="interest-travel" value="travel">
+                                <label class="gift-choice-chip gift-choice-chip-soft gift-choice-pill" for="interest-travel">Travel</label>
+                                <input class="gift-choice-input" type="checkbox" name="interests" id="interest-spooky-goth" value="spooky-goth">
+                                <label class="gift-choice-chip gift-choice-chip-soft gift-choice-pill" for="interest-spooky-goth">Spooky/goth</label>
                             </div>
                         </section>
 
@@ -275,6 +312,6 @@
         btt.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 
     </script>
-    <script src="gift-finder/interactive.js?v=20260402e"></script>
+    <script src="gift-finder/interactive.js?v=20260402f"></script>
 </body>
 </html>

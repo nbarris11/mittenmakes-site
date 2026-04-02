@@ -318,14 +318,171 @@
   const getIdeaArtwork = idea => {
     const match = IDEA_ARTWORK_RULES.find(rule => rule.match(idea));
     const className = match ? match.className : 'art-default';
-    const icon = match ? match.icon : '🎁';
-    const label = match ? match.label : 'Made-to-order print idea';
     const tokens = idea.tags
       .map(tag => IDEA_TAG_LABELS[tag])
       .filter(Boolean)
       .filter((tag, index, tags) => tags.indexOf(tag) === index)
       .slice(0, 3);
-    return { className, icon, label, tokens };
+    const label = match ? match.label : 'Made-to-order print idea';
+    return { className, label, tokens };
+  };
+
+  const renderArtworkScene = artwork => {
+    const note = '<span class="idea-card-scene-note">Concept render</span>';
+
+    switch (artwork.className) {
+      case 'art-dragon':
+        return (
+          '<div class="idea-card-scene scene-dragon">' +
+            '<span class="scene-drift scene-drift-one"></span>' +
+            '<span class="scene-drift scene-drift-two"></span>' +
+            '<span class="scene-dragon-coil scene-print"></span>' +
+            '<span class="scene-dragon-head scene-print"></span>' +
+            '<span class="scene-dragon-crystal scene-print-alt"></span>' +
+            note +
+          '</div>'
+        );
+      case 'art-dino':
+        return (
+          '<div class="idea-card-scene scene-dino">' +
+            '<span class="scene-dino-body scene-print"></span>' +
+            '<span class="scene-dino-neck scene-print"></span>' +
+            '<span class="scene-dino-head scene-print"></span>' +
+            '<span class="scene-dino-eye"></span>' +
+            '<span class="scene-dino-arm scene-print-alt"></span>' +
+            '<span class="scene-dino-tail scene-print-alt"></span>' +
+            '<span class="scene-dino-egg scene-print-soft"></span>' +
+            note +
+          '</div>'
+        );
+      case 'art-fidget':
+        return (
+          '<div class="idea-card-scene scene-fidget">' +
+            '<span class="scene-fidget-piece scene-fidget-piece-a scene-print"></span>' +
+            '<span class="scene-fidget-piece scene-fidget-piece-b scene-print-alt"></span>' +
+            '<span class="scene-fidget-piece scene-fidget-piece-c scene-print-soft"></span>' +
+            '<span class="scene-fidget-button scene-fidget-button-a"></span>' +
+            '<span class="scene-fidget-button scene-fidget-button-b"></span>' +
+            '<span class="scene-fidget-cube scene-print"></span>' +
+            note +
+          '</div>'
+        );
+      case 'art-bookmark':
+        return (
+          '<div class="idea-card-scene scene-bookmark">' +
+            '<span class="scene-bookmark-strip scene-bookmark-strip-a scene-print"></span>' +
+            '<span class="scene-bookmark-strip scene-bookmark-strip-b scene-print-alt"></span>' +
+            '<span class="scene-bookmark-strip scene-bookmark-strip-c scene-print-soft"></span>' +
+            note +
+          '</div>'
+        );
+      case 'art-photo':
+        return (
+          '<div class="idea-card-scene scene-photo">' +
+            '<span class="scene-photo-frame scene-print-soft"></span>' +
+            '<span class="scene-photo-image"></span>' +
+            '<span class="scene-photo-base scene-print"></span>' +
+            '<span class="scene-photo-glow"></span>' +
+            note +
+          '</div>'
+        );
+      case 'art-sign':
+        return (
+          '<div class="idea-card-scene scene-sign">' +
+            '<span class="scene-sign-word scene-print">Oliver</span>' +
+            '<span class="scene-key-tag scene-key-tag-a scene-print-soft">MIA</span>' +
+            '<span class="scene-key-tag scene-key-tag-b scene-print-alt">LEO</span>' +
+            note +
+          '</div>'
+        );
+      case 'art-desk':
+        return (
+          '<div class="idea-card-scene scene-desk">' +
+            '<span class="scene-vase scene-vase-a scene-print"></span>' +
+            '<span class="scene-vase scene-vase-b scene-print-soft"></span>' +
+            '<span class="scene-vase scene-vase-c scene-print-alt"></span>' +
+            '<span class="scene-vase scene-vase-d scene-print"></span>' +
+            note +
+          '</div>'
+        );
+      case 'art-keychain':
+        return (
+          '<div class="idea-card-scene scene-keychain">' +
+            '<span class="scene-keychain-ring scene-metal"></span>' +
+            '<span class="scene-keychain-tag scene-print"></span>' +
+            '<span class="scene-keychain-secondary scene-print-soft"></span>' +
+            note +
+          '</div>'
+        );
+      case 'art-space':
+        return (
+          '<div class="idea-card-scene scene-space">' +
+            '<span class="scene-space-moon scene-print-soft"></span>' +
+            '<span class="scene-space-rocket scene-print"></span>' +
+            '<span class="scene-space-fin scene-print-alt"></span>' +
+            '<span class="scene-space-star scene-space-star-a"></span>' +
+            '<span class="scene-space-star scene-space-star-b"></span>' +
+            note +
+          '</div>'
+        );
+      case 'art-sports':
+        return (
+          '<div class="idea-card-scene scene-sports">' +
+            '<span class="scene-sports-tag scene-print"></span>' +
+            '<span class="scene-sports-ball scene-print-soft"></span>' +
+            '<span class="scene-sports-token scene-print-alt"></span>' +
+            note +
+          '</div>'
+        );
+      case 'art-music':
+        return (
+          '<div class="idea-card-scene scene-music">' +
+            '<span class="scene-music-note scene-print"></span>' +
+            '<span class="scene-music-note-head scene-print"></span>' +
+            '<span class="scene-music-bookmark scene-print-soft"></span>' +
+            note +
+          '</div>'
+        );
+      case 'art-spooky':
+        return (
+          '<div class="idea-card-scene scene-spooky">' +
+            '<span class="scene-spooky-moon scene-print-soft"></span>' +
+            '<span class="scene-spooky-mushroom-cap scene-print"></span>' +
+            '<span class="scene-spooky-mushroom-stem scene-print-soft"></span>' +
+            '<span class="scene-spooky-creature scene-print-alt"></span>' +
+            note +
+          '</div>'
+        );
+      case 'art-bundle':
+        return (
+          '<div class="idea-card-scene scene-bundle">' +
+            '<span class="scene-bundle-piece scene-bundle-piece-a scene-print"></span>' +
+            '<span class="scene-bundle-piece scene-bundle-piece-b scene-print-soft"></span>' +
+            '<span class="scene-bundle-piece scene-bundle-piece-c scene-print-alt"></span>' +
+            '<span class="scene-bundle-piece scene-bundle-piece-d scene-print"></span>' +
+            note +
+          '</div>'
+        );
+      case 'art-animal':
+        return (
+          '<div class="idea-card-scene scene-animal">' +
+            '<span class="scene-animal-body scene-print"></span>' +
+            '<span class="scene-animal-head scene-print"></span>' +
+            '<span class="scene-animal-ear scene-print-soft"></span>' +
+            '<span class="scene-animal-tail scene-print-alt"></span>' +
+            note +
+          '</div>'
+        );
+      default:
+        return (
+          '<div class="idea-card-scene scene-default">' +
+            '<span class="scene-default-piece scene-default-piece-a scene-print"></span>' +
+            '<span class="scene-default-piece scene-default-piece-b scene-print-soft"></span>' +
+            '<span class="scene-default-piece scene-default-piece-c scene-print-alt"></span>' +
+            note +
+          '</div>'
+        );
+    }
   };
 
   const buildAnswersSummary = answers => [
@@ -341,9 +498,9 @@
       .join('\n');
 
   const readAnswersFromDom = () => ({
-    recipient: quizFields.querySelector('[data-question="recipient"] [data-question-id].is-active')?.dataset.value || '',
-    occasion: quizFields.querySelector('[data-question="occasion"] [data-question-id].is-active')?.dataset.value || '',
-    interests: Array.from(quizFields.querySelectorAll('[data-question="interests"] [data-question-id].is-active')).map(button => button.dataset.value),
+    recipient: quizFields.querySelector('input[name="recipient"]:checked')?.value || '',
+    occasion: quizFields.querySelector('input[name="occasion"]:checked')?.value || '',
+    interests: Array.from(quizFields.querySelectorAll('input[name="interests"]:checked')).map(input => input.value),
     extraLikes: quizFields.querySelector('textarea[name="extraLikes"]')?.value || ''
   });
 
@@ -391,7 +548,9 @@
           '<div class="idea-card-visual">' +
             '<p class="idea-card-type">Print idea</p>' +
             '<div class="idea-card-placeholder ' + artwork.className + '">' +
-              '<span class="idea-card-art-icon" aria-hidden="true">' + artwork.icon + '</span>' +
+              renderArtworkScene(artwork) +
+            '</div>' +
+            '<div class="idea-card-art-copy">' +
               '<span class="idea-card-art-label">' + artwork.label + '</span>' +
               '<div class="idea-card-art-tags">' +
                 artwork.tokens.map(token => '<span>' + token + '</span>').join('') +
@@ -521,29 +680,6 @@
     successBanner.textContent = 'Thanks! Your ideas have been sent to Mitten Makes. I’ll review them and follow up with the best print options.';
   };
 
-  quizFields.addEventListener('click', event => {
-    const rawTarget = event.target;
-    const target = rawTarget instanceof Element ? rawTarget : rawTarget && rawTarget.parentElement;
-    const button = target && target.closest('[data-question-id]');
-    if (!button) return;
-
-    const questionId = button.dataset.questionId;
-    const isMulti = questionId === 'interests';
-
-    if (isMulti) {
-      const nextState = !button.classList.contains('is-active');
-      button.classList.toggle('is-active', nextState);
-      button.setAttribute('aria-pressed', String(nextState));
-      return;
-    }
-
-    quizFields.querySelectorAll('[data-question="' + questionId + '"] [data-question-id]').forEach(groupButton => {
-      const active = groupButton === button;
-      groupButton.classList.toggle('is-active', active);
-      groupButton.setAttribute('aria-pressed', String(active));
-    });
-  });
-
   quizForm.addEventListener('submit', async event => {
     event.preventDefault();
     const answers = readAnswersFromDom();
@@ -573,9 +709,8 @@
 
   quizForm.addEventListener('reset', event => {
     event.preventDefault();
-    quizFields.querySelectorAll('[data-question-id]').forEach(button => {
-      button.classList.remove('is-active');
-      button.setAttribute('aria-pressed', 'false');
+    quizFields.querySelectorAll('input[type="radio"], input[type="checkbox"]').forEach(input => {
+      input.checked = false;
     });
     quizFields.querySelectorAll('textarea').forEach(textarea => {
       textarea.value = '';
