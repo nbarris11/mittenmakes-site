@@ -12,10 +12,10 @@
     </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gift Guides | Mitten Makes</title>
-    <meta name="description" content="Browse Mitten Makes gift guides for kids, desks, teachers, Mother's Day, and easy made-to-order 3D printed gifts from Metro Detroit.">
-    <meta property="og:title" content="Gift Guides | Mitten Makes">
-    <meta property="og:description" content="Browse Mitten Makes gift guides for kids, desks, teachers, Mother's Day, and easy made-to-order 3D printed gifts from Metro Detroit.">
+    <title>Gift Finder | Mitten Makes</title>
+    <meta name="description" content="Find made-to-order 3D print gift ideas with the Mitten Makes Gift Finder. Answer a few quick questions and get custom-ready print concepts.">
+    <meta property="og:title" content="Gift Finder | Mitten Makes">
+    <meta property="og:description" content="Find made-to-order 3D print gift ideas with the Mitten Makes Gift Finder. Answer a few quick questions and get custom-ready print concepts.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://mittenmakes.com/gift-guides.html">
     <meta property="og:image" content="https://mittenmakes.com/og-image.jpg">
@@ -45,8 +45,8 @@
             <div class="seo-page-hero">
                 <div class="seo-page-copy fade-up">
                     <p class="order-eyebrow">Gift hub</p>
-                    <h1>Gift Guides</h1>
-                    <p>Use this page when you are shopping by occasion, age group, or vibe instead of by exact product. It is the easiest way to narrow Mitten Makes down into something giftable, personal, and easy to choose.</p>
+                    <h1>Find the Perfect Print</h1>
+                    <p>Answer a few quick questions and get personalized 3D print ideas made to order by Mitten Makes. This is a smart custom idea assistant, not a list of current storefront inventory, so it can help you figure out what kind of print would actually fit.</p>
                 </div>
                 <div class="seo-page-image fade-up">
                     <img src="assets/logo-main.png" alt="Mitten Makes gift guides">
@@ -57,27 +57,85 @@
 
     <section class="section gift-finder-section">
         <div class="container">
-            <h2 class="section-title">Gift finder</h2>
-            <p class="section-lead">Not sure what to pick? Start with who it is for or the kind of gift you want to give.</p>
-            <div class="gift-finder">
-                <div class="finder-options" aria-label="Gift finder options">
-                    <button class="finder-chip is-active" type="button" data-finder-key="kids" aria-pressed="true">For a kid</button>
-                    <button class="finder-chip" type="button" data-finder-key="desk" aria-pressed="false">For a desk</button>
-                    <button class="finder-chip" type="button" data-finder-key="custom" aria-pressed="false">Something personal</button>
-                    <button class="finder-chip" type="button" data-finder-key="easy" aria-pressed="false">Quick easy gift</button>
+            <div class="gift-finder-builder fade-up">
+                <div class="gift-finder-builder-copy">
+                    <p class="order-eyebrow">Idea assistant</p>
+                    <h2 class="section-title">Gift Finder</h2>
+                    <p class="section-lead">Here are some print ideas that fit your answers. Mitten Makes can make these to order, then tweak the final version around colors, personalization, quantity, or theme.</p>
                 </div>
-                <div class="finder-panel fade-up" data-finder-panel>
-                    <p class="finder-eyebrow">Best starting point</p>
-                    <h3 data-finder-title>Squishy fidgets and poseable creatures</h3>
-                    <p class="finder-copy" data-finder-copy>These are the easiest wins for birthdays, reward treats, and kids who love something fun to squeeze, bend, or keep in a backpack.</p>
-                    <div class="finder-tags" data-finder-tags>
-                        <span>Birthday add-ons</span>
-                        <span>Party favors</span>
-                        <span>Backpack fun</span>
+
+                <div class="gift-finder-success" data-gift-finder-success hidden></div>
+
+                <form class="gift-finder-quiz-card" data-gift-finder-quiz>
+                    <div class="gift-finder-quiz-grid" data-gift-finder-fields></div>
+                    <p class="gift-finder-message" data-gift-finder-message hidden></p>
+                    <div class="gift-finder-quiz-actions">
+                        <button type="submit" class="btn btn-primary">Show my print ideas</button>
+                        <button type="reset" class="btn btn-secondary">Clear answers</button>
                     </div>
-                    <div class="finder-actions">
-                        <a class="btn btn-primary" data-finder-link href="shop.html#shop-fidgets">See suggestions</a>
-                        <a class="btn btn-secondary" href="custom.html#order-form">Ask for help choosing</a>
+                </form>
+
+                <section class="gift-finder-results" data-gift-finder-results hidden>
+                    <div class="gift-finder-results-head">
+                        <p class="order-eyebrow">Results</p>
+                        <h3>Based on your answers, here are a few print ideas that would be a great fit.</h3>
+                        <p>Mitten Makes can make these to order. Save one or two ideas below, and the top match is already selected for you to make the next step easier.</p>
+                        <div class="gift-finder-results-meta" data-gift-finder-results-meta></div>
+                    </div>
+                    <div class="gift-finder-results-grid" data-gift-finder-results-grid></div>
+
+                    <p class="gift-finder-fallback" data-gift-finder-fallback hidden>Not seeing the exact right idea? I can still make something custom based on your answers.</p>
+
+                    <div class="gift-finder-lead" data-gift-finder-lead hidden>
+                        <div class="gift-finder-lead-copy">
+                            <p class="order-eyebrow">Send these ideas in</p>
+                            <h3>Love one of these? Send it in as your request.</h3>
+                            <p>Pick the ideas that feel closest, then send the result over. I’ll review what you chose, look at your answers, and follow up with the best print options.</p>
+                        </div>
+
+                        <form
+                            class="order-form gift-finder-lead-form"
+                            data-gift-finder-lead-form
+                            action="https://formsubmit.co/mittenmakes@gmail.com"
+                            method="POST"
+                        >
+                            <input type="hidden" name="_subject" value="Gift Finder request from Mitten Makes">
+                            <input type="hidden" name="_captcha" value="false">
+                            <input type="hidden" name="_next" value="https://www.mittenmakes.com/gift-guides.html?giftFinderSent=1">
+                            <input type="hidden" name="request_type" value="gift_finder_idea_request">
+                            <input type="hidden" name="gift_finder_selected_ideas">
+                            <input type="hidden" name="gift_finder_answers_summary">
+                            <input type="hidden" name="gift_finder_recommendations_summary">
+
+                            <div class="gift-finder-selected">
+                                <span class="gift-finder-selected-label">Favorite ideas</span>
+                                <div class="gift-finder-selected-list" data-selected-summary>
+                                    <span>Pick a result above and it will show up here.</span>
+                                </div>
+                            </div>
+
+                            <div class="form-grid">
+                                <label class="form-field">
+                                    <span>Name</span>
+                                    <input type="text" name="name" required>
+                                </label>
+                                <label class="form-field">
+                                    <span>Email</span>
+                                    <input type="email" name="email" required>
+                                </label>
+                            </div>
+
+                            <label class="form-field">
+                                <span>Anything you want us to know?</span>
+                                <textarea name="gift_finder_notes" placeholder="Colors, name ideas, quantity, timing, theme, or anything else you want us to work from."></textarea>
+                            </label>
+
+                            <p class="form-note">This sends your quiz answers, the recommended ideas, and the favorites you saved so Mitten Makes can follow up with the best print options.</p>
+
+                            <div class="form-actions">
+                                <button type="submit" class="btn btn-primary">Send My Ideas to Mitten Makes</button>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -104,32 +162,6 @@
                     <h3><a href="custom.html#custom-photo-decor">Custom Photo Gifts</a></h3>
                     <p>Best for lightboxes, lithophanes, and more personal custom ideas when the gift needs a photo, a name, or a keepsake feel.</p>
                 </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="section recent-makes-section">
-        <div class="container">
-            <h2 class="section-title">Fast starting points</h2>
-            <div class="recent-makes-grid">
-                <article class="recent-make-card fade-up">
-                    <p class="recent-make-label">Easy win</p>
-                    <h3>Need a small gift fast?</h3>
-                    <p>Start with keychains, little fidgets, and articulated sea creatures that are easy to give and easy to love.</p>
-                </article>
-                <article class="recent-make-card fade-up">
-                    <p class="recent-make-label">Personal pick</p>
-                    <h3>Need something more meaningful?</h3>
-                    <p>Jump to custom photo gifts, name signs, and lithophanes if the gift needs to feel more personal right away.</p>
-                </article>
-                <article class="recent-make-card fade-up">
-                    <p class="recent-make-label">Need help?</p>
-                    <h3>Not finding the right fit?</h3>
-                    <p>The custom page is the best next move when the idea is too specific for a normal product listing.</p>
-                </article>
-            </div>
-            <div class="recent-makes-cta">
-                <a href="custom.html" class="btn btn-primary">Go to custom options</a>
             </div>
         </div>
     </section>
@@ -164,61 +196,7 @@
         window.addEventListener('scroll', () => btt.classList.toggle('visible', window.scrollY > 320));
         btt.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 
-        const finderButtons = document.querySelectorAll('[data-finder-key]');
-        const finderTitle = document.querySelector('[data-finder-title]');
-        const finderCopy = document.querySelector('[data-finder-copy]');
-        const finderTags = document.querySelector('[data-finder-tags]');
-        const finderLink = document.querySelector('[data-finder-link]');
-
-        const finderContent = {
-            kids: {
-                title: 'Squishy fidgets and poseable creatures',
-                copy: 'These are the easiest wins for birthdays, reward treats, and kids who love something fun to squeeze, bend, or keep in a backpack.',
-                tags: ['Birthday add-ons', 'Party favors', 'Backpack fun'],
-                href: 'shop.html#shop-fidgets',
-                cta: 'See kid-friendly fidgets'
-            },
-            desk: {
-                title: 'Desk accessories and playful display pieces',
-                copy: 'If the gift is for a teacher, coworker, parent, or grown-up friend, go with something useful that still has personality.',
-                tags: ['Desk refresh', 'Teacher gift', 'Adult-friendly'],
-                href: 'shop.html#shop-desk-gifts',
-                cta: 'Browse desk gifts'
-            },
-            custom: {
-                title: 'Lightboxes, signs, keychains, and photo gifts',
-                copy: 'When you want the gift to feel personal, custom options give you the most room to add names, photos, or a one-of-a-kind idea.',
-                tags: ['Names', 'Photos', 'Keepsakes'],
-                href: 'custom.html#custom-photo-decor',
-                cta: 'See custom options'
-            },
-            easy: {
-                title: 'Keychains, fidgets, and quick little wins',
-                copy: 'If you need something simple, affordable, and easy to love, start with the smaller pieces that still feel thoughtful.',
-                tags: ['Budget-friendly', 'Easy gifting', 'Fast favorite'],
-                href: 'shop.html#shop-small-creatures',
-                cta: 'See easy gifts'
-            }
-        };
-
-        const updateFinder = key => {
-            const content = finderContent[key];
-            if (!content) return;
-            finderButtons.forEach(button => {
-                const isActive = button.dataset.finderKey === key;
-                button.classList.toggle('is-active', isActive);
-                button.setAttribute('aria-pressed', String(isActive));
-            });
-            finderTitle.textContent = content.title;
-            finderCopy.textContent = content.copy;
-            finderLink.href = content.href;
-            finderLink.textContent = content.cta;
-            finderTags.innerHTML = content.tags.map(tag => `<span>${tag}</span>`).join('');
-        };
-
-        finderButtons.forEach(button => {
-            button.addEventListener('click', () => updateFinder(button.dataset.finderKey));
-        });
     </script>
+    <script type="module" src="gift-finder/ui.js?v=20260401a"></script>
 </body>
 </html>

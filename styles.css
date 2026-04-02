@@ -607,126 +607,351 @@ a:hover { color: var(--accent-hover); }
   background-color: var(--surface);
 }
 
-.gift-finder {
+.gift-finder-builder {
   display: grid;
-  grid-template-columns: minmax(0, 340px) minmax(0, 1fr);
-  gap: 1.5rem;
-  align-items: stretch;
+  gap: 1.75rem;
 }
 
-.finder-options {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.8rem;
-  align-content: flex-start;
+.gift-finder-builder-copy .section-title {
+  margin-bottom: 0.75rem;
 }
 
-.finder-chip {
-  border: 1px solid var(--border);
-  background-color: #ffffff;
-  color: var(--text);
-  border-radius: 999px;
-  padding: 0.9rem 1.1rem;
-  font: inherit;
-  font-weight: 700;
-  font-family: 'Poppins', sans-serif;
-  cursor: pointer;
-  transition: all 0.2s ease;
+.gift-finder-builder-copy .section-lead {
+  max-width: 64ch;
+  margin: 0;
 }
 
-.finder-chip:hover,
-.finder-chip.is-active {
-  background-color: var(--accent);
-  border-color: var(--accent);
-  color: #ffffff;
-  transform: translateY(-1px);
+.gift-finder-success {
+  border: 1px solid rgba(29, 143, 90, 0.22);
+  background: linear-gradient(180deg, rgba(29, 143, 90, 0.08) 0%, rgba(255, 255, 255, 0.9) 100%);
+  color: #166a44;
+  border-radius: 16px;
+  padding: 1rem 1.15rem;
+  font-weight: 600;
+  box-shadow: 0 12px 24px rgba(22, 106, 68, 0.08);
 }
 
-.finder-panel {
+.gift-finder-quiz-card {
   background: linear-gradient(135deg, #FFF9F2 0%, #FFFFFF 100%);
   border: 1px solid var(--border);
-  border-radius: 18px;
+  border-radius: 22px;
   padding: 2rem;
   box-shadow: 0 14px 30px rgba(61, 61, 61, 0.05);
 }
 
-.finder-eyebrow {
-  margin-bottom: 0.45rem;
-  color: var(--accent);
+.gift-finder-quiz-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.5rem;
+}
+
+.gift-finder-question {
+  display: grid;
+  gap: 0.7rem;
+}
+
+.gift-finder-question-wide {
+  grid-column: 1 / -1;
+}
+
+.gift-finder-question-head h3,
+.gift-finder-question-title {
   font-family: 'Poppins', sans-serif;
-  font-size: 0.76rem;
+  font-size: 1rem;
   font-weight: 700;
-  letter-spacing: 1.4px;
-  text-transform: uppercase;
+  margin: 0;
 }
 
-.finder-panel h3 {
-  font-size: 1.5rem;
-  margin-bottom: 0.75rem;
-}
-
-.finder-copy {
+.gift-finder-question-head p,
+.gift-finder-question small {
+  margin: 0;
   color: var(--muted);
-  margin-bottom: 1rem;
-  max-width: 58ch;
+  font-size: 0.88rem;
+  line-height: 1.65;
 }
 
-.finder-tags {
+.gift-choice-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.7rem;
+}
+
+.gift-choice-chip {
+  border: 1px solid var(--border);
+  background: #ffffff;
+  color: var(--text);
+  border-radius: 999px;
+  padding: 0.82rem 1rem;
+  font: inherit;
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.18s ease;
+}
+
+.gift-choice-chip:hover,
+.gift-choice-chip.is-active {
+  border-color: var(--accent);
+  background-color: var(--accent);
+  color: #ffffff;
+  transform: translateY(-1px);
+}
+
+.gift-choice-chip-soft {
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+}
+
+.gift-finder-select,
+.gift-finder-textarea {
+  width: 100%;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 0.95rem 1rem;
+  font: inherit;
+  color: var(--text);
+  background-color: #ffffff;
+}
+
+.gift-finder-select:focus,
+.gift-finder-textarea:focus {
+  outline: 2px solid rgba(196, 81, 26, 0.18);
+  border-color: var(--accent);
+}
+
+.gift-finder-textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+
+.gift-finder-message {
+  margin: 1rem 0 0;
+  border-left: 4px solid var(--accent);
+  padding: 0.9rem 1rem;
+  border-radius: 12px;
+  background-color: var(--accent-soft);
+  color: var(--text);
+  font-weight: 600;
+}
+
+.gift-finder-quiz-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.gift-finder-results {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.gift-finder-results-head {
+  max-width: 68ch;
+}
+
+.gift-finder-results-head h3 {
+  font-size: 1.55rem;
+  margin-bottom: 0.7rem;
+}
+
+.gift-finder-results-head p:last-child {
+  margin-bottom: 0;
+}
+
+.gift-finder-results-meta {
   display: flex;
   flex-wrap: wrap;
   gap: 0.65rem;
-  margin-bottom: 1.35rem;
+  margin-top: 1rem;
 }
 
-.finder-tags span {
+.gift-finder-results-meta span,
+.gift-finder-selected-list span {
   display: inline-flex;
   align-items: center;
   padding: 0.45rem 0.8rem;
   border-radius: 999px;
   background-color: var(--accent-soft);
   color: var(--accent);
-  font-size: 0.8rem;
+  font-size: 0.82rem;
   font-weight: 700;
   font-family: 'Poppins', sans-serif;
 }
 
-.finder-actions {
-  display: flex;
-  gap: 0.9rem;
-  flex-wrap: wrap;
-}
-
-.gifting-grid {
+.gift-finder-results-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1.5rem;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.25rem;
 }
 
-.gift-card {
-  background-color: var(--bg);
+.idea-card {
+  display: grid;
+  gap: 1.1rem;
   border: 1px solid var(--border);
-  border-radius: 14px;
-  padding: 1.8rem;
+  border-radius: 18px;
+  background: #ffffff;
+  padding: 1.25rem;
   box-shadow: 0 10px 26px rgba(61, 61, 61, 0.04);
 }
 
-.gift-card h3 {
-  font-size: 1.1rem;
-  margin-bottom: 0.7rem;
+.idea-card-visual {
+  display: grid;
+  gap: 0.8rem;
 }
 
-.gift-card p {
+.idea-card-type {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  color: var(--accent);
+  font-size: 0.74rem;
+  letter-spacing: 1.4px;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+.idea-card-placeholder {
+  min-height: 124px;
+  border-radius: 16px;
+  border: 1px dashed rgba(196, 81, 26, 0.22);
+  background: linear-gradient(180deg, #FFF9F2 0%, #FFFFFF 100%);
+  display: grid;
+  place-items: center;
+  padding: 1rem;
+  text-align: center;
+  color: var(--accent);
+  font-family: 'Poppins', sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.idea-card-badge {
+  display: inline-flex;
+  width: fit-content;
+  align-items: center;
+  padding: 0.42rem 0.75rem;
+  border-radius: 999px;
+  background-color: rgba(196, 81, 26, 0.1);
+  color: var(--accent);
+  font-size: 0.78rem;
+  font-weight: 700;
+  font-family: 'Poppins', sans-serif;
+}
+
+.idea-card-copy {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.idea-card-copy h3 {
   margin-bottom: 0;
+  font-size: 1.2rem;
+}
+
+.idea-card-description,
+.idea-card-why,
+.idea-card-match {
+  margin: 0;
   color: var(--muted);
-  font-size: 0.95rem;
-  line-height: 1.8;
+  font-size: 0.92rem;
+  line-height: 1.7;
+}
+
+.idea-card-match {
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.idea-card-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+}
+
+.idea-card-meta span {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.4rem 0.7rem;
+  border-radius: 999px;
+  background-color: #F8F1E7;
+  color: var(--muted);
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
+.idea-select-button {
+  margin-top: 0.25rem;
+}
+
+.gift-finder-fallback {
+  margin: 0;
+  color: var(--muted);
+}
+
+.gift-finder-lead {
+  display: grid;
+  gap: 1.2rem;
+  padding: 1.5rem;
+  border-radius: 20px;
+  border: 1px solid var(--border);
+  background: linear-gradient(135deg, #FFF9F2 0%, #FFFFFF 100%);
+  box-shadow: 0 14px 30px rgba(61, 61, 61, 0.05);
+}
+
+.gift-finder-lead-copy h3 {
+  font-size: 1.45rem;
+  margin-bottom: 0.65rem;
+}
+
+.gift-finder-lead-copy p:last-child {
+  margin-bottom: 0;
+}
+
+.gift-finder-selected {
+  display: grid;
+  gap: 0.7rem;
+  margin-bottom: 1rem;
+}
+
+.gift-finder-selected-label {
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.88rem;
+  font-weight: 700;
+}
+
+.gift-finder-selected-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
 }
 
 @media (max-width: 768px) {
-  .gift-finder {
-    grid-template-columns: 1fr;
+  .gift-finder-quiz-card,
+  .gift-finder-lead {
+    padding: 1.4rem;
   }
 
+  .gift-finder-quiz-grid {
+    grid-template-columns: 1fr;
+    gap: 1.1rem;
+  }
+
+  .gift-finder-quiz-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .gift-finder-results-head h3 {
+    font-size: 1.3rem;
+  }
+
+  .gift-finder-results-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
   .gifting-grid {
     grid-template-columns: 1fr;
     gap: 1rem;
