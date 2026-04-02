@@ -5,22 +5,26 @@ const INTEREST_PRIORITIES = {
   dragons: ['dragon', 'fantasy', 'articulated-dragons'],
   dinosaurs: ['dino'],
   animals: ['animal', 'creature'],
+  pets: ['animal', 'bag-tag', 'keychain', 'custom-friendly'],
   fidgets: ['fidget', 'sensory'],
   'sensory-items': ['sensory', 'fidget'],
   'personalized-items': ['personalized', 'name-sign', 'name-plate', 'photo-gift', 'bag-tag'],
   'desk-accessories': ['desk', 'office', 'organizer', 'tray', 'name-plate'],
   'office-workspace': ['desk', 'office', 'organizer', 'tray', 'name-plate'],
+  'space-science': ['space', 'science', 'rocket', 'moon', 'bookmark', 'desk'],
+  'bugs-nature': ['nature', 'bug', 'animal', 'bookmark', 'small-gift'],
   fantasy: ['fantasy', 'dragon'],
   sports: ['sports'],
   'video-games': ['gamer'],
-  'books-reading': ['bookmark', 'classroom']
+  'books-reading': ['bookmark', 'classroom'],
+  'school-classroom': ['classroom', 'teacher', 'tokens', 'bookmark', 'bundle-friendly'],
+  'art-design': ['art', 'design', 'pattern', 'bookmark', 'desk', 'decor'],
+  music: ['music', 'note', 'bookmark', 'desk'],
+  travel: ['bag-tag', 'keychain', 'small-gift'],
+  'spooky-goth': ['spooky', 'goth', 'creature', 'decor', 'bookmark']
 };
 
 const LABEL_OVERRIDES = {
-  'under-10': 'under $10',
-  '10-20': '$10-$20',
-  '20-35': '$20-$35',
-  '35-plus': '$35+',
   'party-favor': 'party favor',
   'classroom-prize': 'classroom/prize',
   'desk-toy': 'desk toy',
@@ -31,7 +35,12 @@ const LABEL_OVERRIDES = {
   'personalized-items': 'personalized items',
   'video-games': 'video games',
   'books-reading': 'books/reading',
-  'office-workspace': 'office/workspace'
+  'office-workspace': 'office/workspace',
+  'space-science': 'space/science',
+  'bugs-nature': 'bugs/nature',
+  'school-classroom': 'school/classroom',
+  'art-design': 'art/design',
+  'spooky-goth': 'spooky/goth'
 };
 
 const SCENARIO_BOOSTS = [
@@ -74,6 +83,26 @@ const SCENARIO_BOOSTS = [
   {
     when: answers => answers.recipient === 'friend' && answers.interests.includes('cute-decor'),
     ids: ['cute-desk-buddy-creature', 'custom-shelf-name-display', 'animal-bookmark', 'personalized-name-keychain']
+  },
+  {
+    when: answers => answers.interests.includes('space-science') && answers.interests.includes('books-reading'),
+    ids: ['moon-phase-bookmark', 'science-token-mini-set', 'rocket-desk-buddy']
+  },
+  {
+    when: answers => answers.interests.includes('pets') && answers.interests.includes('personalized-items'),
+    ids: ['pet-name-bag-tag', 'personalized-name-keychain', 'flexi-animal-keychain']
+  },
+  {
+    when: answers => answers.interests.includes('art-design') && answers.interests.includes('desk-accessories'),
+    ids: ['pattern-play-bookmark-set', 'desktop-catchall-tray', 'teacher-desk-name-plate']
+  },
+  {
+    when: answers => answers.interests.includes('spooky-goth'),
+    ids: ['spooky-shelf-creature', 'fantasy-themed-bookmark', 'funny-desk-decor-creature']
+  },
+  {
+    when: answers => answers.interests.includes('music'),
+    ids: ['music-note-bookmark', 'custom-initial-key-tag', 'teacher-desk-name-plate']
   }
 ];
 
@@ -152,29 +181,53 @@ const getInterestPriorityScore = (idea, answers) => {
     score += 5;
   }
 
-  if (answers.budget === 'under-10') {
-    if (hasPriorityTag(idea, ['small-gift', 'low-print-time', 'keychain', 'bookmark', 'mini', 'fidget'])) {
-      score += 4;
-    }
-
-    if (idea.complexity === 'medium') {
-      score -= 3;
-    }
-
-    if (idea.complexity === 'high') {
-      score -= 7;
-    }
-  }
-
-  if (answers.budget === '10-20' && idea.complexity === 'high') {
-    score -= 2;
-  }
-
   if (
     (answers.occasion === 'party-favor' || answers.occasion === 'classroom-prize') &&
     idea.tags.includes('bundle-friendly')
   ) {
     score += 4;
+  }
+
+  return score;
+};
+
+const getCombinationScore = (idea, answers, matchedInterests) => {
+  let score = 0;
+
+  if (matchedInterests.length >= 2) {
+    score += 5 + matchedInterests.length;
+  }
+
+  if (
+    matchedInterests.includes('desk-accessories') &&
+    matchedInterests.includes('personalized-items') &&
+    hasPriorityTag(idea, ['desk', 'name-plate', 'name-sign', 'organizer'])
+  ) {
+    score += 5;
+  }
+
+  if (
+    matchedInterests.includes('fidgets') &&
+    matchedInterests.includes('sensory-items') &&
+    hasPriorityTag(idea, ['fidget', 'sensory', 'clicker'])
+  ) {
+    score += 5;
+  }
+
+  if (
+    matchedInterests.includes('dragons') &&
+    matchedInterests.includes('fantasy') &&
+    hasPriorityTag(idea, ['dragon', 'fantasy'])
+  ) {
+    score += 5;
+  }
+
+  if (
+    matchedInterests.includes('dinosaurs') &&
+    matchedInterests.includes('fidgets') &&
+    hasPriorityTag(idea, ['dino', 'fidget'])
+  ) {
+    score += 5;
   }
 
   return score;
@@ -193,10 +246,6 @@ const buildReasonBits = (idea, answers, matchedInterests) => {
 
   if (matchedInterests.length) {
     bits.push(`It lines up with ${matchedInterests.map(interest => labelFor('interests', interest).toLowerCase()).join(', ')}.`);
-  }
-
-  if (answers.budget && idea.budgets.includes(answers.budget)) {
-    bits.push(`It stays in the ${labelFor('budget', answers.budget)} range.`);
   }
 
   if (answers.occasion === 'custom-gift' && idea.tags.includes('custom-friendly')) {
@@ -220,10 +269,8 @@ const summarizeIdeaForResults = (idea, answers, score, matchedInterests) => ({
 export const buildAnswersSummary = answers => {
   const lines = [
     `Who it's for: ${labelFor('recipient', answers.recipient) || 'Not specified'}`,
-    `Age range: ${labelFor('ageRange', answers.ageRange) || 'Not specified'}`,
     `Occasion: ${labelFor('occasion', answers.occasion) || 'Not specified'}`,
     `Interests: ${answers.interests.length ? answers.interests.map(value => labelFor('interests', value)).join(', ') : 'Not specified'}`,
-    `Budget: ${labelFor('budget', answers.budget) || 'Not specified'}`,
     `Anything else they like: ${answers.extraLikes?.trim() || 'No extra notes'}`
   ];
 
@@ -239,10 +286,8 @@ export const recommendIdeas = (answers, limit = 4) => {
   const safeLimit = Math.min(Math.max(limit, 3), 6);
   const normalizedAnswers = {
     recipient: answers.recipient || '',
-    ageRange: answers.ageRange || '',
     occasion: answers.occasion || '',
     interests: Array.isArray(answers.interests) ? answers.interests : [],
-    budget: answers.budget || '',
     extraLikes: answers.extraLikes || ''
   };
 
@@ -250,13 +295,12 @@ export const recommendIdeas = (answers, limit = 4) => {
     const matchedInterests = normalizedAnswers.interests.filter(interest => idea.interests.includes(interest));
     const score =
       (normalizedAnswers.recipient && idea.recipientTypes.includes(normalizedAnswers.recipient) ? 4 : 0) +
-      (normalizedAnswers.ageRange && idea.ageRanges.includes(normalizedAnswers.ageRange) ? 4 : 0) +
       (normalizedAnswers.occasion && idea.occasions.includes(normalizedAnswers.occasion) ? 3 : 0) +
       (matchedInterests.length * 5) +
-      (normalizedAnswers.budget && idea.budgets.includes(normalizedAnswers.budget) ? 3 : 0) +
       getFreeTextScore(idea, normalizedAnswers) +
       (normalizedAnswers.occasion === 'custom-gift' && idea.tags.includes('custom-friendly') ? 3 : 0) +
       (['party-favor', 'classroom-prize'].includes(normalizedAnswers.occasion) && idea.tags.includes('bundle-friendly') ? 4 : 0) +
+      getCombinationScore(idea, normalizedAnswers, matchedInterests) +
       getInterestPriorityScore(idea, normalizedAnswers) +
       getScenarioBoost(idea.id, normalizedAnswers) +
       (complexityPenalty[idea.complexity] || 0);
@@ -274,5 +318,45 @@ export const recommendIdeas = (answers, limit = 4) => {
   });
 
   const positiveIdeas = rankedIdeas.filter(idea => idea.score > 0);
-  return (positiveIdeas.length ? positiveIdeas : rankedIdeas).slice(0, safeLimit);
+  const candidateIdeas = positiveIdeas.length ? positiveIdeas : rankedIdeas;
+  const selectedIdeas = [];
+  const usedCategories = new Set();
+  const coveredInterests = new Set();
+
+  while (selectedIdeas.length < safeLimit && selectedIdeas.length < candidateIdeas.length) {
+    let bestIdea = null;
+    let bestAdjustedScore = -Infinity;
+
+    candidateIdeas.forEach(idea => {
+      if (selectedIdeas.some(selected => selected.id === idea.id)) return;
+
+      let adjustedScore = idea.score;
+      const uncoveredMatches = idea.matchedInterests.filter(interest => !coveredInterests.has(interest));
+
+      adjustedScore += uncoveredMatches.length * 2;
+
+      if (!usedCategories.has(idea.internalCategory)) {
+        adjustedScore += 1.5;
+      } else if (selectedIdeas.length && !idea.matchedInterests.length) {
+        adjustedScore -= 2;
+      }
+
+      if (selectedIdeas.some(selected => selected.name === idea.name)) {
+        adjustedScore -= 10;
+      }
+
+      if (adjustedScore > bestAdjustedScore) {
+        bestAdjustedScore = adjustedScore;
+        bestIdea = idea;
+      }
+    });
+
+    if (!bestIdea) break;
+
+    selectedIdeas.push(bestIdea);
+    usedCategories.add(bestIdea.internalCategory);
+    bestIdea.matchedInterests.forEach(interest => coveredInterests.add(interest));
+  }
+
+  return selectedIdeas;
 };

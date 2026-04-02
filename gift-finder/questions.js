@@ -21,25 +21,11 @@ export const GIFT_FINDER_QUESTIONS = [
     ]
   },
   {
-    id: 'ageRange',
-    label: 'Age range',
-    type: 'select',
-    required: true,
-    options: [
-      { value: '3-5', label: '3-5' },
-      { value: '6-8', label: '6-8' },
-      { value: '9-12', label: '9-12' },
-      { value: '13-17', label: '13-17' },
-      { value: '18-29', label: '18-29' },
-      { value: '30-49', label: '30-49' },
-      { value: '50+', label: '50+' }
-    ]
-  },
-  {
     id: 'occasion',
     label: 'Occasion',
-    type: 'select',
+    type: 'single-chip',
     required: true,
+    helper: 'Pick the main reason you are shopping, even if it could fit more than one.',
     options: [
       { value: 'birthday', label: 'Birthday' },
       { value: 'holiday', label: 'Holiday' },
@@ -55,11 +41,14 @@ export const GIFT_FINDER_QUESTIONS = [
     id: 'interests',
     label: 'Interests',
     type: 'multi-chip',
-    helper: 'Pick a few. The more specific you get, the more useful the ideas become.',
+    helper: 'Pick as many as fit. The results will blend them together.',
     options: [
       { value: 'dinosaurs', label: 'Dinosaurs' },
       { value: 'dragons', label: 'Dragons' },
       { value: 'animals', label: 'Animals' },
+      { value: 'pets', label: 'Pets' },
+      { value: 'space-science', label: 'Space/science' },
+      { value: 'bugs-nature', label: 'Bugs/nature' },
       { value: 'sports', label: 'Sports' },
       { value: 'fidgets', label: 'Fidgets' },
       { value: 'sensory-items', label: 'Sensory items' },
@@ -69,19 +58,12 @@ export const GIFT_FINDER_QUESTIONS = [
       { value: 'personalized-items', label: 'Personalized items' },
       { value: 'video-games', label: 'Video games' },
       { value: 'books-reading', label: 'Books/reading' },
-      { value: 'office-workspace', label: 'Office/workspace' }
-    ]
-  },
-  {
-    id: 'budget',
-    label: 'Budget',
-    type: 'single-chip',
-    required: true,
-    options: [
-      { value: 'under-10', label: 'Under $10' },
-      { value: '10-20', label: '$10-$20' },
-      { value: '20-35', label: '$20-$35' },
-      { value: '35-plus', label: '$35+' }
+      { value: 'office-workspace', label: 'Office/workspace' },
+      { value: 'school-classroom', label: 'School/classroom' },
+      { value: 'art-design', label: 'Art/design' },
+      { value: 'music', label: 'Music' },
+      { value: 'travel', label: 'Travel' },
+      { value: 'spooky-goth', label: 'Spooky/goth' }
     ]
   },
   {
@@ -95,10 +77,8 @@ export const GIFT_FINDER_QUESTIONS = [
 
 export const GIFT_FINDER_DEFAULTS = {
   recipient: '',
-  ageRange: '',
   occasion: '',
   interests: [],
-  budget: '',
   extraLikes: ''
 };
 

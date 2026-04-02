@@ -163,12 +163,11 @@ const renderResultsMeta = () => {
     ? state.answers.interests.map(value => labelFor('interests', value)).join(', ')
     : 'Open-ended ideas';
 
-  resultsMeta.innerHTML = `
-    <span>${labelFor('recipient', state.answers.recipient)} gift</span>
-    <span>${labelFor('occasion', state.answers.occasion)}</span>
-    <span>${labelFor('budget', state.answers.budget)}</span>
-    <span>${interestLabels}</span>
-  `;
+  resultsMeta.innerHTML = [
+    `<span>${labelFor('recipient', state.answers.recipient)} gift</span>`,
+    `<span>${labelFor('occasion', state.answers.occasion)}</span>`,
+    `<span>${interestLabels}</span>`
+  ].join('');
 };
 
 const renderResultCards = () => {
@@ -191,8 +190,8 @@ const renderResultCards = () => {
           ${interestLine}
           <p class="idea-card-why"><strong>Why this fits:</strong> ${idea.whyThisFits}</p>
           <div class="idea-card-meta">
-            <span>${idea.budgets.map(budget => labelFor('budget', budget)).join(' · ')}</span>
             <span>${idea.internalCategory.replaceAll('-', ' ')}</span>
+            <span>${idea.customizationLevel} customization</span>
           </div>
           <button
             type="button"
@@ -220,7 +219,8 @@ const syncLeadArea = () => {
 };
 
 const applyRecommendations = () => {
-  state.recommendations = recommendIdeas(state.answers, 4);
+  const desiredCount = state.answers.interests.length >= 3 ? 5 : 4;
+  state.recommendations = recommendIdeas(state.answers, desiredCount);
   state.favorites = state.recommendations.length ? [state.recommendations[0].id] : [];
 
   renderResultsMeta();
