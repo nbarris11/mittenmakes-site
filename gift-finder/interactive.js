@@ -146,21 +146,27 @@
   ];
 
   const IDEA_ARTWORK_RULES = [
-    { className: 'art-dragon', icon: '🐉', label: 'Fantasy creature concept', match: idea => idea.tags.includes('dragon') || idea.tags.includes('fantasy') },
-    { className: 'art-dino', icon: '🦖', label: 'Dino-friendly print idea', match: idea => idea.tags.includes('dino') },
-    { className: 'art-fidget', icon: '✨', label: 'Tactile fidget direction', match: idea => idea.tags.includes('fidget') || idea.tags.includes('sensory') || idea.tags.includes('clicker') },
-    { className: 'art-bookmark', icon: '📚', label: 'Reading-themed extra', match: idea => idea.tags.includes('bookmark') },
-    { className: 'art-photo', icon: '🖼️', label: 'Photo-based keepsake', match: idea => idea.tags.includes('photo-gift') || idea.tags.includes('lithophane') },
-    { className: 'art-sign', icon: '✏️', label: 'Personalized display idea', match: idea => idea.tags.includes('name-sign') || idea.tags.includes('name-plate') || idea.tags.includes('personalized') },
-    { className: 'art-desk', icon: '🗂️', label: 'Desk-ready print idea', match: idea => idea.tags.includes('desk') || idea.tags.includes('office') || idea.tags.includes('organizer') || idea.tags.includes('tray') },
-    { className: 'art-keychain', icon: '🔑', label: 'Clip-on gift idea', match: idea => idea.tags.includes('keychain') || idea.tags.includes('bag-tag') },
-    { className: 'art-space', icon: '🚀', label: 'Space or science pick', match: idea => idea.tags.includes('space') || idea.tags.includes('science') || idea.tags.includes('rocket') || idea.tags.includes('moon') },
-    { className: 'art-sports', icon: '🏅', label: 'Sports-themed concept', match: idea => idea.tags.includes('sports') },
-    { className: 'art-music', icon: '🎵', label: 'Music-inspired idea', match: idea => idea.tags.includes('music') || idea.tags.includes('note') },
-    { className: 'art-spooky', icon: '🕸️', label: 'Moody collectible vibe', match: idea => idea.tags.includes('spooky') || idea.tags.includes('goth') },
-    { className: 'art-bundle', icon: '🎉', label: 'Set or bundle direction', match: idea => idea.tags.includes('bundle-friendly') || idea.tags.includes('tokens') },
-    { className: 'art-animal', icon: '🐾', label: 'Creature gift direction', match: idea => idea.tags.includes('animal') || idea.tags.includes('creature') }
+    { key: 'art-dragon', src: '/assets/gift-finder/art-dragon.png', label: 'Fantasy creature concept', match: idea => idea.tags.includes('dragon') || idea.tags.includes('fantasy') },
+    { key: 'art-dino', src: '/assets/gift-finder/art-dino.png', label: 'Dino-friendly print idea', match: idea => idea.tags.includes('dino') },
+    { key: 'art-fidget', src: '/assets/gift-finder/art-fidget.png', label: 'Tactile fidget direction', match: idea => idea.tags.includes('fidget') || idea.tags.includes('sensory') || idea.tags.includes('clicker') },
+    { key: 'art-bookmark', src: '/assets/gift-finder/art-bookmark.png', label: 'Reading-themed extra', match: idea => idea.tags.includes('bookmark') },
+    { key: 'art-photo', src: '/assets/gift-finder/art-photo.png', label: 'Photo-based keepsake', match: idea => idea.tags.includes('photo-gift') || idea.tags.includes('lithophane') },
+    { key: 'art-sign', src: '/assets/gift-finder/art-sign.png', label: 'Personalized display idea', match: idea => idea.tags.includes('name-sign') || idea.tags.includes('name-plate') || idea.tags.includes('personalized') },
+    { key: 'art-desk', src: '/assets/gift-finder/art-desk.png', label: 'Desk-ready print idea', match: idea => idea.tags.includes('desk') || idea.tags.includes('office') || idea.tags.includes('organizer') || idea.tags.includes('tray') },
+    { key: 'art-keychain', src: '/assets/gift-finder/art-keychain.png', label: 'Clip-on gift idea', match: idea => idea.tags.includes('keychain') || idea.tags.includes('bag-tag') },
+    { key: 'art-space', src: '/assets/gift-finder/art-space.png', label: 'Space or science pick', match: idea => idea.tags.includes('space') || idea.tags.includes('science') || idea.tags.includes('rocket') || idea.tags.includes('moon') },
+    { key: 'art-sports', src: '/assets/gift-finder/art-sports.png', label: 'Sports-themed concept', match: idea => idea.tags.includes('sports') },
+    { key: 'art-music', src: '/assets/gift-finder/art-music.png', label: 'Music-inspired idea', match: idea => idea.tags.includes('music') || idea.tags.includes('note') },
+    { key: 'art-spooky', src: '/assets/gift-finder/art-spooky.png', label: 'Moody collectible vibe', match: idea => idea.tags.includes('spooky') || idea.tags.includes('goth') },
+    { key: 'art-bundle', src: '/assets/gift-finder/art-bundle.png', label: 'Set or bundle direction', match: idea => idea.tags.includes('bundle-friendly') || idea.tags.includes('tokens') },
+    { key: 'art-animal', src: '/assets/gift-finder/art-animal.png', label: 'Creature gift direction', match: idea => idea.tags.includes('animal') || idea.tags.includes('creature') }
   ];
+
+  const DEFAULT_ARTWORK = {
+    key: 'art-default',
+    src: '/assets/gift-finder/art-default.png',
+    label: 'Made-to-order print idea'
+  };
 
   const IDEA_TAG_LABELS = {
     dragon: 'dragon',
@@ -317,172 +323,13 @@
 
   const getIdeaArtwork = idea => {
     const match = IDEA_ARTWORK_RULES.find(rule => rule.match(idea));
-    const className = match ? match.className : 'art-default';
     const tokens = idea.tags
       .map(tag => IDEA_TAG_LABELS[tag])
       .filter(Boolean)
       .filter((tag, index, tags) => tags.indexOf(tag) === index)
       .slice(0, 3);
-    const label = match ? match.label : 'Made-to-order print idea';
-    return { className, label, tokens };
-  };
-
-  const renderArtworkScene = artwork => {
-    const note = '<span class="idea-card-scene-note">Concept render</span>';
-
-    switch (artwork.className) {
-      case 'art-dragon':
-        return (
-          '<div class="idea-card-scene scene-dragon">' +
-            '<span class="scene-drift scene-drift-one"></span>' +
-            '<span class="scene-drift scene-drift-two"></span>' +
-            '<span class="scene-dragon-coil scene-print"></span>' +
-            '<span class="scene-dragon-head scene-print"></span>' +
-            '<span class="scene-dragon-crystal scene-print-alt"></span>' +
-            note +
-          '</div>'
-        );
-      case 'art-dino':
-        return (
-          '<div class="idea-card-scene scene-dino">' +
-            '<span class="scene-dino-body scene-print"></span>' +
-            '<span class="scene-dino-neck scene-print"></span>' +
-            '<span class="scene-dino-head scene-print"></span>' +
-            '<span class="scene-dino-eye"></span>' +
-            '<span class="scene-dino-arm scene-print-alt"></span>' +
-            '<span class="scene-dino-tail scene-print-alt"></span>' +
-            '<span class="scene-dino-egg scene-print-soft"></span>' +
-            note +
-          '</div>'
-        );
-      case 'art-fidget':
-        return (
-          '<div class="idea-card-scene scene-fidget">' +
-            '<span class="scene-fidget-piece scene-fidget-piece-a scene-print"></span>' +
-            '<span class="scene-fidget-piece scene-fidget-piece-b scene-print-alt"></span>' +
-            '<span class="scene-fidget-piece scene-fidget-piece-c scene-print-soft"></span>' +
-            '<span class="scene-fidget-button scene-fidget-button-a"></span>' +
-            '<span class="scene-fidget-button scene-fidget-button-b"></span>' +
-            '<span class="scene-fidget-cube scene-print"></span>' +
-            note +
-          '</div>'
-        );
-      case 'art-bookmark':
-        return (
-          '<div class="idea-card-scene scene-bookmark">' +
-            '<span class="scene-bookmark-strip scene-bookmark-strip-a scene-print"></span>' +
-            '<span class="scene-bookmark-strip scene-bookmark-strip-b scene-print-alt"></span>' +
-            '<span class="scene-bookmark-strip scene-bookmark-strip-c scene-print-soft"></span>' +
-            note +
-          '</div>'
-        );
-      case 'art-photo':
-        return (
-          '<div class="idea-card-scene scene-photo">' +
-            '<span class="scene-photo-frame scene-print-soft"></span>' +
-            '<span class="scene-photo-image"></span>' +
-            '<span class="scene-photo-base scene-print"></span>' +
-            '<span class="scene-photo-glow"></span>' +
-            note +
-          '</div>'
-        );
-      case 'art-sign':
-        return (
-          '<div class="idea-card-scene scene-sign">' +
-            '<span class="scene-sign-word scene-print">Oliver</span>' +
-            '<span class="scene-key-tag scene-key-tag-a scene-print-soft">MIA</span>' +
-            '<span class="scene-key-tag scene-key-tag-b scene-print-alt">LEO</span>' +
-            note +
-          '</div>'
-        );
-      case 'art-desk':
-        return (
-          '<div class="idea-card-scene scene-desk">' +
-            '<span class="scene-vase scene-vase-a scene-print"></span>' +
-            '<span class="scene-vase scene-vase-b scene-print-soft"></span>' +
-            '<span class="scene-vase scene-vase-c scene-print-alt"></span>' +
-            '<span class="scene-vase scene-vase-d scene-print"></span>' +
-            note +
-          '</div>'
-        );
-      case 'art-keychain':
-        return (
-          '<div class="idea-card-scene scene-keychain">' +
-            '<span class="scene-keychain-ring scene-metal"></span>' +
-            '<span class="scene-keychain-tag scene-print"></span>' +
-            '<span class="scene-keychain-secondary scene-print-soft"></span>' +
-            note +
-          '</div>'
-        );
-      case 'art-space':
-        return (
-          '<div class="idea-card-scene scene-space">' +
-            '<span class="scene-space-moon scene-print-soft"></span>' +
-            '<span class="scene-space-rocket scene-print"></span>' +
-            '<span class="scene-space-fin scene-print-alt"></span>' +
-            '<span class="scene-space-star scene-space-star-a"></span>' +
-            '<span class="scene-space-star scene-space-star-b"></span>' +
-            note +
-          '</div>'
-        );
-      case 'art-sports':
-        return (
-          '<div class="idea-card-scene scene-sports">' +
-            '<span class="scene-sports-tag scene-print"></span>' +
-            '<span class="scene-sports-ball scene-print-soft"></span>' +
-            '<span class="scene-sports-token scene-print-alt"></span>' +
-            note +
-          '</div>'
-        );
-      case 'art-music':
-        return (
-          '<div class="idea-card-scene scene-music">' +
-            '<span class="scene-music-note scene-print"></span>' +
-            '<span class="scene-music-note-head scene-print"></span>' +
-            '<span class="scene-music-bookmark scene-print-soft"></span>' +
-            note +
-          '</div>'
-        );
-      case 'art-spooky':
-        return (
-          '<div class="idea-card-scene scene-spooky">' +
-            '<span class="scene-spooky-moon scene-print-soft"></span>' +
-            '<span class="scene-spooky-mushroom-cap scene-print"></span>' +
-            '<span class="scene-spooky-mushroom-stem scene-print-soft"></span>' +
-            '<span class="scene-spooky-creature scene-print-alt"></span>' +
-            note +
-          '</div>'
-        );
-      case 'art-bundle':
-        return (
-          '<div class="idea-card-scene scene-bundle">' +
-            '<span class="scene-bundle-piece scene-bundle-piece-a scene-print"></span>' +
-            '<span class="scene-bundle-piece scene-bundle-piece-b scene-print-soft"></span>' +
-            '<span class="scene-bundle-piece scene-bundle-piece-c scene-print-alt"></span>' +
-            '<span class="scene-bundle-piece scene-bundle-piece-d scene-print"></span>' +
-            note +
-          '</div>'
-        );
-      case 'art-animal':
-        return (
-          '<div class="idea-card-scene scene-animal">' +
-            '<span class="scene-animal-body scene-print"></span>' +
-            '<span class="scene-animal-head scene-print"></span>' +
-            '<span class="scene-animal-ear scene-print-soft"></span>' +
-            '<span class="scene-animal-tail scene-print-alt"></span>' +
-            note +
-          '</div>'
-        );
-      default:
-        return (
-          '<div class="idea-card-scene scene-default">' +
-            '<span class="scene-default-piece scene-default-piece-a scene-print"></span>' +
-            '<span class="scene-default-piece scene-default-piece-b scene-print-soft"></span>' +
-            '<span class="scene-default-piece scene-default-piece-c scene-print-alt"></span>' +
-            note +
-          '</div>'
-        );
-    }
+    const artwork = match || DEFAULT_ARTWORK;
+    return { key: artwork.key, src: artwork.src, label: artwork.label, tokens };
   };
 
   const buildAnswersSummary = answers => [
@@ -547,8 +394,8 @@
         '<article class="idea-card">' +
           '<div class="idea-card-visual">' +
             '<p class="idea-card-type">Print idea</p>' +
-            '<div class="idea-card-placeholder ' + artwork.className + '">' +
-              renderArtworkScene(artwork) +
+            '<div class="idea-card-placeholder idea-card-photo">' +
+              '<img src="' + artwork.src + '" alt="' + idea.name + ' concept image" loading="lazy">' +
             '</div>' +
             '<div class="idea-card-art-copy">' +
               '<span class="idea-card-art-label">' + artwork.label + '</span>' +

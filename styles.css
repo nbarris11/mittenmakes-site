@@ -925,6 +925,23 @@ a:hover { color: var(--accent-hover); }
   background: rgba(255, 255, 255, 0.28);
 }
 
+.idea-card-photo {
+  background: #f7efe6;
+}
+
+.idea-card-photo::before,
+.idea-card-photo::after {
+  display: none;
+}
+
+.idea-card-photo img {
+  display: block;
+  width: 100%;
+  min-height: 188px;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+}
+
 .idea-card-scene,
 .idea-card-art-copy,
 .idea-card-art-label,
