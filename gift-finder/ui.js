@@ -422,7 +422,8 @@ const clearFinder = () => {
 };
 
 quizFields.addEventListener('click', event => {
-  const target = event.target instanceof Element ? event.target : null;
+  const rawTarget = event.target;
+  const target = rawTarget instanceof Element ? rawTarget : rawTarget?.parentElement;
   const button = target?.closest('[data-question-id]');
   if (!button) return;
 
@@ -465,7 +466,9 @@ quizForm.addEventListener('reset', event => {
 });
 
 resultsGrid.addEventListener('click', event => {
-  const button = event.target.closest('[data-favorite-idea]');
+  const rawTarget = event.target;
+  const target = rawTarget instanceof Element ? rawTarget : rawTarget?.parentElement;
+  const button = target?.closest('[data-favorite-idea]');
   if (!button) return;
 
   const { favoriteIdea } = button.dataset;
