@@ -70,7 +70,82 @@
                 <div class="gift-finder-success" data-gift-finder-success hidden></div>
 
                 <form class="gift-finder-quiz-card" data-gift-finder-quiz>
-                    <div class="gift-finder-quiz-grid" data-gift-finder-fields></div>
+                    <div class="gift-finder-quiz-grid" data-gift-finder-fields>
+                        <section class="gift-finder-question" data-question="recipient">
+                            <div class="gift-finder-question-head">
+                                <h3>Who is it for?</h3>
+                                <p>Pick the closest fit so the ideas feel more tailored.</p>
+                            </div>
+                            <div class="gift-choice-group" role="group" aria-label="Who is it for?">
+                                <button type="button" class="gift-choice-chip" data-question-id="recipient" data-value="kid" aria-pressed="false">Kid</button>
+                                <button type="button" class="gift-choice-chip" data-question-id="recipient" data-value="teen" aria-pressed="false">Teen</button>
+                                <button type="button" class="gift-choice-chip" data-question-id="recipient" data-value="adult" aria-pressed="false">Adult</button>
+                                <button type="button" class="gift-choice-chip" data-question-id="recipient" data-value="parent" aria-pressed="false">Parent</button>
+                                <button type="button" class="gift-choice-chip" data-question-id="recipient" data-value="teacher" aria-pressed="false">Teacher</button>
+                                <button type="button" class="gift-choice-chip" data-question-id="recipient" data-value="coworker" aria-pressed="false">Coworker</button>
+                                <button type="button" class="gift-choice-chip" data-question-id="recipient" data-value="friend" aria-pressed="false">Friend</button>
+                                <button type="button" class="gift-choice-chip" data-question-id="recipient" data-value="other" aria-pressed="false">Other</button>
+                            </div>
+                        </section>
+
+                        <section class="gift-finder-question" data-question="occasion">
+                            <div class="gift-finder-question-head">
+                                <h3>Occasion</h3>
+                                <p>Pick the main reason you are shopping, even if it could fit more than one.</p>
+                            </div>
+                            <div class="gift-choice-group" role="group" aria-label="Occasion">
+                                <button type="button" class="gift-choice-chip" data-question-id="occasion" data-value="birthday" aria-pressed="false">Birthday</button>
+                                <button type="button" class="gift-choice-chip" data-question-id="occasion" data-value="holiday" aria-pressed="false">Holiday</button>
+                                <button type="button" class="gift-choice-chip" data-question-id="occasion" data-value="thank-you" aria-pressed="false">Thank you</button>
+                                <button type="button" class="gift-choice-chip" data-question-id="occasion" data-value="party-favor" aria-pressed="false">Party favor</button>
+                                <button type="button" class="gift-choice-chip" data-question-id="occasion" data-value="classroom-prize" aria-pressed="false">Classroom/prize</button>
+                                <button type="button" class="gift-choice-chip" data-question-id="occasion" data-value="desk-toy" aria-pressed="false">Desk toy</button>
+                                <button type="button" class="gift-choice-chip" data-question-id="occasion" data-value="just-because" aria-pressed="false">Just because</button>
+                                <button type="button" class="gift-choice-chip" data-question-id="occasion" data-value="custom-gift" aria-pressed="false">Custom gift</button>
+                            </div>
+                        </section>
+
+                        <section class="gift-finder-question gift-finder-question-wide" data-question="interests">
+                            <div class="gift-finder-question-head">
+                                <h3>Interests</h3>
+                                <p>Pick as many as fit. The results will blend them together.</p>
+                            </div>
+                            <div class="gift-choice-group" role="group" aria-label="Interests">
+                                <button type="button" class="gift-choice-chip gift-choice-chip-soft" data-question-id="interests" data-value="dinosaurs" aria-pressed="false">Dinosaurs</button>
+                                <button type="button" class="gift-choice-chip gift-choice-chip-soft" data-question-id="interests" data-value="dragons" aria-pressed="false">Dragons</button>
+                                <button type="button" class="gift-choice-chip gift-choice-chip-soft" data-question-id="interests" data-value="animals" aria-pressed="false">Animals</button>
+                                <button type="button" class="gift-choice-chip gift-choice-chip-soft" data-question-id="interests" data-value="pets" aria-pressed="false">Pets</button>
+                                <button type="button" class="gift-choice-chip gift-choice-chip-soft" data-question-id="interests" data-value="space-science" aria-pressed="false">Space/science</button>
+                                <button type="button" class="gift-choice-chip gift-choice-chip-soft" data-question-id="interests" data-value="bugs-nature" aria-pressed="false">Bugs/nature</button>
+                                <button type="button" class="gift-choice-chip gift-choice-chip-soft" data-question-id="interests" data-value="sports" aria-pressed="false">Sports</button>
+                                <button type="button" class="gift-choice-chip gift-choice-chip-soft" data-question-id="interests" data-value="fidgets" aria-pressed="false">Fidgets</button>
+                                <button type="button" class="gift-choice-chip gift-choice-chip-soft" data-question-id="interests" data-value="sensory-items" aria-pressed="false">Sensory items</button>
+                                <button type="button" class="gift-choice-chip gift-choice-chip-soft" data-question-id="interests" data-value="desk-accessories" aria-pressed="false">Desk accessories</button>
+                                <button type="button" class="gift-choice-chip gift-choice-chip-soft" data-question-id="interests" data-value="cute-decor" aria-pressed="false">Cute decor</button>
+                                <button type="button" class="gift-choice-chip gift-choice-chip-soft" data-question-id="interests" data-value="fantasy" aria-pressed="false">Fantasy</button>
+                                <button type="button" class="gift-choice-chip gift-choice-chip-soft" data-question-id="interests" data-value="personalized-items" aria-pressed="false">Personalized items</button>
+                                <button type="button" class="gift-choice-chip gift-choice-chip-soft" data-question-id="interests" data-value="video-games" aria-pressed="false">Video games</button>
+                                <button type="button" class="gift-choice-chip gift-choice-chip-soft" data-question-id="interests" data-value="books-reading" aria-pressed="false">Books/reading</button>
+                                <button type="button" class="gift-choice-chip gift-choice-chip-soft" data-question-id="interests" data-value="office-workspace" aria-pressed="false">Office/workspace</button>
+                                <button type="button" class="gift-choice-chip gift-choice-chip-soft" data-question-id="interests" data-value="school-classroom" aria-pressed="false">School/classroom</button>
+                                <button type="button" class="gift-choice-chip gift-choice-chip-soft" data-question-id="interests" data-value="art-design" aria-pressed="false">Art/design</button>
+                                <button type="button" class="gift-choice-chip gift-choice-chip-soft" data-question-id="interests" data-value="music" aria-pressed="false">Music</button>
+                                <button type="button" class="gift-choice-chip gift-choice-chip-soft" data-question-id="interests" data-value="travel" aria-pressed="false">Travel</button>
+                                <button type="button" class="gift-choice-chip gift-choice-chip-soft" data-question-id="interests" data-value="spooky-goth" aria-pressed="false">Spooky/goth</button>
+                            </div>
+                        </section>
+
+                        <label class="gift-finder-question gift-finder-question-wide" data-question="extraLikes">
+                            <span class="gift-finder-question-title">Anything else they like?</span>
+                            <textarea
+                                class="gift-finder-textarea"
+                                name="extraLikes"
+                                rows="3"
+                                placeholder="Favorite colors, themes, hobbies, inside jokes, room style, team, etc."
+                            ></textarea>
+                            <small>Optional, but helpful when the best idea is more custom than obvious.</small>
+                        </label>
+                    </div>
                     <p class="gift-finder-message" data-gift-finder-message hidden></p>
                     <div class="gift-finder-quiz-actions">
                         <button type="submit" class="btn btn-primary">Show my print ideas</button>
@@ -200,6 +275,6 @@
         btt.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 
     </script>
-    <script type="module" src="gift-finder/ui.js?v=20260402b"></script>
+    <script type="module" src="gift-finder/ui.js?v=20260402c"></script>
 </body>
 </html>
