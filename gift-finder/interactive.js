@@ -168,6 +168,94 @@
     label: 'Made-to-order print idea'
   };
 
+  const IDEA_ARTWORK_OVERRIDES = {
+    'teacher-desk-name-plate': {
+      key: 'idea-teacher-name-plate',
+      src: '/assets/gift-finder/idea-teacher-name-plate.png',
+      label: 'Teacher desk gift idea'
+    },
+    'personalized-kids-name-sign': {
+      key: 'idea-kids-name-sign',
+      src: '/assets/gift-finder/idea-kids-name-sign.png',
+      label: 'Kids room name sign idea'
+    },
+    'custom-shelf-name-display': {
+      key: 'idea-shelf-name-display',
+      src: '/assets/gift-finder/idea-shelf-name-display.png',
+      label: 'Shelf-ready personalized display'
+    },
+    'personalized-bag-tag': {
+      key: 'idea-bag-tag-travel',
+      src: '/assets/gift-finder/idea-bag-tag-travel.png',
+      label: 'Travel-friendly bag tag idea'
+    },
+    'modular-pencil-cup-organizer': {
+      key: 'idea-modular-organizer',
+      src: '/assets/gift-finder/idea-modular-organizer.png',
+      label: 'Modular organizer concept'
+    },
+    'desktop-catchall-tray': {
+      key: 'idea-catchall-tray',
+      src: '/assets/gift-finder/idea-catchall-tray.png',
+      label: 'Desk catchall gift idea'
+    },
+    'gamer-desk-accessory': {
+      key: 'idea-gamer-desk',
+      src: '/assets/gift-finder/idea-gamer-desk.png',
+      label: 'Gaming desk setup idea'
+    },
+    'classroom-reward-token-set': {
+      key: 'idea-classroom-tokens',
+      src: '/assets/gift-finder/idea-classroom-tokens.png',
+      label: 'Classroom reward set idea'
+    },
+    'science-token-mini-set': {
+      key: 'idea-classroom-tokens',
+      src: '/assets/gift-finder/idea-classroom-tokens.png',
+      label: 'Science reward set idea'
+    },
+    'office-cable-buddy': {
+      key: 'idea-office-cable-buddy',
+      src: '/assets/gift-finder/idea-office-cable-buddy.png',
+      label: 'Desk cable helper idea'
+    },
+    'funny-desk-decor-creature': {
+      key: 'idea-funny-desk-creature',
+      src: '/assets/gift-finder/idea-funny-desk-creature.png',
+      label: 'Funny desk decor idea'
+    },
+    'rocket-desk-buddy': {
+      key: 'idea-rocket-space-gift',
+      src: '/assets/gift-finder/idea-rocket-space-gift.png',
+      label: 'Space-themed gift concept'
+    },
+    'pet-name-bag-tag': {
+      key: 'idea-pet-name-tag',
+      src: '/assets/gift-finder/idea-pet-name-tag.png',
+      label: 'Pet lover tag idea'
+    },
+    'pattern-play-bookmark-set': {
+      key: 'idea-pattern-bookmarks',
+      src: '/assets/gift-finder/idea-pattern-bookmarks.png',
+      label: 'Art-forward bookmark set'
+    },
+    'spooky-shelf-creature': {
+      key: 'idea-spooky-creature',
+      src: '/assets/gift-finder/idea-spooky-creature.png',
+      label: 'Spooky collectible idea'
+    },
+    'mini-creature-prize-bundle': {
+      key: 'idea-mini-creature-bundle',
+      src: '/assets/gift-finder/idea-mini-creature-bundle.png',
+      label: 'Mini bundle gift set'
+    },
+    'sports-locker-bag-tag': {
+      key: 'idea-bag-tag-travel',
+      src: '/assets/gift-finder/idea-bag-tag-travel.png',
+      label: 'Sports bag tag idea'
+    }
+  };
+
   const IDEA_TAG_LABELS = {
     dragon: 'dragon',
     fantasy: 'fantasy',
@@ -322,6 +410,16 @@
   };
 
   const getIdeaArtwork = idea => {
+    const directArtwork = IDEA_ARTWORK_OVERRIDES[idea.id];
+    if (directArtwork) {
+      const tokens = idea.tags
+        .map(tag => IDEA_TAG_LABELS[tag])
+        .filter(Boolean)
+        .filter((tag, index, tags) => tags.indexOf(tag) === index)
+        .slice(0, 3);
+      return { key: directArtwork.key, src: directArtwork.src, label: directArtwork.label, tokens };
+    }
+
     const match = IDEA_ARTWORK_RULES.find(rule => rule.match(idea));
     const tokens = idea.tags
       .map(tag => IDEA_TAG_LABELS[tag])
