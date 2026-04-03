@@ -7,7 +7,7 @@
   const featuredActions = document.querySelector('.featured-gift-copy .order-actions');
   let cartToastTimeout;
 
-  const response = await fetch('checkout-products.json?v=20260403d');
+  const response = await fetch('checkout-products.json?v=20260403e');
   if (!response.ok) return;
 
   const checkoutConfig = await response.json();

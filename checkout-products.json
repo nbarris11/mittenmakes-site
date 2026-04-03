@@ -39,48 +39,48 @@
     {
       "id": "dual-color-star-fidget",
       "name": "Dual-Color Star Fidget",
-      "priceCents": 1200,
-      "priceLabel": "$12.00",
+      "priceCents": 1300,
+      "priceLabel": "$13.00",
       "image": "assets/geometric-spinner-gradient.png?v=20260330k",
       "description": "Standard ready-to-order version."
     },
     {
       "id": "tiny-t-rex",
       "name": "Tiny T-Rex",
-      "priceCents": 1200,
-      "priceLabel": "$12.00",
+      "priceCents": 1000,
+      "priceLabel": "$10.00",
       "image": "assets/tiny-t-rex-cinderwing.png?v=20260401b",
       "description": "Standard ready-to-order version."
     },
     {
       "id": "crystal-dragon",
       "name": "Crystal Dragon",
-      "priceCents": 1200,
-      "priceLabel": "$12.00",
+      "priceCents": 1500,
+      "priceLabel": "$15.00",
       "image": "assets/crystal-dragon-cinderwing.png?v=20260401b",
       "description": "Standard ready-to-order version."
     },
     {
       "id": "bone-dragon",
       "name": "Bone Dragon",
-      "priceCents": 1400,
-      "priceLabel": "$14.00",
+      "priceCents": 1500,
+      "priceLabel": "$15.00",
       "image": "assets/bone-dragon.jpg?v=20260331c",
       "description": "Standard ready-to-order version."
     },
     {
       "id": "water-dragon",
       "name": "Water Dragon",
-      "priceCents": 1400,
-      "priceLabel": "$14.00",
+      "priceCents": 1500,
+      "priceLabel": "$15.00",
       "image": "assets/water-dragon.jpg?v=20260331f",
       "description": "Standard ready-to-order version."
     },
     {
       "id": "void-octopus",
       "name": "Void Octopus",
-      "priceCents": 1000,
-      "priceLabel": "$10.00",
+      "priceCents": 1500,
+      "priceLabel": "$15.00",
       "image": "assets/void-octopus-cinderwing.png?v=20260403a",
       "description": "Standard ready-to-order version."
     },
@@ -119,8 +119,8 @@
     {
       "id": "flexi-playful-star",
       "name": "Flexi Playful Star",
-      "priceCents": 800,
-      "priceLabel": "$8.00",
+      "priceCents": 1300,
+      "priceLabel": "$13.00",
       "image": "assets/flexi-playful-star.png?v=20260403a",
       "description": "Standard ready-to-order version."
     },
