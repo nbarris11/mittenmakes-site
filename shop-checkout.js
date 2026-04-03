@@ -7,7 +7,7 @@
   const featuredActions = document.querySelector('.featured-gift-copy .order-actions');
   let cartToastTimeout;
 
-  const response = await fetch('checkout-products.json?v=20260403e');
+  const response = await fetch('checkout-products.json?v=20260403h');
   if (!response.ok) return;
 
   const checkoutConfig = await response.json();
@@ -41,6 +41,21 @@
 
   const getProductCustomization = productId => products.get(productId)?.customization || null;
 
+  const getCustomizationSummary = (productId, options) => {
+    const customization = getProductCustomization(productId);
+    if (!customization || !options) return '';
+
+    if (customization.kind === 'golf-ball-holder') {
+      return `${options.customWords} · ${options.primaryColor} + ${options.secondaryColor}`;
+    }
+
+    if (customization.kind === 'bookmarks') {
+      return `${options.palette} · ${options.patternStyle}`;
+    }
+
+    return '';
+  };
+
   const getFinishSummary = options => {
     if (!options?.finishStyle) return '';
     const finishStyle = finishStyleMap.get(options.finishStyle);
@@ -65,6 +80,8 @@
     if (options.customWords) segments.push(options.customWords.trim().toLowerCase());
     if (options.primaryColor) segments.push(options.primaryColor);
     if (options.secondaryColor) segments.push(options.secondaryColor);
+    if (options.palette) segments.push(options.palette);
+    if (options.patternStyle) segments.push(options.patternStyle);
     return segments.join('::');
   };
 
@@ -99,6 +116,19 @@
       }
 
       return { customWords, primaryColor, secondaryColor };
+    }
+
+    if (customization.kind === 'bookmarks') {
+      const allowedPalettes = customization.paletteOptions || [];
+      const allowedPatternStyles = customization.patternOptions || [];
+      const palette = allowedPalettes.includes(rawOptions?.palette) ? rawOptions.palette : '';
+      const patternStyle = allowedPatternStyles.includes(rawOptions?.patternStyle) ? rawOptions.patternStyle : '';
+
+      if (!palette || !patternStyle) {
+        return null;
+      }
+
+      return { palette, patternStyle };
     }
 
     return null;
@@ -273,6 +303,16 @@
           Words on the front
           <input type="text" name="customWords" maxlength="24" placeholder="Dad's League">
         </label>
+        <div class="product-option-grid" data-option-bookmark-grid hidden>
+          <label data-option-palette-wrap>
+            Color palette
+            <select name="bookmarkPalette"></select>
+          </label>
+          <label data-option-pattern-wrap>
+            Bookmark set style
+            <select name="bookmarkPattern"></select>
+          </label>
+        </div>
         <div class="product-option-grid" data-option-golf-colors hidden>
           <label data-option-primary-wrap>
             Main color
@@ -303,10 +343,13 @@
     const finishWrap = form.querySelector('[data-option-finish-wrap]');
     const solidWrap = form.querySelector('[data-option-solid-wrap]');
     const wordsWrap = form.querySelector('[data-option-words-wrap]');
+    const bookmarkGrid = form.querySelector('[data-option-bookmark-grid]');
     const golfColorsWrap = form.querySelector('[data-option-golf-colors]');
     const finishSelect = form.elements.finishStyle;
     const solidSelect = form.elements.solidColor;
     const wordsInput = form.elements.customWords;
+    const paletteSelect = form.elements.bookmarkPalette;
+    const patternSelect = form.elements.bookmarkPattern;
     const primarySelect = form.elements.primaryColor;
     const secondarySelect = form.elements.secondaryColor;
     const errorNode = form.querySelector('[data-option-error]');
@@ -320,6 +363,12 @@
       .join('');
     const golfColorMarkup = ['<option value="">Choose a color</option>']
       .concat(((customization?.colorOptions) || []).map(color => `<option value="${escapeHtml(color)}">${escapeHtml(color)}</option>`))
+      .join('');
+    const bookmarkPaletteMarkup = ['<option value="">Choose a palette</option>']
+      .concat(((customization?.paletteOptions) || []).map(option => `<option value="${escapeHtml(option)}">${escapeHtml(option)}</option>`))
+      .join('');
+    const bookmarkPatternMarkup = ['<option value="">Choose a style</option>']
+      .concat(((customization?.patternOptions) || []).map(option => `<option value="${escapeHtml(option)}">${escapeHtml(option)}</option>`))
       .join('');
 
     const toggleFinishFields = () => {
@@ -336,11 +385,15 @@
     solidSelect.innerHTML = solidMarkup;
     primarySelect.innerHTML = golfColorMarkup;
     secondarySelect.innerHTML = golfColorMarkup;
+    paletteSelect.innerHTML = bookmarkPaletteMarkup;
+    patternSelect.innerHTML = bookmarkPatternMarkup;
     wordsInput.value = '';
     finishSelect.value = '';
     solidSelect.value = '';
     primarySelect.value = '';
     secondarySelect.value = '';
+    paletteSelect.value = '';
+    patternSelect.value = '';
 
     if (customization?.kind === 'golf-ball-holder') {
       titleNode.textContent = 'Customize your golf ball holder';
@@ -348,11 +401,16 @@
       finishWrap.hidden = true;
       solidWrap.hidden = true;
       wordsWrap.hidden = false;
+      bookmarkGrid.hidden = true;
       golfColorsWrap.hidden = false;
       finishSelect.disabled = true;
       solidSelect.disabled = true;
       wordsInput.required = true;
       wordsInput.disabled = false;
+      paletteSelect.required = false;
+      paletteSelect.disabled = true;
+      patternSelect.required = false;
+      patternSelect.disabled = true;
       primarySelect.required = true;
       primarySelect.disabled = false;
       secondarySelect.required = true;
@@ -361,18 +419,54 @@
       solidSelect.required = false;
       finishSelect.value = '';
       solidSelect.value = '';
+      paletteSelect.value = '';
+      patternSelect.value = '';
+    } else if (customization?.kind === 'bookmarks') {
+      titleNode.textContent = 'Customize your bookmark set';
+      descriptionNode.textContent = 'Pick the overall palette and whether you want mixed or matching patterns in the set.';
+      finishWrap.hidden = true;
+      solidWrap.hidden = true;
+      wordsWrap.hidden = true;
+      bookmarkGrid.hidden = false;
+      golfColorsWrap.hidden = true;
+      finishSelect.disabled = true;
+      solidSelect.disabled = true;
+      wordsInput.disabled = true;
+      primarySelect.disabled = true;
+      secondarySelect.disabled = true;
+      wordsInput.required = false;
+      primarySelect.required = false;
+      secondarySelect.required = false;
+      paletteSelect.required = true;
+      paletteSelect.disabled = false;
+      patternSelect.required = true;
+      patternSelect.disabled = false;
+      finishSelect.required = false;
+      solidSelect.required = false;
+      finishSelect.value = '';
+      solidSelect.value = '';
+      wordsInput.value = '';
+      primarySelect.value = '';
+      secondarySelect.value = '';
+      paletteSelect.value = '';
+      patternSelect.value = '';
     } else {
       titleNode.textContent = 'Pick your finish';
       descriptionNode.textContent = 'Choose a simple solid color, pick Surprise me, or upgrade to a silk or rainbow finish for $2 more.';
       finishWrap.hidden = false;
       solidWrap.hidden = false;
       wordsWrap.hidden = true;
+      bookmarkGrid.hidden = true;
       golfColorsWrap.hidden = true;
       finishSelect.disabled = false;
       wordsInput.disabled = true;
+      paletteSelect.disabled = true;
+      patternSelect.disabled = true;
       primarySelect.disabled = true;
       secondarySelect.disabled = true;
       wordsInput.required = false;
+      paletteSelect.required = false;
+      patternSelect.required = false;
       primarySelect.required = false;
       secondarySelect.required = false;
       finishSelect.required = true;
@@ -381,10 +475,12 @@
       wordsInput.value = '';
       primarySelect.value = '';
       secondarySelect.value = '';
+      paletteSelect.value = '';
+      patternSelect.value = '';
       toggleFinishFields();
     }
 
-    finishSelect.value = customization?.kind === 'golf-ball-holder' ? finishSelect.value : 'solid';
+    finishSelect.value = customization?.kind === 'golf-ball-holder' || customization?.kind === 'bookmarks' ? finishSelect.value : 'solid';
     errorNode.hidden = true;
     errorNode.textContent = '';
 
@@ -411,6 +507,11 @@
               primaryColor: primarySelect.value,
               secondaryColor: secondarySelect.value
             })
+          : customization?.kind === 'bookmarks'
+            ? normalizeOptions(productId, {
+                palette: paletteSelect.value,
+                patternStyle: patternSelect.value
+              })
           : normalizeOptions(productId, {
               finishStyle: finishSelect.value,
               solidColor: solidSelect.value
@@ -419,6 +520,8 @@
         if (!options) {
           errorNode.textContent = customization?.kind === 'golf-ball-holder'
             ? 'Add the words and choose two different colors before continuing.'
+            : customization?.kind === 'bookmarks'
+              ? 'Choose a color palette and a bookmark set style before continuing.'
             : 'Choose a finish style, and if you picked solid color, choose the exact color too.';
           errorNode.hidden = false;
           return;
@@ -432,7 +535,13 @@
       dialog.addEventListener('cancel', handleCancel);
       finishSelect.addEventListener('change', toggleFinishFields);
       dialog.showModal();
-      (customization?.kind === 'golf-ball-holder' ? wordsInput : finishSelect).focus();
+      (
+        customization?.kind === 'golf-ball-holder'
+          ? wordsInput
+          : customization?.kind === 'bookmarks'
+            ? paletteSelect
+            : finishSelect
+      ).focus();
     });
   };
 
@@ -529,6 +638,7 @@
         ? `
           ${item.options.customWords ? `<span class="checkout-cart-item-meta">Words: ${escapeHtml(item.options.customWords)}</span>` : ''}
           ${item.options.primaryColor ? `<span class="checkout-cart-item-meta">Colors: ${escapeHtml(item.options.primaryColor)} + ${escapeHtml(item.options.secondaryColor)}</span>` : ''}
+          ${item.options.palette ? `<span class="checkout-cart-item-meta">Bookmark set: ${escapeHtml(getCustomizationSummary(item.id, item.options))}</span>` : ''}
           ${finishStyle ? `<span class="checkout-cart-item-meta">Finish: ${escapeHtml(getFinishSummary(item.options))}${finishStyle.priceDeltaCents ? ` (+${formatCurrency(finishStyle.priceDeltaCents)})` : ''}</span>` : ''}
         `
         : '';

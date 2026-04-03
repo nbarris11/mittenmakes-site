@@ -146,7 +146,24 @@
       "priceCents": 1000,
       "priceLabel": "$10.00",
       "image": "assets/bookmarks-3-pack.png?v=20260331j",
-      "description": "Standard ready-to-order version."
+      "description": "Choose a palette and pattern style for your set of three.",
+      "customization": {
+        "kind": "bookmarks",
+        "paletteLabel": "Color palette",
+        "paletteOptions": [
+          "Classic contrast",
+          "Pastel mix",
+          "Bold bright mix",
+          "Earth tones",
+          "Surprise me"
+        ],
+        "patternLabel": "Bookmark set style",
+        "patternOptions": [
+          "Mixed patterns like the photo",
+          "All one pattern",
+          "Surprise me"
+        ]
+      }
     },
     {
       "id": "custom-golf-ball-holder",

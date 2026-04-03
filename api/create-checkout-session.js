@@ -25,6 +25,19 @@ const normalizeOptions = (product, rawOptions = null) => {
     return { customWords, primaryColor, secondaryColor };
   }
 
+  if (customization.kind === 'bookmarks') {
+    const allowedPalettes = customization.paletteOptions || [];
+    const allowedPatternStyles = customization.patternOptions || [];
+    const palette = allowedPalettes.includes(rawOptions?.palette) ? rawOptions.palette : '';
+    const patternStyle = allowedPatternStyles.includes(rawOptions?.patternStyle) ? rawOptions.patternStyle : '';
+
+    if (!palette || !patternStyle) {
+      return null;
+    }
+
+    return { palette, patternStyle };
+  }
+
   return null;
 };
 
@@ -91,10 +104,16 @@ module.exports = async (req, res) => {
 
       if (product.customization) {
         if (!options) {
-          return res.status(400).json({ error: `Add the custom words and two colors for ${product.name} before checking out.` });
+          return res.status(400).json({
+            error: product.customization.kind === 'bookmarks'
+              ? `Choose a color palette and bookmark set style for ${product.name} before checking out.`
+              : `Add the custom words and two colors for ${product.name} before checking out.`
+          });
         }
 
-        optionDescription = ` Words: ${options.customWords}. Colors: ${options.primaryColor} + ${options.secondaryColor}.`;
+        optionDescription = product.customization.kind === 'bookmarks'
+          ? ` Palette: ${options.palette}. Style: ${options.patternStyle}.`
+          : ` Words: ${options.customWords}. Colors: ${options.primaryColor} + ${options.secondaryColor}.`;
       } else {
         const finishStyle = finishStyleMap.get(options?.finishStyle || 'solid');
         const noOptionsProvided = !options || Object.keys(options).length === 0;
