@@ -90,7 +90,7 @@ a:hover { color: var(--accent-hover); }
 .navbar {
   background-color: var(--bg);
   border-bottom: 1px solid var(--border);
-  padding: 0.65rem 0;
+  padding: 0.35rem 0;
   position: sticky;
   top: 0;
   z-index: 100;
@@ -115,7 +115,7 @@ a:hover { color: var(--accent-hover); }
 .nav-logo:hover { opacity: 0.85; }
 
 .nav-logo-img {
-  width: 152px;
+  width: 176px;
   height: auto;
   display: block;
 }
@@ -147,15 +147,15 @@ a:hover { color: var(--accent-hover); }
 }
 
 @media (max-width: 768px) {
-  .navbar { padding: 0.55rem 0; }
-  .nav-logo-img { width: 116px; }
+  .navbar { padding: 0.3rem 0; }
+  .nav-logo-img { width: 136px; }
   .nav-container {
-    padding: 0 0.6rem;
+    padding: 0 0.35rem;
     align-items: flex-start;
-    gap: 0.65rem;
+    gap: 0.45rem;
   }
   .nav-logo {
-    margin-left: -0.1rem;
+    margin-left: -0.2rem;
   }
   .nav-links {
     width: 100%;
