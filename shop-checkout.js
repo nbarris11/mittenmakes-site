@@ -325,13 +325,22 @@
     const toggleFinishFields = () => {
       const isSolid = finishSelect.value === 'solid';
       solidWrap.hidden = !isSolid;
+      solidSelect.disabled = !isSolid;
       solidSelect.required = isSolid;
+      if (!isSolid) {
+        solidSelect.value = '';
+      }
     };
 
     finishSelect.innerHTML = finishMarkup;
     solidSelect.innerHTML = solidMarkup;
     primarySelect.innerHTML = golfColorMarkup;
     secondarySelect.innerHTML = golfColorMarkup;
+    wordsInput.value = '';
+    finishSelect.value = '';
+    solidSelect.value = '';
+    primarySelect.value = '';
+    secondarySelect.value = '';
 
     if (customization?.kind === 'golf-ball-holder') {
       titleNode.textContent = 'Customize your golf ball holder';
@@ -340,11 +349,18 @@
       solidWrap.hidden = true;
       wordsWrap.hidden = false;
       golfColorsWrap.hidden = false;
+      finishSelect.disabled = true;
+      solidSelect.disabled = true;
       wordsInput.required = true;
+      wordsInput.disabled = false;
       primarySelect.required = true;
+      primarySelect.disabled = false;
       secondarySelect.required = true;
+      secondarySelect.disabled = false;
       finishSelect.required = false;
       solidSelect.required = false;
+      finishSelect.value = '';
+      solidSelect.value = '';
     } else {
       titleNode.textContent = 'Pick your finish';
       descriptionNode.textContent = 'Choose a simple solid color, pick Surprise me, or upgrade to a silk or rainbow finish for $2 more.';
@@ -352,21 +368,23 @@
       solidWrap.hidden = false;
       wordsWrap.hidden = true;
       golfColorsWrap.hidden = true;
+      finishSelect.disabled = false;
+      wordsInput.disabled = true;
+      primarySelect.disabled = true;
+      secondarySelect.disabled = true;
       wordsInput.required = false;
       primarySelect.required = false;
       secondarySelect.required = false;
       finishSelect.required = true;
-      solidSelect.required = true;
       finishSelect.value = 'solid';
       solidSelect.value = '';
+      wordsInput.value = '';
+      primarySelect.value = '';
+      secondarySelect.value = '';
       toggleFinishFields();
     }
 
-    wordsInput.value = '';
     finishSelect.value = customization?.kind === 'golf-ball-holder' ? finishSelect.value : 'solid';
-    solidSelect.value = '';
-    primarySelect.value = '';
-    secondarySelect.value = '';
     errorNode.hidden = true;
     errorNode.textContent = '';
 
