@@ -11,27 +11,43 @@
       "description": "Standard ready-to-order version."
     },
     {
-      "id": "flexi-playful-star",
-      "name": "Flexi Playful Star",
-      "priceCents": 800,
-      "priceLabel": "$8.00",
-      "image": "assets/flexi-playful-star.png?v=20260403a",
+      "id": "tiny-t-rex",
+      "name": "Tiny T-Rex",
+      "priceCents": 1200,
+      "priceLabel": "$12.00",
+      "image": "assets/tiny-t-rex-cinderwing.png?v=20260401b",
       "description": "Standard ready-to-order version."
     },
     {
-      "id": "bun-slime-fidget",
-      "name": "Bun Slime Fidget",
+      "id": "crystal-dragon",
+      "name": "Crystal Dragon",
+      "priceCents": 1200,
+      "priceLabel": "$12.00",
+      "image": "assets/crystal-dragon-cinderwing.png?v=20260401b",
+      "description": "Standard ready-to-order version."
+    },
+    {
+      "id": "bone-dragon",
+      "name": "Bone Dragon",
+      "priceCents": 1400,
+      "priceLabel": "$14.00",
+      "image": "assets/bone-dragon.jpg?v=20260331c",
+      "description": "Standard ready-to-order version."
+    },
+    {
+      "id": "water-dragon",
+      "name": "Water Dragon",
+      "priceCents": 1400,
+      "priceLabel": "$14.00",
+      "image": "assets/water-dragon.jpg?v=20260331f",
+      "description": "Standard ready-to-order version."
+    },
+    {
+      "id": "void-octopus",
+      "name": "Void Octopus",
       "priceCents": 1000,
       "priceLabel": "$10.00",
-      "image": "assets/bun-slime-fidget-closed.jpg?v=20260331a",
-      "description": "Standard ready-to-order version."
-    },
-    {
-      "id": "fidget-switch",
-      "name": "Fidget Switch",
-      "priceCents": 800,
-      "priceLabel": "$8.00",
-      "image": "assets/fidget-switch.jpg?v=20260401a",
+      "image": "assets/void-octopus-cinderwing.png?v=20260403a",
       "description": "Standard ready-to-order version."
     },
     {
@@ -67,6 +83,30 @@
       "description": "Standard ready-to-order version."
     },
     {
+      "id": "flexi-playful-star",
+      "name": "Flexi Playful Star",
+      "priceCents": 800,
+      "priceLabel": "$8.00",
+      "image": "assets/flexi-playful-star.png?v=20260403a",
+      "description": "Standard ready-to-order version."
+    },
+    {
+      "id": "bun-slime-fidget",
+      "name": "Bun Slime Fidget",
+      "priceCents": 1000,
+      "priceLabel": "$10.00",
+      "image": "assets/bun-slime-fidget-closed.jpg?v=20260331a",
+      "description": "Standard ready-to-order version."
+    },
+    {
+      "id": "fidget-switch",
+      "name": "Fidget Switch",
+      "priceCents": 800,
+      "priceLabel": "$8.00",
+      "image": "assets/fidget-switch.jpg?v=20260401a",
+      "description": "Standard ready-to-order version."
+    },
+    {
       "id": "bookmarks-3-pack",
       "name": "Bookmarks 3 Pack",
       "priceCents": 1000,
@@ -75,11 +115,54 @@
       "description": "Standard ready-to-order version."
     },
     {
-      "id": "void-octopus",
-      "name": "Void Octopus",
+      "id": "custom-golf-ball-holder",
+      "name": "Custom Golf Ball Holder",
+      "priceCents": 1800,
+      "priceLabel": "$18.00",
+      "image": "assets/golf-ball-holder-loaded.png?v=20260330t",
+      "description": "Includes custom words and your two color choices.",
+      "customization": {
+        "kind": "golf-ball-holder",
+        "wordsLabel": "Words on the front",
+        "maxWords": 24,
+        "colorOptions": [
+          "Black",
+          "White",
+          "Gray",
+          "Navy",
+          "Royal Blue",
+          "Bright Green",
+          "Forest Green",
+          "Red",
+          "Orange",
+          "Gold",
+          "Purple",
+          "Pink"
+        ]
+      }
+    },
+    {
+      "id": "cable-monster-desk-helper",
+      "name": "Cable Monster Desk Helper",
+      "priceCents": 1400,
+      "priceLabel": "$14.00",
+      "image": "assets/cable-monster-blue.jpg?v=20260331i",
+      "description": "Standard ready-to-order version."
+    },
+    {
+      "id": "flirty-heart-photo-card-display",
+      "name": "Flirty Heart Photo & Card Display",
+      "priceCents": 1200,
+      "priceLabel": "$12.00",
+      "image": "assets/flirty-heart-photo.jpg?v=20260331d",
+      "description": "Standard ready-to-order version."
+    },
+    {
+      "id": "fleggy-flexi-egg-buddy",
+      "name": "Fleggy Flexi Egg Buddy",
       "priceCents": 1000,
       "priceLabel": "$10.00",
-      "image": "assets/void-octopus-cinderwing.png?v=20260403a",
+      "image": "assets/fleggy-egg-open.jpg?v=20260331e",
       "description": "Standard ready-to-order version."
     }
   ]

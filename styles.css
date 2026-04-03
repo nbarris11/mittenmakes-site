@@ -2224,6 +2224,11 @@ details.faq-item[open] summary::after { transform: rotate(45deg); }
   font-size: 0.88rem;
 }
 
+.checkout-cart-item-meta {
+  color: var(--muted);
+  font-size: 0.82rem;
+}
+
 .checkout-cart-item-controls {
   display: flex;
   align-items: center;
@@ -2365,6 +2370,73 @@ details.faq-item[open] summary::after { transform: rotate(45deg); }
 .cart-toast.is-visible {
   opacity: 1;
   transform: translateY(0);
+}
+
+.product-option-dialog {
+  width: min(520px, calc(100vw - 2rem));
+  border: 0;
+  border-radius: 22px;
+  padding: 0;
+  box-shadow: 0 28px 60px rgba(31, 24, 20, 0.22);
+}
+
+.product-option-dialog::backdrop {
+  background: rgba(35, 30, 27, 0.48);
+  backdrop-filter: blur(2px);
+}
+
+.product-option-form {
+  display: grid;
+  gap: 1rem;
+  padding: 1.4rem;
+  background: var(--surface);
+}
+
+.product-option-copy {
+  display: grid;
+  gap: 0.45rem;
+}
+
+.product-option-copy h2 {
+  margin: 0;
+}
+
+.product-option-form label {
+  display: grid;
+  gap: 0.45rem;
+  color: var(--text);
+  font-weight: 600;
+}
+
+.product-option-form input,
+.product-option-form select {
+  width: 100%;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 0.85rem 0.95rem;
+  font: inherit;
+  color: var(--text);
+  background: #ffffff;
+}
+
+.product-option-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.9rem;
+}
+
+.product-option-error {
+  margin: 0;
+  color: #a73b12;
+  font-size: 0.88rem;
+  font-weight: 600;
+}
+
+.product-option-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  justify-content: flex-end;
 }
 
 .featured-gift-card {
@@ -2670,6 +2742,18 @@ details.faq-item[open] summary::after { transform: rotate(45deg); }
     right: 1rem;
     bottom: 7.75rem;
     max-width: none;
+  }
+
+  .product-option-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .product-option-actions {
+    justify-content: stretch;
+  }
+
+  .product-option-actions .btn {
+    flex: 1 1 180px;
   }
 
   .product-grid { grid-template-columns: 1fr; gap: 1.25rem; }

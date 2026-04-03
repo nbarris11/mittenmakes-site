@@ -8,6 +8,26 @@ const CONFIG_PATH = path.join(__dirname, '..', 'checkout-products.json');
 
 const readCheckoutConfig = () => JSON.parse(fs.readFileSync(CONFIG_PATH, 'utf8'));
 
+const normalizeOptions = (product, rawOptions = null) => {
+  const customization = product.customization;
+  if (!customization) return null;
+
+  if (customization.kind === 'golf-ball-holder') {
+    const allowedColors = customization.colorOptions || [];
+    const customWords = String(rawOptions?.customWords || '').trim().slice(0, customization.maxWords || 24);
+    const primaryColor = allowedColors.includes(rawOptions?.primaryColor) ? rawOptions.primaryColor : '';
+    const secondaryColor = allowedColors.includes(rawOptions?.secondaryColor) ? rawOptions.secondaryColor : '';
+
+    if (!customWords || !primaryColor || !secondaryColor || primaryColor === secondaryColor) {
+      return null;
+    }
+
+    return { customWords, primaryColor, secondaryColor };
+  }
+
+  return null;
+};
+
 const getRequiredEnv = name => {
   const value = process.env[name];
   if (!value) {
@@ -62,14 +82,22 @@ module.exports = async (req, res) => {
         return res.status(400).json({ error: 'One of the cart items is invalid. Refresh the page and try again.' });
       }
 
+      const options = normalizeOptions(product, item.options);
+      if (product.customization && !options) {
+        return res.status(400).json({ error: `Add the custom words and two colors for ${product.name} before checking out.` });
+      }
+
       subtotal += product.priceCents * quantity;
+      const optionDescription = options
+        ? ` Words: ${options.customWords}. Colors: ${options.primaryColor} + ${options.secondaryColor}.`
+        : '';
       normalizedItems.push({
         price_data: {
           currency: 'usd',
           unit_amount: product.priceCents,
           product_data: {
             name: product.name,
-            description: `${product.description} Made to order by Mitten Makes in Metro Detroit.`
+            description: `${product.description}${optionDescription} Made to order by Mitten Makes in Metro Detroit.`
           }
         },
         quantity

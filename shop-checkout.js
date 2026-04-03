@@ -1,5 +1,6 @@
 (async () => {
   const CART_STORAGE_KEY = 'mitten-makes-cart-v1';
+  const GOLF_BALL_PRODUCT_ID = 'custom-golf-ball-holder';
   const cartRoot = document.getElementById('online-checkout');
   const cartSummaryLinks = Array.from(document.querySelectorAll('[data-cart-link]'));
   const cartSummaryCounts = Array.from(document.querySelectorAll('[data-cart-count]'));
@@ -7,7 +8,7 @@
   const featuredActions = document.querySelector('.featured-gift-copy .order-actions');
   let cartToastTimeout;
 
-  const response = await fetch('checkout-products.json?v=20260401a');
+  const response = await fetch('checkout-products.json?v=20260403a');
   if (!response.ok) return;
 
   const checkoutConfig = await response.json();
@@ -28,10 +29,66 @@
   const formatCurrency = cents =>
     new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(cents / 100);
 
+  const escapeHtml = value =>
+    String(value)
+      .replaceAll('&', '&amp;')
+      .replaceAll('<', '&lt;')
+      .replaceAll('>', '&gt;')
+      .replaceAll('"', '&quot;')
+      .replaceAll("'", '&#39;');
+
+  const getProductCustomization = productId => products.get(productId)?.customization || null;
+
+  const buildCartKey = (productId, options = null) => {
+    if (!options) return productId;
+    return [
+      productId,
+      options.customWords?.trim().toLowerCase() || '',
+      options.primaryColor || '',
+      options.secondaryColor || ''
+    ].join('::');
+  };
+
+  const normalizeOptions = (productId, rawOptions = null) => {
+    const customization = getProductCustomization(productId);
+    if (!customization) return null;
+
+    if (customization.kind === 'golf-ball-holder') {
+      const allowedColors = customization.colorOptions || [];
+      const customWords = String(rawOptions?.customWords || '').trim().slice(0, customization.maxWords || 24);
+      const primaryColor = allowedColors.includes(rawOptions?.primaryColor) ? rawOptions.primaryColor : '';
+      const secondaryColor = allowedColors.includes(rawOptions?.secondaryColor) ? rawOptions.secondaryColor : '';
+
+      if (!customWords || !primaryColor || !secondaryColor || primaryColor === secondaryColor) {
+        return null;
+      }
+
+      return { customWords, primaryColor, secondaryColor };
+    }
+
+    return null;
+  };
+
+  const normalizeCartItem = rawItem => {
+    const product = products.get(rawItem?.id);
+    const quantity = Number(rawItem?.quantity);
+    if (!product || !Number.isInteger(quantity) || quantity < 1) return null;
+
+    const options = normalizeOptions(rawItem.id, rawItem.options);
+    return {
+      id: rawItem.id,
+      quantity,
+      cartKey: buildCartKey(rawItem.id, options),
+      ...(options ? { options } : {})
+    };
+  };
+
   const readCart = () => {
     try {
       const parsed = JSON.parse(localStorage.getItem(CART_STORAGE_KEY) || '[]');
-      return Array.isArray(parsed) ? parsed.filter(item => products.has(item.id) && item.quantity > 0) : [];
+      return Array.isArray(parsed)
+        ? parsed.map(normalizeCartItem).filter(Boolean)
+        : [];
     } catch {
       return [];
     }
@@ -121,15 +178,17 @@
       const cartButton = document.createElement('button');
       cartButton.type = 'button';
       cartButton.className = 'btn btn-primary btn-add-to-cart';
-      cartButton.textContent = 'Add to cart';
-      cartButton.addEventListener('click', () => {
-        addToCart(productId);
-        flashAddedState(cartButton);
+      cartButton.textContent = product.customization ? 'Customize & add' : 'Add to cart';
+      cartButton.addEventListener('click', async () => {
+        const wasAdded = await addToCart(productId);
+        if (wasAdded) flashAddedState(cartButton);
       });
 
       const cardNote = document.createElement('p');
       cardNote.className = 'product-checkout-note';
-      cardNote.textContent = `${product.priceLabel} online for the standard ready-to-order version.`;
+      cardNote.textContent = product.customization
+        ? `${product.priceLabel} online and includes a quick words + colors step before checkout.`
+        : `${product.priceLabel} online for the standard ready-to-order version.`;
       actions.prepend(cartButton);
       actions.before(cardNote);
     });
@@ -144,9 +203,9 @@
     cartButton.type = 'button';
     cartButton.className = 'btn btn-primary btn-add-to-cart';
     cartButton.textContent = 'Add to cart';
-    cartButton.addEventListener('click', () => {
-      addToCart(productId);
-      flashAddedState(cartButton);
+    cartButton.addEventListener('click', async () => {
+      const wasAdded = await addToCart(productId);
+      if (wasAdded) flashAddedState(cartButton);
     });
 
     const requestButton = featuredActions.querySelector('.btn.btn-primary') || featuredActions.querySelector('.btn');
@@ -158,13 +217,132 @@
     featuredActions.prepend(cartButton);
   };
 
-  const addToCart = productId => {
-    const existing = cart.find(item => item.id === productId);
+  const ensureCustomizationDialog = () => {
+    let dialog = document.querySelector('[data-cart-customization-dialog]');
+    if (dialog) return dialog;
+
+    dialog = document.createElement('dialog');
+    dialog.className = 'product-option-dialog';
+    dialog.setAttribute('data-cart-customization-dialog', '');
+    dialog.innerHTML = `
+      <form method="dialog" class="product-option-form">
+        <div class="product-option-copy">
+          <p class="order-eyebrow">Before we add it</p>
+          <h2>Customize your golf ball holder</h2>
+          <p>Choose the words for the front, then pick two colors for the print.</p>
+        </div>
+        <label>
+          Words on the front
+          <input type="text" name="customWords" maxlength="24" placeholder="Dad's League" required>
+        </label>
+        <div class="product-option-grid">
+          <label>
+            Main color
+            <select name="primaryColor" required></select>
+          </label>
+          <label>
+            Accent color
+            <select name="secondaryColor" required></select>
+          </label>
+        </div>
+        <p class="product-option-error" data-option-error hidden></p>
+        <div class="product-option-actions">
+          <button type="button" class="btn btn-secondary" data-option-cancel>Cancel</button>
+          <button type="submit" class="btn btn-primary">Add to cart</button>
+        </div>
+      </form>
+    `;
+    document.body.appendChild(dialog);
+    return dialog;
+  };
+
+  const requestProductOptions = productId => {
+    const customization = getProductCustomization(productId);
+    if (!customization) return Promise.resolve(null);
+
+    if (customization.kind !== 'golf-ball-holder') return Promise.resolve(null);
+
+    const dialog = ensureCustomizationDialog();
+    const form = dialog.querySelector('form');
+    const wordsInput = form.elements.customWords;
+    const primarySelect = form.elements.primaryColor;
+    const secondarySelect = form.elements.secondaryColor;
+    const errorNode = form.querySelector('[data-option-error]');
+    const cancelButton = form.querySelector('[data-option-cancel]');
+
+    const optionsMarkup = ['<option value="">Choose a color</option>']
+      .concat((customization.colorOptions || []).map(color => `<option value="${escapeHtml(color)}">${escapeHtml(color)}</option>`))
+      .join('');
+
+    primarySelect.innerHTML = optionsMarkup;
+    secondarySelect.innerHTML = optionsMarkup;
+    wordsInput.value = '';
+    primarySelect.value = '';
+    secondarySelect.value = '';
+    errorNode.hidden = true;
+    errorNode.textContent = '';
+
+    return new Promise(resolve => {
+      const closeDialog = result => {
+        form.removeEventListener('submit', handleSubmit);
+        cancelButton.removeEventListener('click', handleCancel);
+        dialog.removeEventListener('cancel', handleCancel);
+        dialog.close();
+        resolve(result);
+      };
+
+      const handleCancel = event => {
+        event?.preventDefault?.();
+        closeDialog(null);
+      };
+
+      const handleSubmit = event => {
+        event.preventDefault();
+        const options = normalizeOptions(productId, {
+          customWords: wordsInput.value,
+          primaryColor: primarySelect.value,
+          secondaryColor: secondarySelect.value
+        });
+
+        if (!options) {
+          errorNode.textContent = 'Add the words and choose two different colors before continuing.';
+          errorNode.hidden = false;
+          return;
+        }
+
+        closeDialog(options);
+      };
+
+      form.addEventListener('submit', handleSubmit);
+      cancelButton.addEventListener('click', handleCancel);
+      dialog.addEventListener('cancel', handleCancel);
+      dialog.showModal();
+      wordsInput.focus();
+    });
+  };
+
+  const addToCart = async productId => {
     const product = products.get(productId);
+    const options = getProductCustomization(productId)
+      ? await requestProductOptions(productId)
+      : null;
+
+    if (getProductCustomization(productId) && !options) {
+      return false;
+    }
+
+    const cartKey = buildCartKey(productId, options);
+    const existing = cart.find(item => item.cartKey === cartKey);
+
     if (existing) {
       existing.quantity += 1;
     } else {
-      cart.push({ id: productId, quantity: 1 });
+      cart.push({
+        id: productId,
+        quantity: 1,
+        cartKey,
+        ...(options ? { options } : {})
+      });
     }
     saveCart(cart);
     updateCartSummary();
@@ -172,19 +350,20 @@
     const itemCount = cart.reduce((sum, item) => sum + item.quantity, 0);
     pulseCartIndicators();
     showCartToast(`${product?.name || 'Item'} added to cart • ${itemCount} item${itemCount === 1 ? '' : 's'} ready`);
+    return true;
   };
 
-  const updateQuantity = (productId, delta) => {
+  const updateQuantity = (cartKey, delta) => {
     cart = cart
-      .map(item => item.id === productId ? { ...item, quantity: item.quantity + delta } : item)
+      .map(item => item.cartKey === cartKey ? { ...item, quantity: item.quantity + delta } : item)
       .filter(item => item.quantity > 0);
     saveCart(cart);
     updateCartSummary();
     renderCart();
   };
 
-  const removeFromCart = productId => {
-    cart = cart.filter(item => item.id !== productId);
+  const removeFromCart = cartKey => {
+    cart = cart.filter(item => item.cartKey !== cartKey);
     saveCart(cart);
     updateCartSummary();
     renderCart();
@@ -231,6 +410,12 @@
     cart.forEach(item => {
       const product = products.get(item.id);
       if (!product) return;
+      const optionsMarkup = item.options
+        ? `
+          <span class="checkout-cart-item-meta">Words: ${escapeHtml(item.options.customWords)}</span>
+          <span class="checkout-cart-item-meta">Colors: ${escapeHtml(item.options.primaryColor)} + ${escapeHtml(item.options.secondaryColor)}</span>
+        `
+        : '';
 
       const lineItem = document.createElement('li');
       lineItem.className = 'checkout-cart-item';
@@ -238,6 +423,7 @@
         <div class="checkout-cart-item-copy">
           <strong>${product.name}</strong>
           <span>${product.priceLabel} each</span>
+          ${optionsMarkup}
         </div>
         <div class="checkout-cart-item-controls">
           <button type="button" class="cart-qty-button" aria-label="Remove one ${product.name}">−</button>
@@ -250,9 +436,9 @@
       const [decreaseButton, increaseButton] = lineItem.querySelectorAll('.cart-qty-button');
       const removeButton = lineItem.querySelector('.cart-remove-button');
 
-      decreaseButton.addEventListener('click', () => updateQuantity(item.id, -1));
-      increaseButton.addEventListener('click', () => updateQuantity(item.id, 1));
-      removeButton.addEventListener('click', () => removeFromCart(item.id));
+      decreaseButton.addEventListener('click', () => updateQuantity(item.cartKey, -1));
+      increaseButton.addEventListener('click', () => updateQuantity(item.cartKey, 1));
+      removeButton.addEventListener('click', () => removeFromCart(item.cartKey));
 
       cartList.appendChild(lineItem);
     });
