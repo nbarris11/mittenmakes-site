@@ -11,11 +11,11 @@
       "description": "Standard ready-to-order version."
     },
     {
-      "id": "blue-starfish-fidget",
-      "name": "Blue Starfish Fidget",
+      "id": "flexi-playful-star",
+      "name": "Flexi Playful Star",
       "priceCents": 800,
       "priceLabel": "$8.00",
-      "image": "assets/articulated-starfish-blue.png?v=20260330k",
+      "image": "assets/flexi-playful-star.png?v=20260403a",
       "description": "Standard ready-to-order version."
     },
     {
