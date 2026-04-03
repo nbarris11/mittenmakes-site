@@ -184,13 +184,7 @@
         if (wasAdded) flashAddedState(cartButton);
       });
 
-      const cardNote = document.createElement('p');
-      cardNote.className = 'product-checkout-note';
-      cardNote.textContent = product.customization
-        ? `${product.priceLabel} online and includes a quick words + colors step before checkout.`
-        : `${product.priceLabel} online for the standard ready-to-order version.`;
       actions.prepend(cartButton);
-      actions.before(cardNote);
     });
   };
 
