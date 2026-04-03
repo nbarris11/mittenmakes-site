@@ -75,11 +75,11 @@
       "description": "Standard ready-to-order version."
     },
     {
-      "id": "cute-octopus",
-      "name": "Cute Octopus",
+      "id": "void-octopus",
+      "name": "Void Octopus",
       "priceCents": 1000,
       "priceLabel": "$10.00",
-      "image": "assets/cute-octopus-clean.png?v=20260330q",
+      "image": "assets/void-octopus-cinderwing.png?v=20260403a",
       "description": "Standard ready-to-order version."
     }
   ]
