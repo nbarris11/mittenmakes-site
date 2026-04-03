@@ -7,7 +7,7 @@
   const featuredActions = document.querySelector('.featured-gift-copy .order-actions');
   let cartToastTimeout;
 
-  const response = await fetch('checkout-products.json?v=20260403c');
+  const response = await fetch('checkout-products.json?v=20260403d');
   if (!response.ok) return;
 
   const checkoutConfig = await response.json();
@@ -347,7 +347,7 @@
       solidSelect.required = false;
     } else {
       titleNode.textContent = 'Pick your finish';
-      descriptionNode.textContent = 'Choose a simple solid color, or upgrade to a silk or rainbow finish for $2 more.';
+      descriptionNode.textContent = 'Choose a simple solid color, pick Surprise me, or upgrade to a silk or rainbow finish for $2 more.';
       finishWrap.hidden = false;
       solidWrap.hidden = false;
       wordsWrap.hidden = true;
