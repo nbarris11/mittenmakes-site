@@ -2392,6 +2392,15 @@ details.faq-item[open] summary::after { transform: rotate(45deg); }
   background: var(--surface);
 }
 
+.product-option-form [hidden] {
+  display: none !important;
+}
+
+.product-option-form label[hidden],
+.product-option-form .product-option-grid[hidden] {
+  display: none !important;
+}
+
 .product-option-copy {
   display: grid;
   gap: 0.45rem;
