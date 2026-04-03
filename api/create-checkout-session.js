@@ -10,7 +10,7 @@ const readCheckoutConfig = () => JSON.parse(fs.readFileSync(CONFIG_PATH, 'utf8')
 
 const normalizeOptions = (product, rawOptions = null) => {
   const customization = product.customization;
-  if (!customization) return null;
+  if (!customization) return rawOptions || null;
 
   if (customization.kind === 'golf-ball-holder') {
     const allowedColors = customization.colorOptions || [];
@@ -60,6 +60,9 @@ module.exports = async (req, res) => {
     const products = new Map(checkoutConfig.products.map(product => [product.id, product]));
     const minimumSubtotalCents = checkoutConfig.minimumSubtotalCents;
     const shippingCents = checkoutConfig.shippingCents;
+    const finishStyleOptions = checkoutConfig.finishStyleOptions || [];
+    const finishStyleMap = new Map(finishStyleOptions.map(option => [option.id, option]));
+    const solidColorOptions = checkoutConfig.solidColorOptions || [];
 
     const { items, fulfillmentMethod } = req.body || {};
 
@@ -83,18 +86,41 @@ module.exports = async (req, res) => {
       }
 
       const options = normalizeOptions(product, item.options);
-      if (product.customization && !options) {
-        return res.status(400).json({ error: `Add the custom words and two colors for ${product.name} before checking out.` });
+      let optionDescription = '';
+      let unitAmount = product.priceCents;
+
+      if (product.customization) {
+        if (!options) {
+          return res.status(400).json({ error: `Add the custom words and two colors for ${product.name} before checking out.` });
+        }
+
+        optionDescription = ` Words: ${options.customWords}. Colors: ${options.primaryColor} + ${options.secondaryColor}.`;
+      } else {
+        const finishStyle = finishStyleMap.get(options?.finishStyle || 'solid');
+        const noOptionsProvided = !options || Object.keys(options).length === 0;
+        const solidColor = typeof options?.solidColor === 'string' && options.solidColor
+          ? options.solidColor
+          : (noOptionsProvided ? (solidColorOptions[0] || '') : '');
+
+        if (!finishStyle) {
+          return res.status(400).json({ error: `Choose a valid finish for ${product.name} before checking out.` });
+        }
+
+        if (finishStyle.id === 'solid' && !solidColorOptions.includes(solidColor)) {
+          return res.status(400).json({ error: `Choose a solid color for ${product.name} before checking out.` });
+        }
+
+        unitAmount += finishStyle.priceDeltaCents || 0;
+        optionDescription = finishStyle.id === 'solid'
+          ? ` Finish: ${finishStyle.label}. Color: ${solidColor}.`
+          : ` Finish: ${finishStyle.label}.`;
       }
 
-      subtotal += product.priceCents * quantity;
-      const optionDescription = options
-        ? ` Words: ${options.customWords}. Colors: ${options.primaryColor} + ${options.secondaryColor}.`
-        : '';
+      subtotal += unitAmount * quantity;
       normalizedItems.push({
         price_data: {
           currency: 'usd',
-          unit_amount: product.priceCents,
+          unit_amount: unitAmount,
           product_data: {
             name: product.name,
             description: `${product.description}${optionDescription} Made to order by Mitten Makes in Metro Detroit.`

@@ -1,6 +1,5 @@
 (async () => {
   const CART_STORAGE_KEY = 'mitten-makes-cart-v1';
-  const GOLF_BALL_PRODUCT_ID = 'custom-golf-ball-holder';
   const cartRoot = document.getElementById('online-checkout');
   const cartSummaryLinks = Array.from(document.querySelectorAll('[data-cart-link]'));
   const cartSummaryCounts = Array.from(document.querySelectorAll('[data-cart-count]'));
@@ -8,13 +7,16 @@
   const featuredActions = document.querySelector('.featured-gift-copy .order-actions');
   let cartToastTimeout;
 
-  const response = await fetch('checkout-products.json?v=20260403a');
+  const response = await fetch('checkout-products.json?v=20260403c');
   if (!response.ok) return;
 
   const checkoutConfig = await response.json();
   const products = new Map(checkoutConfig.products.map(product => [product.id, product]));
   const minimumSubtotalCents = checkoutConfig.minimumSubtotalCents;
   const shippingCents = checkoutConfig.shippingCents;
+  const finishStyleOptions = checkoutConfig.finishStyleOptions || [];
+  const finishStyleMap = new Map(finishStyleOptions.map(option => [option.id, option]));
+  const solidColorOptions = checkoutConfig.solidColorOptions || [];
 
   const cartList = document.getElementById('checkout-cart-items');
   const emptyState = document.getElementById('checkout-cart-empty');
@@ -39,19 +41,52 @@
 
   const getProductCustomization = productId => products.get(productId)?.customization || null;
 
+  const getFinishSummary = options => {
+    if (!options?.finishStyle) return '';
+    const finishStyle = finishStyleMap.get(options.finishStyle);
+    if (!finishStyle) return '';
+    return options.solidColor
+      ? `${finishStyle.label} · ${options.solidColor}`
+      : finishStyle.label;
+  };
+
+  const getItemUnitPrice = item => {
+    const product = products.get(item.id);
+    if (!product) return 0;
+    const finishStyle = item.options?.finishStyle ? finishStyleMap.get(item.options.finishStyle) : null;
+    return product.priceCents + (finishStyle?.priceDeltaCents || 0);
+  };
+
   const buildCartKey = (productId, options = null) => {
     if (!options) return productId;
-    return [
-      productId,
-      options.customWords?.trim().toLowerCase() || '',
-      options.primaryColor || '',
-      options.secondaryColor || ''
-    ].join('::');
+    const segments = [productId];
+    if (options.finishStyle) segments.push(options.finishStyle);
+    if (options.solidColor) segments.push(options.solidColor);
+    if (options.customWords) segments.push(options.customWords.trim().toLowerCase());
+    if (options.primaryColor) segments.push(options.primaryColor);
+    if (options.secondaryColor) segments.push(options.secondaryColor);
+    return segments.join('::');
   };
 
   const normalizeOptions = (productId, rawOptions = null) => {
     const customization = getProductCustomization(productId);
-    if (!customization) return null;
+    if (!customization) {
+      const noOptionsProvided = !rawOptions || Object.keys(rawOptions).length === 0;
+      const finishStyle = finishStyleMap.has(rawOptions?.finishStyle) ? rawOptions.finishStyle : 'solid';
+      const solidColor = finishStyle === 'solid'
+        ? (
+            solidColorOptions.includes(rawOptions?.solidColor)
+              ? rawOptions.solidColor
+              : (noOptionsProvided ? (solidColorOptions[0] || '') : '')
+          )
+        : '';
+
+      if (finishStyle === 'solid' && !solidColor) {
+        return null;
+      }
+
+      return { finishStyle, ...(solidColor ? { solidColor } : {}) };
+    }
 
     if (customization.kind === 'golf-ball-holder') {
       const allowedColors = customization.colorOptions || [];
@@ -74,7 +109,7 @@
     const quantity = Number(rawItem?.quantity);
     if (!product || !Number.isInteger(quantity) || quantity < 1) return null;
 
-    const options = normalizeOptions(rawItem.id, rawItem.options);
+    const options = normalizeOptions(rawItem.id, rawItem.options || {});
     return {
       id: rawItem.id,
       quantity,
@@ -105,8 +140,7 @@
 
   const getSubtotal = () =>
     cart.reduce((sum, item) => {
-      const product = products.get(item.id);
-      return product ? sum + (product.priceCents * item.quantity) : sum;
+      return sum + (getItemUnitPrice(item) * item.quantity);
     }, 0);
 
   const updateCartSummary = () => {
@@ -178,7 +212,7 @@
       const cartButton = document.createElement('button');
       cartButton.type = 'button';
       cartButton.className = 'btn btn-primary btn-add-to-cart';
-      cartButton.textContent = product.customization ? 'Customize & add' : 'Add to cart';
+      cartButton.textContent = product.customization ? 'Customize & add' : 'Choose color & add';
       cartButton.addEventListener('click', async () => {
         const wasAdded = await addToCart(productId);
         if (wasAdded) flashAddedState(cartButton);
@@ -196,7 +230,7 @@
     const cartButton = document.createElement('button');
     cartButton.type = 'button';
     cartButton.className = 'btn btn-primary btn-add-to-cart';
-    cartButton.textContent = 'Add to cart';
+    cartButton.textContent = 'Choose color & add';
     cartButton.addEventListener('click', async () => {
       const wasAdded = await addToCart(productId);
       if (wasAdded) flashAddedState(cartButton);
@@ -221,22 +255,32 @@
     dialog.innerHTML = `
       <form method="dialog" class="product-option-form">
         <div class="product-option-copy">
-          <p class="order-eyebrow">Before we add it</p>
-          <h2>Customize your golf ball holder</h2>
-          <p>Choose the words for the front, then pick two colors for the print.</p>
+          <p class="order-eyebrow" data-option-eyebrow>Before we add it</p>
+          <h2 data-option-title>Customize your item</h2>
+          <p data-option-description>Pick a finish and color before adding it to your cart.</p>
         </div>
-        <label>
-          Words on the front
-          <input type="text" name="customWords" maxlength="24" placeholder="Dad's League" required>
-        </label>
-        <div class="product-option-grid">
-          <label>
-            Main color
-            <select name="primaryColor" required></select>
+        <div class="product-option-grid product-option-grid-single">
+          <label data-option-finish-wrap>
+            Finish & color style
+            <select name="finishStyle"></select>
           </label>
-          <label>
+          <label data-option-solid-wrap>
+            Solid color
+            <select name="solidColor"></select>
+          </label>
+        </div>
+        <label data-option-words-wrap hidden>
+          Words on the front
+          <input type="text" name="customWords" maxlength="24" placeholder="Dad's League">
+        </label>
+        <div class="product-option-grid" data-option-golf-colors hidden>
+          <label data-option-primary-wrap>
+            Main color
+            <select name="primaryColor"></select>
+          </label>
+          <label data-option-secondary-wrap>
             Accent color
-            <select name="secondaryColor" required></select>
+            <select name="secondaryColor"></select>
           </label>
         </div>
         <p class="product-option-error" data-option-error hidden></p>
@@ -252,25 +296,75 @@
 
   const requestProductOptions = productId => {
     const customization = getProductCustomization(productId);
-    if (!customization) return Promise.resolve(null);
-
-    if (customization.kind !== 'golf-ball-holder') return Promise.resolve(null);
-
     const dialog = ensureCustomizationDialog();
     const form = dialog.querySelector('form');
+    const titleNode = form.querySelector('[data-option-title]');
+    const descriptionNode = form.querySelector('[data-option-description]');
+    const finishWrap = form.querySelector('[data-option-finish-wrap]');
+    const solidWrap = form.querySelector('[data-option-solid-wrap]');
+    const wordsWrap = form.querySelector('[data-option-words-wrap]');
+    const golfColorsWrap = form.querySelector('[data-option-golf-colors]');
+    const finishSelect = form.elements.finishStyle;
+    const solidSelect = form.elements.solidColor;
     const wordsInput = form.elements.customWords;
     const primarySelect = form.elements.primaryColor;
     const secondarySelect = form.elements.secondaryColor;
     const errorNode = form.querySelector('[data-option-error]');
     const cancelButton = form.querySelector('[data-option-cancel]');
 
-    const optionsMarkup = ['<option value="">Choose a color</option>']
-      .concat((customization.colorOptions || []).map(color => `<option value="${escapeHtml(color)}">${escapeHtml(color)}</option>`))
+    const finishMarkup = finishStyleOptions
+      .map(option => `<option value="${escapeHtml(option.id)}">${escapeHtml(option.label)}</option>`)
+      .join('');
+    const solidMarkup = ['<option value="">Choose a color</option>']
+      .concat(solidColorOptions.map(color => `<option value="${escapeHtml(color)}">${escapeHtml(color)}</option>`))
+      .join('');
+    const golfColorMarkup = ['<option value="">Choose a color</option>']
+      .concat(((customization?.colorOptions) || []).map(color => `<option value="${escapeHtml(color)}">${escapeHtml(color)}</option>`))
       .join('');
 
-    primarySelect.innerHTML = optionsMarkup;
-    secondarySelect.innerHTML = optionsMarkup;
+    const toggleFinishFields = () => {
+      const isSolid = finishSelect.value === 'solid';
+      solidWrap.hidden = !isSolid;
+      solidSelect.required = isSolid;
+    };
+
+    finishSelect.innerHTML = finishMarkup;
+    solidSelect.innerHTML = solidMarkup;
+    primarySelect.innerHTML = golfColorMarkup;
+    secondarySelect.innerHTML = golfColorMarkup;
+
+    if (customization?.kind === 'golf-ball-holder') {
+      titleNode.textContent = 'Customize your golf ball holder';
+      descriptionNode.textContent = 'Choose the words for the front, then pick two colors for the print.';
+      finishWrap.hidden = true;
+      solidWrap.hidden = true;
+      wordsWrap.hidden = false;
+      golfColorsWrap.hidden = false;
+      wordsInput.required = true;
+      primarySelect.required = true;
+      secondarySelect.required = true;
+      finishSelect.required = false;
+      solidSelect.required = false;
+    } else {
+      titleNode.textContent = 'Pick your finish';
+      descriptionNode.textContent = 'Choose a simple solid color, or upgrade to a silk or rainbow finish for $2 more.';
+      finishWrap.hidden = false;
+      solidWrap.hidden = false;
+      wordsWrap.hidden = true;
+      golfColorsWrap.hidden = true;
+      wordsInput.required = false;
+      primarySelect.required = false;
+      secondarySelect.required = false;
+      finishSelect.required = true;
+      solidSelect.required = true;
+      finishSelect.value = 'solid';
+      solidSelect.value = '';
+      toggleFinishFields();
+    }
+
     wordsInput.value = '';
+    finishSelect.value = customization?.kind === 'golf-ball-holder' ? finishSelect.value : 'solid';
+    solidSelect.value = '';
     primarySelect.value = '';
     secondarySelect.value = '';
     errorNode.hidden = true;
@@ -281,6 +375,7 @@
         form.removeEventListener('submit', handleSubmit);
         cancelButton.removeEventListener('click', handleCancel);
         dialog.removeEventListener('cancel', handleCancel);
+        finishSelect.removeEventListener('change', toggleFinishFields);
         dialog.close();
         resolve(result);
       };
@@ -292,14 +387,21 @@
 
       const handleSubmit = event => {
         event.preventDefault();
-        const options = normalizeOptions(productId, {
-          customWords: wordsInput.value,
-          primaryColor: primarySelect.value,
-          secondaryColor: secondarySelect.value
-        });
+        const options = customization?.kind === 'golf-ball-holder'
+          ? normalizeOptions(productId, {
+              customWords: wordsInput.value,
+              primaryColor: primarySelect.value,
+              secondaryColor: secondarySelect.value
+            })
+          : normalizeOptions(productId, {
+              finishStyle: finishSelect.value,
+              solidColor: solidSelect.value
+            });
 
         if (!options) {
-          errorNode.textContent = 'Add the words and choose two different colors before continuing.';
+          errorNode.textContent = customization?.kind === 'golf-ball-holder'
+            ? 'Add the words and choose two different colors before continuing.'
+            : 'Choose a finish style, and if you picked solid color, choose the exact color too.';
           errorNode.hidden = false;
           return;
         }
@@ -310,18 +412,16 @@
       form.addEventListener('submit', handleSubmit);
       cancelButton.addEventListener('click', handleCancel);
       dialog.addEventListener('cancel', handleCancel);
+      finishSelect.addEventListener('change', toggleFinishFields);
       dialog.showModal();
-      wordsInput.focus();
+      (customization?.kind === 'golf-ball-holder' ? wordsInput : finishSelect).focus();
     });
   };
 
   const addToCart = async productId => {
     const product = products.get(productId);
-    const options = getProductCustomization(productId)
-      ? await requestProductOptions(productId)
-      : null;
-
-    if (getProductCustomization(productId) && !options) {
+    const options = await requestProductOptions(productId);
+    if (!options) {
       return false;
     }
 
@@ -404,10 +504,14 @@
     cart.forEach(item => {
       const product = products.get(item.id);
       if (!product) return;
+      const finishStyle = item.options?.finishStyle ? finishStyleMap.get(item.options.finishStyle) : null;
+      const unitPrice = getItemUnitPrice(item);
+      const lineTotal = unitPrice * item.quantity;
       const optionsMarkup = item.options
         ? `
-          <span class="checkout-cart-item-meta">Words: ${escapeHtml(item.options.customWords)}</span>
-          <span class="checkout-cart-item-meta">Colors: ${escapeHtml(item.options.primaryColor)} + ${escapeHtml(item.options.secondaryColor)}</span>
+          ${item.options.customWords ? `<span class="checkout-cart-item-meta">Words: ${escapeHtml(item.options.customWords)}</span>` : ''}
+          ${item.options.primaryColor ? `<span class="checkout-cart-item-meta">Colors: ${escapeHtml(item.options.primaryColor)} + ${escapeHtml(item.options.secondaryColor)}</span>` : ''}
+          ${finishStyle ? `<span class="checkout-cart-item-meta">Finish: ${escapeHtml(getFinishSummary(item.options))}${finishStyle.priceDeltaCents ? ` (+${formatCurrency(finishStyle.priceDeltaCents)})` : ''}</span>` : ''}
         `
         : '';
 
@@ -416,7 +520,7 @@
       lineItem.innerHTML = `
         <div class="checkout-cart-item-copy">
           <strong>${product.name}</strong>
-          <span>${product.priceLabel} each</span>
+          <span>${formatCurrency(unitPrice)} each · ${formatCurrency(lineTotal)} total</span>
           ${optionsMarkup}
         </div>
         <div class="checkout-cart-item-controls">

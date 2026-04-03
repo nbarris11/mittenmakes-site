@@ -1,6 +1,39 @@
 {
   "minimumSubtotalCents": 2497,
   "shippingCents": 997,
+  "finishStyleOptions": [
+    {
+      "id": "solid",
+      "label": "Solid color",
+      "priceDeltaCents": 0,
+      "description": "Pick one solid filament color."
+    },
+    {
+      "id": "silk",
+      "label": "Silk / shiny finish",
+      "priceDeltaCents": 200,
+      "description": "A shinier silk-style finish. +$2"
+    },
+    {
+      "id": "rainbow",
+      "label": "Rainbow / color-shift",
+      "priceDeltaCents": 200,
+      "description": "Color-shifting filament with a surprise blend. +$2"
+    }
+  ],
+  "solidColorOptions": [
+    "Black",
+    "White",
+    "Gray",
+    "Blue",
+    "Green",
+    "Red",
+    "Orange",
+    "Pink",
+    "Purple",
+    "Yellow",
+    "Tan / beige"
+  ],
   "products": [
     {
       "id": "dual-color-star-fidget",
