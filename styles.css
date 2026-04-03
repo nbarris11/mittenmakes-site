@@ -2910,6 +2910,29 @@ details.faq-item[open] summary::after { transform: rotate(45deg); }
   margin-bottom: 0;
 }
 
+.policy-list {
+  margin: 1rem 0 1.5rem 1.25rem;
+  color: var(--muted);
+}
+
+.policy-list li {
+  margin-bottom: 0.75rem;
+}
+
+.policy-note,
+.checkout-policy-note {
+  margin-top: 1rem;
+  color: var(--muted);
+  font-size: 0.96rem;
+  line-height: 1.7;
+}
+
+.checkout-policy-note a,
+.policy-note a {
+  color: var(--accent);
+  font-weight: 600;
+}
+
 @media (max-width: 768px) {
   .footer { padding: 2rem 0 1.5rem; margin-top: 2rem; }
   .footer-content { flex-direction: column; align-items: flex-start; gap: 1.5rem; }
