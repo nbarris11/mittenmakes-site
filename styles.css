@@ -149,8 +149,19 @@ a:hover { color: var(--accent-hover); }
 @media (max-width: 768px) {
   .navbar { padding: 0.55rem 0; }
   .nav-logo-img { width: 116px; }
-  .nav-container { flex-direction: column; gap: 1rem; }
-  .nav-links { gap: 1rem; justify-content: center; }
+  .nav-container {
+    padding: 0 0.6rem;
+    align-items: flex-start;
+    gap: 0.65rem;
+  }
+  .nav-logo {
+    margin-left: -0.1rem;
+  }
+  .nav-links {
+    width: 100%;
+    gap: 0.85rem;
+    justify-content: flex-start;
+  }
 }
 
 /* ===========================
