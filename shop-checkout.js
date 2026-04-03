@@ -17,6 +17,7 @@
   const finishStyleOptions = checkoutConfig.finishStyleOptions || [];
   const finishStyleMap = new Map(finishStyleOptions.map(option => [option.id, option]));
   const solidColorOptions = checkoutConfig.solidColorOptions || [];
+  const silkColorOptions = checkoutConfig.silkColorOptions || [];
 
   const cartList = document.getElementById('checkout-cart-items');
   const emptyState = document.getElementById('checkout-cart-empty');
@@ -62,6 +63,8 @@
     if (!finishStyle) return '';
     return options.solidColor
       ? `${finishStyle.label} · ${options.solidColor}`
+      : options.silkColor
+        ? `${finishStyle.label} · ${options.silkColor}`
       : finishStyle.label;
   };
 
@@ -77,6 +80,7 @@
     const segments = [productId];
     if (options.finishStyle) segments.push(options.finishStyle);
     if (options.solidColor) segments.push(options.solidColor);
+    if (options.silkColor) segments.push(options.silkColor);
     if (options.customWords) segments.push(options.customWords.trim().toLowerCase());
     if (options.primaryColor) segments.push(options.primaryColor);
     if (options.secondaryColor) segments.push(options.secondaryColor);
@@ -97,12 +101,26 @@
               : (noOptionsProvided ? (solidColorOptions[0] || '') : '')
           )
         : '';
+      const silkColor = finishStyle === 'silk'
+        ? (
+            silkColorOptions.includes(rawOptions?.silkColor)
+              ? rawOptions.silkColor
+              : ''
+          )
+        : '';
 
       if (finishStyle === 'solid' && !solidColor) {
         return null;
       }
+      if (finishStyle === 'silk' && !silkColor) {
+        return null;
+      }
 
-      return { finishStyle, ...(solidColor ? { solidColor } : {}) };
+      return {
+        finishStyle,
+        ...(solidColor ? { solidColor } : {}),
+        ...(silkColor ? { silkColor } : {})
+      };
     }
 
     if (customization.kind === 'golf-ball-holder') {
@@ -298,6 +316,10 @@
             Solid color
             <select name="solidColor"></select>
           </label>
+          <label data-option-silk-wrap hidden>
+            Silk color
+            <select name="silkColor"></select>
+          </label>
         </div>
         <label data-option-words-wrap hidden>
           Words on the front
@@ -342,11 +364,13 @@
     const descriptionNode = form.querySelector('[data-option-description]');
     const finishWrap = form.querySelector('[data-option-finish-wrap]');
     const solidWrap = form.querySelector('[data-option-solid-wrap]');
+    const silkWrap = form.querySelector('[data-option-silk-wrap]');
     const wordsWrap = form.querySelector('[data-option-words-wrap]');
     const bookmarkGrid = form.querySelector('[data-option-bookmark-grid]');
     const golfColorsWrap = form.querySelector('[data-option-golf-colors]');
     const finishSelect = form.elements.finishStyle;
     const solidSelect = form.elements.solidColor;
+    const silkSelect = form.elements.silkColor;
     const wordsInput = form.elements.customWords;
     const paletteSelect = form.elements.bookmarkPalette;
     const patternSelect = form.elements.bookmarkPattern;
@@ -361,6 +385,9 @@
     const solidMarkup = ['<option value="">Choose a color</option>']
       .concat(solidColorOptions.map(color => `<option value="${escapeHtml(color)}">${escapeHtml(color)}</option>`))
       .join('');
+    const silkMarkup = ['<option value="">Choose a silk color</option>']
+      .concat(silkColorOptions.map(color => `<option value="${escapeHtml(color)}">${escapeHtml(color)}</option>`))
+      .join('');
     const golfColorMarkup = ['<option value="">Choose a color</option>']
       .concat(((customization?.colorOptions) || []).map(color => `<option value="${escapeHtml(color)}">${escapeHtml(color)}</option>`))
       .join('');
@@ -373,16 +400,24 @@
 
     const toggleFinishFields = () => {
       const isSolid = finishSelect.value === 'solid';
+      const isSilk = finishSelect.value === 'silk';
       solidWrap.hidden = !isSolid;
       solidSelect.disabled = !isSolid;
       solidSelect.required = isSolid;
+      silkWrap.hidden = !isSilk;
+      silkSelect.disabled = !isSilk;
+      silkSelect.required = isSilk;
       if (!isSolid) {
         solidSelect.value = '';
+      }
+      if (!isSilk) {
+        silkSelect.value = '';
       }
     };
 
     finishSelect.innerHTML = finishMarkup;
     solidSelect.innerHTML = solidMarkup;
+    silkSelect.innerHTML = silkMarkup;
     primarySelect.innerHTML = golfColorMarkup;
     secondarySelect.innerHTML = golfColorMarkup;
     paletteSelect.innerHTML = bookmarkPaletteMarkup;
@@ -390,6 +425,7 @@
     wordsInput.value = '';
     finishSelect.value = '';
     solidSelect.value = '';
+    silkSelect.value = '';
     primarySelect.value = '';
     secondarySelect.value = '';
     paletteSelect.value = '';
@@ -400,11 +436,13 @@
       descriptionNode.textContent = 'Choose the words for the front, then pick two colors for the print.';
       finishWrap.hidden = true;
       solidWrap.hidden = true;
+      silkWrap.hidden = true;
       wordsWrap.hidden = false;
       bookmarkGrid.hidden = true;
       golfColorsWrap.hidden = false;
       finishSelect.disabled = true;
       solidSelect.disabled = true;
+      silkSelect.disabled = true;
       wordsInput.required = true;
       wordsInput.disabled = false;
       paletteSelect.required = false;
@@ -417,8 +455,10 @@
       secondarySelect.disabled = false;
       finishSelect.required = false;
       solidSelect.required = false;
+      silkSelect.required = false;
       finishSelect.value = '';
       solidSelect.value = '';
+      silkSelect.value = '';
       paletteSelect.value = '';
       patternSelect.value = '';
     } else if (customization?.kind === 'bookmarks') {
@@ -426,11 +466,13 @@
       descriptionNode.textContent = 'Pick the overall palette and whether you want mixed or matching patterns in the set.';
       finishWrap.hidden = true;
       solidWrap.hidden = true;
+      silkWrap.hidden = true;
       wordsWrap.hidden = true;
       bookmarkGrid.hidden = false;
       golfColorsWrap.hidden = true;
       finishSelect.disabled = true;
       solidSelect.disabled = true;
+      silkSelect.disabled = true;
       wordsInput.disabled = true;
       primarySelect.disabled = true;
       secondarySelect.disabled = true;
@@ -443,8 +485,10 @@
       patternSelect.disabled = false;
       finishSelect.required = false;
       solidSelect.required = false;
+      silkSelect.required = false;
       finishSelect.value = '';
       solidSelect.value = '';
+      silkSelect.value = '';
       wordsInput.value = '';
       primarySelect.value = '';
       secondarySelect.value = '';
@@ -455,11 +499,13 @@
       descriptionNode.textContent = 'Choose a simple solid color, pick Surprise me, or upgrade to a silk or rainbow finish for $2 more.';
       finishWrap.hidden = false;
       solidWrap.hidden = false;
+      silkWrap.hidden = true;
       wordsWrap.hidden = true;
       bookmarkGrid.hidden = true;
       golfColorsWrap.hidden = true;
       finishSelect.disabled = false;
       wordsInput.disabled = true;
+      silkSelect.disabled = false;
       paletteSelect.disabled = true;
       patternSelect.disabled = true;
       primarySelect.disabled = true;
@@ -472,6 +518,7 @@
       finishSelect.required = true;
       finishSelect.value = 'solid';
       solidSelect.value = '';
+      silkSelect.value = '';
       wordsInput.value = '';
       primarySelect.value = '';
       secondarySelect.value = '';
@@ -514,7 +561,8 @@
               })
           : normalizeOptions(productId, {
               finishStyle: finishSelect.value,
-              solidColor: solidSelect.value
+              solidColor: solidSelect.value,
+              silkColor: silkSelect.value
             });
 
         if (!options) {
@@ -522,7 +570,7 @@
             ? 'Add the words and choose two different colors before continuing.'
             : customization?.kind === 'bookmarks'
               ? 'Choose a color palette and a bookmark set style before continuing.'
-            : 'Choose a finish style, and if you picked solid color, choose the exact color too.';
+            : 'Choose a finish style. Solid color needs an exact color, and silk finish needs a silk color choice.';
           errorNode.hidden = false;
           return;
         }

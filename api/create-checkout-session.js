@@ -76,6 +76,7 @@ module.exports = async (req, res) => {
     const finishStyleOptions = checkoutConfig.finishStyleOptions || [];
     const finishStyleMap = new Map(finishStyleOptions.map(option => [option.id, option]));
     const solidColorOptions = checkoutConfig.solidColorOptions || [];
+    const silkColorOptions = checkoutConfig.silkColorOptions || [];
 
     const { items, fulfillmentMethod } = req.body || {};
 
@@ -120,6 +121,9 @@ module.exports = async (req, res) => {
         const solidColor = typeof options?.solidColor === 'string' && options.solidColor
           ? options.solidColor
           : (noOptionsProvided ? (solidColorOptions[0] || '') : '');
+        const silkColor = typeof options?.silkColor === 'string' && options.silkColor
+          ? options.silkColor
+          : '';
 
         if (!finishStyle) {
           return res.status(400).json({ error: `Choose a valid finish for ${product.name} before checking out.` });
@@ -128,10 +132,15 @@ module.exports = async (req, res) => {
         if (finishStyle.id === 'solid' && !solidColorOptions.includes(solidColor)) {
           return res.status(400).json({ error: `Choose a solid color for ${product.name} before checking out.` });
         }
+        if (finishStyle.id === 'silk' && !silkColorOptions.includes(silkColor)) {
+          return res.status(400).json({ error: `Choose a silk color for ${product.name} before checking out.` });
+        }
 
         unitAmount += finishStyle.priceDeltaCents || 0;
         optionDescription = finishStyle.id === 'solid'
           ? ` Finish: ${finishStyle.label}. Color: ${solidColor}.`
+          : finishStyle.id === 'silk'
+            ? ` Finish: ${finishStyle.label}. Silk color: ${silkColor}.`
           : ` Finish: ${finishStyle.label}.`;
       }
 

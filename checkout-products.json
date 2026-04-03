@@ -35,6 +35,15 @@
     "Yellow",
     "Tan / beige"
   ],
+  "silkColorOptions": [
+    "Blue / Purple",
+    "Green / Pink",
+    "Green",
+    "Red",
+    "Purple",
+    "Blue",
+    "Light Blue"
+  ],
   "products": [
     {
       "id": "dual-color-star-fidget",
