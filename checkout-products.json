@@ -46,6 +46,22 @@
   ],
   "products": [
     {
+      "id": "love-from-michigan",
+      "name": "Love From Michigan",
+      "priceCents": 2200,
+      "priceLabel": "$22.00",
+      "image": "assets/love-from-michigan.png?v=20260404a",
+      "description": "Standard ready-to-order version."
+    },
+    {
+      "id": "thankful-for-our-michigan",
+      "name": "Thankful for our Michigan",
+      "priceCents": 2200,
+      "priceLabel": "$22.00",
+      "image": "assets/thankful-for-our-michigan.png?v=20260404a",
+      "description": "Standard ready-to-order version."
+    },
+    {
       "id": "dual-color-star-fidget",
       "name": "Dual-Color Star Fidget",
       "priceCents": 1300,
