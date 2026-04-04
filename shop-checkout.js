@@ -271,6 +271,11 @@
         if (wasAdded) flashAddedState(cartButton);
       });
 
+      if (product.simpleAddToCart) {
+        const requestButton = actions.querySelector('.btn-secondary, .btn-primary, .btn');
+        requestButton?.remove();
+      }
+
       actions.prepend(cartButton);
     });
   };
