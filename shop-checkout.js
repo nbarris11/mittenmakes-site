@@ -271,10 +271,8 @@
         if (wasAdded) flashAddedState(cartButton);
       });
 
-      if (product.simpleAddToCart) {
-        const requestButton = actions.querySelector('.btn-secondary, .btn-primary, .btn');
-        requestButton?.remove();
-      }
+      const requestButton = actions.querySelector('.btn-secondary, .btn-primary, .btn');
+      requestButton?.remove();
 
       actions.prepend(cartButton);
     });
@@ -295,10 +293,7 @@
     });
 
     const requestButton = featuredActions.querySelector('.btn.btn-primary') || featuredActions.querySelector('.btn');
-    if (requestButton) {
-      requestButton.classList.remove('btn-primary');
-      requestButton.classList.add('btn-secondary');
-    }
+    requestButton?.remove();
 
     featuredActions.prepend(cartButton);
   };
