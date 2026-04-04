@@ -1,7 +1,21 @@
 (function () {
   const launchAt = new Date('2026-04-06T08:00:00-04:00');
+  const bypassParam = 'mmPreview';
+  const bypassValue = 'farmington';
+  const bypassStorageKey = 'mittenMakesLaunchBypass';
+  const params = new URLSearchParams(window.location.search);
 
-  if (Number.isNaN(launchAt.getTime()) || Date.now() >= launchAt.getTime()) {
+  if (params.get(bypassParam) === bypassValue) {
+    window.localStorage.setItem(bypassStorageKey, 'true');
+  }
+
+  if (params.get(bypassParam) === 'off') {
+    window.localStorage.removeItem(bypassStorageKey);
+  }
+
+  const previewBypassEnabled = window.localStorage.getItem(bypassStorageKey) === 'true';
+
+  if (Number.isNaN(launchAt.getTime()) || Date.now() >= launchAt.getTime() || previewBypassEnabled) {
     return;
   }
 
