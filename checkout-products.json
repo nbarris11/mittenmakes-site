@@ -51,7 +51,8 @@
       "priceCents": 2200,
       "priceLabel": "$22.00",
       "image": "assets/love-from-michigan.png?v=20260404a",
-      "description": "Standard ready-to-order version."
+      "description": "Standard ready-to-order version.",
+      "simpleAddToCart": true
     },
     {
       "id": "thankful-for-our-michigan",
@@ -59,7 +60,8 @@
       "priceCents": 2200,
       "priceLabel": "$22.00",
       "image": "assets/thankful-for-our-michigan.png?v=20260404a",
-      "description": "Standard ready-to-order version."
+      "description": "Standard ready-to-order version.",
+      "simpleAddToCart": true
     },
     {
       "id": "detroit-red-wings-hockeytown",
@@ -67,7 +69,8 @@
       "priceCents": 2200,
       "priceLabel": "$22.00",
       "image": "assets/detroit-red-wings-hockeytown.png?v=20260404a",
-      "description": "Standard ready-to-order version."
+      "description": "Standard ready-to-order version.",
+      "simpleAddToCart": true
     },
     {
       "id": "detroit-pistons",
@@ -75,7 +78,8 @@
       "priceCents": 2200,
       "priceLabel": "$22.00",
       "image": "assets/detroit-pistons-mitten.png?v=20260404a",
-      "description": "Standard ready-to-order version."
+      "description": "Standard ready-to-order version.",
+      "simpleAddToCart": true
     },
     {
       "id": "detroit-lions",
@@ -83,7 +87,8 @@
       "priceCents": 2200,
       "priceLabel": "$22.00",
       "image": "assets/detroit-lions-all-grit.png?v=20260404a",
-      "description": "Standard ready-to-order version."
+      "description": "Standard ready-to-order version.",
+      "simpleAddToCart": true
     },
     {
       "id": "detroit-tigers",
@@ -91,7 +96,8 @@
       "priceCents": 2200,
       "priceLabel": "$22.00",
       "image": "assets/detroit-tigers-mitten.png?v=20260404a",
-      "description": "Standard ready-to-order version."
+      "description": "Standard ready-to-order version.",
+      "simpleAddToCart": true
     },
     {
       "id": "dual-color-star-fidget",

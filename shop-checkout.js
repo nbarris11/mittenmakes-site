@@ -18,6 +18,7 @@
   const finishStyleMap = new Map(finishStyleOptions.map(option => [option.id, option]));
   const solidColorOptions = checkoutConfig.solidColorOptions || [];
   const silkColorOptions = checkoutConfig.silkColorOptions || [];
+  const usesSimpleAddToCart = productId => Boolean(products.get(productId)?.simpleAddToCart);
 
   const cartList = document.getElementById('checkout-cart-items');
   const emptyState = document.getElementById('checkout-cart-empty');
@@ -260,7 +261,11 @@
       const cartButton = document.createElement('button');
       cartButton.type = 'button';
       cartButton.className = 'btn btn-primary btn-add-to-cart';
-      cartButton.textContent = product.customization ? 'Customize & add' : 'Choose color & add';
+      cartButton.textContent = product.customization
+        ? 'Customize & add'
+        : product.simpleAddToCart
+          ? 'Add to cart'
+          : 'Choose color & add';
       cartButton.addEventListener('click', async () => {
         const wasAdded = await addToCart(productId);
         if (wasAdded) flashAddedState(cartButton);
@@ -278,7 +283,7 @@
     const cartButton = document.createElement('button');
     cartButton.type = 'button';
     cartButton.className = 'btn btn-primary btn-add-to-cart';
-    cartButton.textContent = 'Choose color & add';
+    cartButton.textContent = products.get(productId)?.simpleAddToCart ? 'Add to cart' : 'Choose color & add';
     cartButton.addEventListener('click', async () => {
       const wasAdded = await addToCart(productId);
       if (wasAdded) flashAddedState(cartButton);
@@ -358,6 +363,9 @@
 
   const requestProductOptions = productId => {
     const customization = getProductCustomization(productId);
+    if (!customization && usesSimpleAddToCart(productId)) {
+      return Promise.resolve({});
+    }
     const dialog = ensureCustomizationDialog();
     const form = dialog.querySelector('form');
     const titleNode = form.querySelector('[data-option-title]');
