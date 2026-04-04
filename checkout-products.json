@@ -62,6 +62,38 @@
       "description": "Standard ready-to-order version."
     },
     {
+      "id": "detroit-red-wings-hockeytown",
+      "name": "Detroit Red Wings Hockeytown Decor",
+      "priceCents": 2200,
+      "priceLabel": "$22.00",
+      "image": "assets/detroit-red-wings-hockeytown.png?v=20260404a",
+      "description": "Standard ready-to-order version."
+    },
+    {
+      "id": "detroit-pistons",
+      "name": "Detroit Pistons",
+      "priceCents": 2200,
+      "priceLabel": "$22.00",
+      "image": "assets/detroit-pistons-mitten.png?v=20260404a",
+      "description": "Standard ready-to-order version."
+    },
+    {
+      "id": "detroit-lions",
+      "name": "Detroit Lions",
+      "priceCents": 2200,
+      "priceLabel": "$22.00",
+      "image": "assets/detroit-lions-all-grit.png?v=20260404a",
+      "description": "Standard ready-to-order version."
+    },
+    {
+      "id": "detroit-tigers",
+      "name": "Detroit Tigers",
+      "priceCents": 2200,
+      "priceLabel": "$22.00",
+      "image": "assets/detroit-tigers-mitten.png?v=20260404a",
+      "description": "Standard ready-to-order version."
+    },
+    {
       "id": "dual-color-star-fidget",
       "name": "Dual-Color Star Fidget",
       "priceCents": 1300,
