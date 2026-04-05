@@ -655,7 +655,8 @@
     const shippingAmount = fulfillmentMethod === 'shipping' ? shippingCents : 0;
     const total = subtotal + shippingAmount;
     const itemCount = cart.reduce((sum, item) => sum + item.quantity, 0);
-    const meetsMinimum = subtotal >= minimumSubtotalCents;
+    const minimumRequired = fulfillmentMethod === 'shipping';
+    const meetsMinimum = !minimumRequired || subtotal >= minimumSubtotalCents;
     const amountRemaining = Math.max(minimumSubtotalCents - subtotal, 0);
 
     cartCount.textContent = `${itemCount} item${itemCount === 1 ? '' : 's'}`;
@@ -663,9 +664,11 @@
     shippingValue.textContent = shippingAmount ? formatCurrency(shippingAmount) : 'Free';
     totalValue.textContent = formatCurrency(total);
 
-    minimumNote.textContent = meetsMinimum
-      ? `Your ready-to-order subtotal qualifies for online checkout. ${fulfillmentMethod === 'shipping' ? 'Shipping is a flat $9.97.' : 'Local pickup stays free.'}`
-      : `Online checkout starts at ${formatCurrency(minimumSubtotalCents)} in ready-to-order items before shipping.`;
+    minimumNote.textContent = fulfillmentMethod === 'shipping'
+      ? (meetsMinimum
+          ? 'Your ready-to-order subtotal qualifies for shipping checkout. Shipping is a flat $9.97.'
+          : `Shipping checkout starts at ${formatCurrency(minimumSubtotalCents)} in ready-to-order items before shipping.`)
+      : 'Local pickup has no minimum. Pickup in Metro Detroit stays free.';
 
     checkoutButton.disabled = !cart.length || !meetsMinimum;
     checkoutButton.classList.toggle('btn-disabled', !cart.length || !meetsMinimum);
@@ -673,12 +676,12 @@
       ? 'Add items to unlock checkout'
       : meetsMinimum
         ? 'Checkout with Stripe'
-        : `Add ${formatCurrency(amountRemaining)} more to checkout`;
+        : `Add ${formatCurrency(amountRemaining)} more to ship`;
     checkoutMessage.textContent = !cart.length
       ? 'Add a few ready-to-order items to start online checkout.'
       : meetsMinimum
         ? `You are ready to check out${fulfillmentMethod === 'shipping' ? ' with flat-rate shipping.' : ' for free local pickup.'}`
-        : `Add ${formatCurrency(amountRemaining)} more in ready-to-order items to unlock online checkout.`;
+        : `Add ${formatCurrency(amountRemaining)} more in ready-to-order items to unlock shipping checkout.`;
 
     emptyState.hidden = cart.length > 0;
     cartList.hidden = cart.length === 0;

@@ -158,9 +158,9 @@ module.exports = async (req, res) => {
       });
     }
 
-    if (subtotal < minimumSubtotalCents) {
+    if (fulfillmentMethod === 'shipping' && subtotal < minimumSubtotalCents) {
       return res.status(400).json({
-        error: `Online checkout starts at $${(minimumSubtotalCents / 100).toFixed(2)} in ready-to-order items before shipping.`
+        error: `Shipping checkout starts at $${(minimumSubtotalCents / 100).toFixed(2)} in ready-to-order items before shipping. Local pickup can be any amount.`
       });
     }
 
