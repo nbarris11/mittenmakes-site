@@ -169,7 +169,7 @@ a:hover { color: var(--accent-hover); }
    =========================== */
 
 .hero {
-  min-height: 560px;
+  min-height: 530px;
   background-color: var(--bg);
   display: flex;
   align-items: center;
@@ -193,7 +193,7 @@ a:hover { color: var(--accent-hover); }
 .hero-logo {
   width: min(460px, 90vw);
   height: auto;
-  margin: 0 auto 1rem;
+  margin: 0 auto 0.4rem;
   display: block;
 }
 
@@ -224,10 +224,10 @@ a:hover { color: var(--accent-hover); }
 }
 
 @media (max-width: 768px) {
-  .hero { min-height: 470px; }
+  .hero { min-height: 445px; }
   .hero-logo {
     width: min(360px, 88vw);
-    margin-bottom: 0.8rem;
+    margin-bottom: 0.35rem;
   }
   .hero-tagline { font-size: 1.65rem; }
   .hero-sub { font-size: 0.78rem; letter-spacing: 2px; }
