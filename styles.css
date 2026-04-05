@@ -2925,19 +2925,14 @@ details.faq-item[open] summary::after { transform: rotate(45deg); }
   grid-row: 2;
 }
 
-.footer-link[href*="customer-reviews.html"] {
+.footer-link[href*="contact.html"] {
   grid-column: 3;
   grid-row: 3;
 }
 
-.footer-link[href*="contact.html"] {
-  grid-column: 3;
-  grid-row: 4;
-}
-
 .footer-link[href*="returns-policy.html"] {
   grid-column: 3;
-  grid-row: 5;
+  grid-row: 4;
 }
 
 .footer-copyright {
@@ -3037,18 +3032,17 @@ details.faq-item[open] summary::after { transform: rotate(45deg); }
   .footer-contact { grid-column: 1; grid-row: 4; }
   .footer-link[href*="instagram.com"] { grid-column: 1; grid-row: 5; }
   .footer-link[href*="facebook.com"] { grid-column: 1; grid-row: 6; }
-  .footer-link[href*="customer-reviews.html"] { grid-column: 1; grid-row: 7; }
-  .footer-link[href*="contact.html"] { grid-column: 1; grid-row: 8; }
-  .footer-link[href*="returns-policy.html"] { grid-column: 1; grid-row: 9; }
-  .footer-content::after { grid-column: 1; grid-row: 10; margin-top: 0.7rem; }
+  .footer-link[href*="contact.html"] { grid-column: 1; grid-row: 7; }
+  .footer-link[href*="returns-policy.html"] { grid-column: 1; grid-row: 8; }
+  .footer-content::after { grid-column: 1; grid-row: 9; margin-top: 0.7rem; }
   .footer-copyright {
     grid-column: 1;
-    grid-row: 11;
+    grid-row: 10;
     padding-top: 0.8rem;
   }
   .footer-license {
     grid-column: 1;
-    grid-row: 12;
+    grid-row: 11;
     text-align: left;
     padding-top: 0;
   }
