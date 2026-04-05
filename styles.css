@@ -115,8 +115,9 @@ a:hover { color: var(--accent-hover); }
 .nav-logo:hover { opacity: 0.85; }
 
 .nav-logo-img {
-  width: 176px;
-  height: auto;
+  width: auto;
+  height: 64px;
+  max-width: min(260px, 42vw);
   display: block;
 }
 
@@ -148,7 +149,11 @@ a:hover { color: var(--accent-hover); }
 
 @media (max-width: 768px) {
   .navbar { padding: 0.3rem 0; }
-  .nav-logo-img { width: 136px; }
+  .nav-logo-img {
+    width: auto;
+    height: 48px;
+    max-width: 56vw;
+  }
   .nav-container {
     padding: 0 0.35rem;
     align-items: flex-start;
@@ -191,7 +196,7 @@ a:hover { color: var(--accent-hover); }
 }
 
 .hero-logo {
-  width: min(460px, 90vw);
+  width: min(360px, 72vw);
   height: auto;
   margin: 0 auto 0.4rem;
   display: block;
@@ -226,7 +231,7 @@ a:hover { color: var(--accent-hover); }
 @media (max-width: 768px) {
   .hero { min-height: 445px; }
   .hero-logo {
-    width: min(360px, 88vw);
+    width: min(280px, 64vw);
     margin-bottom: 0.35rem;
   }
   .hero-tagline { font-size: 1.65rem; }
