@@ -182,8 +182,8 @@
     {
       "id": "flexi-playful-star",
       "name": "Flexi Playful Star",
-      "priceCents": 1300,
-      "priceLabel": "$13.00",
+      "priceCents": 1200,
+      "priceLabel": "$12.00",
       "image": "assets/flexi-playful-star.png?v=20260403a",
       "description": "Standard ready-to-order version."
     },
