@@ -19,6 +19,8 @@
   const solidColorOptions = checkoutConfig.solidColorOptions || [];
   const silkColorOptions = checkoutConfig.silkColorOptions || [];
   const usesSimpleAddToCart = productId => Boolean(products.get(productId)?.simpleAddToCart);
+  let externalCheckoutMessage = '';
+  let externalCouponCode = null;
 
   const cartList = document.getElementById('checkout-cart-items');
   const emptyState = document.getElementById('checkout-cart-empty');
@@ -183,6 +185,65 @@
   };
 
   let cart = readCart();
+
+  const importMetaCheckoutUrl = () => {
+    if (!checkoutPanelPresent) return;
+
+    const url = new URL(window.location.href);
+    const productsParam = url.searchParams.get('products');
+    const couponParam = url.searchParams.get('coupon');
+    if (!productsParam) return;
+
+    const parsedItems = [];
+    const skippedProducts = [];
+
+    for (const rawEntry of productsParam.split(',')) {
+      const entry = rawEntry.trim();
+      if (!entry) continue;
+
+      const [productId, quantityRaw] = entry.split(':');
+      const quantity = Number(quantityRaw);
+      const product = products.get(productId);
+
+      if (!product || !Number.isInteger(quantity) || quantity < 1 || quantity > 25) {
+        skippedProducts.push(productId || entry);
+        continue;
+      }
+
+      const options = normalizeOptions(productId, {});
+      if (product.customization || !options) {
+        skippedProducts.push(product.name);
+        continue;
+      }
+
+      parsedItems.push({
+        id: productId,
+        quantity,
+        cartKey: buildCartKey(productId, options),
+        options
+      });
+    }
+
+    if (parsedItems.length) {
+      cart = parsedItems;
+      saveCart(cart);
+      externalCouponCode = couponParam || null;
+      const couponNote = couponParam
+        ? ` Coupon code received: ${couponParam}.`
+        : '';
+      const skippedNote = skippedProducts.length
+        ? ` Some items could not be added automatically: ${skippedProducts.join(', ')}.`
+        : '';
+      externalCheckoutMessage = `We loaded your Facebook or Instagram cart.${couponNote}${skippedNote}`;
+    } else {
+      externalCouponCode = couponParam || null;
+      externalCheckoutMessage = 'We could not load any valid items from that Facebook or Instagram checkout link.';
+    }
+
+    url.searchParams.delete('products');
+    url.searchParams.delete('coupon');
+    window.history.replaceState({}, '', `${url.pathname}${url.search}${url.hash}`);
+  };
 
   const getFulfillmentMethod = () =>
     document.querySelector('input[name="checkout-fulfillment"]:checked')?.value || 'pickup';
@@ -677,11 +738,11 @@
       : meetsMinimum
         ? 'Checkout with Stripe'
         : `Add ${formatCurrency(amountRemaining)} more to ship`;
-    checkoutMessage.textContent = !cart.length
+    checkoutMessage.textContent = externalCheckoutMessage || (!cart.length
       ? 'Add a few ready-to-order items to start online checkout.'
       : meetsMinimum
         ? `You are ready to check out${fulfillmentMethod === 'shipping' ? ' with flat-rate shipping.' : ' for free local pickup.'}`
-        : `Add ${formatCurrency(amountRemaining)} more in ready-to-order items to unlock shipping checkout.`;
+        : `Add ${formatCurrency(amountRemaining)} more in ready-to-order items to unlock shipping checkout.`);
 
     emptyState.hidden = cart.length > 0;
     cartList.hidden = cart.length === 0;
@@ -740,7 +801,8 @@
     try {
       const payload = {
         fulfillmentMethod: getFulfillmentMethod(),
-        items: cart
+        items: cart,
+        couponCode: externalCouponCode
       };
 
       const result = await fetch('/api/create-checkout-session', {
@@ -766,6 +828,7 @@
 
   syncCardButtons();
   syncFeaturedButton();
+  importMetaCheckoutUrl();
   updateCartSummary();
   renderCart();
 })();

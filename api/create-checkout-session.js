@@ -78,7 +78,7 @@ module.exports = async (req, res) => {
     const solidColorOptions = checkoutConfig.solidColorOptions || [];
     const silkColorOptions = checkoutConfig.silkColorOptions || [];
 
-    const { items, fulfillmentMethod } = req.body || {};
+    const { items, fulfillmentMethod, couponCode } = req.body || {};
 
     if (!Array.isArray(items) || items.length === 0) {
       return res.status(400).json({ error: 'Your cart is empty. Add ready-to-order items before checking out.' });
@@ -174,7 +174,8 @@ module.exports = async (req, res) => {
       cancel_url: `${baseUrl}/shop.html?checkout=cancelled#online-checkout`,
       metadata: {
         fulfillment_method: fulfillmentMethod,
-        merchandise_subtotal_cents: String(subtotal)
+        merchandise_subtotal_cents: String(subtotal),
+        ...(couponCode ? { coupon_requested: String(couponCode).trim().slice(0, 64) } : {})
       }
     };
 
