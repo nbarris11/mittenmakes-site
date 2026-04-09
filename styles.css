@@ -2002,10 +2002,85 @@ details.faq-item[open] summary::after { transform: rotate(45deg); }
 .instagram-strip {
   background-color: var(--accent);
   padding: 3rem 0;
+}
+.instagram-strip-copy {
+  max-width: 760px;
+  margin: 0 auto 1.5rem;
   text-align: center;
 }
+.instagram-strip-eyebrow {
+  color: rgba(255,255,255,0.78);
+  margin-bottom: 0.55rem;
+}
 .instagram-strip h2 { color: #ffffff; font-size: 1.7rem; margin-bottom: 0.5rem; }
-.instagram-strip p { color: rgba(255,255,255,0.88); margin-bottom: 1.75rem; font-size: 0.98rem; }
+.instagram-strip p { color: rgba(255,255,255,0.88); margin-bottom: 0; font-size: 0.98rem; }
+
+.instagram-rail {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(220px, 260px);
+  gap: 1rem;
+  overflow-x: auto;
+  padding: 0.3rem 0 0.8rem;
+  margin-bottom: 1.5rem;
+  scroll-snap-type: x proximity;
+}
+
+.instagram-card {
+  scroll-snap-align: start;
+  background: rgba(255, 255, 255, 0.96);
+  border-radius: 18px;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,0.28);
+  box-shadow: 0 12px 28px rgba(96, 43, 16, 0.14);
+}
+
+.instagram-card img {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  display: block;
+  background: #fff7f0;
+}
+
+.instagram-card-copy {
+  padding: 1rem 1rem 1.05rem;
+}
+
+.instagram-card-label {
+  margin-bottom: 0.3rem;
+  color: var(--accent);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 1.1px;
+  text-transform: uppercase;
+  font-family: 'Poppins', sans-serif;
+}
+
+.instagram-card h3 {
+  margin: 0;
+  color: var(--text);
+  font-size: 1rem;
+}
+
+.instagram-strip-actions {
+  display: flex;
+  gap: 0.9rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.btn-instagram-secondary {
+  background: rgba(255,255,255,0.12);
+  border-color: rgba(255,255,255,0.36);
+  color: #ffffff;
+}
+
+.btn-instagram-secondary:hover {
+  background: rgba(255,255,255,0.18);
+  color: #ffffff;
+  border-color: rgba(255,255,255,0.48);
+}
 
 /* ===========================
    SHOP SECTION
