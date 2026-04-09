@@ -3,6 +3,7 @@
   const cartRoot = document.getElementById('online-checkout');
   const cartSummaryLinks = Array.from(document.querySelectorAll('[data-cart-link]'));
   const cartSummaryCounts = Array.from(document.querySelectorAll('[data-cart-count]'));
+  const cartSubtotalNodes = Array.from(document.querySelectorAll('[data-cart-subtotal]'));
   const checkoutPanelPresent = Boolean(cartRoot);
   const featuredActions = document.querySelector('.featured-gift-copy .order-actions');
   let cartToastTimeout;
@@ -255,14 +256,18 @@
 
   const updateCartSummary = () => {
     const itemCount = cart.reduce((sum, item) => sum + item.quantity, 0);
+    const subtotal = getSubtotal();
     cartSummaryCounts.forEach(node => {
       node.textContent = `${itemCount} item${itemCount === 1 ? '' : 's'}`;
+    });
+    cartSubtotalNodes.forEach(node => {
+      node.textContent = formatCurrency(subtotal);
     });
 
     cartSummaryLinks.forEach(link => {
       link.textContent = itemCount > 0
-        ? `View cart & checkout (${itemCount})`
-        : 'Open cart';
+        ? `Review cart & checkout (${itemCount})`
+        : 'Browse first, then checkout';
     });
   };
 
