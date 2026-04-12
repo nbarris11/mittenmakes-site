@@ -613,6 +613,29 @@ a:hover { color: var(--accent-hover); }
 }
 
 /* ===========================
+   SITE INTRO
+   =========================== */
+
+.site-intro-section {
+  background: var(--surface);
+  padding: 2.25rem 1.5rem;
+}
+
+.site-intro-text {
+  max-width: 740px;
+  margin: 0 auto;
+  text-align: center;
+  color: var(--muted);
+  line-height: 1.8;
+  font-size: 1.05rem;
+}
+
+@media (max-width: 768px) {
+  .site-intro-section { padding: 1.75rem 1.25rem; }
+  .site-intro-text { font-size: 1rem; }
+}
+
+/* ===========================
    HOW IT WORKS
    =========================== */
 
