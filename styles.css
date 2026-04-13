@@ -769,7 +769,7 @@ a:hover { color: var(--accent-hover); }
 
 .gift-finder-builder-copy .section-lead {
   max-width: 64ch;
-  margin: 0;
+  margin: 0 auto;
 }
 
 .gift-finder-success {
