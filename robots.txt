@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://mittenmakes.com/sitemap.xml
+Sitemap: https://www.mittenmakes.com/sitemap.xml
