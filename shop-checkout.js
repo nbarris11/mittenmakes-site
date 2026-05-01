@@ -693,6 +693,13 @@
     const itemCount = cart.reduce((sum, item) => sum + item.quantity, 0);
     pulseCartIndicators();
     showCartToast(`${product?.name || 'Item'} added to cart • ${itemCount} item${itemCount === 1 ? '' : 's'} ready`);
+    window.posthog?.capture('product_added_to_cart', {
+      product_id: productId,
+      product_name: product?.name,
+      product_price_cents: product?.priceCents,
+      has_options: Boolean(options && Object.keys(options).length),
+      cart_item_count: itemCount,
+    });
     return true;
   };
 
@@ -706,10 +713,19 @@
   };
 
   const removeFromCart = cartKey => {
+    const removing = cart.find(item => item.cartKey === cartKey);
+    const product = removing ? products.get(removing.id) : null;
     cart = cart.filter(item => item.cartKey !== cartKey);
     saveCart(cart);
     updateCartSummary();
     renderCart();
+    if (removing) {
+      window.posthog?.capture('product_removed_from_cart', {
+        product_id: removing.id,
+        product_name: product?.name,
+        cart_item_count: cart.reduce((sum, item) => sum + item.quantity, 0),
+      });
+    }
   };
 
   const renderCart = () => {
@@ -796,16 +812,31 @@
   };
 
   document.querySelectorAll('input[name="checkout-fulfillment"]').forEach(input => {
-    input.addEventListener('change', renderCart);
+    input.addEventListener('change', () => {
+      renderCart();
+      window.posthog?.capture('fulfillment_method_changed', { method: input.value });
+    });
   });
 
   checkoutButton?.addEventListener('click', async () => {
     checkoutButton.disabled = true;
     checkoutMessage.textContent = 'Opening secure checkout...';
 
+    const fulfillmentMethod = getFulfillmentMethod();
+    const subtotalCents = getSubtotal();
+    const cartItemCount = cart.reduce((sum, item) => sum + item.quantity, 0);
+    const checkoutProps = {
+      cart_item_count: cartItemCount,
+      cart_subtotal_cents: subtotalCents,
+      fulfillment_method: fulfillmentMethod,
+      has_coupon: Boolean(externalCouponCode),
+    };
+
+    window.posthog?.capture('checkout_initiated', checkoutProps);
+
     try {
       const payload = {
-        fulfillmentMethod: getFulfillmentMethod(),
+        fulfillmentMethod,
         items: cart,
         couponCode: externalCouponCode
       };
@@ -824,8 +855,10 @@
         throw new Error(data.error || 'Online checkout is not available yet. Please use the request form for now.');
       }
 
+      window.posthog?.capture('checkout_stripe_redirect', checkoutProps);
       window.location.href = data.url;
     } catch (error) {
+      window.posthog?.capture('checkout_error', { ...checkoutProps, error_message: error.message });
       checkoutMessage.textContent = error.message;
       checkoutButton.disabled = false;
     }
