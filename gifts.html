@@ -1,0 +1,762 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-D4EEQX849H"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-D4EEQX849H');
+      gtag('config', 'AW-18064376526');
+    </script>
+    <!-- Vercel Analytics -->
+    <script>
+      window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+    </script>
+    <script defer src="/_vercel/insights/script.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D Printed Gifts Made in Michigan | Mitten Makes</title>
+    <meta name="description" content="Articulated animals, Michigan decor, fidgets, and more — all made to order in Metro Detroit. Pick your look, checkout fast.">
+    <meta name="robots" content="noindex, nofollow">
+    <link rel="icon" type="image/png" href="/assets/logo-badge-favicon.png?v=20260404a">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css?v=20260413a">
+    <script src="launch-lock.js?v=20260404a" defer></script>
+    <script src="shop-checkout.js?v=20260404d" defer></script>
+    <!-- PostHog Analytics -->
+    <script>
+        !function(t,e){var o,n,p,r;e.__SV||(window.posthog && window.posthog.__loaded)||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="init Dr qr Ci Br Zr Pr capture calculateEventProperties Ur register register_once register_for_session unregister unregister_for_session Xr getFeatureFlag getFeatureFlagPayload getFeatureFlagResult isFeatureEnabled reloadFeatureFlags updateFlags updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures on onFeatureFlags onSurveysLoaded onSessionId getSurveys getActiveMatchingSurveys renderSurvey displaySurvey cancelPendingSurvey canRenderSurvey canRenderSurveyAsync Jr identify setPersonProperties group resetGroups setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags reset setIdentity clearIdentity get_distinct_id getGroups get_session_id get_session_replay_url alias set_config startSessionRecording stopSessionRecording sessionRecordingStarted captureException captureLog startExceptionAutocapture stopExceptionAutocapture loadToolbar get_property getSessionProperty Wr Hr createPersonProfile setInternalOrTestUser Gr Fr tn opt_in_capturing opt_out_capturing has_opted_in_capturing has_opted_out_capturing get_explicit_consent_status is_capturing clear_opt_in_out_capturing $r debug ki Yr getPageViewId captureTraceFeedback captureTraceMetric Rr".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+        posthog.init('phc_AogD8eSWciZfxnGJprgkuCb7bdto8gvj8HZeUFBoTGCM', {
+            api_host: 'https://t.mittenmakes.com',
+            ui_host: 'https://us.posthog.com',
+            defaults: '2026-01-30',
+            person_profiles: 'identified_only',
+        })
+    </script>
+    <style>
+        /* Stripped nav for landing page */
+        .lp-nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid rgba(196, 81, 26, 0.1);
+            background: var(--surface, #fffaf4);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .lp-nav-logo img {
+            height: 36px;
+            width: auto;
+        }
+
+        .lp-nav-cart {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--text, #1a1a1a);
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border: 2px solid var(--primary, #c4511a);
+            border-radius: 9999px;
+            transition: background 0.15s, color 0.15s;
+        }
+
+        .lp-nav-cart:hover {
+            background: var(--primary, #c4511a);
+            color: #fff;
+        }
+
+        .lp-nav-cart-count {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--primary, #c4511a);
+            color: #fff;
+            border-radius: 9999px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            min-width: 1.25rem;
+            height: 1.25rem;
+            padding: 0 0.25rem;
+        }
+
+        /* Hero */
+        .lp-hero {
+            background: linear-gradient(160deg, #fff9f2 0%, #f7e8d8 100%);
+            padding: 3rem 1.5rem 2.5rem;
+            text-align: center;
+        }
+
+        .lp-hero-eyebrow {
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #c4511a;
+            margin-bottom: 0.75rem;
+        }
+
+        .lp-hero h1 {
+            font-family: 'Poppins', sans-serif;
+            font-size: clamp(1.75rem, 6vw, 2.75rem);
+            font-weight: 800;
+            line-height: 1.15;
+            color: #1a1a1a;
+            margin-bottom: 1rem;
+        }
+
+        .lp-hero-sub {
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+            color: #4a4a4a;
+            max-width: 480px;
+            margin: 0 auto 1.75rem;
+            line-height: 1.6;
+        }
+
+        .lp-trust-row {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 0.5rem 1.25rem;
+            margin-bottom: 0;
+        }
+
+        .lp-trust-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: #5a3a1a;
+            background: rgba(196, 81, 26, 0.08);
+            border-radius: 9999px;
+            padding: 0.35rem 0.85rem;
+        }
+
+        /* Products */
+        .lp-products {
+            padding: 2.5rem 1.5rem 3rem;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .lp-section-label {
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #c4511a;
+            margin-bottom: 0.4rem;
+        }
+
+        .lp-section-title {
+            font-family: 'Poppins', sans-serif;
+            font-size: clamp(1.25rem, 4vw, 1.75rem);
+            font-weight: 800;
+            color: #1a1a1a;
+            margin-bottom: 0.5rem;
+        }
+
+        .lp-section-desc {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.925rem;
+            color: #5a5a5a;
+            margin-bottom: 2rem;
+            max-width: 560px;
+        }
+
+        .lp-product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: 1.25rem;
+            margin-bottom: 3rem;
+        }
+
+        .product-card {
+            overflow: hidden;
+            border-radius: 16px;
+            border: 1px solid rgba(196, 81, 26, 0.1);
+            background: #fff;
+        }
+
+        .product-photo.product-photo-real {
+            aspect-ratio: 1 / 1;
+            display: grid;
+            place-items: center;
+            background: linear-gradient(180deg, #FFF9F2 0%, #F7E8D8 100%);
+            border-bottom: 1px solid rgba(196, 81, 26, 0.08);
+            padding: 1rem;
+        }
+
+        .product-photo.product-photo-real img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            filter: drop-shadow(0 8px 16px rgba(61, 61, 61, 0.1));
+        }
+
+        .product-card-body {
+            padding: 1rem 1rem 1.25rem;
+        }
+
+        .product-card-kickers {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.35rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .product-kicker {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.65rem;
+            font-weight: 700;
+            letter-spacing: 0.8px;
+            text-transform: uppercase;
+            color: #c4511a;
+            background: rgba(196, 81, 26, 0.08);
+            border-radius: 4px;
+            padding: 0.2rem 0.5rem;
+        }
+
+        .product-name {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1rem;
+            font-weight: 700;
+            color: #1a1a1a;
+            margin-bottom: 0.35rem;
+        }
+
+        .product-description {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.825rem;
+            color: #5a5a5a;
+            line-height: 1.5;
+            margin-bottom: 0.75rem;
+        }
+
+        .product-price {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: #1a1a1a;
+            margin-bottom: 0.75rem;
+        }
+
+        .product-card-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .product-card-actions .btn {
+            flex: 1;
+            text-align: center;
+            font-size: 0.875rem;
+        }
+
+        /* Cart dock */
+        .shop-cart-dock {
+            position: fixed;
+            bottom: 1.25rem;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #1a1a1a;
+            color: #fff;
+            border-radius: 9999px;
+            padding: 0.75rem 1.25rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.25);
+            z-index: 200;
+            white-space: nowrap;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.2s;
+        }
+
+        .shop-cart-dock.shop-cart-dock-visible {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .shop-cart-dock-copy {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.825rem;
+        }
+
+        .shop-cart-dock-label {
+            font-weight: 600;
+            font-size: 0.7rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            opacity: 0.7;
+            margin-bottom: 0.1rem;
+        }
+
+        .shop-cart-dock-count { font-weight: 700; }
+        .shop-cart-dock-subtotal { opacity: 0.8; }
+        .shop-cart-dock-note { display: none; }
+
+        .shop-cart-dock-link {
+            background: #c4511a;
+            color: #fff;
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.825rem;
+            font-weight: 700;
+            padding: 0.6rem 1.25rem;
+            border-radius: 9999px;
+            text-decoration: none;
+            white-space: nowrap;
+            transition: background 0.15s;
+        }
+
+        .shop-cart-dock-link:hover { background: #a83e12; }
+
+        /* Color swatches */
+        .swatches-label {
+            font-size: 0.7rem;
+            font-family: 'Inter', sans-serif;
+            color: #888;
+            margin-bottom: 0.3rem;
+        }
+
+        .color-swatches {
+            display: flex;
+            gap: 0.35rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .swatch {
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            border: 1.5px solid rgba(0,0,0,0.12);
+            display: inline-block;
+        }
+
+        /* Divider between groups */
+        .lp-divider {
+            border: none;
+            border-top: 1px solid rgba(196, 81, 26, 0.1);
+            margin: 2rem 0;
+        }
+
+        /* Bottom CTA */
+        .lp-bottom-cta {
+            text-align: center;
+            padding: 2.5rem 1.5rem 3rem;
+            background: linear-gradient(160deg, #fff9f2 0%, #f7e8d8 100%);
+        }
+
+        .lp-bottom-cta h2 {
+            font-family: 'Poppins', sans-serif;
+            font-size: clamp(1.2rem, 4vw, 1.75rem);
+            font-weight: 800;
+            color: #1a1a1a;
+            margin-bottom: 0.5rem;
+        }
+
+        .lp-bottom-cta p {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.925rem;
+            color: #5a5a5a;
+            margin-bottom: 1.5rem;
+        }
+
+        .lp-bottom-cta .btn {
+            margin: 0 0.4rem 0.5rem;
+        }
+
+        /* Minimal footer */
+        .lp-footer {
+            padding: 1.25rem 1.5rem;
+            border-top: 1px solid rgba(196, 81, 26, 0.1);
+            text-align: center;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.775rem;
+            color: #888;
+        }
+
+        .lp-footer a { color: #888; }
+
+        @media (max-width: 480px) {
+            .lp-hero { padding: 2rem 1.25rem 2rem; }
+            .lp-products { padding: 2rem 1rem 2.5rem; }
+            .lp-product-grid { grid-template-columns: repeat(2, 1fr); gap: 0.75rem; }
+            .product-card-body { padding: 0.75rem 0.75rem 1rem; }
+            .product-name { font-size: 0.875rem; }
+            .product-description { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Stripped nav: logo + cart only -->
+    <nav class="lp-nav">
+        <a href="/" class="lp-nav-logo">
+            <img src="/mitten-makes-main-logo2.png" alt="Mitten Makes">
+        </a>
+        <a href="checkout.html" class="lp-nav-cart" data-cart-link>
+            Cart&nbsp;<span class="lp-nav-cart-count" data-cart-count>0</span>
+        </a>
+    </nav>
+
+    <!-- Hero -->
+    <div class="lp-hero">
+        <p class="lp-hero-eyebrow">Made to order in Farmington Hills, MI</p>
+        <h1>3D Printed Gifts<br>They'll Actually Love</h1>
+        <p class="lp-hero-sub">Articulated animals, Michigan decor, fidgets, and more — printed fresh and shipped right to you.</p>
+        <div class="lp-trust-row">
+            <span class="lp-trust-pill">✓ Free local pickup</span>
+            <span class="lp-trust-pill">✓ Flat $9.97 shipping</span>
+            <span class="lp-trust-pill">✓ Made every order</span>
+            <span class="lp-trust-pill">✓ Free surprise mini print today</span>
+        </div>
+    </div>
+
+    <!-- Cart dock (shown when cart has items) -->
+    <div class="shop-cart-dock" aria-live="polite">
+        <div class="shop-cart-dock-copy">
+            <p class="shop-cart-dock-label">Your cart</p>
+            <p class="shop-cart-dock-count"><strong data-cart-count>0 items</strong></p>
+            <p class="shop-cart-dock-subtotal">Subtotal <strong data-cart-subtotal>$0.00</strong></p>
+        </div>
+        <a href="checkout.html" class="shop-cart-dock-link" data-cart-link>Review &amp; checkout →</a>
+    </div>
+
+    <!-- Products -->
+    <div class="lp-products">
+
+        <!-- Creatures -->
+        <p class="lp-section-label">Collector creatures</p>
+        <h2 class="lp-section-title">Articulated animals &amp; dragons</h2>
+        <p class="lp-section-desc">Every joint moves. Every one is printed fresh in the color you pick.</p>
+
+        <div class="lp-product-grid">
+
+            <div class="product-card fade-up" id="crystal-dragon">
+                <div class="product-photo product-photo-real">
+                    <img src="assets/crystal-dragon-cinderwing.png?v=20260401b" alt="Crystal Dragon articulated 3D print">
+                </div>
+                <div class="product-card-body">
+                    <div class="product-card-kickers">
+                        <span class="product-kicker">Fan favorite</span>
+                        <span class="product-kicker">Desk decor</span>
+                    </div>
+                    <h3 class="product-name">Crystal Dragon</h3>
+                    <p class="product-description">A fully-articulated dragon with a crystal-clear look. Every joint moves.</p>
+                    <p class="product-price">$15</p>
+                    <div class="product-card-actions">
+                        <a href="#" class="btn btn-secondary">Add to cart</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="product-card fade-up" id="void-octopus">
+                <div class="product-photo product-photo-real">
+                    <img src="assets/void-octopus-cinderwing.png?v=20260403a" alt="Void Octopus articulated 3D print">
+                </div>
+                <div class="product-card-body">
+                    <div class="product-card-kickers">
+                        <span class="product-kicker">Unique gift</span>
+                        <span class="product-kicker">Flexible</span>
+                    </div>
+                    <h3 class="product-name">Void Octopus</h3>
+                    <p class="product-description">Eight articulated tentacles, fully poseable. A standout piece.</p>
+                    <p class="product-price">$15</p>
+                    <div class="product-card-actions">
+                        <a href="#" class="btn btn-secondary">Add to cart</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="product-card fade-up" id="bone-dragon">
+                <div class="product-photo product-photo-real">
+                    <img src="assets/bone-dragon.jpg?v=20260331c" alt="Bone Dragon articulated 3D print">
+                </div>
+                <div class="product-card-body">
+                    <div class="product-card-kickers">
+                        <span class="product-kicker">Bold look</span>
+                        <span class="product-kicker">Desk decor</span>
+                    </div>
+                    <h3 class="product-name">Bone Dragon</h3>
+                    <p class="product-description">Articulated dragon with an intricate skeletal design.</p>
+                    <p class="product-price">$15</p>
+                    <div class="product-card-actions">
+                        <a href="#" class="btn btn-secondary">Add to cart</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="product-card fade-up" id="tiny-t-rex">
+                <div class="product-photo product-photo-real">
+                    <img src="assets/tiny-t-rex-cinderwing.png?v=20260401b" alt="Tiny T-Rex articulated 3D print">
+                </div>
+                <div class="product-card-body">
+                    <div class="product-card-kickers">
+                        <span class="product-kicker">Kid-friendly</span>
+                        <span class="product-kicker">Fun gift</span>
+                    </div>
+                    <h3 class="product-name">Tiny T-Rex</h3>
+                    <p class="product-description">Fully articulated mini T-Rex. Surprisingly satisfying to fidget with.</p>
+                    <p class="product-price">$10</p>
+                    <div class="product-card-actions">
+                        <a href="#" class="btn btn-secondary">Add to cart</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="product-card fade-up" id="whale-shark">
+                <div class="product-photo product-photo-real">
+                    <img src="assets/whale-shark-biocraftlab.jpg?v=20260401b" alt="Whale Shark articulated 3D print">
+                </div>
+                <div class="product-card-body">
+                    <div class="product-card-kickers">
+                        <span class="product-kicker">Ocean vibes</span>
+                        <span class="product-kicker">Kid gift</span>
+                    </div>
+                    <h3 class="product-name">Whale Shark</h3>
+                    <p class="product-description">Gentle giant. Articulated body that ripples as it moves.</p>
+                    <p class="product-price">$10</p>
+                    <div class="product-card-actions">
+                        <a href="#" class="btn btn-secondary">Add to cart</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="product-card fade-up" id="cookie-dragon-keychain-figure">
+                <div class="product-photo product-photo-real">
+                    <img src="assets/cookie-dragon-front.jpg?v=20260331b" alt="Cookie Dragon Keychain Figure">
+                </div>
+                <div class="product-card-body">
+                    <div class="product-card-kickers">
+                        <span class="product-kicker">Keychain</span>
+                        <span class="product-kicker">Impulse gift</span>
+                    </div>
+                    <h3 class="product-name">Cookie Dragon Keychain</h3>
+                    <p class="product-description">A tiny articulated dragon that clips right to your keys or bag.</p>
+                    <p class="product-price">$8</p>
+                    <div class="product-card-actions">
+                        <a href="#" class="btn btn-secondary">Add to cart</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <hr class="lp-divider">
+
+        <!-- Fidgets -->
+        <p class="lp-section-label">Satisfying fidgets</p>
+        <h2 class="lp-section-title">Fidgets &amp; desk toys</h2>
+        <p class="lp-section-desc">Great for kids, teens, and anyone who needs something to do with their hands.</p>
+
+        <div class="lp-product-grid">
+
+            <div class="product-card fade-up" id="dual-color-star-fidget">
+                <div class="product-photo product-photo-real">
+                    <img src="assets/geometric-spinner-gradient.png?v=20260330k" alt="Dual-Color Star Fidget">
+                </div>
+                <div class="product-card-body">
+                    <div class="product-card-kickers">
+                        <span class="product-kicker">Best seller</span>
+                        <span class="product-kicker">Silk finish</span>
+                    </div>
+                    <h3 class="product-name">Dual-Color Star Fidget</h3>
+                    <p class="product-description">A layered star fidget with a silky finish and a two-color look that shifts as it moves.</p>
+                    <p class="product-price">$13</p>
+                    <div class="product-card-actions">
+                        <a href="#" class="btn btn-secondary">Add to cart</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="product-card fade-up" id="bun-slime-fidget">
+                <div class="product-photo product-photo-real">
+                    <img src="assets/bun-slime-fidget-closed.jpg?v=20260331a" alt="Bun Slime Fidget">
+                </div>
+                <div class="product-card-body">
+                    <div class="product-card-kickers">
+                        <span class="product-kicker">Satisfying</span>
+                        <span class="product-kicker">Cute</span>
+                    </div>
+                    <h3 class="product-name">Bun Slime Fidget</h3>
+                    <p class="product-description">Opens, closes, squishes. One of those things you can't put down.</p>
+                    <p class="product-price">$10</p>
+                    <div class="product-card-actions">
+                        <a href="#" class="btn btn-secondary">Add to cart</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="product-card fade-up" id="fidget-switch">
+                <div class="product-photo product-photo-real">
+                    <img src="assets/fidget-switch.jpg?v=20260401a" alt="Fidget Switch">
+                </div>
+                <div class="product-card-body">
+                    <div class="product-card-kickers">
+                        <span class="product-kicker">Clicky</span>
+                        <span class="product-kicker">Pocket-sized</span>
+                    </div>
+                    <h3 class="product-name">Fidget Switch</h3>
+                    <p class="product-description">Satisfying clicks and flips. Small enough for a pocket or backpack.</p>
+                    <p class="product-price">$8</p>
+                    <div class="product-card-actions">
+                        <a href="#" class="btn btn-secondary">Add to cart</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="product-card fade-up" id="flexi-playful-star">
+                <div class="product-photo product-photo-real">
+                    <img src="assets/flexi-playful-star.png?v=20260403a" alt="Flexi Playful Star">
+                </div>
+                <div class="product-card-body">
+                    <div class="product-card-kickers">
+                        <span class="product-kicker">Flexible</span>
+                        <span class="product-kicker">Party favor</span>
+                    </div>
+                    <h3 class="product-name">Flexi Playful Star</h3>
+                    <p class="product-description">A flexible, poseable star that moves in all directions. Great for bulk orders too.</p>
+                    <p class="product-price">$12</p>
+                    <div class="product-card-actions">
+                        <a href="#" class="btn btn-secondary">Add to cart</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <hr class="lp-divider">
+
+        <!-- Michigan -->
+        <p class="lp-section-label">Michigan made</p>
+        <h2 class="lp-section-title">Michigan &amp; Detroit decor</h2>
+        <p class="lp-section-desc">Wall decor and gifts for anyone who loves the mitten. Ships anywhere in the U.S.</p>
+
+        <div class="lp-product-grid">
+
+            <div class="product-card fade-up" id="love-from-michigan">
+                <div class="product-photo product-photo-real">
+                    <img src="assets/love-from-michigan.png?v=20260404a" alt="Love From Michigan 3D printed wall decor">
+                </div>
+                <div class="product-card-body">
+                    <div class="product-card-kickers">
+                        <span class="product-kicker">Local favorite</span>
+                        <span class="product-kicker">Housewarming</span>
+                    </div>
+                    <h3 class="product-name">Love From Michigan</h3>
+                    <p class="product-description">A layered Michigan mitten wall piece. Great housewarming or host gift.</p>
+                    <p class="swatches-label">Shown in</p>
+                    <div class="color-swatches">
+                        <span class="swatch" style="background:#D25A55" title="Warm red"></span>
+                        <span class="swatch" style="background:#2F4B7C" title="Navy blue"></span>
+                        <span class="swatch" style="background:#E8D7BD" title="Natural"></span>
+                    </div>
+                    <p class="product-price">$22</p>
+                    <div class="product-card-actions">
+                        <a href="#" class="btn btn-secondary">Add to cart</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="product-card fade-up" id="detroit-lions">
+                <div class="product-photo product-photo-real">
+                    <img src="assets/detroit-lions-all-grit.png?v=20260404a" alt="Detroit Lions 3D printed Michigan mitten decor">
+                </div>
+                <div class="product-card-body">
+                    <div class="product-card-kickers">
+                        <span class="product-kicker">Sports gift</span>
+                        <span class="product-kicker">Detroit</span>
+                    </div>
+                    <h3 class="product-name">Detroit Lions</h3>
+                    <p class="product-description">Michigan mitten wall decor for the Lions fan in your life.</p>
+                    <p class="product-price">$22</p>
+                    <div class="product-card-actions">
+                        <a href="#" class="btn btn-secondary">Add to cart</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="product-card fade-up" id="detroit-red-wings-hockeytown">
+                <div class="product-photo product-photo-real">
+                    <img src="assets/detroit-red-wings-hockeytown.png?v=20260404a" alt="Detroit Red Wings Hockeytown 3D printed Michigan mitten decor">
+                </div>
+                <div class="product-card-body">
+                    <div class="product-card-kickers">
+                        <span class="product-kicker">Hockeytown</span>
+                        <span class="product-kicker">Sports room</span>
+                    </div>
+                    <h3 class="product-name">Detroit Red Wings</h3>
+                    <p class="product-description">Hockeytown pride in mitten form. Perfect for sports rooms and Detroit fans.</p>
+                    <p class="product-price">$22</p>
+                    <div class="product-card-actions">
+                        <a href="#" class="btn btn-secondary">Add to cart</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="product-card fade-up" id="custom-golf-ball-holder">
+                <div class="product-photo product-photo-real">
+                    <img src="assets/golf-ball-holder-loaded.png?v=20260330t" alt="Custom Golf Ball Holder with personalized text">
+                </div>
+                <div class="product-card-body">
+                    <div class="product-card-kickers">
+                        <span class="product-kicker">Personalized</span>
+                        <span class="product-kicker">Dad gift</span>
+                    </div>
+                    <h3 class="product-name">Custom Golf Ball Holder</h3>
+                    <p class="product-description">Personalized with your words and two colors. A standout Father's Day or golfer gift.</p>
+                    <p class="product-price">$18</p>
+                    <div class="product-card-actions">
+                        <a href="#" class="btn btn-secondary">Add to cart</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Bottom CTA -->
+    <div class="lp-bottom-cta">
+        <h2>Want something more specific?</h2>
+        <p>Send us a custom order request — we can do names, colors, and one-off designs.</p>
+        <a href="custom.html" class="btn btn-primary">Start a custom order</a>
+        <a href="shop.html" class="btn btn-secondary">See the full shop</a>
+    </div>
+
+    <!-- Minimal footer -->
+    <footer class="lp-footer">
+        <p>Made in Farmington Hills, MI &nbsp;·&nbsp; <a href="returns-policy.html">Returns &amp; store credit</a> &nbsp;·&nbsp; <a href="mailto:mittenmakes@gmail.com">mittenmakes@gmail.com</a> &nbsp;·&nbsp; &copy; 2026 Mitten Makes</p>
+    </footer>
+
+    <!-- Show cart dock when items are in cart -->
+    <script>
+      (function() {
+        const dock = document.querySelector('.shop-cart-dock');
+        if (!dock) return;
+        const observer = new MutationObserver(() => {
+          const count = parseInt(document.querySelector('[data-cart-count]')?.textContent) || 0;
+          dock.classList.toggle('shop-cart-dock-visible', count > 0);
+        });
+        document.querySelectorAll('[data-cart-count]').forEach(el => {
+          observer.observe(el, { childList: true, characterData: true, subtree: true });
+        });
+      })();
+    </script>
+
+</body>
+</html>
