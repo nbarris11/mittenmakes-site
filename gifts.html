@@ -743,6 +743,15 @@
         <p>Made in Farmington Hills, MI &nbsp;·&nbsp; <a href="returns-policy.html">Returns &amp; store credit</a> &nbsp;·&nbsp; <a href="mailto:mittenmakes@gmail.com">mittenmakes@gmail.com</a> &nbsp;·&nbsp; &copy; 2026 Mitten Makes</p>
     </footer>
 
+    <!-- Fade-in observer for product cards -->
+    <script>
+      const fadeObserver = new IntersectionObserver(
+        entries => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }),
+        { threshold: 0.08 }
+      );
+      document.querySelectorAll('.fade-up').forEach(el => fadeObserver.observe(el));
+    </script>
+
     <!-- Show cart dock when items are in cart -->
     <script>
       (function() {
