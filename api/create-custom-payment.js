@@ -63,7 +63,7 @@ module.exports = async (req, res) => {
       },
     });
 
-    return res.status(200).json({ url: session.url });
+    return res.status(200).json({ url: `${baseUrl}/pay?id=${session.id}` });
   } catch (error) {
     const statusCode = error.statusCode || 500;
     return res.status(statusCode).json({ error: error.message || 'Could not create payment link.' });

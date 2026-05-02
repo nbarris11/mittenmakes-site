@@ -1,6 +1,17 @@
 {
   "version": 2,
+  "redirects": [
+    {
+      "source": "/index.html",
+      "destination": "/",
+      "permanent": true
+    }
+  ],
   "rewrites": [
+    {
+      "source": "/pay",
+      "destination": "/api/pay"
+    },
     {
       "source": "/static/(.*)",
       "has": [{ "type": "host", "value": "t.mittenmakes.com" }],
