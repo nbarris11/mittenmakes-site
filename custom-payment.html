@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Custom Payment Link | Mitten Makes</title>
+  <meta name="robots" content="noindex, nofollow">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css?v=20260413a">
+  <style>
+    body { background: #f8f8f6; }
+    .payment-wrap {
+      max-width: 520px;
+      margin: 4rem auto;
+      padding: 0 1.25rem;
+    }
+    .payment-card {
+      background: #fff;
+      border-radius: 16px;
+      padding: 2.5rem 2rem;
+      box-shadow: 0 2px 16px rgba(0,0,0,0.07);
+    }
+    .payment-card h1 {
+      font-family: 'Poppins', sans-serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin: 0 0 0.25rem;
+    }
+    .payment-card .subtitle {
+      color: #666;
+      font-size: 0.9rem;
+      margin: 0 0 2rem;
+    }
+    .result-box {
+      background: #f0faf3;
+      border: 1.5px solid #3bbf6b;
+      border-radius: 10px;
+      padding: 1.25rem 1rem;
+      margin-top: 1.5rem;
+    }
+    .result-box p {
+      margin: 0 0 0.75rem;
+      font-size: 0.85rem;
+      color: #333;
+      font-weight: 600;
+    }
+    .result-link-wrap {
+      display: flex;
+      gap: 0.5rem;
+      align-items: center;
+    }
+    .result-link {
+      flex: 1;
+      font-size: 0.8rem;
+      padding: 0.5rem 0.75rem;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      background: #fff;
+      color: #333;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      cursor: text;
+      font-family: monospace;
+    }
+    .copy-btn {
+      flex-shrink: 0;
+      padding: 0.5rem 1rem;
+      font-size: 0.85rem;
+      font-weight: 600;
+      background: #3bbf6b;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+    .copy-btn:hover { background: #2eab5c; }
+    .copy-btn.copied { background: #1a8c47; }
+    .error-box {
+      background: #fff5f5;
+      border: 1.5px solid #e55;
+      border-radius: 10px;
+      padding: 1rem;
+      margin-top: 1.5rem;
+      color: #c33;
+      font-size: 0.9rem;
+    }
+    .amount-prefix {
+      position: relative;
+    }
+    .amount-prefix::before {
+      content: '$';
+      position: absolute;
+      left: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #555;
+      font-size: 1rem;
+      pointer-events: none;
+    }
+    .amount-prefix input {
+      padding-left: 1.75rem !important;
+    }
+    #generate-btn:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+  </style>
+</head>
+<body>
+  <div class="payment-wrap">
+    <div class="payment-card">
+      <h1>Custom Payment Link</h1>
+      <p class="subtitle">Generate a Stripe checkout link to send to a customer.</p>
+
+      <form id="payment-form">
+        <div class="form-grid">
+          <div class="form-field">
+            <span>Amount (USD)</span>
+            <div class="amount-prefix">
+              <input
+                type="number"
+                id="amount"
+                name="amount"
+                min="0.50"
+                max="10000"
+                step="0.01"
+                placeholder="0.00"
+                required
+                autocomplete="off"
+              >
+            </div>
+          </div>
+          <div class="form-field">
+            <span>What is this for?</span>
+            <input
+              type="text"
+              id="description"
+              name="description"
+              maxlength="200"
+              placeholder="e.g. Custom name plate — 3 lines, black"
+              required
+              autocomplete="off"
+            >
+          </div>
+          <div class="form-field">
+            <span>Note to customer <em style="font-weight:400;color:#888">(optional)</em></span>
+            <textarea
+              id="note"
+              name="note"
+              maxlength="400"
+              rows="3"
+              placeholder="e.g. Includes Michigan shape, two-tone finish. Ready in 5–7 days."
+            ></textarea>
+          </div>
+        </div>
+        <div class="form-actions">
+          <button type="submit" id="generate-btn" class="btn btn-primary">Generate payment link</button>
+        </div>
+      </form>
+
+      <div id="result" hidden></div>
+    </div>
+  </div>
+
+  <script>
+    const form = document.getElementById('payment-form');
+    const resultEl = document.getElementById('result');
+    const generateBtn = document.getElementById('generate-btn');
+
+    form.addEventListener('submit', async e => {
+      e.preventDefault();
+      resultEl.hidden = true;
+      resultEl.innerHTML = '';
+      generateBtn.disabled = true;
+      generateBtn.textContent = 'Generating…';
+
+      const amountDollars = parseFloat(document.getElementById('amount').value);
+      const description = document.getElementById('description').value.trim();
+      const note = document.getElementById('note').value.trim();
+
+      if (!amountDollars || amountDollars < 0.50) {
+        showError('Enter an amount of at least $0.50.');
+        generateBtn.disabled = false;
+        generateBtn.textContent = 'Generate payment link';
+        return;
+      }
+
+      const amountCents = Math.round(amountDollars * 100);
+
+      try {
+        const res = await fetch('/api/create-custom-payment', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ amountCents, description, note }),
+        });
+        const data = await res.json();
+
+        if (!res.ok || !data.url) {
+          showError(data.error || 'Something went wrong. Try again.');
+        } else {
+          showResult(data.url, amountDollars, description);
+        }
+      } catch {
+        showError('Network error. Check your connection and try again.');
+      }
+
+      generateBtn.disabled = false;
+      generateBtn.textContent = 'Generate payment link';
+    });
+
+    function showResult(url, amount, description) {
+      const fmt = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(amount);
+      resultEl.innerHTML = `
+        <div class="result-box">
+          <p>Payment link ready — ${fmt} for "${escapeHtml(description)}"</p>
+          <div class="result-link-wrap">
+            <input class="result-link" type="text" value="${escapeHtml(url)}" readonly onclick="this.select()">
+            <button class="copy-btn" id="copy-btn" type="button">Copy</button>
+          </div>
+        </div>
+      `;
+      resultEl.hidden = false;
+
+      document.getElementById('copy-btn').addEventListener('click', function() {
+        navigator.clipboard.writeText(url).then(() => {
+          this.textContent = 'Copied!';
+          this.classList.add('copied');
+          setTimeout(() => {
+            this.textContent = 'Copy';
+            this.classList.remove('copied');
+          }, 2000);
+        });
+      });
+    }
+
+    function showError(message) {
+      resultEl.innerHTML = `<div class="error-box">${escapeHtml(message)}</div>`;
+      resultEl.hidden = false;
+    }
+
+    function escapeHtml(str) {
+      return String(str)
+        .replaceAll('&', '&amp;')
+        .replaceAll('<', '&lt;')
+        .replaceAll('>', '&gt;')
+        .replaceAll('"', '&quot;')
+        .replaceAll("'", '&#39;');
+    }
+  </script>
+</body>
+</html>
