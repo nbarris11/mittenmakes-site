@@ -2937,6 +2937,24 @@ details.faq-item[open] summary::after { transform: rotate(45deg); }
 .shipping-progress.is-unlocked .shipping-progress-label { color: #2F7D32; }
 .shipping-progress.is-unlocked .shipping-progress-fill { background: #2F7D32; }
 
+.cart-bonus-note {
+  display: inline-block;
+  align-self: flex-start;
+  margin: 0.85rem 0 0.5rem;
+  padding: 0.4rem 0.75rem;
+  background: var(--accent-soft);
+  color: var(--accent);
+  font-size: 0.85rem;
+  font-weight: 500;
+  border-radius: 999px;
+  line-height: 1.3;
+}
+.cart-bonus-note-compact {
+  font-size: 0.78rem;
+  margin: 0.5rem 0 0;
+  padding: 0.3rem 0.65rem;
+}
+
 .product-card-kickers {
   display: flex;
   flex-wrap: wrap;
