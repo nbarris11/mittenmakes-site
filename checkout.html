@@ -29,9 +29,9 @@
     <link rel="canonical" href="https://mittenmakes.com/checkout.html">
     <link rel="icon" type="image/png" href="/assets/logo-badge-favicon.png?v=20260404a">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css?v=20260413a">
+    <link rel="stylesheet" href="styles.css?v=20260523a">
     <script src="launch-lock.js?v=20260404a" defer></script>
-    <script src="shop-checkout.js?v=20260404d" defer></script>
+    <script src="shop-checkout.js?v=20260523a" defer></script>
     <!-- PostHog Analytics -->
     <script>
         !function(t,e){var o,n,p,r;e.__SV||(window.posthog && window.posthog.__loaded)||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="init Dr qr Ci Br Zr Pr capture calculateEventProperties Ur register register_once register_for_session unregister unregister_for_session Xr getFeatureFlag getFeatureFlagPayload getFeatureFlagResult isFeatureEnabled reloadFeatureFlags updateFlags updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures on onFeatureFlags onSurveysLoaded onSessionId getSurveys getActiveMatchingSurveys renderSurvey displaySurvey cancelPendingSurvey canRenderSurvey canRenderSurveyAsync Jr identify setPersonProperties group resetGroups setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags reset setIdentity clearIdentity get_distinct_id getGroups get_session_id get_session_replay_url alias set_config startSessionRecording stopSessionRecording sessionRecordingStarted captureException captureLog startExceptionAutocapture stopExceptionAutocapture loadToolbar get_property getSessionProperty Wr Hr createPersonProfile setInternalOrTestUser Gr Fr tn opt_in_capturing opt_out_capturing has_opted_in_capturing has_opted_out_capturing get_explicit_consent_status is_capturing clear_opt_in_out_capturing $r debug ki Yr getPageViewId captureTraceFeedback captureTraceMetric Rr".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
@@ -66,7 +66,7 @@
                 <div class="seo-page-copy">
                     <p class="order-eyebrow">Ready-to-order checkout</p>
                     <h1>Review your cart before Stripe</h1>
-                    <p>This page is for the standard ready-to-order versions of select products. Your merchandise subtotal needs to be at least <strong>$24.97</strong> before online checkout. Local pickup is free, and shipping is a flat <strong>$9.97</strong> anywhere in the U.S.</p>
+                    <p>This page is for the standard ready-to-order versions of select products. <strong>Local pickup is free</strong> at any subtotal. U.S. shipping is a flat <strong>$5</strong> — and <strong>free over $45</strong>.</p>
                     <p class="checkout-cart-subcopy">Colors and filament blends can vary a little from the listing photos because every item is made to order. You can also pick <strong>Surprise me</strong> for a fun solid-color choice. If you want something more specific than the standard options, head back to the shop and then use the <a href="custom.html">Custom page</a>.</p>
                     <p class="launch-bonus-note launch-bonus-note-inline">Order today and we’ll tuck in a free surprise mini print or fidget while supplies last.</p>
                     <div class="hero-actions">
@@ -87,8 +87,8 @@
                 <div class="checkout-cart-copy">
                     <p class="order-eyebrow">Your cart</p>
                     <h2 id="online-checkout-title">Choose pickup or shipping, then continue to Stripe.</h2>
-                    <p>Choose pickup or shipping first. Local pickup can be any amount, while shipped orders need at least $24.97 in ready-to-order merchandise before shipping.</p>
-                    <p class="checkout-cart-subcopy">Current cart: <strong data-cart-count>0 items</strong>. If the button is locked for shipping, you just need a little more merchandise subtotal first. Today’s order also gets a free surprise mini print or fidget while supplies last.</p>
+                    <p>Choose pickup or shipping first. Pickup is free at any subtotal. U.S. shipping is a flat $5, and free once your subtotal reaches $45.</p>
+                    <p class="checkout-cart-subcopy">Current cart: <strong data-cart-count>0 items</strong>. Today’s order also gets a free surprise mini print or fidget while supplies last.</p>
                 </div>
                 <div class="checkout-cart-shell">
                     <div class="checkout-cart-header">
@@ -106,7 +106,7 @@
                         </label>
                         <label class="checkout-fulfillment-option">
                             <input type="radio" name="checkout-fulfillment" value="shipping">
-                            <span>Ship within the U.S. (+$9.97)</span>
+                            <span>Ship within the U.S. (flat $5, free over $45)</span>
                         </label>
                     </fieldset>
 
@@ -116,7 +116,7 @@
                         <div class="checkout-total-row"><span>Total at checkout</span><strong id="checkout-total">$0.00</strong></div>
                     </div>
 
-                    <p class="checkout-minimum-note" id="checkout-minimum-note">Local pickup has no minimum. Shipping checkout starts at $24.97 in ready-to-order items before shipping.</p>
+                    <p class="checkout-minimum-note" id="checkout-minimum-note">Local pickup in Metro Detroit is free at any subtotal.</p>
                     <p class="checkout-policy-note">If something arrives incorrect or damaged, approved issues are handled with a remake, replacement, or store credit. <a href="returns-policy.html">Read the full returns &amp; store credit policy</a>.</p>
 
                     <div class="checkout-actions">

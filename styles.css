@@ -2881,6 +2881,38 @@ details.faq-item[open] summary::after { transform: rotate(45deg); }
   border-bottom-color: currentColor;
 }
 
+.shipping-progress {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  padding: 0.75rem 0;
+}
+.shipping-progress.shipping-progress-compact { padding: 0.5rem 0 0.25rem; }
+.shipping-progress-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.75rem;
+  font-size: 0.85rem;
+  color: var(--text);
+}
+.shipping-progress-label { font-weight: 600; }
+.shipping-progress-meta { color: var(--text-soft, #6b6359); font-weight: 500; font-variant-numeric: tabular-nums; }
+.shipping-progress-bar {
+  width: 100%;
+  height: 6px;
+  background: rgba(199, 90, 46, 0.15);
+  border-radius: 999px;
+  overflow: hidden;
+}
+.shipping-progress-fill {
+  height: 100%;
+  background: #C75A2E;
+  border-radius: 999px;
+  transition: width 0.3s ease;
+}
+.shipping-progress.is-unlocked .shipping-progress-label { color: #2F7D32; }
+.shipping-progress.is-unlocked .shipping-progress-fill { background: #2F7D32; }
+
 .product-card-kickers {
   display: flex;
   flex-wrap: wrap;

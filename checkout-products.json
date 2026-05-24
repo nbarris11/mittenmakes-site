@@ -1,6 +1,6 @@
 {
-  "minimumSubtotalCents": 2497,
-  "shippingCents": 997,
+  "shippingCents": 500,
+  "freeShippingThresholdCents": 4500,
   "finishStyleOptions": [
     {
       "id": "solid",

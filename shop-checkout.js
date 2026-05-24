@@ -8,13 +8,13 @@
   const featuredActions = document.querySelector('.featured-gift-copy .order-actions');
   let cartToastTimeout;
 
-  const response = await fetch('checkout-products.json?v=20260403h');
+  const response = await fetch('checkout-products.json?v=20260523a');
   if (!response.ok) return;
 
   const checkoutConfig = await response.json();
   const products = new Map(checkoutConfig.products.map(product => [product.id, product]));
-  const minimumSubtotalCents = checkoutConfig.minimumSubtotalCents;
   const shippingCents = checkoutConfig.shippingCents;
+  const freeShippingThresholdCents = checkoutConfig.freeShippingThresholdCents;
   const finishStyleOptions = checkoutConfig.finishStyleOptions || [];
   const finishStyleMap = new Map(finishStyleOptions.map(option => [option.id, option]));
   const solidColorOptions = checkoutConfig.solidColorOptions || [];
@@ -254,6 +254,49 @@
       return sum + (getItemUnitPrice(item) * item.quantity);
     }, 0);
 
+  const computeShipping = (subtotal, fulfillmentMethod) => {
+    if (fulfillmentMethod !== 'shipping') return 0;
+    if (subtotal >= freeShippingThresholdCents) return 0;
+    return shippingCents;
+  };
+
+  const renderShippingProgressInto = (host, { subtotal, fulfillmentMethod, compact = false }) => {
+    if (!host) return;
+    let node = host.querySelector('[data-shipping-progress]');
+    if (!node) {
+      node = document.createElement('div');
+      node.setAttribute('data-shipping-progress', '');
+      node.className = `shipping-progress${compact ? ' shipping-progress-compact' : ''}`;
+      node.innerHTML = `
+        <div class="shipping-progress-row">
+          <span class="shipping-progress-label" data-shipping-progress-label></span>
+          <span class="shipping-progress-meta" data-shipping-progress-meta></span>
+        </div>
+        <div class="shipping-progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100">
+          <div class="shipping-progress-fill" data-shipping-progress-fill></div>
+        </div>
+      `;
+      host.appendChild(node);
+    }
+    const labelNode = node.querySelector('[data-shipping-progress-label]');
+    const metaNode = node.querySelector('[data-shipping-progress-meta]');
+    const fillNode = node.querySelector('[data-shipping-progress-fill]');
+    const remaining = Math.max(freeShippingThresholdCents - subtotal, 0);
+    const ratio = Math.min(subtotal / freeShippingThresholdCents, 1);
+    const percent = Math.round(ratio * 100);
+    fillNode.style.width = `${percent}%`;
+    node.querySelector('.shipping-progress-bar').setAttribute('aria-valuenow', String(percent));
+    if (remaining === 0) {
+      node.classList.add('is-unlocked');
+      labelNode.textContent = '✨ Free shipping unlocked.';
+      metaNode.textContent = '';
+    } else {
+      node.classList.remove('is-unlocked');
+      labelNode.textContent = `You're ${formatCurrency(remaining)} away from free shipping.`;
+      metaNode.textContent = `${formatCurrency(subtotal)} / ${formatCurrency(freeShippingThresholdCents)}`;
+    }
+  };
+
   const updateCartSummary = () => {
     const itemCount = cart.reduce((sum, item) => sum + item.quantity, 0);
     const subtotal = getSubtotal();
@@ -268,6 +311,17 @@
       link.textContent = itemCount > 0
         ? `Review cart & checkout (${itemCount})`
         : 'Browse first, then checkout';
+    });
+
+    document.querySelectorAll('.shop-cart-dock').forEach(dock => {
+      const subtotalLine = dock.querySelector('.shop-cart-dock-subtotal');
+      let host = dock.querySelector('[data-shipping-progress-host]');
+      if (!host && subtotalLine) {
+        host = document.createElement('div');
+        host.setAttribute('data-shipping-progress-host', '');
+        subtotalLine.insertAdjacentElement('afterend', host);
+      }
+      renderShippingProgressInto(host, { subtotal, fulfillmentMethod: 'shipping', compact: true });
     });
   };
 
@@ -734,12 +788,9 @@
 
     const subtotal = getSubtotal();
     const fulfillmentMethod = getFulfillmentMethod();
-    const shippingAmount = fulfillmentMethod === 'shipping' ? shippingCents : 0;
+    const shippingAmount = computeShipping(subtotal, fulfillmentMethod);
     const total = subtotal + shippingAmount;
     const itemCount = cart.reduce((sum, item) => sum + item.quantity, 0);
-    const minimumRequired = fulfillmentMethod === 'shipping';
-    const meetsMinimum = !minimumRequired || subtotal >= minimumSubtotalCents;
-    const amountRemaining = Math.max(minimumSubtotalCents - subtotal, 0);
 
     cartCount.textContent = `${itemCount} item${itemCount === 1 ? '' : 's'}`;
     subtotalValue.textContent = formatCurrency(subtotal);
@@ -747,23 +798,30 @@
     totalValue.textContent = formatCurrency(total);
 
     minimumNote.textContent = fulfillmentMethod === 'shipping'
-      ? (meetsMinimum
-          ? 'Your ready-to-order subtotal qualifies for shipping checkout. Shipping is a flat $9.97.'
-          : `Shipping checkout starts at ${formatCurrency(minimumSubtotalCents)} in ready-to-order items before shipping.`)
-      : 'Local pickup has no minimum. Pickup in Metro Detroit stays free.';
+      ? (subtotal >= freeShippingThresholdCents
+          ? 'You qualify for free U.S. shipping.'
+          : `Flat ${formatCurrency(shippingCents)} U.S. shipping — free over ${formatCurrency(freeShippingThresholdCents)}.`)
+      : 'Local pickup in Metro Detroit is free at any subtotal.';
 
-    checkoutButton.disabled = !cart.length || !meetsMinimum;
-    checkoutButton.classList.toggle('btn-disabled', !cart.length || !meetsMinimum);
+    let progressHost = cartRoot.querySelector('[data-shipping-progress-host]');
+    if (!progressHost) {
+      const totalsNode = cartRoot.querySelector('.checkout-totals');
+      if (totalsNode) {
+        progressHost = document.createElement('div');
+        progressHost.setAttribute('data-shipping-progress-host', '');
+        totalsNode.insertAdjacentElement('beforebegin', progressHost);
+      }
+    }
+    renderShippingProgressInto(progressHost, { subtotal, fulfillmentMethod });
+
+    checkoutButton.disabled = !cart.length;
+    checkoutButton.classList.toggle('btn-disabled', !cart.length);
     checkoutButton.textContent = !cart.length
       ? 'Add items to unlock checkout'
-      : meetsMinimum
-        ? 'Checkout with Stripe'
-        : `Add ${formatCurrency(amountRemaining)} more to ship`;
+      : 'Checkout with Stripe';
     checkoutMessage.textContent = externalCheckoutMessage || (!cart.length
       ? 'Add a few ready-to-order items to start online checkout.'
-      : meetsMinimum
-        ? `You are ready to check out${fulfillmentMethod === 'shipping' ? ' with flat-rate shipping.' : ' for free local pickup.'}`
-        : `Add ${formatCurrency(amountRemaining)} more in ready-to-order items to unlock shipping checkout.`);
+      : `You are ready to check out${fulfillmentMethod === 'shipping' ? (shippingAmount ? ` with flat ${formatCurrency(shippingAmount)} shipping.` : ' with free U.S. shipping.') : ' for free local pickup.'}`);
 
     emptyState.hidden = cart.length > 0;
     cartList.hidden = cart.length === 0;
