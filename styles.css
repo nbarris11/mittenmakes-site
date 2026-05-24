@@ -2955,6 +2955,188 @@ details.faq-item[open] summary::after { transform: rotate(45deg); }
   padding: 0.3rem 0.65rem;
 }
 
+/* Product-led hero (Task 7) */
+.hero.hero-product {
+  min-height: 600px;
+  display: flex;
+  align-items: center;
+  padding: 3rem 1.5rem;
+}
+.hero-product-container {
+  width: 100%;
+  max-width: 1140px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr);
+  gap: 3rem;
+  align-items: center;
+}
+.hero-product-copy {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  text-align: left;
+}
+.hero-eyebrow {
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--accent);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin: 0;
+}
+.hero-product-headline {
+  font-family: 'Poppins', sans-serif;
+  font-size: clamp(2.2rem, 4.6vw, 3.6rem);
+  font-weight: 800;
+  color: var(--text);
+  line-height: 1.05;
+  letter-spacing: -1px;
+  margin: 0;
+}
+.hero-product-sub {
+  font-size: 1.05rem;
+  line-height: 1.55;
+  color: var(--text);
+  margin: 0;
+  max-width: 36ch;
+}
+.hero-product-actions {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  flex-wrap: wrap;
+  margin-top: 0.25rem;
+}
+.hero-product-secondary-link {
+  font-weight: 600;
+  color: var(--accent);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.15s ease, color 0.15s ease;
+}
+.hero-product-secondary-link:hover,
+.hero-product-secondary-link:focus {
+  color: var(--accent-hover);
+  border-bottom-color: currentColor;
+}
+.hero-trust-strip {
+  list-style: none;
+  padding: 0;
+  margin: 1rem 0 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.4rem;
+  font-size: 0.82rem;
+  color: var(--text-soft, #6b6359);
+}
+.hero-trust-strip li {
+  display: inline-flex;
+  align-items: center;
+  white-space: nowrap;
+}
+.hero-trust-strong {
+  color: var(--accent);
+  font-weight: 700;
+  margin-right: 0.3rem;
+}
+
+.hero-product-media {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.hero-product-image {
+  width: 100%;
+  max-width: 560px;
+  height: auto;
+  border-radius: 18px;
+  box-shadow: 0 18px 40px -18px rgba(60, 30, 12, 0.35);
+}
+.hero-product-pill {
+  position: absolute;
+  left: 6%;
+  bottom: 6%;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.85rem;
+  padding: 0.55rem 0.65rem 0.55rem 1rem;
+  background: #fff;
+  border-radius: 999px;
+  box-shadow: 0 12px 28px -12px rgba(60, 30, 12, 0.4);
+  text-decoration: none;
+  color: var(--text);
+  transition: transform 0.15s ease;
+}
+.hero-product-pill:hover,
+.hero-product-pill:focus {
+  transform: translateY(-2px);
+  color: var(--text);
+}
+.hero-product-pill-copy {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.15;
+}
+.hero-product-pill-copy strong {
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+.hero-product-pill-price {
+  font-size: 0.85rem;
+  color: var(--accent);
+  font-weight: 600;
+}
+.hero-product-pill-cta {
+  background: var(--accent);
+  color: #fff;
+  font-weight: 600;
+  font-size: 0.85rem;
+  padding: 0.55rem 0.95rem;
+  border-radius: 999px;
+  white-space: nowrap;
+}
+
+@media (max-width: 820px) {
+  .hero-product-container {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 2rem;
+    text-align: center;
+  }
+  .hero-product-copy {
+    align-items: center;
+    text-align: center;
+  }
+  .hero-product-sub { max-width: none; }
+  .hero-product-actions { justify-content: center; }
+  .hero-trust-strip { justify-content: center; gap: 0.4rem 1rem; }
+  .hero-product-media { order: -1; }
+  .hero-product-image { max-width: 100%; }
+  .hero-product-pill { left: 50%; transform: translateX(-50%); bottom: 4%; }
+  .hero-product-pill:hover { transform: translateX(-50%) translateY(-2px); }
+}
+
+/* Bestseller row */
+.hero-bestsellers { padding-top: 3rem; padding-bottom: 1rem; }
+.hero-bestsellers-head { text-align: center; max-width: 640px; margin: 0 auto 2rem; }
+.hero-bestsellers-head .section-title { margin-bottom: 0.5rem; }
+.product-grid-3up {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.5rem;
+}
+@media (max-width: 880px) {
+  .product-grid-3up { grid-template-columns: minmax(0, 1fr); }
+}
+.hero-bestsellers-cta {
+  text-align: center;
+  margin-top: 1.5rem;
+  font-weight: 600;
+}
+
 .product-card-kickers {
   display: flex;
   flex-wrap: wrap;

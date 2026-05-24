@@ -28,7 +28,8 @@
     <link rel="canonical" href="https://www.mittenmakes.com/">
     <link rel="icon" type="image/png" href="/assets/logo-badge-favicon.png?v=20260404a">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css?v=20260413a">
+    <link rel="stylesheet" href="styles.css?v=20260523b">
+    <script src="shop-checkout.js?v=20260523a" defer></script>
     <script src="launch-lock.js?v=20260404a" defer></script>
     <script type="application/ld+json">
     {
@@ -87,15 +88,110 @@
     </nav>
 
     <!-- Hero Section -->
-    <section class="hero">
-        <div class="hero-content">
-            <img src="/mitten-makes-badge-logo2.png" alt="Mitten Makes" class="hero-logo">
-            <h1 class="hero-tagline">Custom 3D printed gifts, party favors, and personalized pieces made to order in Metro Detroit</h1>
-            <p class="hero-sub">Shop 3D printed gifts, fidgets, desk items, party favors, and custom designs for birthdays, classrooms, holidays, and everyday gift giving.</p>
-            <div class="hero-actions">
-                <a href="custom.html" class="btn btn-primary">Request a Custom Order</a>
-                <a href="shop.html" class="btn btn-secondary">Shop Gifts</a>
+    <section class="hero hero-product">
+        <div class="hero-product-container">
+            <div class="hero-product-copy">
+                <p class="hero-eyebrow">Made one at a time in Farmington Hills, MI</p>
+                <h1 class="hero-product-headline">The gift they’ll actually keep.</h1>
+                <p class="hero-product-sub">3D printed gifts, party favors, and personalized pieces — made to order in Metro Detroit. Pickup is always free, U.S. shipping is $5 (free over $45).</p>
+                <div class="hero-product-actions">
+                    <a href="shop.html" class="btn btn-primary">Shop bestsellers →</a>
+                    <a href="custom.html" class="hero-product-secondary-link">Need something custom? →</a>
+                </div>
+                <ul class="hero-trust-strip" aria-label="What customers can count on">
+                    <!-- TODO(neil): replace the rating + count once we have real review data — see Task 6. -->
+                    <li><span class="hero-trust-strong">★ 4.9</span> reviews coming soon</li>
+                    <li>5–7 day production</li>
+                    <li>Free local pickup</li>
+                    <li>Authorized Hive seller</li>
+                </ul>
             </div>
+            <div class="hero-product-media">
+                <img src="assets/crystal-dragon-cinderwing.png?v=20260401b" alt="Crystal Dragon — articulated 3D printed dragon with a rainbow crystal finish" class="hero-product-image">
+                <a href="shop.html#crystal-dragon" class="hero-product-pill">
+                    <span class="hero-product-pill-copy">
+                        <strong>Crystal Dragon</strong>
+                        <span class="hero-product-pill-price">$15</span>
+                    </span>
+                    <span class="hero-product-pill-cta">Add to cart →</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Bestseller row -->
+    <section class="section hero-bestsellers">
+        <div class="container">
+            <div class="hero-bestsellers-head">
+                <p class="order-eyebrow">Most popular this month</p>
+                <h2 class="section-title">Bestsellers</h2>
+                <p>Three of the gifts that fly out the door fastest — ready to add to your cart.</p>
+            </div>
+            <div class="product-grid product-grid-3up">
+                <div class="product-card fade-up" id="crystal-dragon">
+                    <div class="product-photo product-photo-real product-photo-square">
+                        <img src="assets/crystal-dragon-cinderwing.png?v=20260401b" alt="Crystal Dragon — rainbow articulated 3D printed dragon">
+                    </div>
+                    <div class="product-card-body">
+                        <div class="product-card-kickers">
+                            <span class="product-kicker">Collector favorite</span>
+                            <span class="product-kicker">Fantasy gift</span>
+                        </div>
+                        <h3 class="product-name">Crystal Dragon</h3>
+                        <p class="product-description">A faceted articulated dragon with a bright crystal look. Great for fantasy fans, collectors, and standout gifts.</p>
+                        <p class="product-price">$15</p>
+                        <div class="product-card-actions">
+                            <a href="shop.html#crystal-dragon" class="btn btn-secondary">Add to cart</a>
+                            <a href="custom.html" class="product-card-customize-link">Want it customized? →</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="product-card fade-up" id="love-from-michigan">
+                    <div class="product-photo product-photo-real product-photo-square">
+                        <img src="assets/love-from-michigan.png?v=20260404a" alt="Love From Michigan 3D printed layered mitten wall decor">
+                    </div>
+                    <div class="product-card-body">
+                        <div class="product-card-kickers">
+                            <span class="product-kicker">Local favorite</span>
+                            <span class="product-kicker">Housewarming gift</span>
+                        </div>
+                        <h3 class="product-name">Love From Michigan</h3>
+                        <p class="product-description">A layered Michigan mitten wall art piece — perfect for housewarmings, host gifts, and local pride.</p>
+                        <p class="product-price">$22</p>
+                        <div class="product-card-actions">
+                            <a href="shop.html#love-from-michigan" class="btn btn-secondary">Add to cart</a>
+                            <a href="custom.html" class="product-card-customize-link">Want it customized? →</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="product-card fade-up" id="dual-color-star-fidget">
+                    <div class="product-photo product-photo-real product-photo-square">
+                        <img src="assets/geometric-spinner-gradient.png?v=20260330k" alt="Dual-Color Star Fidget in pink and blue">
+                    </div>
+                    <div class="product-card-body">
+                        <div class="product-card-kickers">
+                            <span class="product-kicker">Shiny finish</span>
+                            <span class="product-kicker">Desk toy</span>
+                        </div>
+                        <h3 class="product-name">Dual-Color Star Fidget</h3>
+                        <p class="product-description">A layered star fidget with a silky two-color finish — an easy little gift for kids, teens, and desk fidget fans.</p>
+                        <p class="product-price">$13</p>
+                        <div class="product-card-actions">
+                            <a href="shop.html#dual-color-star-fidget" class="btn btn-secondary">Add to cart</a>
+                            <a href="custom.html" class="product-card-customize-link">Want it customized? →</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <p class="hero-bestsellers-cta"><a href="shop.html" class="link-coral">Browse the whole shop →</a></p>
+        </div>
+    </section>
+
+    <!-- TODO(neil): Task 6 — real testimonials block goes here, with featured quote + 3 smaller cards. -->
+    <!-- Placeholder for now so the rest of the page lays out as designed. -->
+    <section class="section testimonials-placeholder" aria-hidden="true" hidden>
+        <div class="container">
+            <p class="testimonials-placeholder-note">Testimonials block will live here once Neil has collected 4 real customer quotes (Task 6).</p>
         </div>
     </section>
 
