@@ -951,139 +951,23 @@
                     <input type="hidden" name="_blacklist" value="viagra,casino,loan,crypto,seo service,guest post,backlink,http://,https://">
                     <input type="text" name="_honey" class="honeypot-field" tabindex="-1" autocomplete="off">
 
-                    <div class="form-grid">
-                        <label class="form-field">
-                            <span>Your name</span>
-                            <input type="text" name="name" required>
-                        </label>
-                        <label class="form-field">
-                            <span>Your email</span>
-                            <input type="email" name="email" required>
-                        </label>
-                        <label class="form-field">
-                            <span>What are you interested in?</span>
-                            <select name="product_interest" required>
-                                <option value="">Choose one</option>
-                                <option>Tiny T-Rex</option>
-                                <option>Love From Michigan</option>
-                                <option>Thankful for our Michigan</option>
-                                <option>Detroit Red Wings Hockeytown Decor</option>
-                                <option>Detroit Pistons</option>
-                                <option>Detroit Lions</option>
-                                <option>Detroit Tigers</option>
-                                <option>Crystal Dragon</option>
-                                <option>Bone Dragon</option>
-                                <option>Water Dragon</option>
-                                <option>Void Octopus</option>
-                                <option>Whale Shark</option>
-                                <option>Cookie Dragon Keychain Figure</option>
-                                <option>Penguin Articulated Figure Keychain</option>
-                                <option>Elephant Articulated Figure Keychain</option>
-                                <option>Dual-Color Star Fidget</option>
-                                <option>Flexi Playful Star</option>
-                                <option>Bun Slime Fidget</option>
-                                <option>Fidget Switch</option>
-                                <option>Bookmarks 3 Pack</option>
-                                <option>Custom Golf Ball Holder</option>
-                                <option>Cable Monster Desk Helper</option>
-                                <option>Flirty Heart Photo & Card Display</option>
-                                <option>Fleggy Flexi Egg Buddy</option>
-                                <option>Something custom</option>
-                            </select>
-                        </label>
-                        <label class="form-field">
-                            <span>Who is it for?</span>
-                            <select name="who_its_for">
-                                <option value="">Optional</option>
-                                <option>My child</option>
-                                <option>A parent</option>
-                                <option>An adult gift</option>
-                                <option>Myself</option>
-                                <option>Special event</option>
-                            </select>
-                        </label>
-                        <label class="form-field">
-                            <span>Delivery preference</span>
-                            <select name="delivery_preference" required>
-                                <option value="">Choose one</option>
-                                <option>Local pickup in Metro Detroit</option>
-                                <option>Ship within the U.S.</option>
-                                <option>Not sure yet</option>
-                            </select>
-                        </label>
-                        <label class="form-field">
-                            <span>How many do you need?</span>
-                            <select name="quantity">
-                                <option value="">Choose one</option>
-                                <option>1</option>
-                                <option>2 to 5</option>
-                                <option>6 to 10</option>
-                                <option>11 to 25</option>
-                                <option>25+</option>
-                                <option>Not sure yet</option>
-                            </select>
-                        </label>
-                        <label class="form-field">
-                            <span>When do you need it?</span>
-                            <select name="timeline">
-                                <option value="">Choose one</option>
-                                <option>As soon as possible</option>
-                                <option>Within 1 week</option>
-                                <option>Within 2 weeks</option>
-                                <option>This month</option>
-                                <option>Just browsing for now</option>
-                            </select>
-                        </label>
-                        <label class="form-field">
-                            <span>Color style</span>
-                            <select name="color_style">
-                                <option value="">Optional</option>
-                                <option>Use the colors shown</option>
-                                <option>Bright colors</option>
-                                <option>Pastel colors</option>
-                                <option>Rainbow / color blend</option>
-                                <option>Neutral colors</option>
-                                <option>Metallic / shiny look</option>
-                                <option>Not sure yet</option>
-                            </select>
-                        </label>
-                        <label class="form-field">
-                            <span>Do you need a name, photo, or custom text?</span>
-                            <select name="personalization_type">
-                                <option value="">Optional</option>
-                                <option>No</option>
-                                <option>Name or short text</option>
-                                <option>Photo-based</option>
-                                <option>Logo or business version</option>
-                                <option>Not sure yet</option>
-                            </select>
-                        </label>
-                        <label class="form-field conditional-payment-field" hidden>
-                            <span>How would you like to pay?</span>
-                            <select name="payment_preference">
-                                <option value="">Optional</option>
-                                <option>Cash</option>
-                                <option>Venmo</option>
-                                <option>PayPal</option>
-                                <option>Not sure yet</option>
-                            </select>
-                        </label>
-                        <label class="form-field conditional-shipping-field" hidden>
-                            <span>Shipping ZIP code</span>
-                            <input type="text" name="shipping_zip" placeholder="Only if you want shipping">
-                        </label>
-                    </div>
-
                     <label class="form-field">
-                        <span>Anything else we should know?</span>
-                        <textarea name="message" rows="4" placeholder="Optional. Add names, size ideas, classroom quantities, or anything special here."></textarea>
+                        <span>What are you thinking?</span>
+                        <textarea name="idea" rows="5" required placeholder="20 little dragon keychains for my daughter's 9th birthday — in pink and purple, ideally"></textarea>
+                    </label>
+                    <label class="form-field">
+                        <span>How can we reach you?</span>
+                        <input type="text" name="contact" required placeholder="email or phone">
+                    </label>
+                    <label class="form-field">
+                        <span>When do you need it? <span class="form-optional">(optional)</span></span>
+                        <input type="text" name="when" placeholder="no rush / by next Friday / etc.">
                     </label>
 
-                    <p class="form-note">We will follow up with the final price, timing, pickup or shipping details, and payment. You do not need to have every detail figured out before sending this.</p>
-
                     <div class="form-actions">
-                        <button type="submit" class="btn btn-primary">Send request</button>
+                        <button type="submit" class="btn btn-primary">Send request →</button>
                     </div>
+                    <p class="form-note form-helper-note">Or DM us on <a href="https://instagram.com/mittenmakes" target="_blank" rel="noopener">Instagram</a>, or text <a href="tel:+12482917642">(248) 291-7642</a> — same person on the other end.</p>
                 </form>
             </div>
         </div>

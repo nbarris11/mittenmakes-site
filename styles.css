@@ -1960,6 +1960,30 @@ a:hover { color: var(--accent-hover); }
 
 .order-form {
   margin-top: 1.75rem;
+  max-width: 520px;
+}
+
+.form-optional {
+  font-weight: 400;
+  color: var(--text-soft, #6b6359);
+  font-size: 0.78rem;
+  margin-left: 0.25rem;
+}
+
+.form-helper-note {
+  margin-top: 0.85rem;
+  font-size: 0.9rem;
+  color: var(--text-soft, #6b6359);
+}
+.form-helper-note a {
+  color: var(--accent);
+  font-weight: 500;
+  border-bottom: 1px solid currentColor;
+  text-decoration: none;
+}
+.form-helper-note a:hover,
+.form-helper-note a:focus {
+  color: var(--accent-hover);
 }
 
 .form-grid {
