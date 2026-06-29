@@ -1,6 +1,6 @@
 {
-  "shippingCents": 500,
-  "freeShippingThresholdCents": 4500,
+  "shippingCents": 1000,
+  "freeShippingThresholdCents": 4997,
   "finishStyleOptions": [
     {
       "id": "solid",
