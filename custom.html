@@ -18,18 +18,23 @@
     <script defer src="/_vercel/insights/script.js"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Custom 3D Printed Orders — Names, Photos &amp; Bulk Requests | Mitten Makes</title>
-    <meta name="description" content="Need something personalized? Order custom 3D printed gifts with names, photos, or in bulk for parties, classrooms, and events. Made in Farmington Hills, MI.">
-    <meta property="og:title" content="Custom 3D Printed Orders — Names, Photos &amp; Bulk Requests | Mitten Makes">
-    <meta property="og:description" content="Need something personalized? Order custom 3D printed gifts with names, photos, or in bulk for parties, classrooms, and events. Made in Farmington Hills, MI.">
+    <title>Custom 3D Prints: Names, Photos &amp; Bulk Orders | Mitten Makes</title>
+    <meta name="description" content="Order custom 3D printed gifts with names, photos, or logos, including holiday and bulk orders for parties and classrooms. Made in Farmington Hills, MI.">
+    <meta property="og:title" content="Custom 3D Prints: Names, Photos &amp; Bulk Orders | Mitten Makes">
+    <meta property="og:description" content="Order custom 3D printed gifts with names, photos, or logos, including holiday and bulk orders for parties and classrooms. Made in Farmington Hills, MI.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://www.mittenmakes.com/custom.html">
-    <meta property="og:image" content="https://mittenmakes.com/og-image.jpg">
+    <meta property="og:image" content="https://www.mittenmakes.com/og-image.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="https://www.mittenmakes.com/og-image.jpg">
     <link rel="canonical" href="https://www.mittenmakes.com/custom.html">
     <link rel="icon" type="image/png" href="/assets/logo-badge-favicon.png?v=20260404a">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css?v=20260523c">
     <script src="launch-lock.js?v=20260404a" defer></script>
+    <script src="order-form.js?v=20261121a" defer></script>
     <!-- PostHog Analytics -->
     <script>
         !function(t,e){var o,n,p,r;e.__SV||(window.posthog && window.posthog.__loaded)||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="init Dr qr Ci Br Zr Pr capture calculateEventProperties Ur register register_once register_for_session unregister unregister_for_session Xr getFeatureFlag getFeatureFlagPayload getFeatureFlagResult isFeatureEnabled reloadFeatureFlags updateFlags updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures on onFeatureFlags onSurveysLoaded onSessionId getSurveys getActiveMatchingSurveys renderSurvey displaySurvey cancelPendingSurvey canRenderSurvey canRenderSurveyAsync Jr identify setPersonProperties group resetGroups setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags reset setIdentity clearIdentity get_distinct_id getGroups get_session_id get_session_replay_url alias set_config startSessionRecording stopSessionRecording sessionRecordingStarted captureException captureLog startExceptionAutocapture stopExceptionAutocapture loadToolbar get_property getSessionProperty Wr Hr createPersonProfile setInternalOrTestUser Gr Fr tn opt_in_capturing opt_out_capturing has_opted_in_capturing has_opted_out_capturing get_explicit_consent_status is_capturing clear_opt_in_out_capturing $r debug ki Yr getPageViewId captureTraceFeedback captureTraceMetric Rr".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
@@ -40,16 +45,37 @@
             person_profiles: 'identified_only',
         })
     </script>
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://www.mittenmakes.com/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Custom Orders",
+      "item": "https://www.mittenmakes.com/custom.html"
+    }
+  ]
+}
+    </script>
 </head>
 <body>
     <nav class="navbar">
         <div class="nav-container">
             <a href="index.html" class="nav-logo">
-                <img src="/mitten-makes-main-logo2.png" alt="Mitten Makes" class="nav-logo-img">
+                <img src="/mitten-makes-main-logo2.png" alt="Mitten Makes" class="nav-logo-img" width="1004" height="584">
             </a>
             <ul class="nav-links">
                 <li><a href="index.html" class="nav-link">Home</a></li>
                 <li><a href="shop.html" class="nav-link">Shop</a></li>
+                <li class="seasonal-holiday"><a href="/custom-holiday-gifts/" class="nav-link nav-link-seasonal">Holiday<span class="nav-link-long"> Gifts</span></a></li>
                 <li><a href="gift-guides.html" class="nav-link">Gift Guides</a></li>
                 <li><a href="custom.html" class="nav-link active">Custom</a></li>
                 <li><a href="contact.html" class="nav-link">Contact</a></li>
@@ -69,11 +95,24 @@
                     <p class="checkout-policy-note">Because custom work is made to order, approved issues are usually handled with a remake, replacement, or store credit instead of a cash refund. <a href="returns-policy.html">Read the full returns &amp; store credit policy</a>.</p>
                 </div>
                 <div class="seo-page-image fade-up">
-                    <img src="/mitten-makes-badge-logo2.png" alt="Mitten Makes custom orders">
+                    <img src="/mitten-makes-badge-logo2.png" alt="Mitten Makes custom orders" width="1153" height="818">
                 </div>
             </div>
         </div>
     </section>
+
+    <!-- SEASONAL HOLIDAY LINK (switch off with .seasonal-holiday in styles.css) -->
+    <section class="seasonal-banner seasonal-holiday" aria-label="Holiday gifts">
+        <div class="container seasonal-banner-inner">
+            <div class="seasonal-banner-copy">
+                <p class="order-eyebrow">Holiday custom orders</p>
+                <h2>Custom Christmas and Hanukkah gifts</h2>
+                <p>Names, photos, ornaments, and matching sets for teachers or coworkers. Order by Tuesday, December 8 to ship, or Monday, December 14 for pickup in Farmington Hills.</p>
+            </div>
+            <a href="/custom-holiday-gifts/" class="btn btn-primary">See custom holiday gifts</a>
+        </div>
+    </section>
+
 
     <section class="section">
         <div class="container">
@@ -250,8 +289,22 @@
                         <input type="text" name="contact" required placeholder="email or phone">
                     </label>
                     <label class="form-field">
-                        <span>When do you need it? <span class="form-optional">(optional)</span></span>
-                        <input type="text" name="when" placeholder="no rush / by next Friday / etc.">
+                        <span>What's the occasion? <span class="form-optional">(optional)</span></span>
+                        <select name="occasion">
+                            <option value="">Optional</option>
+                            <option>Holiday / Christmas gift</option>
+                            <option>Hanukkah gift</option>
+                            <option>Stocking stuffer</option>
+                            <option>Holiday party favors / bulk</option>
+                            <option>Birthday</option>
+                            <option>Teacher or coworker gift</option>
+                            <option>Just because</option>
+                            <option>Something else</option>
+                        </select>
+                    </label>
+                    <label class="form-field">
+                        <span>Need it by</span>
+                        <input type="date" name="need_by" required>
                     </label>
 
                     <div class="form-actions">
@@ -268,7 +321,7 @@
             <div class="footer-content">
                 <div class="footer-brand">
                     <a href="index.html" class="footer-logo">
-                        <img src="assets/logo-badge.png" alt="Mitten Makes" class="footer-badge-image">
+                        <img src="assets/logo-badge.png" alt="Mitten Makes" class="footer-badge-image" width="1536" height="1024" loading="lazy">
                     </a>
                     <p class="footer-tagline">From our mitten to yours.</p>
                 </div>

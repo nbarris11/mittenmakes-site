@@ -19,25 +19,33 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Personalized 3D Printed Gifts &amp; Custom Party Favors | Mitten Makes</title>
-    <meta name="description" content="Handmade 3D printed gifts, fidgets, party favors, and custom pieces made to order in Farmington Hills, MI. Local pickup available. Ships anywhere in the U.S.">
+    <meta name="description" content="Handmade 3D printed gifts, fidgets, stocking stuffers, and party favors made to order in Farmington Hills, MI. Free local pickup. Ships U.S.-wide.">
     <meta property="og:title" content="Personalized 3D Printed Gifts &amp; Custom Party Favors | Mitten Makes">
-    <meta property="og:description" content="Handmade 3D printed gifts, fidgets, party favors, and custom pieces made to order in Farmington Hills, MI. Local pickup available. Ships anywhere in the U.S.">
+    <meta property="og:description" content="Handmade 3D printed gifts, fidgets, stocking stuffers, and party favors made to order in Farmington Hills, MI. Free local pickup. Ships U.S.-wide.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://www.mittenmakes.com">
-    <meta property="og:image" content="https://mittenmakes.com/og-image.jpg">
+    <meta property="og:image" content="https://www.mittenmakes.com/og-image.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="https://www.mittenmakes.com/og-image.jpg">
     <link rel="canonical" href="https://www.mittenmakes.com/">
     <link rel="icon" type="image/png" href="/assets/logo-badge-favicon.png?v=20260404a">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css?v=20260523c">
     <script src="shop-checkout.js?v=20260523a" defer></script>
     <script src="launch-lock.js?v=20260404a" defer></script>
+    <script src="order-form.js?v=20261121a" defer></script>
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
-      "@type": "LocalBusiness",
+      "@type": "Store",
+      "@id": "https://www.mittenmakes.com/#business",
       "name": "Mitten Makes",
+      "logo": "https://www.mittenmakes.com/mitten-makes-main-logo2.png",
+      "image": "https://www.mittenmakes.com/og-image.jpg",
       "description": "Custom 3D printed gifts, party favors, fidgets, and personalized pieces made to order in Farmington Hills, MI.",
-      "url": "https://www.mittenmakes.com",
+      "url": "https://www.mittenmakes.com/",
       "telephone": "+12482917642",
       "email": "mittenmakes@gmail.com",
       "address": {
@@ -47,8 +55,17 @@
         "addressCountry": "US"
       },
       "areaServed": [
-        { "@type": "Place", "name": "Farmington Hills, Michigan" },
-        { "@type": "Place", "name": "Metro Detroit, Michigan" }
+        { "@type": "City", "name": "Farmington Hills, MI" },
+        { "@type": "City", "name": "Farmington, MI" },
+        { "@type": "City", "name": "Novi, MI" },
+        { "@type": "City", "name": "Livonia, MI" },
+        { "@type": "City", "name": "West Bloomfield, MI" },
+        { "@type": "City", "name": "Southfield, MI" },
+        { "@type": "City", "name": "Northville, MI" },
+        { "@type": "City", "name": "Bloomfield Hills, MI" },
+        { "@type": "City", "name": "Royal Oak, MI" },
+        { "@type": "Place", "name": "Metro Detroit, MI" },
+        { "@type": "Country", "name": "United States" }
       ],
       "priceRange": "$–$$",
       "hasMap": "https://www.google.com/maps/place/Mitten+Makes/",
@@ -74,11 +91,12 @@
     <nav class="navbar">
         <div class="nav-container">
             <a href="/" class="nav-logo">
-                <img src="/mitten-makes-main-logo2.png" alt="Mitten Makes" class="nav-logo-img">
+                <img src="/mitten-makes-main-logo2.png" alt="Mitten Makes" class="nav-logo-img" width="1004" height="584">
             </a>
             <ul class="nav-links">
                 <li><a href="/" class="nav-link active">Home</a></li>
                 <li><a href="shop.html" class="nav-link">Shop</a></li>
+                <li class="seasonal-holiday"><a href="/custom-holiday-gifts/" class="nav-link nav-link-seasonal">Holiday<span class="nav-link-long"> Gifts</span></a></li>
                 <li><a href="gift-guides.html" class="nav-link">Gift Guides</a></li>
                 <li><a href="custom.html" class="nav-link">Custom</a></li>
                 <li><a href="contact.html" class="nav-link">Contact</a></li>
@@ -86,6 +104,20 @@
             </ul>
         </div>
     </nav>
+
+    <!-- SEASONAL HOLIDAY BANNER: to remove after the season, delete from here to "END SEASONAL HOLIDAY BANNER",
+         or switch off every seasonal piece at once with the one line in styles.css under "SEASONAL: HOLIDAY". -->
+    <section class="seasonal-banner seasonal-holiday" aria-label="Holiday ordering">
+        <div class="container seasonal-banner-inner">
+            <div class="seasonal-banner-copy">
+                <p class="order-eyebrow">Holiday orders are open</p>
+                <h2>Christmas, Hanukkah, and stocking stuffers, made in Farmington Hills</h2>
+                <p>Order by Tuesday, December 8 to ship for Christmas, or Monday, December 14 for free local pickup. Hanukkah orders by Monday, November 23 to ship, or Wednesday, November 25 for local pickup.</p>
+            </div>
+            <a href="/custom-holiday-gifts/" class="btn btn-primary">Shop holiday gifts</a>
+        </div>
+    </section>
+    <!-- END SEASONAL HOLIDAY BANNER -->
 
     <!-- Hero Section -->
     <section class="hero hero-product">
@@ -99,15 +131,15 @@
                     <a href="custom.html" class="hero-product-secondary-link">Need something custom? →</a>
                 </div>
                 <ul class="hero-trust-strip" aria-label="What customers can count on">
-                    <!-- TODO(neil): replace the rating + count once we have real review data — see Task 6. -->
-                    <li><span class="hero-trust-strong">★ 4.9</span> reviews coming soon</li>
+                    <!-- Add a real rating here once there are real reviews to show. -->
+                    <li><span class="hero-trust-strong">Made in</span> Farmington Hills</li>
                     <li>5–7 day production</li>
                     <li>Free local pickup</li>
                     <li>Authorized Hive seller</li>
                 </ul>
             </div>
             <div class="hero-product-media">
-                <img src="assets/crystal-dragon-cinderwing.png?v=20260401b" alt="Crystal Dragon — articulated 3D printed dragon with a rainbow crystal finish" class="hero-product-image">
+                <img src="assets/crystal-dragon-cinderwing.png?v=20260401b" alt="Crystal Dragon — articulated 3D printed dragon with a rainbow crystal finish" class="hero-product-image" width="1200" height="982">
                 <a href="shop.html#crystal-dragon" class="hero-product-pill">
                     <span class="hero-product-pill-copy">
                         <strong>Crystal Dragon</strong>
@@ -130,7 +162,7 @@
             <div class="product-grid product-grid-3up">
                 <div class="product-card fade-up" id="crystal-dragon">
                     <div class="product-photo product-photo-real product-photo-square">
-                        <img src="assets/crystal-dragon-cinderwing.png?v=20260401b" alt="Crystal Dragon — rainbow articulated 3D printed dragon">
+                        <img src="assets/crystal-dragon-cinderwing.png?v=20260401b" alt="Crystal Dragon — rainbow articulated 3D printed dragon" width="1200" height="982" loading="lazy">
                     </div>
                     <div class="product-card-body">
                         <div class="product-card-kickers">
@@ -148,7 +180,7 @@
                 </div>
                 <div class="product-card fade-up" id="love-from-michigan">
                     <div class="product-photo product-photo-real product-photo-square">
-                        <img src="assets/love-from-michigan.png?v=20260404a" alt="Love From Michigan 3D printed layered mitten wall decor">
+                        <img src="assets/love-from-michigan.png?v=20260404a" alt="Love From Michigan 3D printed layered mitten wall decor" width="1051" height="1008" loading="lazy">
                     </div>
                     <div class="product-card-body">
                         <div class="product-card-kickers">
@@ -166,7 +198,7 @@
                 </div>
                 <div class="product-card fade-up" id="dual-color-star-fidget">
                     <div class="product-photo product-photo-real product-photo-square">
-                        <img src="assets/geometric-spinner-feature.png?v=20260330n" alt="Dual-Color Star Fidget — silky pink-and-blue star spinner">
+                        <img src="assets/geometric-spinner-feature.png?v=20260330n" alt="Dual-Color Star Fidget — silky pink-and-blue star spinner" width="512" height="512" loading="lazy">
                     </div>
                     <div class="product-card-body">
                         <div class="product-card-kickers">
@@ -247,7 +279,7 @@
                     <p>Need something personalized or made in a specific style, color, or quantity? Custom orders are perfect for party favors, classroom sets, name signs, organizers, and one-of-a-kind gift ideas.</p>
                 </div>
             </div>
-            <p class="section-micro-links">Popular right now: <a href="products/3d-printed-fidget-toys/">3D printed fidget toys</a>, <a href="products/articulated-3d-printed-animals/">articulated animals</a>, <a href="products/custom-lithophane/">custom lithophanes</a>, <a href="blog/3d-printed-teacher-gifts/">teacher gifts</a>, and <a href="party-favors.html">custom party favors</a>. Also browse: <a href="/personalized-gifts/">personalized gifts</a> and <a href="/custom-3d-printed-gifts/">custom 3D printed gifts</a>.</p>
+            <p class="section-micro-links">Popular right now: <a href="products/3d-printed-fidget-toys/">3D printed fidget toys</a>, <a href="products/articulated-3d-printed-animals/">articulated animals</a>, <a href="products/custom-lithophane/">custom lithophanes</a>, <a href="blog/3d-printed-teacher-gifts/">teacher gifts</a>, and <a href="party-favors.html">custom party favors</a>. <span class="seasonal-holiday">For the season: <a href="/custom-holiday-gifts/">custom holiday gifts and stocking stuffers</a>.</span> Also browse: <a href="/personalized-gifts/">personalized gifts</a> and <a href="/custom-3d-printed-gifts/">custom 3D printed gifts</a>.</p>
         </div>
     </section>
 
@@ -373,6 +405,8 @@
                                 <option>Decorative Vase</option>
                                 <option>Image Keychain</option>
                                 <option>Custom Name Sign</option>
+                                <option>Custom Ornament</option>
+                                <option>Michigan / Detroit Decor</option>
                                 <option>Something custom</option>
                             </select>
                         </label>
@@ -385,6 +419,20 @@
                                 <option>An adult gift</option>
                                 <option>Myself</option>
                                 <option>Special event</option>
+                            </select>
+                        </label>
+                        <label class="form-field">
+                            <span>What's the occasion?</span>
+                            <select name="occasion">
+                                <option value="">Optional</option>
+                                <option>Holiday / Christmas gift</option>
+                                <option>Hanukkah gift</option>
+                                <option>Stocking stuffer</option>
+                                <option>Holiday party favors / bulk</option>
+                                <option>Birthday</option>
+                                <option>Teacher or coworker gift</option>
+                                <option>Just because</option>
+                                <option>Something else</option>
                             </select>
                         </label>
                         <label class="form-field">
@@ -409,15 +457,8 @@
                             </select>
                         </label>
                         <label class="form-field">
-                            <span>When do you need it?</span>
-                            <select name="timeline">
-                                <option value="">Choose one</option>
-                                <option>As soon as possible</option>
-                                <option>Within 1 week</option>
-                                <option>Within 2 weeks</option>
-                                <option>This month</option>
-                                <option>Just browsing for now</option>
-                            </select>
+                            <span>Need it by</span>
+                            <input type="date" name="need_by" required>
                         </label>
                         <label class="form-field">
                             <span>Color style</span>
@@ -526,42 +567,42 @@
 
             <div class="instagram-rail" aria-label="Popular Mitten Makes gift ideas">
                 <article class="instagram-card">
-                    <img src="assets/love-from-michigan.png" alt="Love From Michigan wall decor">
+                    <img src="assets/love-from-michigan.png" alt="Love From Michigan wall decor" width="1051" height="1008" loading="lazy">
                     <div class="instagram-card-copy">
                         <p class="instagram-card-label">Michigan favorite</p>
                         <h3>Love From Michigan</h3>
                     </div>
                 </article>
                 <article class="instagram-card">
-                    <img src="assets/detroit-lions-all-grit.png" alt="Detroit Lions Michigan decor">
+                    <img src="assets/detroit-lions-all-grit.png" alt="Detroit Lions Michigan decor" width="1191" height="1200" loading="lazy">
                     <div class="instagram-card-copy">
                         <p class="instagram-card-label">Detroit pride</p>
                         <h3>Lions wall decor</h3>
                     </div>
                 </article>
                 <article class="instagram-card">
-                    <img src="assets/crystal-dragon-cinderwing.png" alt="Crystal Dragon articulated figure">
+                    <img src="assets/crystal-dragon-cinderwing.png" alt="Crystal Dragon articulated figure" width="1200" height="982" loading="lazy">
                     <div class="instagram-card-copy">
                         <p class="instagram-card-label">Collector creature</p>
                         <h3>Crystal Dragon</h3>
                     </div>
                 </article>
                 <article class="instagram-card">
-                    <img src="assets/flexi-playful-star.png" alt="Flexi Playful Star fidget">
+                    <img src="assets/flexi-playful-star.png" alt="Flexi Playful Star fidget" width="1024" height="1024" loading="lazy">
                     <div class="instagram-card-copy">
                         <p class="instagram-card-label">Fun little gift</p>
                         <h3>Flexi Playful Star</h3>
                     </div>
                 </article>
                 <article class="instagram-card">
-                    <img src="assets/bookmarks-3-pack.png" alt="Bookmarks 3 Pack">
+                    <img src="assets/bookmarks-3-pack.png" alt="Bookmarks 3 Pack" width="960" height="1200" loading="lazy">
                     <div class="instagram-card-copy">
                         <p class="instagram-card-label">Teacher gift</p>
                         <h3>Bookmarks 3 Pack</h3>
                     </div>
                 </article>
                 <article class="instagram-card">
-                    <img src="assets/golf-ball-holder-loaded.png" alt="Custom golf ball holder">
+                    <img src="assets/golf-ball-holder-loaded.png" alt="Custom golf ball holder" width="800" height="1200" loading="lazy">
                     <div class="instagram-card-copy">
                         <p class="instagram-card-label">Custom favorite</p>
                         <h3>Golf ball holder</h3>
@@ -589,7 +630,7 @@
             <div class="footer-content">
                 <div class="footer-brand">
                     <a href="/" class="footer-logo">
-                        <img src="assets/logo-badge.png" alt="Mitten Makes" class="footer-badge-image">
+                        <img src="assets/logo-badge.png" alt="Mitten Makes" class="footer-badge-image" width="1536" height="1024" loading="lazy">
                     </a>
                     <p class="footer-tagline">From our mitten to yours.</p>
                 </div>

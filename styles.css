@@ -3870,3 +3870,82 @@ body.lightbox-open {
   .navbar, .footer { display: none; }
   body { background: white; }
 }
+
+/* ===========================
+   SEASONAL: HOLIDAY
+   Everything seasonal carries the class .seasonal-holiday.
+   To switch the season off site-wide, uncomment the next line:
+   =========================== */
+/* .seasonal-holiday { display: none !important; } */
+
+.nav-link-seasonal {
+  color: var(--accent);
+}
+.nav-link-seasonal::before {
+  content: "\2744\FE0E";
+  margin-right: 0.3rem;
+  font-size: 0.8em;
+}
+
+.seasonal-banner {
+  background: linear-gradient(180deg, #FFF9F2 0%, var(--accent-soft) 100%);
+  border-bottom: 1px solid var(--border);
+  padding: 1.1rem 0;
+}
+.seasonal-banner-inner {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem 1.5rem;
+  align-items: center;
+  justify-content: space-between;
+}
+.seasonal-banner-copy { max-width: 760px; }
+.seasonal-banner-copy .order-eyebrow { margin-bottom: 0.2rem; }
+.seasonal-banner-copy h2 {
+  font-size: 1.25rem;
+  margin-bottom: 0.25rem;
+}
+.seasonal-banner-copy p {
+  color: var(--muted);
+  font-size: 0.92rem;
+  margin: 0;
+}
+
+.holiday-deadlines {
+  list-style: none;
+  display: grid;
+  gap: 0.6rem;
+  margin: 1.25rem 0 0;
+}
+.holiday-deadlines li {
+  background-color: var(--bg);
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--accent);
+  border-radius: 10px;
+  padding: 0.65rem 0.9rem;
+  font-size: 0.95rem;
+}
+.holiday-deadlines strong { color: var(--text); }
+
+.holiday-callout {
+  background-color: var(--accent-soft);
+  border: 1px solid rgba(196, 81, 26, 0.18);
+  border-radius: 14px;
+  padding: 1.25rem 1.4rem;
+  margin-top: 1.5rem;
+}
+.holiday-callout h3 { font-size: 1.05rem; margin-bottom: 0.35rem; }
+.holiday-callout p { margin: 0; color: var(--text); }
+
+.holiday-card-link {
+  display: inline-block;
+  margin-top: 0.35rem;
+}
+
+@media (max-width: 768px) {
+  .seasonal-banner-inner .btn { width: 100%; text-align: center; }
+}
+@media (max-width: 768px) {
+  .nav-link-long { display: none; }
+  .nav-link-seasonal::before { margin-right: 0.15rem; }
+}
