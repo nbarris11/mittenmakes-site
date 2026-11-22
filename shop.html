@@ -50,10 +50,11 @@
     <link rel="canonical" href="https://www.mittenmakes.com/shop.html">
     <link rel="icon" type="image/png" href="/assets/logo-badge-favicon.png?v=20260404a">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css?v=20261122e">
+    <link rel="stylesheet" href="styles.css?v=20261122f">
     <script src="launch-lock.js?v=20260404a" defer></script>
+    <script src="/form-submit.js?v=20261122a" defer></script>
     <script src="order-form.js?v=20261121a" defer></script>
-    <script src="shop-checkout.js?v=20261122c" defer></script>
+    <script src="shop-checkout.js?v=20261122f" defer></script>
     <style>
         .product-card {
             overflow: hidden;
@@ -991,9 +992,9 @@
                     <h2 id="order-form-heading">Send us your idea and we'll take it from there.</h2>
                     <p>Tell us what item you want, or what you are trying to make happen. Whether you need one gift, a quantity for a classroom, or a custom piece for a specific space, we'll follow up with the details, timing, final price, and best next step.</p>
                 </div>
-                <form id="order-form" class="order-form fade-up" action="https://formsubmit.co/mittenmakes@gmail.com" method="POST" aria-labelledby="order-form-heading">
+                <form id="order-form" class="order-form fade-up" action="https://formsubmit.co/mittenmakes@gmail.com" method="POST" aria-labelledby="order-form-heading" data-form="order" data-email-or-phone>
                     <input type="hidden" name="_subject" value="New Mitten Makes order inquiry">
-                    <input type="hidden" name="_next" value="https://mittenmakes.com/thanks.html">
+                    <input type="hidden" name="_next" value="https://www.mittenmakes.com/thanks.html">
                     <input type="hidden" name="_template" value="table">
                     <input type="hidden" name="_captcha" value="true">
                     <input type="hidden" name="_autoresponse" value="Thanks for reaching out to Mitten Makes. We got your inquiry and will follow up soon with next steps.">
@@ -1005,8 +1006,12 @@
                         <textarea name="idea" rows="5" required placeholder="20 little dragon keychains for my daughter's 9th birthday — in pink and purple, ideally"></textarea>
                     </label>
                     <label class="form-field">
-                        <span>How can we reach you?</span>
-                        <input type="text" name="contact" required placeholder="email or phone">
+                        <span>Your email</span>
+                        <input type="email" name="email" required autocomplete="email">
+                    </label>
+                    <label class="form-field">
+                        <span>Phone <span class="form-optional">(instead of email, if you like)</span></span>
+                        <input type="tel" name="phone" autocomplete="tel">
                     </label>
                     <label class="form-field">
                         <span>What's the occasion? <span class="form-optional">(optional)</span></span>

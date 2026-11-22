@@ -8,6 +8,8 @@
   const fallbackCopy = document.querySelector('[data-gift-finder-fallback]');
   const leadPanel = document.querySelector('[data-gift-finder-lead]');
   const leadForm = document.querySelector('[data-gift-finder-lead-form]');
+  const productsHost = document.querySelector('[data-gift-finder-products]');
+  const customIdeas = document.querySelector('[data-gift-finder-custom]');
   const successBanner = document.querySelector('[data-gift-finder-success]');
 
   if (!quizForm || !quizFields || !resultsSection || !resultsGrid || !leadPanel || !leadForm) {
@@ -37,18 +39,18 @@
     },
     interests: {
       dinosaurs: 'Dinosaurs',
-      dragons: 'Dragons',
-      animals: 'Animals',
+      dragons: 'Dragons & fantasy',
+      animals: 'Animals & pets',
       pets: 'Pets',
       'space-science': 'Space/science',
       'bugs-nature': 'Bugs/nature',
       sports: 'Sports',
       fidgets: 'Fidgets',
       'sensory-items': 'Sensory items',
-      'desk-accessories': 'Desk accessories',
-      'cute-decor': 'Cute decor',
+      'desk-accessories': 'Desk & office',
+      'cute-decor': 'Michigan & decor',
       fantasy: 'Fantasy',
-      'personalized-items': 'Personalized items',
+      'personalized-items': 'Personalized',
       'video-games': 'Video games',
       'books-reading': 'Books/reading',
       'office-workspace': 'Office/workspace',
@@ -746,8 +748,12 @@
     if (!validateAnswers(answers)) return;
 
     try {
+      // Products first. Custom ideas stay folded away unless there are no products to show.
+      const hasProducts = Boolean(productsHost && window.giftFinderProducts)
+        && await window.giftFinderProducts.render(productsHost, answers);
+      if (customIdeas) customIdeas.open = !hasProducts;
       const catalog = await loadCatalog();
-      const desiredCount = answers.interests.length >= 3 ? 5 : 4;
+      const desiredCount = 3;
       state.recommendations = recommendIdeas(catalog, answers, desiredCount);
       state.favorites = state.recommendations.length ? [state.recommendations[0].id] : [];
 

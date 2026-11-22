@@ -50,9 +50,10 @@
     <link rel="canonical" href="https://www.mittenmakes.com/">
     <link rel="icon" type="image/png" href="/assets/logo-badge-favicon.png?v=20260404a">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css?v=20261122e">
-    <script src="shop-checkout.js?v=20261122c" defer></script>
+    <link rel="stylesheet" href="styles.css?v=20261122f">
+    <script src="shop-checkout.js?v=20261122f" defer></script>
     <script src="launch-lock.js?v=20260404a" defer></script>
+    <script src="/form-submit.js?v=20261122a" defer></script>
     <script src="order-form.js?v=20261121a" defer></script>
     <script type="application/ld+json">
     {
@@ -125,16 +126,10 @@
 
     <!-- SEASONAL HOLIDAY BANNER: to remove after the season, delete from here to "END SEASONAL HOLIDAY BANNER",
          or switch off every seasonal piece at once with the one line in styles.css under "SEASONAL: HOLIDAY". -->
-    <section class="seasonal-banner seasonal-holiday" aria-label="Holiday ordering">
-        <div class="container seasonal-banner-inner">
-            <div class="seasonal-banner-copy">
-                <p class="order-eyebrow">Holiday orders are open</p>
-                <h2>Christmas, Hanukkah, and stocking stuffers, made in Farmington Hills</h2>
-                <p>Order by Tuesday, December 8 to ship for Christmas, or Monday, December 14 for free local pickup. Hanukkah orders by Monday, November 23 to ship, or Wednesday, November 25 for local pickup.</p>
-            </div>
-            <a href="/custom-holiday-gifts/" class="btn btn-primary">Shop holiday gifts</a>
-        </div>
-    </section>
+    <a class="holiday-strip seasonal-holiday" href="/custom-holiday-gifts/" aria-label="Holiday order deadlines. Christmas: December 8 to ship, December 14 for pickup. Hanukkah: November 23 to ship, November 25 for pickup.">
+        <span><strong>Christmas:</strong> order by Dec 8 to ship, Dec 14 pickup</span>
+        <span><strong>Hanukkah:</strong> Nov 23 to ship, Nov 25 pickup</span>
+    </a>
     <!-- END SEASONAL HOLIDAY BANNER -->
 
     <!-- Hero Section -->
@@ -145,8 +140,8 @@
                 <h1 class="hero-product-headline">The gift they’ll actually keep.</h1>
                 <p class="hero-product-sub">3D printed gifts, party favors, and personalized pieces — made to order in Metro Detroit. Pickup is always free, U.S. shipping is $10 (free over $49.97).</p>
                 <div class="hero-product-actions">
-                    <a href="shop.html" class="btn btn-primary">Shop bestsellers →</a>
-                    <a href="custom.html" class="hero-product-secondary-link">Need something custom? →</a>
+                    <a href="shop.html" class="btn btn-primary">Shop gifts</a>
+                    <a href="custom.html" class="btn btn-secondary">Order custom</a>
                 </div>
                 <ul class="hero-trust-strip" aria-label="What customers can count on">
                     <!-- Add a real rating here once there are real reviews to show. -->
@@ -158,12 +153,12 @@
             </div>
             <div class="hero-product-media">
                 <img src="assets/crystal-dragon-cinderwing.png?v=20260401b" alt="Crystal Dragon — articulated 3D printed dragon with a rainbow crystal finish" class="hero-product-image" width="1200" height="982">
-                <a href="shop.html#crystal-dragon" class="hero-product-pill">
+                <a href="shop.html#crystal-dragon" class="hero-product-pill" data-add-product="crystal-dragon">
                     <span class="hero-product-pill-copy">
                         <strong>Crystal Dragon</strong>
                         <span class="hero-product-pill-price">$15</span>
                     </span>
-                    <span class="hero-product-pill-cta">Add to cart →</span>
+                    <span class="hero-product-pill-cta" data-add-label>Add to cart</span>
                 </a>
             </div>
         </div>
@@ -388,12 +383,11 @@
                     </div>
                 </div>
                 <div class="order-actions">
-                    <a href="https://instagram.com/mittenmakes" target="_blank" class="btn btn-primary">Message Us on Instagram</a>
-                    <a href="#order-form" class="btn btn-secondary">Use the order form</a>
+                    <a href="#order-form" class="btn btn-primary">Use the order form</a>
                 </div>
-                <form id="order-form" class="order-form fade-up" action="https://formsubmit.co/mittenmakes@gmail.com" method="POST">
+                <form id="order-form" class="order-form fade-up" action="https://formsubmit.co/mittenmakes@gmail.com" method="POST" data-form="order">
                     <input type="hidden" name="_subject" value="New Mitten Makes order inquiry">
-                    <input type="hidden" name="_next" value="https://mittenmakes.com/thanks.html">
+                    <input type="hidden" name="_next" value="https://www.mittenmakes.com/thanks.html">
                     <input type="hidden" name="_template" value="table">
                     <input type="hidden" name="_captcha" value="true">
                     <input type="hidden" name="_autoresponse" value="Thanks for reaching out to Mitten Makes. We got your inquiry and will follow up soon with next steps.">
@@ -544,7 +538,7 @@
                 </details>
                 <details class="faq-item fade-up">
                     <summary>Can I choose my own colors?</summary>
-                    <p class="faq-answer">Absolutely. We offer a wide range of colors and finishes, from bright and glossy to soft and subtle. DM us on Instagram and we'll share what is currently available.</p>
+                    <p class="faq-answer">Absolutely. We offer a wide range of colors and finishes, from bright and glossy to soft and subtle. Send us a message and we'll share what is currently available.</p>
                 </details>
                 <details class="faq-item fade-up">
                     <summary>Do you ship nationally?</summary>
@@ -629,14 +623,6 @@
             </div>
 
             <div class="instagram-strip-actions">
-                <a href="https://instagram.com/mittenmakes" target="_blank" class="btn-instagram">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
-                        <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
-                        <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
-                    </svg>
-                    See more on Instagram
-                </a>
                 <a href="shop.html" class="btn btn-secondary btn-instagram-secondary">Shop ready-to-order pieces</a>
             </div>
         </div>
@@ -668,6 +654,15 @@
     </footer>
 
     <!-- Back to Top -->
+    <div class="shop-cart-dock" aria-live="polite" hidden>
+        <div class="shop-cart-dock-copy">
+            <p class="shop-cart-dock-label">Your cart</p>
+            <p class="shop-cart-dock-count"><strong data-cart-count>0 items</strong></p>
+            <p class="shop-cart-dock-subtotal">Subtotal <strong data-cart-subtotal>$0.00</strong></p>
+        </div>
+        <a href="checkout.html" class="btn btn-primary shop-cart-dock-link" data-cart-link>Checkout</a>
+    </div>
+
     <button class="back-to-top" aria-label="Back to top">&#8679;</button>
 
     <script>

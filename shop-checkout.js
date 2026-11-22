@@ -431,6 +431,57 @@
     featuredActions.prepend(cartButton);
   };
 
+  // CSS backgrounds for the swatches. A color added to the catalog without an entry here gets a neutral dot.
+  const SOLID_SWATCHES = {
+    'Surprise me': 'conic-gradient(#e8573f, #f2b630, #3f9b57, #2f6fd0, #8550b8, #e8573f)',
+    Black: '#222',
+    White: '#fff',
+    Gray: '#92969b',
+    Blue: '#2f6fd0',
+    Green: '#3f9b57',
+    Red: '#d2352f',
+    Orange: '#ee7d22',
+    Pink: '#ee86b5',
+    Purple: '#8550b8',
+    Yellow: '#f3cf3b',
+    'Tan / beige': '#d6b98c'
+  };
+  const SILK_SWATCHES = {
+    'Blue / Purple': ['#2f6fd0', '#8550b8'],
+    'Green / Pink': ['#3f9b57', '#ee86b5'],
+    Green: ['#23743b', '#9be0a9'],
+    Red: ['#a51f22', '#f49a90'],
+    Purple: ['#5c2d91', '#cfa5f0'],
+    Blue: ['#174a9c', '#95bff7'],
+    'Light Blue': ['#58a6d8', '#d5f0ff']
+  };
+  const RAINBOW_SWATCH = 'linear-gradient(90deg, #e8573f, #f2b630, #3f9b57, #2f6fd0, #8550b8)';
+
+  // One flat list of looks, so changing finish can never clear a chosen color.
+  const getLookChoices = () => finishStyleOptions.flatMap(finish => {
+    const delta = finish.priceDeltaCents || 0;
+    if (finish.id === 'solid') {
+      return solidColorOptions.map(color => ({
+        label: color,
+        delta,
+        background: SOLID_SWATCHES[color] || '#ddd',
+        options: { finishStyle: finish.id, solidColor: color }
+      }));
+    }
+    if (finish.id === 'silk') {
+      return silkColorOptions.map(color => {
+        const [dark, light] = SILK_SWATCHES[color] || ['#aaa', '#eee'];
+        return {
+          label: `${color} silk`,
+          delta,
+          background: `linear-gradient(135deg, ${dark} 15%, ${light} 50%, ${dark} 90%)`,
+          options: { finishStyle: finish.id, silkColor: color }
+        };
+      });
+    }
+    return [{ label: 'Rainbow', delta, background: RAINBOW_SWATCH, options: { finishStyle: finish.id } }];
+  });
+
   const ensureCustomizationDialog = () => {
     let dialog = document.querySelector('[data-cart-customization-dialog]');
     if (dialog) return dialog;
@@ -438,52 +489,18 @@
     dialog = document.createElement('dialog');
     dialog.className = 'product-option-dialog';
     dialog.setAttribute('data-cart-customization-dialog', '');
+    dialog.setAttribute('aria-labelledby', 'product-option-title');
     dialog.innerHTML = `
       <form method="dialog" class="product-option-form">
-        <div class="product-option-copy">
-          <p class="order-eyebrow" data-option-eyebrow>Before we add it</p>
-          <h2 data-option-title>Customize your item</h2>
-          <p data-option-description>Pick a finish and color before adding it to your cart.</p>
+        <div class="product-option-product">
+          <img data-option-image alt="" width="76" height="76">
+          <div>
+            <h2 id="product-option-title" data-option-title></h2>
+            <p class="product-option-price" data-option-price aria-live="polite"></p>
+          </div>
         </div>
-        <div class="product-option-grid product-option-grid-single">
-          <label data-option-finish-wrap>
-            Finish & color style
-            <select name="finishStyle"></select>
-          </label>
-          <label data-option-solid-wrap>
-            Solid color
-            <select name="solidColor"></select>
-          </label>
-          <label data-option-silk-wrap hidden>
-            Silk color
-            <select name="silkColor"></select>
-          </label>
-        </div>
-        <label data-option-words-wrap hidden>
-          Words on the front
-          <input type="text" name="customWords" maxlength="24" placeholder="Dad's League">
-        </label>
-        <div class="product-option-grid" data-option-bookmark-grid hidden>
-          <label data-option-palette-wrap>
-            Color palette
-            <select name="bookmarkPalette"></select>
-          </label>
-          <label data-option-pattern-wrap>
-            Bookmark set style
-            <select name="bookmarkPattern"></select>
-          </label>
-        </div>
-        <div class="product-option-grid" data-option-golf-colors hidden>
-          <label data-option-primary-wrap>
-            Main color
-            <select name="primaryColor"></select>
-          </label>
-          <label data-option-secondary-wrap>
-            Accent color
-            <select name="secondaryColor"></select>
-          </label>
-        </div>
-        <p class="product-option-error" data-option-error hidden></p>
+        <div data-option-fields></div>
+        <p class="product-option-error" data-option-error role="alert" hidden></p>
         <div class="product-option-actions">
           <button type="button" class="btn btn-secondary" data-option-cancel>Cancel</button>
           <button type="submit" class="btn btn-primary">Add to cart</button>
@@ -494,224 +511,106 @@
     return dialog;
   };
 
+  const selectMarkup = (name, label, choices, selected = '', placeholder = '') => `
+    <label>
+      ${escapeHtml(label)}
+      <select name="${name}" required>
+        ${placeholder ? `<option value="">${escapeHtml(placeholder)}</option>` : ''}
+        ${choices.map(choice => `<option value="${escapeHtml(choice)}"${choice === selected ? ' selected' : ''}>${escapeHtml(choice)}</option>`).join('')}
+      </select>
+    </label>`;
+
+  const getOptionFieldsMarkup = (customization, looks) => {
+    if (customization?.kind === 'golf-ball-holder') {
+      const colors = customization.colorOptions || [];
+      return `
+        <label>
+          Words on the front
+          <input type="text" name="customWords" maxlength="${Number(customization.maxWords) || 24}" placeholder="Dad's League" required>
+        </label>
+        <div class="product-option-grid">
+          ${selectMarkup('primaryColor', 'Main color', colors, colors[0])}
+          ${selectMarkup('secondaryColor', 'Accent color', colors, colors[1])}
+        </div>`;
+    }
+
+    if (customization?.kind === 'bookmarks') {
+      return `
+        <div class="product-option-grid">
+          ${selectMarkup('palette', 'Color palette', customization.paletteOptions || [], 'Surprise me')}
+          ${selectMarkup('patternStyle', 'Bookmark set style', customization.patternOptions || [], 'Surprise me')}
+        </div>`;
+    }
+
+    const initial = Math.max(looks.findIndex(look => look.label === 'Surprise me'), 0);
+    return `
+      <fieldset class="look-picker">
+        <legend>Color: <strong data-look-label></strong></legend>
+        <div class="look-swatches">
+          ${looks.map((look, index) => `
+            <label class="look-swatch" title="${escapeHtml(look.label)}">
+              <input type="radio" name="look" value="${index}"${index === initial ? ' checked' : ''}
+                aria-label="${escapeHtml(look.label)}${look.delta ? `, plus ${formatCurrency(look.delta)}` : ''}">
+              <span class="look-dot" style="background: ${look.background}" aria-hidden="true"></span>
+              <span class="look-extra" aria-hidden="true">${look.delta ? `+$${look.delta / 100}` : ''}</span>
+            </label>`).join('')}
+        </div>
+      </fieldset>`;
+  };
+
   const requestProductOptions = productId => {
-    const customization = getProductCustomization(productId);
+    const product = products.get(productId);
+    if (!product) return Promise.resolve(null);
+
+    const { customization } = product;
     if (!customization && usesSimpleAddToCart(productId)) {
       return Promise.resolve({});
     }
+
     const dialog = ensureCustomizationDialog();
     const form = dialog.querySelector('form');
-    const titleNode = form.querySelector('[data-option-title]');
-    const descriptionNode = form.querySelector('[data-option-description]');
-    const finishWrap = form.querySelector('[data-option-finish-wrap]');
-    const solidWrap = form.querySelector('[data-option-solid-wrap]');
-    const silkWrap = form.querySelector('[data-option-silk-wrap]');
-    const wordsWrap = form.querySelector('[data-option-words-wrap]');
-    const bookmarkGrid = form.querySelector('[data-option-bookmark-grid]');
-    const golfColorsWrap = form.querySelector('[data-option-golf-colors]');
-    const finishSelect = form.elements.finishStyle;
-    const solidSelect = form.elements.solidColor;
-    const silkSelect = form.elements.silkColor;
-    const wordsInput = form.elements.customWords;
-    const paletteSelect = form.elements.bookmarkPalette;
-    const patternSelect = form.elements.bookmarkPattern;
-    const primarySelect = form.elements.primaryColor;
-    const secondarySelect = form.elements.secondaryColor;
+    const looks = getLookChoices();
+    const priceNode = form.querySelector('[data-option-price]');
     const errorNode = form.querySelector('[data-option-error]');
     const cancelButton = form.querySelector('[data-option-cancel]');
 
-    const finishMarkup = finishStyleOptions
-      .map(option => `<option value="${escapeHtml(option.id)}">${escapeHtml(option.label)}</option>`)
-      .join('');
-    const solidMarkup = ['<option value="">Choose a color</option>']
-      .concat(solidColorOptions.map(color => `<option value="${escapeHtml(color)}">${escapeHtml(color)}</option>`))
-      .join('');
-    const silkMarkup = ['<option value="">Choose a silk color</option>']
-      .concat(silkColorOptions.map(color => `<option value="${escapeHtml(color)}">${escapeHtml(color)}</option>`))
-      .join('');
-    const golfColorMarkup = ['<option value="">Choose a color</option>']
-      .concat(((customization?.colorOptions) || []).map(color => `<option value="${escapeHtml(color)}">${escapeHtml(color)}</option>`))
-      .join('');
-    const bookmarkPaletteMarkup = ['<option value="">Choose a palette</option>']
-      .concat(((customization?.paletteOptions) || []).map(option => `<option value="${escapeHtml(option)}">${escapeHtml(option)}</option>`))
-      .join('');
-    const bookmarkPatternMarkup = ['<option value="">Choose a style</option>']
-      .concat(((customization?.patternOptions) || []).map(option => `<option value="${escapeHtml(option)}">${escapeHtml(option)}</option>`))
-      .join('');
-
-    const toggleFinishFields = () => {
-      const isSolid = finishSelect.value === 'solid';
-      const isSilk = finishSelect.value === 'silk';
-      solidWrap.hidden = !isSolid;
-      solidSelect.disabled = !isSolid;
-      solidSelect.required = isSolid;
-      silkWrap.hidden = !isSilk;
-      silkSelect.disabled = !isSilk;
-      silkSelect.required = isSilk;
-      if (!isSolid) {
-        solidSelect.value = '';
-      }
-      if (!isSilk) {
-        silkSelect.value = '';
-      }
-    };
-
-    finishSelect.innerHTML = finishMarkup;
-    solidSelect.innerHTML = solidMarkup;
-    silkSelect.innerHTML = silkMarkup;
-    primarySelect.innerHTML = golfColorMarkup;
-    secondarySelect.innerHTML = golfColorMarkup;
-    paletteSelect.innerHTML = bookmarkPaletteMarkup;
-    patternSelect.innerHTML = bookmarkPatternMarkup;
-    wordsInput.value = '';
-    finishSelect.value = '';
-    solidSelect.value = '';
-    silkSelect.value = '';
-    primarySelect.value = '';
-    secondarySelect.value = '';
-    paletteSelect.value = '';
-    patternSelect.value = '';
-
-    if (customization?.kind === 'golf-ball-holder') {
-      titleNode.textContent = 'Customize your golf ball holder';
-      descriptionNode.textContent = 'Choose the words for the front, then pick two colors for the print.';
-      finishWrap.hidden = true;
-      solidWrap.hidden = true;
-      silkWrap.hidden = true;
-      wordsWrap.hidden = false;
-      bookmarkGrid.hidden = true;
-      golfColorsWrap.hidden = false;
-      finishSelect.disabled = true;
-      solidSelect.disabled = true;
-      silkSelect.disabled = true;
-      wordsInput.required = true;
-      wordsInput.disabled = false;
-      paletteSelect.required = false;
-      paletteSelect.disabled = true;
-      patternSelect.required = false;
-      patternSelect.disabled = true;
-      primarySelect.required = true;
-      primarySelect.disabled = false;
-      secondarySelect.required = true;
-      secondarySelect.disabled = false;
-      finishSelect.required = false;
-      solidSelect.required = false;
-      silkSelect.required = false;
-      finishSelect.value = '';
-      solidSelect.value = '';
-      silkSelect.value = '';
-      paletteSelect.value = '';
-      patternSelect.value = '';
-    } else if (customization?.kind === 'bookmarks') {
-      titleNode.textContent = 'Customize your bookmark set';
-      descriptionNode.textContent = 'Pick the overall palette and whether you want mixed or matching patterns in the set.';
-      finishWrap.hidden = true;
-      solidWrap.hidden = true;
-      silkWrap.hidden = true;
-      wordsWrap.hidden = true;
-      bookmarkGrid.hidden = false;
-      golfColorsWrap.hidden = true;
-      finishSelect.disabled = true;
-      solidSelect.disabled = true;
-      silkSelect.disabled = true;
-      wordsInput.disabled = true;
-      primarySelect.disabled = true;
-      secondarySelect.disabled = true;
-      wordsInput.required = false;
-      primarySelect.required = false;
-      secondarySelect.required = false;
-      paletteSelect.required = true;
-      paletteSelect.disabled = false;
-      patternSelect.required = true;
-      patternSelect.disabled = false;
-      finishSelect.required = false;
-      solidSelect.required = false;
-      silkSelect.required = false;
-      finishSelect.value = '';
-      solidSelect.value = '';
-      silkSelect.value = '';
-      wordsInput.value = '';
-      primarySelect.value = '';
-      secondarySelect.value = '';
-      paletteSelect.value = '';
-      patternSelect.value = '';
-    } else {
-      titleNode.textContent = 'Pick your finish';
-      descriptionNode.textContent = 'Choose a simple solid color, pick Surprise me, or upgrade to a silk or rainbow finish for $2 more.';
-      finishWrap.hidden = false;
-      solidWrap.hidden = false;
-      silkWrap.hidden = true;
-      wordsWrap.hidden = true;
-      bookmarkGrid.hidden = true;
-      golfColorsWrap.hidden = true;
-      finishSelect.disabled = false;
-      wordsInput.disabled = true;
-      silkSelect.disabled = false;
-      paletteSelect.disabled = true;
-      patternSelect.disabled = true;
-      primarySelect.disabled = true;
-      secondarySelect.disabled = true;
-      wordsInput.required = false;
-      paletteSelect.required = false;
-      patternSelect.required = false;
-      primarySelect.required = false;
-      secondarySelect.required = false;
-      finishSelect.required = true;
-      finishSelect.value = 'solid';
-      solidSelect.value = '';
-      silkSelect.value = '';
-      wordsInput.value = '';
-      primarySelect.value = '';
-      secondarySelect.value = '';
-      paletteSelect.value = '';
-      patternSelect.value = '';
-      toggleFinishFields();
-    }
-
-    finishSelect.value = customization?.kind === 'golf-ball-holder' || customization?.kind === 'bookmarks' ? finishSelect.value : 'solid';
+    form.querySelector('[data-option-image]').src = product.image || '';
+    form.querySelector('[data-option-title]').textContent = product.name;
+    form.querySelector('[data-option-fields]').innerHTML = getOptionFieldsMarkup(customization, looks);
     errorNode.hidden = true;
-    errorNode.textContent = '';
+
+    const selectedLook = () => looks[Number(form.querySelector('input[name="look"]:checked')?.value)];
+    const showSelection = () => {
+      const look = customization ? null : selectedLook();
+      priceNode.textContent = formatCurrency(product.priceCents + (look?.delta || 0));
+      if (look) form.querySelector('[data-look-label]').textContent = look.label;
+      errorNode.hidden = true;
+    };
+    showSelection();
 
     return new Promise(resolve => {
       const closeDialog = result => {
         form.removeEventListener('submit', handleSubmit);
+        form.removeEventListener('change', showSelection);
         cancelButton.removeEventListener('click', handleCancel);
-        dialog.removeEventListener('cancel', handleCancel);
-        finishSelect.removeEventListener('change', toggleFinishFields);
-        dialog.close();
+        dialog.removeEventListener('close', handleCancel);
+        if (dialog.open) dialog.close();
         resolve(result);
       };
 
-      const handleCancel = event => {
-        event?.preventDefault?.();
-        closeDialog(null);
-      };
+      const handleCancel = () => closeDialog(null);
 
       const handleSubmit = event => {
         event.preventDefault();
-        const options = customization?.kind === 'golf-ball-holder'
-          ? normalizeOptions(productId, {
-              customWords: wordsInput.value,
-              primaryColor: primarySelect.value,
-              secondaryColor: secondarySelect.value
-            })
-          : customization?.kind === 'bookmarks'
-            ? normalizeOptions(productId, {
-                palette: paletteSelect.value,
-                patternStyle: patternSelect.value
-              })
-          : normalizeOptions(productId, {
-              finishStyle: finishSelect.value,
-              solidColor: solidSelect.value,
-              silkColor: silkSelect.value
-            });
+        const rawOptions = customization
+          ? Object.fromEntries(new FormData(form))
+          : selectedLook()?.options;
+        const options = rawOptions ? normalizeOptions(productId, rawOptions) : null;
 
         if (!options) {
           errorNode.textContent = customization?.kind === 'golf-ball-holder'
             ? 'Add the words and choose two different colors before continuing.'
-            : customization?.kind === 'bookmarks'
-              ? 'Choose a color palette and a bookmark set style before continuing.'
-            : 'Choose a finish style. Solid color needs an exact color, and silk finish needs a silk color choice.';
+            : 'Choose an option before continuing.';
           errorNode.hidden = false;
           return;
         }
@@ -720,17 +619,11 @@
       };
 
       form.addEventListener('submit', handleSubmit);
+      form.addEventListener('change', showSelection);
       cancelButton.addEventListener('click', handleCancel);
-      dialog.addEventListener('cancel', handleCancel);
-      finishSelect.addEventListener('change', toggleFinishFields);
+      dialog.addEventListener('close', handleCancel);
       dialog.showModal();
-      (
-        customization?.kind === 'golf-ball-holder'
-          ? wordsInput
-          : customization?.kind === 'bookmarks'
-            ? paletteSelect
-            : finishSelect
-      ).focus();
+      form.querySelector('input:checked, input[type="text"], select')?.focus();
     });
   };
 
@@ -942,6 +835,17 @@
     if (!event.persisted) return;
     cart = readCart();
     renderCart();
+  });
+
+  // Any element with data-add-product adds that product. Links keep their href as the fallback
+  // until this listener is attached (or if the catalog fails to load).
+  document.addEventListener('click', async event => {
+    const trigger = event.target.closest?.('[data-add-product]');
+    if (!trigger || !products.has(trigger.dataset.addProduct)) return;
+    event.preventDefault();
+    if (await addToCart(trigger.dataset.addProduct)) {
+      flashAddedState(trigger.querySelector('[data-add-label]') || trigger);
+    }
   });
 
   syncCardButtons();

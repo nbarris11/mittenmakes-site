@@ -50,8 +50,9 @@
     <link rel="canonical" href="https://www.mittenmakes.com/custom.html">
     <link rel="icon" type="image/png" href="/assets/logo-badge-favicon.png?v=20260404a">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css?v=20260523c">
+    <link rel="stylesheet" href="styles.css?v=20261122f">
     <script src="launch-lock.js?v=20260404a" defer></script>
+    <script src="/form-submit.js?v=20261122a" defer></script>
     <script src="order-form.js?v=20261121a" defer></script>
     <!-- PostHog Analytics -->
     <script>
@@ -102,19 +103,85 @@
         </div>
     </nav>
 
-    <section class="section about-section">
+    <section class="section about-section custom-intro">
         <div class="container">
             <div class="seo-page-hero">
                 <div class="seo-page-copy fade-up">
                     <p class="order-eyebrow">Custom orders</p>
                     <h1>Custom 3D Printed Gifts Made to Order</h1>
-                    <p>This is the place to start when you want something personalized, specific, or made in quantity. Party favors with a name on each one, a photo gift that actually looks thoughtful, a name sign for a kid's room, a classroom set of fidgets, or a one-of-a-kind piece you've had in mind for a while. If you can describe it, we can usually make it.</p>
-                    <p>Tell us what you are going for and we will help you sort out the design, colors, quantity, and delivery before anything is due. No pressure, no payment upfront, just a conversation first.</p>
-                    <p class="checkout-policy-note">Because custom work is made to order, approved issues are usually handled with a remake, replacement, or store credit instead of a cash refund. <a href="returns-policy.html">Read the full returns &amp; store credit policy</a>.</p>
+                    <p>Party favors, name signs, photo gifts, or an idea of your own. Describe it and we'll reply with a price and timing. Nothing is due until you say yes.</p>
                 </div>
                 <div class="seo-page-image fade-up">
                     <img src="/mitten-makes-badge-logo2.png" alt="Mitten Makes custom orders" width="1153" height="818">
                 </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section order-section custom-request">
+        <div class="container">
+            <div class="order-panel">
+                <h2 id="order-form-heading">Tell us your idea</h2>
+                <form id="order-form" class="order-form" action="https://formsubmit.co/mittenmakes@gmail.com" method="POST" aria-labelledby="order-form-heading" data-form="order" data-email-or-phone>
+                    <input type="hidden" name="_subject" value="New Mitten Makes order inquiry">
+                    <input type="hidden" name="_next" value="https://www.mittenmakes.com/thanks.html">
+                    <input type="hidden" name="_template" value="table">
+                    <input type="hidden" name="_captcha" value="true">
+                    <input type="hidden" name="_autoresponse" value="Thanks for reaching out to Mitten Makes. We got your inquiry and will follow up soon with next steps.">
+                    <input type="hidden" name="_blacklist" value="viagra,casino,crypto,seo service,guest post,backlink">
+                    <input type="text" name="_honey" class="honeypot-field" tabindex="-1" autocomplete="off">
+
+                    <label class="form-field">
+                        <span>What are you thinking?</span>
+                        <textarea name="idea" rows="5" required placeholder="20 little dragon keychains for my daughter's 9th birthday — in pink and purple, ideally"></textarea>
+                    </label>
+                    <label class="form-field">
+                        <span>Your email</span>
+                        <input type="email" name="email" required autocomplete="email">
+                    </label>
+                    <label class="form-field">
+                        <span>Phone <span class="form-optional">(instead of email, if you like)</span></span>
+                        <input type="tel" name="phone" autocomplete="tel">
+                    </label>
+                    <label class="form-field">
+                        <span>What's the occasion? <span class="form-optional">(optional)</span></span>
+                        <select name="occasion">
+                            <option value="">Optional</option>
+                            <option>Holiday / Christmas gift</option>
+                            <option>Hanukkah gift</option>
+                            <option>Stocking stuffer</option>
+                            <option>Holiday party favors / bulk</option>
+                            <option>Birthday</option>
+                            <option>Teacher or coworker gift</option>
+                            <option>Just because</option>
+                            <option>Something else</option>
+                        </select>
+                    </label>
+                    <label class="form-field">
+                        <span>Need it by <span class="form-optional">(optional)</span></span>
+                        <input type="date" name="need_by">
+                    </label>
+
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary">Send request →</button>
+                    </div>
+                    <p class="form-note form-helper-note">Or DM us on <a href="https://instagram.com/mittenmakes" target="_blank" rel="noopener">Instagram</a>, or text <a href="tel:+12482917642">(248) 291-7642</a> — same person on the other end.</p>
+                </form>
+                <div class="order-steps">
+                    <div class="order-step">
+                        <span>1</span>
+                        <p>Pick a product or share your idea.</p>
+                    </div>
+                    <div class="order-step">
+                        <span>2</span>
+                        <p>Tell us colors, quantity, and who it is for.</p>
+                    </div>
+                    <div class="order-step">
+                        <span>3</span>
+                        <p>We'll confirm the details, final price, pickup or shipping, and whether cash, Venmo, or PayPal makes the most sense.</p>
+                    </div>
+                </div>
+                <p class="checkout-policy-note">Because custom work is made to order, approved issues are usually handled with a remake, replacement, or store credit instead of a cash refund. <a href="returns-policy.html">Read the full returns &amp; store credit policy</a>.</p>
             </div>
         </div>
     </section>
@@ -263,77 +330,6 @@
         </div>
     </section>
 
-    <section class="section order-section">
-        <div class="container">
-            <div class="order-panel">
-                <div class="order-copy">
-                    <p class="order-eyebrow">Ready to order?</p>
-                    <h2 id="order-form-heading">Tell us what you want and we'll help from there.</h2>
-                    <p>You do not have to figure everything out on your own. Send us the item you want, or just tell us what you are trying to make happen. Whether it is a gift, a classroom quantity, or a custom home piece, we'll help you sort out the design, colors, delivery, and payment.</p>
-                </div>
-                <div class="order-steps">
-                    <div class="order-step">
-                        <span>1</span>
-                        <p>Pick a product or share your idea.</p>
-                    </div>
-                    <div class="order-step">
-                        <span>2</span>
-                        <p>Tell us colors, quantity, and who it is for.</p>
-                    </div>
-                    <div class="order-step">
-                        <span>3</span>
-                        <p>We'll confirm the details, final price, pickup or shipping, and whether cash, Venmo, or PayPal makes the most sense.</p>
-                    </div>
-                </div>
-                <div class="order-actions">
-                    <a href="https://instagram.com/mittenmakes" target="_blank" class="btn btn-primary">DM on Instagram</a>
-                    <a href="#order-form" class="btn btn-secondary">Use the order form</a>
-                </div>
-                <form id="order-form" class="order-form fade-up" action="https://formsubmit.co/mittenmakes@gmail.com" method="POST" aria-labelledby="order-form-heading">
-                    <input type="hidden" name="_subject" value="New Mitten Makes order inquiry">
-                    <input type="hidden" name="_next" value="https://mittenmakes.com/thanks.html">
-                    <input type="hidden" name="_template" value="table">
-                    <input type="hidden" name="_captcha" value="true">
-                    <input type="hidden" name="_autoresponse" value="Thanks for reaching out to Mitten Makes. We got your inquiry and will follow up soon with next steps.">
-                    <input type="hidden" name="_blacklist" value="viagra,casino,crypto,seo service,guest post,backlink">
-                    <input type="text" name="_honey" class="honeypot-field" tabindex="-1" autocomplete="off">
-
-                    <label class="form-field">
-                        <span>What are you thinking?</span>
-                        <textarea name="idea" rows="5" required placeholder="20 little dragon keychains for my daughter's 9th birthday — in pink and purple, ideally"></textarea>
-                    </label>
-                    <label class="form-field">
-                        <span>How can we reach you?</span>
-                        <input type="text" name="contact" required placeholder="email or phone">
-                    </label>
-                    <label class="form-field">
-                        <span>What's the occasion? <span class="form-optional">(optional)</span></span>
-                        <select name="occasion">
-                            <option value="">Optional</option>
-                            <option>Holiday / Christmas gift</option>
-                            <option>Hanukkah gift</option>
-                            <option>Stocking stuffer</option>
-                            <option>Holiday party favors / bulk</option>
-                            <option>Birthday</option>
-                            <option>Teacher or coworker gift</option>
-                            <option>Just because</option>
-                            <option>Something else</option>
-                        </select>
-                    </label>
-                    <label class="form-field">
-                        <span>Need it by <span class="form-optional">(optional)</span></span>
-                        <input type="date" name="need_by">
-                    </label>
-
-                    <div class="form-actions">
-                        <button type="submit" class="btn btn-primary">Send request →</button>
-                    </div>
-                    <p class="form-note form-helper-note">Or DM us on <a href="https://instagram.com/mittenmakes" target="_blank" rel="noopener">Instagram</a>, or text <a href="tel:+12482917642">(248) 291-7642</a> — same person on the other end.</p>
-                </form>
-            </div>
-        </div>
-    </section>
-
     <footer class="footer">
         <div class="container">
             <div class="footer-content">
@@ -370,65 +366,13 @@
         window.addEventListener('scroll', () => btt.classList.toggle('visible', window.scrollY > 320));
         btt.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 
-        document.querySelectorAll('form').forEach(form => {
-            const delivery = form.querySelector('select[name="delivery_preference"]');
-            const shippingField = form.querySelector('.conditional-shipping-field');
-            const shippingInput = shippingField?.querySelector('input[name="shipping_zip"]');
-            const paymentField = form.querySelector('.conditional-payment-field');
-            const paymentSelect = paymentField?.querySelector('select[name="payment_preference"]');
-            const productSelect = form.querySelector('select[name="product_interest"]');
-
-            if (!delivery || !shippingField || !shippingInput || !paymentField || !paymentSelect || !productSelect) return;
-
-            const setPaymentOptions = () => {
-                const current = paymentSelect.value;
-                let options = [];
-
-                if (delivery.value === 'Local pickup in Metro Detroit') {
-                    options = ['', 'Cash', 'Venmo', 'Not sure yet'];
-                } else if (delivery.value === 'Ship within the U.S.') {
-                    options = ['', 'Venmo', 'PayPal', 'Not sure yet'];
-                } else if (delivery.value === 'Not sure yet') {
-                    options = ['', 'Not sure yet'];
-                }
-
-                paymentSelect.innerHTML = '';
-                options.forEach(optionValue => {
-                    const option = document.createElement('option');
-                    option.value = optionValue;
-                    option.textContent = optionValue || 'Choose one';
-                    paymentSelect.appendChild(option);
-                });
-
-                if (options.includes(current)) {
-                    paymentSelect.value = current;
-                }
-            };
-
-            const syncShippingField = () => {
-                const shouldShow = delivery.value === 'Ship within the U.S.';
-                shippingField.hidden = !shouldShow;
-                shippingInput.disabled = !shouldShow;
-                if (!shouldShow) shippingInput.value = '';
-
-                const showPayment = delivery.value !== '';
-                paymentField.hidden = !showPayment;
-                paymentSelect.disabled = !showPayment;
-                if (!showPayment) {
-                    paymentSelect.value = '';
-                } else {
-                    setPaymentOptions();
-                }
-            };
-
-            delivery.addEventListener('change', syncShippingField);
-            syncShippingField();
-
-            const requestedProduct = new URLSearchParams(window.location.search).get('product');
-            if (requestedProduct && [...productSelect.options].some(option => option.value === requestedProduct)) {
-                productSelect.value = requestedProduct;
-            }
-        });
+        // ?product=Custom%20Name%20Sign starts the idea box for links from the product pages.
+        const requestedProduct = (new URLSearchParams(window.location.search).get('product') || '').trim();
+        const ideaBox = document.querySelector('#order-form textarea[name="idea"]');
+        if (ideaBox && !ideaBox.value && /^[a-z0-9 &'-]{2,60}$/i.test(requestedProduct)) {
+            ideaBox.value = `I'm interested in: ${requestedProduct}.\n\n`;
+            ideaBox.setSelectionRange(ideaBox.value.length, ideaBox.value.length);
+        }
     </script>
 </body>
 </html>

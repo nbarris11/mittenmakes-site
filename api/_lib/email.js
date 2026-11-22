@@ -194,6 +194,7 @@ const sendOrderConfirmationEmail = async ({
 
 module.exports = {
   sendOrderConfirmationEmail,
+  getTransporter,
   getRequiredEnv,
   formatMoney
 };
