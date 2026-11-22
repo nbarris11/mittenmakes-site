@@ -3949,3 +3949,63 @@ body.lightbox-open {
   .nav-link-long { display: none; }
   .nav-link-seasonal::before { margin-right: 0.15rem; }
 }
+
+/* ===========================
+   CART BAR + EMPTY CHECKOUT
+   =========================== */
+
+.shop-cart-dock[hidden] { display: none; }
+
+.checkout-empty-cta { display: none; }
+.checkout-cart-panel.is-empty .checkout-empty-cta { display: inline-flex; justify-content: center; }
+.checkout-cart-panel.is-empty :is(.checkout-fulfillment, .checkout-totals, .checkout-minimum-note, .checkout-policy-note, .cart-bonus-note, [data-shipping-progress-host], #checkout-button) { display: none; }
+.checkout-cart-panel.is-empty:not(.has-notice) .checkout-actions { display: none; }
+/* Drop the long checkout intro when there is nothing to check out, so the button is on the first screen. */
+body:has(.checkout-cart-panel.is-empty) section:has(.seo-page-hero),
+.checkout-cart-panel.is-empty .checkout-cart-copy { display: none; }
+.checkout-cart-panel.is-empty .checkout-empty-cta { margin-top: 1rem; }
+.checkout-cart-panel.is-empty { grid-template-columns: 1fr; }
+
+/* Desktop: keep back-to-top off the cart panel's checkout button. */
+body.has-cart-bar .back-to-top { right: calc(320px + 2.5rem); }
+
+/* Phones: one 56px bar. The body prefix outranks the page-level styles in gifts.html. */
+@media (max-width: 768px) {
+  body.has-cart-bar { padding-bottom: 56px; }
+  body.has-cart-bar .back-to-top { right: 1rem; bottom: calc(56px + 0.75rem); }
+  body.has-cart-bar .cart-toast { bottom: calc(56px + 0.75rem); }
+
+  body.has-cart-bar .shop-cart-dock {
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: auto;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    padding: 0 1rem;
+    border-radius: 0;
+    transform: none;
+  }
+  body.has-cart-bar .shop-cart-dock-copy {
+    display: flex;
+    align-items: baseline;
+    gap: 0.6rem;
+    white-space: nowrap;
+  }
+  body.has-cart-bar .shop-cart-dock :is(.shop-cart-dock-label, .shop-cart-dock-note, .cart-bonus-note, [data-shipping-progress-host]) { display: none; }
+  body.has-cart-bar .shop-cart-dock :is(.shop-cart-dock-count, .shop-cart-dock-subtotal) { margin: 0; font-size: 0.9rem; }
+  /* Show the amount without the word "Subtotal". */
+  body.has-cart-bar .shop-cart-dock p.shop-cart-dock-subtotal { font-size: 0; }
+  body.has-cart-bar .shop-cart-dock p.shop-cart-dock-subtotal strong { font-size: 0.9rem; }
+  body.has-cart-bar .shop-cart-dock-link {
+    display: inline-flex;
+    align-items: center;
+    width: auto;
+    min-height: 44px;
+    margin: 0;
+    padding: 0 1.25rem;
+  }
+}

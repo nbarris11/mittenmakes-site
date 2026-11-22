@@ -73,6 +73,7 @@ module.exports = async (req, res) => {
     const products = new Map(checkoutConfig.products.map(product => [product.id, product]));
     const minimumSubtotalCents = checkoutConfig.minimumSubtotalCents;
     const shippingCents = checkoutConfig.shippingCents;
+    const freeShippingThresholdCents = checkoutConfig.freeShippingThresholdCents;
     const finishStyleOptions = checkoutConfig.finishStyleOptions || [];
     const finishStyleMap = new Map(finishStyleOptions.map(option => [option.id, option]));
     const solidColorOptions = checkoutConfig.solidColorOptions || [];
@@ -180,18 +181,19 @@ module.exports = async (req, res) => {
     };
 
     if (fulfillmentMethod === 'shipping') {
-      // Shipping stays flat for now, so we provide a single built-in shipping
-      // option to Stripe Checkout when the customer chooses shipping on-site.
+      // A single shipping option: flat rate, or free at the catalog threshold.
+      // Keep the comparison in step with computeShipping() in shop-checkout.js.
+      const qualifiesForFreeShipping = subtotal >= freeShippingThresholdCents;
       sessionConfig.shipping_address_collection = {
         allowed_countries: ['US']
       };
       sessionConfig.shipping_options = [
         {
           shipping_rate_data: {
-            display_name: 'Flat rate shipping',
+            display_name: qualifiesForFreeShipping ? 'Free shipping' : 'Flat rate shipping',
             type: 'fixed_amount',
             fixed_amount: {
-              amount: shippingCents,
+              amount: qualifiesForFreeShipping ? 0 : shippingCents,
               currency: 'usd'
             },
             delivery_estimate: {

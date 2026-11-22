@@ -308,12 +308,25 @@
     });
 
     cartSummaryLinks.forEach(link => {
-      link.textContent = itemCount > 0
-        ? `Review cart & checkout (${itemCount})`
-        : 'Browse first, then checkout';
+      if (!link.dataset.checkoutHref) link.dataset.checkoutHref = link.getAttribute('href') || 'checkout.html';
+      // Links with a count badge (gifts.html nav) keep their markup; only their href changes.
+      const hasBadge = Boolean(link.querySelector('[data-cart-count]'));
+      if (itemCount > 0) {
+        if (!hasBadge) link.textContent = 'Checkout';
+        link.setAttribute('href', link.dataset.checkoutHref);
+        link.classList.remove('is-empty-cart');
+      } else {
+        // Empty cart: send shoppers to the products instead of an empty checkout page.
+        const firstSection = document.querySelector('.shop-group[id]');
+        if (!hasBadge) link.textContent = 'Your cart is empty. Browse gifts ↓';
+        link.setAttribute('href', firstSection ? `#${firstSection.id}` : 'shop.html');
+        link.classList.add('is-empty-cart');
+      }
     });
 
     document.querySelectorAll('.shop-cart-dock').forEach(dock => {
+      dock.hidden = itemCount === 0;
+      document.body.classList.toggle('has-cart-bar', itemCount > 0);
       const subtotalLine = dock.querySelector('.shop-cart-dock-subtotal');
       let host = dock.querySelector('[data-shipping-progress-host]');
       if (!host && subtotalLine) {
@@ -823,6 +836,8 @@
       ? 'Add a few ready-to-order items to start online checkout.'
       : `You are ready to check out${fulfillmentMethod === 'shipping' ? (shippingAmount ? ` with flat ${formatCurrency(shippingAmount)} shipping.` : ' with free U.S. shipping.') : ' for free local pickup.'}`);
 
+    cartRoot.classList.toggle('is-empty', !cart.length);
+    cartRoot.classList.toggle('has-notice', Boolean(externalCheckoutMessage));
     emptyState.hidden = cart.length > 0;
     cartList.hidden = cart.length === 0;
     cartList.innerHTML = '';
@@ -920,6 +935,13 @@
       checkoutMessage.textContent = error.message;
       checkoutButton.disabled = false;
     }
+  });
+
+  // Back/forward cache restores a page with the cart as it was; re-read it.
+  window.addEventListener('pageshow', event => {
+    if (!event.persisted) return;
+    cart = readCart();
+    renderCart();
   });
 
   syncCardButtons();
