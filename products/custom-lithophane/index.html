@@ -35,39 +35,54 @@
     <link rel="stylesheet" href="../../styles.css?v=20260413a">
     <script src="../../launch-lock.js?v=20260404a" defer></script>
     <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "Product",
-      "name": "Custom Lithophane Photo Gift",
-      "description": "Custom 3D printed lithophane made from your favorite photo. Made to order in Farmington Hills, MI.",
-      "image": "https://www.mittenmakes.com/og-image.jpg",
-      "brand": {
-        "@type": "Brand",
-        "name": "Mitten Makes"
+{
+  "@context": "https://schema.org",
+  "@type": "Product",
+  "name": "Custom Lithophane Photo Gift",
+  "description": "Custom 3D printed lithophane made from your favorite photo. Made to order in Farmington Hills, MI.",
+  "image": "https://www.mittenmakes.com/og-image.jpg",
+  "brand": {
+    "@type": "Brand",
+    "name": "Mitten Makes"
+  },
+  "offers": {
+    "@type": "Offer",
+    "price": "25.00",
+    "priceCurrency": "USD",
+    "availability": "https://schema.org/InStock",
+    "seller": {
+      "@type": "Organization",
+      "name": "Mitten Makes"
+    },
+    "shippingDetails": {
+      "@type": "OfferShippingDetails",
+      "shippingRate": {
+        "@type": "MonetaryAmount",
+        "value": "10.00",
+        "currency": "USD"
       },
-      "offers": {
-        "@type": "Offer",
-        "price": "25.00",
-        "priceCurrency": "USD",
-        "availability": "https://schema.org/InStock",
-        "seller": {
-          "@type": "Organization",
-          "name": "Mitten Makes"
+      "shippingDestination": {
+        "@type": "DefinedRegion",
+        "addressCountry": "US"
+      },
+      "deliveryTime": {
+        "@type": "ShippingDeliveryTime",
+        "handlingTime": {
+          "@type": "QuantitativeValue",
+          "minValue": 5,
+          "maxValue": 7,
+          "unitCode": "DAY"
         },
-        "shippingDetails": {
-          "@type": "OfferShippingDetails",
-          "shippingRate": {
-            "@type": "MonetaryAmount",
-            "value": "10.00",
-            "currency": "USD"
-          },
-          "shippingDestination": {
-            "@type": "DefinedRegion",
-            "addressCountry": "US"
-          }
+        "transitTime": {
+          "@type": "QuantitativeValue",
+          "minValue": 2,
+          "maxValue": 5,
+          "unitCode": "DAY"
         }
       }
     }
+  }
+}
     </script>
     <!-- PostHog Analytics -->
     <script>
