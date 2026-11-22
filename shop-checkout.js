@@ -747,7 +747,7 @@
     const itemCount = cart.reduce((sum, item) => sum + item.quantity, 0);
     pulseCartIndicators();
     showCartToast(`${product?.name || 'Item'} added to cart • ${itemCount} item${itemCount === 1 ? '' : 's'} ready`);
-    window.posthog?.capture('product_added_to_cart', {
+    window.posthog?.capture?.('product_added_to_cart', {
       product_id: productId,
       product_name: product?.name,
       product_price_cents: product?.priceCents,
@@ -774,7 +774,7 @@
     updateCartSummary();
     renderCart();
     if (removing) {
-      window.posthog?.capture('product_removed_from_cart', {
+      window.posthog?.capture?.('product_removed_from_cart', {
         product_id: removing.id,
         product_name: product?.name,
         cart_item_count: cart.reduce((sum, item) => sum + item.quantity, 0),
@@ -872,7 +872,7 @@
   document.querySelectorAll('input[name="checkout-fulfillment"]').forEach(input => {
     input.addEventListener('change', () => {
       renderCart();
-      window.posthog?.capture('fulfillment_method_changed', { method: input.value });
+      window.posthog?.capture?.('fulfillment_method_changed', { method: input.value });
     });
   });
 
@@ -890,7 +890,7 @@
       has_coupon: Boolean(externalCouponCode),
     };
 
-    window.posthog?.capture('checkout_initiated', checkoutProps);
+    window.posthog?.capture?.('checkout_initiated', checkoutProps);
 
     try {
       const payload = {
@@ -913,10 +913,10 @@
         throw new Error(data.error || 'Online checkout is not available yet. Please use the request form for now.');
       }
 
-      window.posthog?.capture('checkout_stripe_redirect', checkoutProps);
+      window.posthog?.capture?.('checkout_stripe_redirect', checkoutProps);
       window.location.href = data.url;
     } catch (error) {
-      window.posthog?.capture('checkout_error', { ...checkoutProps, error_message: error.message });
+      window.posthog?.capture?.('checkout_error', { ...checkoutProps, error_message: error.message });
       checkoutMessage.textContent = error.message;
       checkoutButton.disabled = false;
     }
