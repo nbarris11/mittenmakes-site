@@ -27,7 +27,7 @@ No framework, no build step — files are served as-is.
 ## Payments (Stripe)
 
 - `api/create-checkout-session.js` — builds a Stripe Checkout session from the cart, validating items/options against `checkout-products.json`.
-- `api/create-custom-payment.js` — generates a one-off custom payment link. Used by the **private** `custom-payment.html` page to charge any custom amount.
+- `api/create-custom-payment.js` — generates a one-off custom payment link. Used by the owner-only `custom-payment.html` page to charge any custom amount. Requires `Authorization: Bearer <CUSTOM_PAYMENT_SECRET>` and fails closed if that env var is missing; never remove that check.
 - `api/pay.js` — resolves `/pay?id=cs_...` and 303-redirects to the live Stripe URL (the `/pay` rewrite is in `vercel.json`).
 - `api/stripe-webhook.js` — handles Stripe webhooks; sends confirmation email via `api/_lib/email.js` (nodemailer).
 - **Shipping rules** live in `checkout-products.json`: `$5` flat, free over `$45` (`shippingCents` / `freeShippingThresholdCents`).

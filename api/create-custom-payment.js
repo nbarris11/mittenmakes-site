@@ -1,3 +1,4 @@
+const { createHash, timingSafeEqual } = require('crypto');
 const Stripe = require('stripe');
 
 const getRequiredEnv = name => {
@@ -8,6 +9,26 @@ const getRequiredEnv = name => {
     throw error;
   }
   return value;
+};
+
+const MIN_SECRET_LENGTH = 24;
+
+const sha256 = value => createHash('sha256').update(value).digest();
+
+// Only the owner may create payment links. Hashing first gives timingSafeEqual equal-length inputs.
+const getAuthFailure = req => {
+  const secret = (process.env.CUSTOM_PAYMENT_SECRET || '').trim();
+  if (secret.length < MIN_SECRET_LENGTH) {
+    return { status: 503, error: 'Payment links are locked until CUSTOM_PAYMENT_SECRET is set in Vercel and the site is redeployed.' };
+  }
+
+  const header = req.headers.authorization;
+  const given = typeof header === 'string' && header.startsWith('Bearer ') ? header.slice('Bearer '.length) : '';
+  if (!timingSafeEqual(sha256(given), sha256(secret))) {
+    return { status: 401, error: 'That access key is not right.' };
+  }
+
+  return null;
 };
 
 const buildBaseUrl = req => {
@@ -23,8 +44,15 @@ module.exports = async (req, res) => {
     return res.status(405).json({ error: 'Method not allowed.' });
   }
 
+  res.setHeader('Cache-Control', 'no-store');
+
+  // Must stay ahead of everything that reads the body or talks to Stripe.
+  const authFailure = getAuthFailure(req);
+  if (authFailure) return res.status(authFailure.status).json({ error: authFailure.error });
+
   try {
-    const { amountCents, description, note } = req.body || {};
+    const { amountCents, description, note: rawNote } = req.body || {};
+    const note = typeof rawNote === 'string' ? rawNote : '';
 
     const amount = Number(amountCents);
     if (!Number.isInteger(amount) || amount < 50 || amount > 1000000) {
